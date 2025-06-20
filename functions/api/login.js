@@ -48,6 +48,7 @@ async function handleRequest(request, env) {
     name_account: data.user.user_metadata.name_account,
     name_user: data.user.user_metadata.name_user,
     phone_user: data.user.user_metadata.phone_user,
+    email_confirmed_at: data.user.email_confirmed_at,
   };
 
   return new Response(
