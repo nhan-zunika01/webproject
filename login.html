@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Sổ tay nông dân thông minh</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        /* Thêm style cho trang login */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .auth-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+        }
+        .form-container {
+            display: none;
+        }
+        .form-container.active {
+            display: block;
+        }
+        .auth-toggle-link {
+            color: #4CAF50;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="header">
+            <h1><i class="fas fa-seedling"></i> Sổ tay nông dân thông minh</h1>
+        </div>
+
+        <div id="login-form-container" class="form-container active">
+            <div class="login-form">
+                <h2 style="text-align: center; color: #2c5530; margin-bottom: 20px;">Đăng nhập</h2>
+        
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="login-email" placeholder="Nhập email của bạn..." required>
+                </div>
+        
+                <div class="form-group">
+                    <label>Mật khẩu:</label>
+                    <input type="password" id="login-password" placeholder="Nhập mật khẩu..." required>
+                </div>
+                <button class="btn" style="width: 100%;" onclick="handleLogin()">Đăng nhập</button>
+                <p style="text-align: center; margin-top: 15px;">
+                    Chưa có tài khoản? <span class="auth-toggle-link" onclick="toggleForms()">Đăng ký ngay</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="register-form-container" class="form-container">
+            <div class="login-form">
+                <h2 style="text-align: center; color: #2c5530; margin-bottom: 20px;">Đăng ký</h2>
+                <div class="form-group">
+                    <label>Tên tài khoản (tối thiểu 5 ký tự):</label>
+                    <input type="text" id="reg-name-account" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu (tối thiểu 8 ký tự):</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <div class="form-group">
+                    <label>Họ và tên:</label>
+                    <input type="text" id="reg-name-user" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại:</label>
+                    <input type="tel" id="reg-phone" required>
+                </div>
+                <button class="btn" style="width: 100%;" onclick="handleRegister()">Đăng ký</button>
+                <p style="text-align: center; margin-top: 15px;">
+                    Đã có tài khoản? <span class="auth-toggle-link" onclick="toggleForms()">Đăng nhập</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>

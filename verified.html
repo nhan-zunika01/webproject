@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác thực thành công - Sổ tay nông dân thông minh</title>
+    <meta name="description" content="Xác thực email thành công cho ứng dụng Sổ tay nông dân thông minh">
+    
+    <!-- Font Awesome cho icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset và base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* Container styles */
+        .container {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .verified-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        /* Form container */
+        .login-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+        }
+
+        /* Success icon styles */
+        .icon-success {
+            font-size: 5rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            animation: pop-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        @keyframes pop-in {
+            0% { 
+                transform: scale(0) rotate(-360deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(-180deg);
+            }
+            100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Typography */
+        h1 {
+            color: #2c5530;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(44, 85, 48, 0.1);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Countdown styling */
+        #countdown {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 1.2em;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn:focus {
+            outline: 3px solid rgba(76, 175, 80, 0.5);
+            outline-offset: 2px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .login-form {
+                padding: 30px 25px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .icon-success {
+                font-size: 4rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                min-width: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .login-form {
+                padding: 25px 20px;
+            }
+            
+            .icon-success {
+                font-size: 3.5rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            p {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                min-width: 160px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .icon-success,
+            .verified-container,
+            #countdown,
+            .btn {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            .btn:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container verified-container">
+        <div class="login-form">
+            <i class="fas fa-check-circle icon-success" aria-hidden="true"></i>
+            <h1>Xác thực thành công!</h1>
+            <p>
+                Cảm ơn bạn đã xác nhận địa chỉ email. Tài khoản của bạn đã được kích hoạt và sẵn sàng sử dụng.
+            </p>
+            <p>
+                Bạn sẽ được tự động chuyển đến trang đăng nhập trong 
+                <strong id="countdown" aria-live="polite">5</strong> giây.
+            </p>
+            <br>
+            <a href="login.html" class="btn" role="button">
+                <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                Đăng nhập ngay
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Countdown và chuyển trang
+        const countdownElement = document.getElementById('countdown');
+        let seconds = 5;
+        
+        // Kiểm tra nếu element tồn tại
+        if (countdownElement) {
+            const interval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    // Thêm loading state
+                    countdownElement.textContent = '...';
+                    
+                    // Chuyển trang với fallback
+                    try {
+                        window.location.href = 'login.html';
+                    } catch (error) {
+                        console.error('Không thể chuyển trang:', error);
+                        // Fallback: hiển thị thông báo cho user
+                        countdownElement.textContent = 'Lỗi! Vui lòng nhấn nút đăng nhập.';
+                    }
+                }
+            }, 1000);
+            
+            // Cleanup khi user rời khỏi trang
+            window.addEventListener('beforeunload', () => {
+                clearInterval(interval);
+            });
+        }
+        
+        // Preload trang đăng nhập để tăng tốc độ
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = 'login.html';
+        document.head.appendChild(link);
+    </script>
+</body>
+</html>

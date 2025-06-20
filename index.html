@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ tay nông dân thông minh</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-seedling"></i> Sổ tay nông dân thông minh</h1>
+            <p>Nền tảng học tập nông nghiệp hiện đại với AI và công nghệ 4.0</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('dashboard')">
+                <i class="fas fa-home"></i> Trang chủ
+            </button>
+            <button class="nav-tab" onclick="showSection('courses')">
+                <i class="fas fa-graduation-cap"></i> Khóa học
+            </button>
+            <button class="nav-tab" onclick="showSection('quiz')">
+                <i class="fas fa-clipboard-check"></i> Kiểm tra
+            </button>
+            <button class="nav-tab" onclick="showSection('forum')">
+                <i class="fas fa-comments"></i> Diễn đàn
+            </button>
+            <button class="nav-tab" onclick="showSection('news')">
+                <i class="fas fa-newspaper"></i> Tin tức
+            </button>
+            <button class="nav-tab" onclick="showSection('weather')">
+                <i class="fas fa-cloud-sun"></i> Thời tiết
+            </button>
+            <button class="nav-tab" onclick="showSection('profile')">
+                <i class="fas fa-user"></i> Hồ sơ
+            </button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <h2><i class="fas fa-chart-line"></i> Bảng điều khiển</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>12</h3>
+                    <p>Khóa học đã hoàn thành</p>
+                </div>
+                <div class="stat-card">
+                    <h3>85%</h3>
+                    <p>Điểm trung bình</p>
+                </div>
+                <div class="stat-card">
+                    <h3>156</h3>
+                    <p>Giờ học tích lũy</p>
+                </div>
+                <div class="stat-card">
+                    <h3>4.8★</h3>
+                    <p>Đánh giá học viên</p>
+                </div>
+            </div>
+
+            <div class="weather-widget">
+                <h3><i class="fas fa-map-marker-alt"></i> Thời tiết hôm nay - Buôn Ma Thuột</h3>
+                <div class="weather-info">
+                    <div class="weather-detail">
+                        <i class="fas fa-sun"></i>
+                        <p>Nắng đẹp</p>
+                        <p>28°C</p>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-tint"></i>
+                        <p>Độ ẩm</p>
+                        <p>65%</p>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-wind"></i>
+                        <p>Gió</p>
+                        <p>12 km/h</p>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-eye"></i>
+                        <p>Tầm nhìn</p>
+                        <p>10 km</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Section -->
+        <div id="courses" class="content-section">
+            <h2><i class="fas fa-graduation-cap"></i> Khóa học nông nghiệp</h2>
+            <div class="course-grid">
+                <div class="course-card">
+                    <h3>Kỹ thuật trồng lúa hiệu quả</h3>
+                    <p>Học cách trồng lúa với năng suất cao, sử dụng công nghệ hiện đại và phương pháp canh tác bền vững.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p><strong>Tiến độ:</strong> 75% (15/20 bài)</p>
+                    <button class="btn" onclick="startCourse('rice')">Tiếp tục học</button>
+                </div>
+                
+                <div class="course-card">
+                    <h3>Chăn nuôi gà an toàn</h3>
+                    <p>Hướng dẫn chăn nuôi gà theo tiêu chuẩn VietGAP, phòng chống dịch bệnh hiệu quả.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                    </div>
+                    <p><strong>Tiến độ:</strong> 40% (6/15 bài)</p>
+                    <button class="btn" onclick="startCourse('chicken')">Tiếp tục học</button>
+                </div>
+                
+                <div class="course-card">
+                    <h3>Trồng rau sạch thủy canh</h3>
+                    <p>Công nghệ trồng rau không đất, tiết kiệm nước và cho năng suất cao.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%"></div>
+                    </div>
+                    <p><strong>Tiến độ:</strong> 90% (18/20 bài)</p>
+                    <button class="btn" onclick="startCourse('hydroponic')">Tiếp tục học</button>
+                </div>
+                
+                <div class="course-card">
+                    <h3>Nông nghiệp thông minh 4.0</h3>
+                    <p>Ứng dụng IoT, AI và big data trong nông nghiệp hiện đại.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p><strong>Tiến độ:</strong> 0% (0/25 bài)</p>
+                    <button class="btn" onclick="startCourse('smart')">Bắt đầu học</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz" class="content-section">
+            <h2><i class="fas fa-clipboard-check"></i> Kiểm tra kiến thức</h2>
+            <div class="quiz-container">
+                <h3>Bài kiểm tra: Kỹ thuật trồng lúa cơ bản</h3>
+                <p>Thời gian: 15 phút | Số câu hỏi: 5</p>
+                
+                <div class="question">
+                    <h4>Câu 1: Thời gian gieo mạ lúa mùa phù hợp nhất là?</h4>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a">
+                            <span>Tháng 1-2</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b">
+                            <span>Tháng 4-5</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c">
+                            <span>Tháng 7-8</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="d">
+                            <span>Tháng 10-11</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Câu 2: Lượng phân bón NPK cần thiết cho 1 ha lúa là?</h4>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="a">
+                            <span>50-60 kg</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="b">
+                            <span>80-100 kg</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="c">
+                            <span>120-150 kg</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="d">
+                            <span>200-250 kg</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Câu 3: Dấu hiệu nhận biết lúa bị bệnh đạo ôn là?</h4>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a">
+                            <span>Lá vàng từ từ</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b">
+                            <span>Có vết đốm nâu trên lá</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c">
+                            <span>Thân cây bị gãy</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="d">
+                            <span>Rễ bị thối</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="submitQuiz()">Nộp bài kiểm tra</button>
+                <button class="btn" onclick="showQuizResult()" style="margin-left: 10px; background: #ff9800;">Xem kết quả</button>
+            </div>
+        </div>
+
+        <!-- Forum Section -->
+        <div id="forum" class="content-section">
+            <h2><i class="fas fa-comments"></i> Diễn đàn thảo luận</h2>
+            <button class="btn" onclick="showNewPostForm()" style="margin-bottom: 20px;">
+                <i class="fas fa-plus"></i> Tạo bài viết mới
+            </button>
+            
+            <div class="forum-post">
+                <div class="post-header">
+                    <div class="avatar">AN</div>
+                    <div class="post-info">
+                        <h4>Anh Nguyễn Văn An</h4>
+                        <small>2 giờ trước</small>
+                    </div>
+                </div>
+                <h3>Cách phòng chống sâu bệnh trên cây lúa mùa này?</h3>
+                <p>Mình đang trồng lúa ở Đồng bằng sông Cửu Long, gần đây thấy có dấu hiệu sâu bệnh. Các bác có kinh nghiệm chia sẻ cách phòng chống hiệu quả không ạ?</p>
+                <div style="margin-top: 15px;">
+                    <button class="btn" style="background: #2196F3; margin-right: 10px;">
+                        <i class="fas fa-thumbs-up"></i> 12 Like
+                    </button>
+                    <button class="btn" style="background: #FF9800;">
+                        <i class="fas fa-reply"></i> Trả lời
+                    </button>
+                </div>
+            </div>
+
+            <div class="forum-post">
+                <div class="post-header">
+                    <div class="avatar">LT</div>
+                    <div class="post-info">
+                        <h4>Chị Lê Thị Tâm</h4>
+                        <small>5 giờ trước</small>
+                    </div>
+                </div>
+                <h3>Chia sẻ kinh nghiệm trồng rau thủy canh tại nhà</h3>
+                <p>Sau 6 tháng trồng rau thủy canh, mình muốn chia sẻ một số kinh nghiệm với mọi người. Đầu tiên là việc chọn hạt giống...</p>
+                <div style="margin-top: 15px;">
+                    <button class="btn" style="background: #2196F3; margin-right: 10px;">
+                        <i class="fas fa-thumbs-up"></i> 28 Like
+                    </button>
+                    <button class="btn" style="background: #FF9800;">
+                        <i class="fas fa-reply"></i> Trả lời
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Section -->
+        <div id="news" class="content-section">
+            <h2><i class="fas fa-newspaper"></i> Tin tức nông nghiệp</h2>
+            
+            <div class="news-item">
+                <div class="date">
+                    <i class="fas fa-calendar"></i> 15/06/2025
+                </div>
+                <h3>Công nghệ AI giúp dự đoán sâu bệnh trên lúa với độ chính xác 95%</h3>
+                <p>Các nhà khoa học Việt Nam đã phát triển thành công hệ thống AI có thể dự đoán sự xuất hiện của sâu bệnh trên cây lúa với độ chính xác lên đến 95%, giúp nông dân chủ động phòng chống...</p>
+                <button class="btn">Đọc thêm</button>
+            </div>
+
+            <div class="news-item">
+                <div class="date">
+                    <i class="fas fa-calendar"></i> 14/06/2025
+                </div>
+                <h3>Xuất khẩu gạo Việt Nam đạt kỷ lục trong tháng 5/2025</h3>
+                <p>Theo thống kê của Bộ Nông nghiệp và Phát triển nông thôn, xuất khẩu gạo Việt Nam trong tháng 5/2025 đạt 450.000 tấn, tăng 25% so với cùng kỳ năm trước...</p>
+                <button class="btn">Đọc thêm</button>
+            </div>
+
+            <div class="news-item">
+                <div class="date">
+                    <i class="fas fa-calendar"></i> 13/06/2025
+                </div>
+                <h3>Hướng dẫn sử dụng phân bón hữu cơ hiệu quả</h3>
+                <p>Việc sử dụng phân bón hữu cơ đang trở thành xu hướng trong nông nghiệp bền vững. Các chuyên gia khuyến cáo nông dân nên kết hợp phân hữu cơ với phân vô cơ...</p>
+                <button class="btn">Đọc thêm</button>
+            </div>
+        </div>
+
+        <!-- Weather Section -->
+        <div id="weather" class="content-section">
+            <h2><i class="fas fa-cloud-sun"></i> Thời tiết & Lịch nông vụ</h2>
+            
+            <div class="weather-widget">
+                <h3><i class="fas fa-map-marker-alt"></i> Dự báo thời tiết 7 ngày - Buôn Ma Thuột</h3>
+                <div class="weather-info">
+                    <div class="weather-detail">
+                        <strong>Hôm nay</strong>
+                        <i class="fas fa-sun"></i>
+                        <p>28°C / 22°C</p>
+                        <p>Nắng đẹp</p>
+                    </div>
+                    <div class="weather-detail">
+                        <strong>Thứ 2</strong>
+                        <i class="fas fa-cloud-sun"></i>
+                        <p>30°C / 24°C</p>
+                        <p>Có mây</p>
+                    </div>
+                    <div class="weather-detail">
+                        <strong>Thứ 3</strong>
+                        <i class="fas fa-cloud-rain"></i>
+                        <p>26°C / 21°C</p>
+                        <p>Mưa nhẹ</p>
+                    </div>
+                    <div class="weather-detail">
+                        <strong>Thứ 4</strong>
+                        <i class="fas fa-cloud-rain"></i>
+                        <p>25°C / 20°C</p>
+                        <p>Mưa to</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 15px; padding: 25px; margin-top: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                <h3><i class="fas fa-calendar-alt"></i> Lịch nông vụ tháng 6</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; border-left: 4px solid #4CAF50;">
+                        <h4><i class="fas fa-seedling"></i> Tuần 1-2: Chuẩn bị đất</h4>
+                        <p>Làm đất, bón phân chuồng, xử lý đất chua</p>
+                    </div>
+                    <div style="background: #fff3e0; padding: 15px; border-radius: 10px; border-left: 4px solid #FF9800;">
+                        <h4><i class="fas fa-tint"></i> Tuần 3: Gieo mạ</h4>
+                        <p>Thời điểm thích hợp cho vụ mùa</p>
+                    </div>
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; border-left: 4px solid #2196F3;">
+                        <h4><i class="fas fa-spray-can"></i> Tuần 4: Phun thuốc</h4>
+                        <p>Phòng chống sâu bệnh đầu mùa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="content-section">
+            <h2><i class="fas fa-user"></i> Hồ sơ cá nhân</h2>
+            <div class="login-form">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div class="avatar" style="width: 80px; height: 80px; margin: 0 auto; font-size: 2rem;">
+                        ...
+                    </div>
+                    <h3 style="margin-top: 10px; color: #2c5530;"></h3>
+                    <p style="color: #666;">Nông dân chuyên nghiệp</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Họ và tên:</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" value="" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Số điện thoại:</label>
+                    <input type="tel" value="" readonly>
+                </div>
+                
+                
+                
+                
+                
+                <button class="btn" onclick="editProfile()">
+                    <i class="fas fa-edit"></i> Chỉnh sửa thông tin
+                </button>
+                <button class="btn" onclick="logout()" style="background: #f44336; margin-left: 10px;">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="animation.js">
+
+    </script>
+</body>
+</html>
