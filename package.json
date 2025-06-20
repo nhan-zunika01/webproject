@@ -1,0 +1,14 @@
+{
+  "name": "webproject",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "wrangler pages dev --compatibility-date=2023-10-30 --port=8788"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
