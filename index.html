@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sổ tay nông dân thông minh</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .auth-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+        }
+        .form-container {
+            display: none;
+        }
+        .form-container.active {
+            display: block;
+        }
+        .auth-toggle-link {
+            color: #4CAF50;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        /* Style cho thông báo lỗi */
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            min-height: 1em; /* Giữ không gian cho thông báo */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
