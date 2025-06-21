@@ -265,17 +265,6 @@ function updateWeather() {
 }
 
 // Initialize app
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Sổ tay nông dân thông minh đã được khởi tạo");
-
-  // Simulate data loading
-  setTimeout(() => {
-    console.log("Dữ liệu đã được tải");
-  }, 1000);
-
-  // Update weather every 30 minutes (in real app)
-  setInterval(updateWeather, 1800000);
-});
 
 // Add some interactive effects
 document.addEventListener("click", function (e) {
@@ -294,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!userData) {
     // Nếu chưa, chuyển về trang đăng nhập
     alert("Vui lòng đăng nhập để tiếp tục.");
-    window.location.href = "login.html";
+    //window.location.href = "login.html";
     return; // Dừng thực thi script
   }
 

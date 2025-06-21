@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ tay nông dân thông minh - Nền tảng nông nghiệp 4.0</title>
+    <meta name="description" content="Tham gia cộng đồng nông dân hiện đại, học hỏi kiến thức mới với AI và công nghệ 4.0.">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="styles/styles-home.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
+            <nav class="main-nav">
+                <a href="#features" class="nav-link">Tính năng</a>
+                <a href="login.html" class="nav-btn btn-login">Đăng nhập</a>
+                <a href="login.html" class="nav-btn btn-register">Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Nâng Tầm Nông Nghiệp Việt Nam</h1>
+                <p>Nền tảng học tập và quản lý nông nghiệp thông minh, ứng dụng công nghệ AI và 4.0 để tối ưu hóa năng suất và hiệu quả.</p>
+                <a class="btn-primary">Bắt đầu miễn phí</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Tại sao chọn chúng tôi?</h2>
+                <p class="section-subtitle">Chúng tôi cung cấp bộ công cụ toàn diện giúp bạn thành công trong kỷ nguyên số, từ kiến thức chuyên sâu đến quản lý trang trại hiệu quả.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-graduation-cap icon"></i>
+                        <h3>Khóa học đa dạng</h3>
+                        <p>Học hỏi từ các chuyên gia hàng đầu về kỹ thuật trồng trọt, chăn nuôi và công nghệ mới nhất.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-comments icon"></i>
+                        <h3>Cộng đồng chuyên gia</h3>
+                        <p>Thảo luận, chia sẻ kinh nghiệm và giải đáp thắc mắc cùng hàng ngàn nông dân và chuyên gia khác.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cloud-sun icon"></i>
+                        <h3>Thông tin thời gian thực</h3>
+                        <p>Cập nhật thông tin thời tiết, tin tức nông nghiệp và lịch nông vụ chính xác, kịp thời.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Sổ tay nông dân thông minh. Mọi quyền được bảo lưu.</p>
+            
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Script to handle redirecting to the registration form
+        function handleRegisterRedirect(event) {
+            event.preventDefault();
+            // We use a flag in localStorage because we can't directly manipulate the DOM of the next page
+            localStorage.setItem('showRegisterForm', 'true');
+            window.location.href = 'login.html';
+        }
+
+        // Attach event to both register buttons (hero and nav)
+        const heroRegisterBtn = document.querySelector('a.btn-primary');
+        const navRegisterBtn = document.querySelector('a.btn-register');
+
+        if (heroRegisterBtn) {
+            heroRegisterBtn.addEventListener('click', handleRegisterRedirect);
+        }
+        if (navRegisterBtn) {
+            navRegisterBtn.addEventListener('click', handleRegisterRedirect);
+        }
+
+        // In login.html, you'll need a script to check for this flag.
+        // Add the following to your auth.js inside the DOMContentLoaded event listener.
+        /* if (localStorage.getItem('showRegisterForm') === 'true') {
+            if (typeof toggleForms === 'function') {
+                toggleForms();
+            }
+            localStorage.removeItem('showRegisterForm'); // Clean up the flag
+        }
+        */
+    </script>
+</body>
+</html>
