@@ -1,305 +1,69 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link rel="stylesheet" href="styles/styles-login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - Sổ tay nông dân thông minh</title>
+    <!-- Liên kết đến file CSS mới -->
+    <link rel="stylesheet" href="styles/login.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="header">
-            <h1><i class="fas fa-seedling"></i> Sổ tay nông dân thông minh</h1>
+    <header class="main-header">
+        <div class="container">
+            <a href="home.html" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
+            <nav class="main-nav">
+                <!-- Nút này sẽ dẫn đến trang đăng ký mới -->
+                <a href="home.html" class="nav-btn">Trở về trang chủ</a>
+            </nav>
         </div>
-
-        <!-- Login Form -->
-        <div id="login-form-container" class="form-container active">
-            <div id="login-success" class="success-message">
-                <i class="fas fa-check-circle"></i> Đăng nhập thành công!
+    </header>
+    
+    <main class="main-content">
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div id="login-form-container" class="form-container active">
+                <form id="login-form" novalidate>
+                    <h2 class="form-title">Đăng nhập</h2>
+                    <div class="form-group">
+                        <input type="email" id="login-email" placeholder="Địa chỉ email" required>
+                        <div class="error-message message" id="error-login-email"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="login-password" placeholder="Mật khẩu" required>
+                        <div class="error-message message" id="error-login-password"></div>
+                    </div>
+                    <div class="form-group forgot-password-link">
+                        <button type="button" class="auth-toggle-link" onclick="showForm('forgot-password-form-container')">Quên mật khẩu?</button>
+                    </div>
+                    <div class="error-message message" id="error-login-general"></div>
+                    <button type="submit" class="btn-submit" id="login-btn">Đăng nhập</button>
+                    <div class="auth-toggle">
+                        Chưa có tài khoản? <a href="register.html" class="auth-toggle-link">Đăng ký ngay</a>
+                    </div>
+                </form>
             </div>
-            <form class="login-form" id="login-form" novalidate>
-                <h2 class="form-title">Đăng nhập</h2>
-        
-                <div class="form-group">
-                    <label for="login-email">Email:</label>
-                    <input type="email" id="login-email" placeholder="Nhập email của bạn..." required>
-                    <div class="error-message" id="error-login-email"></div>
-                </div>
-        
-                <div class="form-group">
-                    <label for="login-password">Mật khẩu:</label>
-                    <input type="password" id="login-password" placeholder="Nhập mật khẩu..." required>
-                    <div class="error-message" id="error-login-password"></div>
-                </div>
 
-                <button type="submit" class="btn" id="login-btn">
-                    <span class="btn-text">Đăng nhập</span>
-                </button>
-                
-                <div class="auth-toggle">
-                    Chưa có tài khoản? <span class="auth-toggle-link" onclick="toggleForms()">Đăng ký ngay</span>
-                </div>
-            </form>
-        </div>
-
-        <!-- Register Form -->
-        <div id="register-form-container" class="form-container">
-            <div id="register-success" class="success-message">
-                <i class="fas fa-check-circle"></i> Đăng ký thành công!
+            <!-- Forgot Password Form -->
+            <div id="forgot-password-form-container" class="form-container">
+                <form id="forgot-password-form" novalidate>
+                    <h2 class="form-title">Khôi phục mật khẩu</h2>
+                    <p class="form-instructions">Nhập email của bạn. Chúng tôi sẽ gửi một liên kết để bạn có thể đặt lại mật khẩu.</p>
+                    <div class="form-group">
+                        <input type="email" id="forgot-email" placeholder="Địa chỉ email của bạn" required>
+                    </div>
+                    <div class="message success-message" id="success-forgot-password"></div>
+                    <div class="message error-message" id="error-forgot-password"></div>
+                    <button type="submit" class="btn-submit">Gửi liên kết</button>
+                    <div class="auth-toggle">
+                        Nhớ mật khẩu rồi? <button type="button" class="auth-toggle-link" onclick="showForm('login-form-container')">Đăng nhập</button>
+                    </div>
+                </form>
             </div>
-            <form class="login-form" id="register-form" novalidate>
-                <h2 class="form-title">Đăng ký</h2>
-                
-                <div class="form-group">
-                    <label for="reg-name-account">Tên tài khoản (tối thiểu 5 ký tự):</label>
-                    <input type="text" id="reg-name-account" placeholder="Nhập tên tài khoản..." required>
-                    <div class="error-message" id="error-reg-name-account"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-password">Mật khẩu (tối thiểu 8 ký tự):</label>
-                    <input type="password" id="reg-password" placeholder="Nhập mật khẩu..." required>
-                    <div class="error-message" id="error-reg-password"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-name-user">Họ và tên:</label>
-                    <input type="text" id="reg-name-user" placeholder="Nhập họ và tên..." required>
-                    <div class="error-message" id="error-reg-name-user"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-email">Email:</label>
-                    <input type="email" id="reg-email" placeholder="Nhập email..." required>
-                    <div class="error-message" id="error-reg-email"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-phone">Số điện thoại:</label>
-                    <input type="tel" id="reg-phone" placeholder="Nhập số điện thoại..." required>
-                    <div class="error-message" id="error-reg-phone"></div>
-                </div>
-
-                <button type="submit" class="btn" id="register-btn">
-                    <span class="btn-text">Đăng ký</span>
-                </button>
-                
-                <div class="auth-toggle">
-                    Đã có tài khoản? <span class="auth-toggle-link" onclick="toggleForms()">Đăng nhập</span>
-                </div>
-            </form>
         </div>
-    </div>
+    </main>
 
-    <script>
-        // Form toggle functionality
-        function toggleForms() {
-            const loginForm = document.getElementById('login-form-container');
-            const registerForm = document.getElementById('register-form-container');
-            
-            if (loginForm.classList.contains('active')) {
-                loginForm.classList.remove('active');
-                registerForm.classList.add('active');
-            } else {
-                registerForm.classList.remove('active');
-                loginForm.classList.add('active');
-            }
-            
-            // Clear any error messages and success messages
-            clearMessages();
-        }
-
-        // Clear all error and success messages
-        function clearMessages() {
-            const errorMessages = document.querySelectorAll('.error-message');
-            const successMessages = document.querySelectorAll('.success-message');
-            
-            errorMessages.forEach(msg => {
-                msg.classList.remove('show');
-                msg.textContent = '';
-            });
-            
-            successMessages.forEach(msg => {
-                msg.classList.remove('show');
-            });
-        }
-
-        // Show error message
-        function showError(fieldId, message) {
-            const errorElement = document.getElementById(`error-${fieldId}`);
-            if (errorElement) {
-                errorElement.textContent = message;
-                errorElement.classList.add('show');
-            }
-        }
-
-        // Show success message
-        function showSuccess(formType) {
-            const successElement = document.getElementById(`${formType}-success`);
-            if (successElement) {
-                successElement.classList.add('show');
-                setTimeout(() => {
-                    successElement.classList.remove('show');
-                }, 3000);
-            }
-        }
-
-        // Validation functions
-        function validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        function validatePhone(phone) {
-            const phoneRegex = /^[0-9]{10,11}$/;
-            return phoneRegex.test(phone.replace(/\s/g, ''));
-        }
-
-        // Button loading state
-        function setButtonLoading(buttonId, isLoading) {
-            const button = document.getElementById(buttonId);
-            const buttonText = button.querySelector('.btn-text');
-            
-            if (isLoading) {
-                button.disabled = true;
-                buttonText.innerHTML = '<span class="loading"></span>Đang xử lý...';
-            } else {
-                button.disabled = false;
-                buttonText.textContent = buttonId === 'login-btn' ? 'Đăng nhập' : 'Đăng ký';
-            }
-        }
-
-        // Login form validation and submission
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            clearMessages();
-            
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-            
-            let isValid = true;
-            
-            // Email validation
-            if (!email) {
-                showError('login-email', 'Vui lòng nhập email');
-                isValid = false;
-            } else if (!validateEmail(email)) {
-                showError('login-email', 'Email không hợp lệ');
-                isValid = false;
-            }
-            
-            // Password validation
-            if (!password) {
-                showError('login-password', 'Vui lòng nhập mật khẩu');
-                isValid = false;
-            }
-            
-            if (isValid) {
-                setButtonLoading('login-btn', true);
-                
-                // Simulate login process
-                setTimeout(() => {
-                    setButtonLoading('login-btn', false);
-                    showSuccess('login');
-                    console.log('Login:', { email, password });
-                }, 2000);
-            }
-        });
-
-        // Register form validation and submission
-        document.getElementById('register-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            clearMessages();
-            
-            const nameAccount = document.getElementById('reg-name-account').value.trim();
-            const password = document.getElementById('reg-password').value;
-            const nameUser = document.getElementById('reg-name-user').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const phone = document.getElementById('reg-phone').value.trim();
-            
-            let isValid = true;
-            
-            // Username validation
-            if (!nameAccount) {
-                showError('reg-name-account', 'Vui lòng nhập tên tài khoản');
-                isValid = false;
-            } else if (nameAccount.length < 5) {
-                showError('reg-name-account', 'Tên tài khoản phải có ít nhất 5 ký tự');
-                isValid = false;
-            }
-            
-            // Password validation
-            if (!password) {
-                showError('reg-password', 'Vui lòng nhập mật khẩu');
-                isValid = false;
-            } else if (password.length < 8) {
-                showError('reg-password', 'Mật khẩu phải có ít nhất 8 ký tự');
-                isValid = false;
-            }
-            
-            // Full name validation
-            if (!nameUser) {
-                showError('reg-name-user', 'Vui lòng nhập họ và tên');
-                isValid = false;
-            }
-            
-            // Email validation
-            if (!email) {
-                showError('reg-email', 'Vui lòng nhập email');
-                isValid = false;
-            } else if (!validateEmail(email)) {
-                showError('reg-email', 'Email không hợp lệ');
-                isValid = false;
-            }
-            
-            // Phone validation
-            if (!phone) {
-                showError('reg-phone', 'Vui lòng nhập số điện thoại');
-                isValid = false;
-            } else if (!validatePhone(phone)) {
-                showError('reg-phone', 'Số điện thoại không hợp lệ');
-                isValid = false;
-            }
-            
-            if (isValid) {
-                setButtonLoading('register-btn', true);
-                
-                // Simulate registration process
-                setTimeout(() => {
-                    setButtonLoading('register-btn', false);
-                    showSuccess('register');
-                    console.log('Register:', { nameAccount, password, nameUser, email, phone });
-                }, 2000);
-            }
-        });
-
-        // Real-time validation
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('blur', function() {
-                const fieldId = this.id;
-                const value = this.value.trim();
-                
-                // Clear previous error for this field
-                const errorElement = document.getElementById(`error-${fieldId}`);
-                if (errorElement) {
-                    errorElement.classList.remove('show');
-                }
-                
-                // Validate based on field type
-                if (fieldId.includes('email') && value && !validateEmail(value)) {
-                    showError(fieldId, 'Email không hợp lệ');
-                } else if (fieldId.includes('phone') && value && !validatePhone(value)) {
-                    showError(fieldId, 'Số điện thoại không hợp lệ');
-                } else if (fieldId === 'reg-name-account' && value && value.length < 5) {
-                    showError(fieldId, 'Tên tài khoản phải có ít nhất 5 ký tự');
-                } else if (fieldId === 'reg-password' && value && value.length < 8) {
-                    showError(fieldId, 'Mật khẩu phải có ít nhất 8 ký tự');
-                }
-            });
-        });
-    </script>
-    <script src="auth.js"></script>
-
+    <!-- Liên kết đến file JavaScript mới -->
+    <script src="logic/login.js"></script>
 </body>
 </html>

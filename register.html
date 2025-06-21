@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - Sổ tay nông dân thông minh</title>
+    <!-- Liên kết đến file CSS mới -->
+    <link rel="stylesheet" href="styles/register.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="home.html" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
+            <nav class="main-nav">
+                <!-- Nút này sẽ dẫn đến trang đăng nhập -->
+                <a href="home.html" class="nav-btn">Trở về trang chủ</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="auth-container">
+            <!-- Register Form -->
+            <div id="register-form-container" class="form-container active">
+                <form id="register-form" novalidate>
+                    <h2 class="form-title">Tạo tài khoản</h2>
+                    <div class="form-group">
+                        <input type="text" id="reg-name-account" placeholder="Tên tài khoản (tối thiểu 5 ký tự)" required>
+                        <div class="error-message message" id="error-reg-name-account"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="reg-password" placeholder="Mật khẩu (tối thiểu 8 ký tự)" required>
+                        <div class="error-message message" id="error-reg-password"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="reg-name-user" placeholder="Họ và tên" required>
+                        <div class="error-message message" id="error-reg-name-user"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="reg-email" placeholder="Email" required>
+                        <div class="error-message message" id="error-reg-email"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="reg-phone" placeholder="Số điện thoại" required>
+                        <div class="error-message message" id="error-reg-phone"></div>
+                    </div>
+                    <button type="submit" class="btn-submit" id="register-btn">Đăng ký</button>
+                    <div class="auth-toggle">
+                        Đã có tài khoản? <a href="login.html" class="auth-toggle-link">Đăng nhập</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Liên kết đến file JavaScript mới -->
+    <script src="logic/register.js"></script>
+</body>
+</html>
