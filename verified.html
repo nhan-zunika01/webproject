@@ -4,147 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xác thực thành công - Sổ tay nông dân thông minh</title>
-    <meta name="description" content="Xác thực email thành công cho ứng dụng Sổ tay nông dân thông minh">
-    
-    <!-- Font Awesome cho icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Reset và base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            line-height: 1.6;
+            color: #f8f9fa;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             overflow-x: hidden;
         }
-
-        /* Animated background particles */
-        body::before {
+        body::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.35) 0%, transparent 50%);
-            animation: floatParticles 12s ease-in-out infinite;
-            pointer-events: none;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -2;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes floatParticles {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(1deg); }
-            66% { transform: translateY(10px) rotate(-1deg); }
-        }
-
-        /* Container styles */
-        .container {
-            width: 100%;
-            padding: 0 15px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .verified-container {
-            max-width: 680px;
-            width: 100%;
-            margin: 0 auto;
-            animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Form container */
-        .login-form {
-            background: #ffffff; 
-            border-radius: 24px;
-            box-shadow: 
-                0 32px 64px rgba(0, 0, 0, 0.12),
-                0 0 0 1px rgba(255, 255, 255, 0.4);
-            padding: 50px 40px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-        }
-
-        .login-form::before {
-            content: '';
-            position: absolute;
+        /* Celebratory particles */
+        .particles {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #4CAF50, #66bb6a, #81c784);
-            background-size: 200% 100%;
-            animation: shimmer 2s ease-in-out infinite;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: celebrate 3s ease-out infinite;
+        }
+        .particle.green { background: #4CAF50; }
+        .particle.light-green { background: #a5d6a7; }
+        .particle.gold { background: #f39c12; }
+        
+        @keyframes celebrate {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% { 
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% { 
+                opacity: 1;
+                transform: translateY(-10vh) rotate(324deg) scale(1);
+            }
+            100% { 
+                transform: translateY(-20vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
         }
 
-        @keyframes shimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Success icon styles */
-        .icon-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .icon-success {
-            font-size: 5.5rem;
-            color: #4CAF50;
-            animation: successPulse 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            text-shadow: 0 8px 24px rgba(76, 175, 80, 0.4);
-            filter: drop-shadow(0 4px 12px rgba(76, 175, 80, 0.3));
-            position: relative;
-            z-index: 2;
-        }
-
-        .icon-container::after {
-            content: '';
+        /* Success rings animation */
+        .success-rings {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
             transform: translate(-50%, -50%);
-            animation: ripple 2s ease-out infinite;
-            z-index: 1;
+            z-index: -1;
+        }
+        .ring {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.2); /* Changed to white */
+            border-radius: 50%;
+            animation: expandRing 2s ease-out infinite;
+        }
+        .ring:nth-child(1) { animation-delay: 0s; }
+        .ring:nth-child(2) { animation-delay: 0.5s; }
+        .ring:nth-child(3) { animation-delay: 1s; }
+        
+        @keyframes expandRing {
+            0% {
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
 
-        @keyframes successPulse {
+        .main-header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            position: absolute;
+            top: 0;
+            animation: slideInFromTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @keyframes slideInFromTop {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .main-header .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-header .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .main-header .logo i {
+            margin-right: 8px;
+            color: #a5d6a7;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+        .message-box {
+            background: rgba(255, 255, 255, 0.08); /* Giảm alpha để trong suốt hơn */
+            backdrop-filter: blur(20px); /* Tăng độ mờ */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            animation: successEntrance 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Success entrance with bounce */
+        @keyframes successEntrance {
+            0% { 
+                opacity: 0; 
+                transform: translateY(100px) scale(0.5) rotate(-10deg);
+            }
+            60% { 
+                opacity: 1; 
+                transform: translateY(-20px) scale(1.1) rotate(5deg);
+            }
+            80% { 
+                transform: translateY(10px) scale(0.95) rotate(-2deg);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+        }
+
+        /* Success glow effect - CHANGED TO WHITE */
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffffff, rgba(255, 255, 255, 0.1), #ffffff);
+            border-radius: 17px;
+            z-index: -1;
+            animation: successGlow 3s ease-in-out infinite;
+            opacity: 0.2;
+        }
+        @keyframes successGlow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+
+        .message-box .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: checkmarkSuccess 1.5s ease-out 0.5s both;
+            position: relative;
+        }
+
+        /* Epic checkmark animation */
+        @keyframes checkmarkSuccess {
             0% { 
                 transform: scale(0) rotate(-180deg);
                 opacity: 0;
             }
-            50% {
-                transform: scale(1.15) rotate(0deg);
+            30% { 
+                transform: scale(1.3) rotate(-10deg);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(0.9) rotate(10deg);
+            }
+            70% { 
+                transform: scale(1.1) rotate(-5deg);
             }
             100% { 
                 transform: scale(1) rotate(0deg);
@@ -152,428 +227,338 @@
             }
         }
 
-        @keyframes ripple {
-            0% {
-                transform: translate(-50%, -50%) scale(0.5);
-                opacity: 0.8;
+        /* Pulsing success glow for icon */
+        .message-box .icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: iconGlow 2s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes iconGlow {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
             }
-            100% {
-                transform: translate(-50%, -50%) scale(2);
-                opacity: 0;
+            50% { 
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.2;
             }
         }
 
-        @keyframes slideInUp {
-            0% {
-                transform: translateY(60px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .message-box h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+            color: #ffffff; /* Changed to white */
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         }
-
-        /* Typography */
-        h1 {
-            color: #1a4f1e;
-            font-size: 2.25rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-shadow: 0 2px 8px rgba(26, 79, 30, 0.15);
-            background: linear-gradient(135deg, #1a4f1e, #2d5a2d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #5a677d;
-            margin-bottom: 20px;
-            font-weight: 500;
-            text-shadow: none;
-        }
-
-        .login-form p {
-            font-size: 1.1rem;
-            color: #3c4858;
+        .message-box p {
+            color: #dcdcdc;
+            line-height: 1.6;
             margin-bottom: 25px;
-            max-width: 520px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
-            text-shadow: none;
+            animation: fadeInUp 0.8s ease-out 1s both;
         }
 
-        /* Countdown styling */
-        .countdown-container {
-            background: rgba(240, 245, 250, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 30px 0;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
-        #countdown {
-            color: #4CAF50;
-            font-weight: 700;
-            font-size: 1.4em;
-            animation: countdownPulse 1s ease-in-out infinite;
-            text-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
-            display: inline-block;
-        }
-
-        @keyframes countdownPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        /* Button styles */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #4CAF50, #45a049, #66bb6a);
-            background-size: 200% 200%;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
-            padding: 18px 36px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            padding: 12px 25px;
+            border-radius: 25px;
             font-weight: 600;
+            font-size: 1em;
             text-decoration: none;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 
-                0 8px 24px rgba(76, 175, 80, 0.35),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
             position: relative;
             overflow: hidden;
-            min-width: 220px;
-            font-family: inherit;
-            animation: buttonGlow 3s ease-in-out infinite;
+            animation: fadeInUp 0.8s ease-out 1.2s both;
         }
 
-        @keyframes buttonGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 
-                0 12px 32px rgba(76, 175, 80, 0.45),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-            background-position: 100% 50%;
-        }
-
-        .btn:active {
-            transform: translateY(-1px) scale(0.98);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
-
-        .btn:focus {
-            outline: 3px solid rgba(76, 175, 80, 0.6);
-            outline-offset: 2px;
-        }
-
-        .btn i {
-            margin-right: 10px;
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .btn:hover i {
-            transform: translateX(2px);
-        }
-
+        /* Button success pulse */
         .btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            transition: left 0.6s ease;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
-
         .btn:hover::before {
-            left: 100%;
+            width: 300px;
+            height: 300px;
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(45deg, #5cbf60, #4CAF50);
         }
 
-        /* Progress bar */
-        .progress-container {
-            width: 100%;
-            height: 6px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
-            margin: 20px 0;
-            overflow: hidden;
+        .countdown-container {
+            font-size: 0.9em;
+            color: #ccc;
+            animation: fadeInUp 0.8s ease-out 1.4s both;
+        }
+        .countdown-container #countdown {
+            font-weight: bold;
+            color: #ffffff;
+            animation: countdownPulse 1s ease-in-out infinite;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
+        @keyframes countdownPulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                transform: scale(1.1);
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Progress bar for countdown */
         .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #4CAF50, #66bb6a);
-            border-radius: 3px;
             width: 100%;
-            animation: progressAnimation 5s linear;
-            transform-origin: left;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 15px;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 1.6s both;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffffff, #e0e0e0); /* Changed to white */
+            border-radius: 2px;
+            animation: progressCountdown 5s linear;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        @keyframes progressCountdown {
+            from { width: 100%; }
+            to { width: 0%; }
         }
 
-        @keyframes progressAnimation {
-            0% { transform: scaleX(1); }
-            100% { transform: scaleX(0); }
-        }
-
-        /* Responsive design */
+        /* Responsive animations */
         @media (max-width: 768px) {
-            .login-form {
-                padding: 40px 30px;
-                margin: 15px;
-                border-radius: 20px;
+            .message-box {
+                padding: 30px 20px;
+                margin: 20px;
             }
-            
-            .icon-success {
-                font-size: 4.5rem;
+            .message-box .icon {
+                font-size: 3rem;
             }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .login-form p {
-                font-size: 1rem;
-            }
-            
-            .btn {
-                padding: 16px 32px;
-                font-size: 1rem;
-                min-width: 200px;
+            .message-box h1 {
+                font-size: 1.5rem;
             }
         }
 
-        @media (max-width: 480px) {
-            body {
-                padding: 15px;
-            }
-            
-            .login-form {
-                padding: 30px 25px;
-            }
-            
-            .icon-success {
-                font-size: 4rem;
-            }
-            
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            .login-form p {
-                font-size: 0.95rem;
-                margin-bottom: 20px;
-            }
-            
-            .btn {
-                padding: 14px 28px;
-                font-size: 0.95rem;
-                min-width: 180px;
-            }
-
-            .countdown-container {
-                padding: 16px;
-                margin: 25px 0;
-            }
-
-            #countdown {
-                font-size: 1.2em;
-            }
+        /* Success burst animation */
+        .success-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .login-form {
-                background: #ffffff; /* SỬA LỖI: Luôn là nền trắng */
-                border: 1px solid rgba(0, 0, 0, 0.1);
-            }
-            .subtitle, .login-form p {
-                color: #3c4858; /* SỬA LỖI: Chữ tối để đọc được trên nền trắng */
-            }
-             .countdown-container {
-                background: rgba(229, 231, 235, 0.7); /* Nền sáng hơn cho dark mode */
-                border: 1px solid rgba(0, 0, 0, 0.05);
-            }
+        .burst-line {
+            position: absolute;
+            width: 3px;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent); /* Changed to white */
+            transform-origin: center bottom;
+            animation: burstLine 2s ease-out infinite;
         }
-
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation: none !important;
-                transition: none !important;
+        @keyframes burstLine {
+            0% { 
+                transform: translate(-50%, 0) scale(0);
+                opacity: 1;
             }
-            
-            .btn:hover {
-                transform: none;
-            }
-        }
-
-        /* High contrast mode */
-        @media (prefers-contrast: high) {
-            .login-form {
-                background: #ffffff;
-                border: 2px solid #000;
-            }
-            
-            h1, .subtitle, p {
-                color: #000;
+            100% { 
+                transform: translate(-50%, -50px) scale(1);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container verified-container">
-        <div class="login-form">
-            <div class="icon-container">
-                <i class="fas fa-check-circle icon-success" aria-hidden="true"></i>
-            </div>
-            
-            <h1>Xác thực thành công!</h1>
-            <p class="subtitle">Chào mừng bạn đến với Sổ tay nông dân thông minh</p>
-            
-            <p>
-                Cảm ơn bạn đã xác nhận địa chỉ email. Tài khoản của bạn đã được kích hoạt thành công và sẵn sàng để bạn khám phá những tính năng tuyệt vời.
-            </p>
-            
-            <div class="countdown-container">
-                <p>
-                    Tự động chuyển đến trang đăng nhập trong 
-                    <strong id="countdown" aria-live="polite">5</strong> giây
-                </p>
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
-                </div>
-            </div>
-            
-            <a href="login.html" class="btn" role="button">
-                <i class="fas fa-sign-in-alt"></i>
-                Đăng nhập ngay
-            </a>
-        </div>
+    <div class="particles"></div>
+    <div class="success-rings">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
     </div>
 
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="message-box">
+            <div class="success-burst"></div>
+            <div class="icon" style="color: #4CAF50;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Xác thực thành công!</h1>
+            <p>
+                Chào mừng bạn đến với Sổ tay nông dân thông minh. Tài khoản của bạn đã được kích hoạt và sẵn sàng để sử dụng.
+            </p>
+            <a href="login.html" class="btn">
+                <i class="fas fa-sign-in-alt"></i> Đăng nhập ngay
+            </a>
+            <div class="countdown-container" style="margin-top: 20px;">
+                <p>
+                    Tự động chuyển trang sau 
+                    <strong id="countdown">5</strong> giây...
+                </p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script>
-        // Enhanced countdown với progress bar và better UX
-        const countdownElement = document.getElementById('countdown');
-        const progressBar = document.querySelector('.progress-bar');
-        let seconds = 5;
-        
-        // Kiểm tra nếu element tồn tại
-        if (countdownElement) {
-            const interval = setInterval(() => {
-                seconds--;
-                countdownElement.textContent = seconds;
-                
-                // Cập nhật progress bar
-                if (progressBar) {
-                    const progress = (seconds) / 5;
-                    // Note: Animation is reversed via CSS, so this logic is simplified
-                }
-                
-                if (seconds <= 0) {
-                    clearInterval(interval);
-                    
-                    // Thêm loading state với animation
-                    const countdownParagraph = countdownElement.parentElement;
-                    if(countdownParagraph) {
-                        countdownParagraph.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size: 1.5em;"></i>';
-                    }
-
-                    
-                    // Smooth transition effect
-                    const loginForm = document.querySelector('.login-form');
-                    if(loginForm){
-                        loginForm.style.opacity = '0.7';
-                        loginForm.style.transform = 'scale(0.98)';
-                    }
-                    
-                    // Chuyển trang với delay để hiệu ứng hoàn thành
-                    setTimeout(() => {
-                        try {
-                            window.location.href = 'login.html';
-                        } catch (error) {
-                            console.error('Không thể chuyển trang:', error);
-                            // Fallback: hiển thị thông báo và khôi phục giao diện
-                            const countdownContainer = document.querySelector('.countdown-container');
-                            if(countdownContainer){
-                                countdownContainer.innerHTML = 
-                                    '<p style="color: #ff6b6b; font-weight: 600;">Không thể tự động chuyển trang. Vui lòng nhấn nút đăng nhập bên dưới.</p>';
-                            }
-                            if(loginForm){
-                                loginForm.style.opacity = '1';
-                                loginForm.style.transform = 'scale(1)';
-                            }
-                        }
-                    }, 500);
-                }
-            }, 1000);
+        // Create celebratory particles
+        function createCelebrationParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 20;
+            const colors = ['green', 'light-green', 'gold'];
             
-            // Cleanup khi user rời khỏi trang
-            window.addEventListener('beforeunload', () => {
-                clearInterval(interval);
-            });
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = `particle ${colors[Math.floor(Math.random() * colors.length)]}`;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                particlesContainer.appendChild(particle);
+            }
         }
-        
-        // Preload trang đăng nhập để tăng tốc độ
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = 'login.html';
-        document.head.appendChild(link);
 
-        // Enhanced accessibility - keyboard navigation
-        document.querySelector('.btn').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                window.location.href = 'login.html';
+        // Create success burst lines
+        function createSuccessBurst() {
+            const burstContainer = document.querySelector('.success-burst');
+            const lineCount = 12;
+            
+            for (let i = 0; i < lineCount; i++) {
+                const line = document.createElement('div');
+                line.className = 'burst-line';
+                line.style.transform = `rotate(${i * 30}deg)`;
+                line.style.animationDelay = (i * 0.1) + 's';
+                burstContainer.appendChild(line);
+            }
+        }
+
+        // Enhanced countdown with sound effect simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            createCelebrationParticles();
+            createSuccessBurst();
+            
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                let seconds = 5;
+                const interval = setInterval(() => {
+                    seconds--;
+                    countdownElement.textContent = seconds;
+                    
+                    // Add extra pulse on last 3 seconds
+                    if (seconds <= 3) {
+                        countdownElement.style.animation = 'countdownPulse 0.5s ease-in-out infinite';
+                        countdownElement.style.color = seconds <= 1 ? '#f39c12' : '#ffffff';
+                    }
+                    
+                    if (seconds <= 0) {
+                        clearInterval(interval);
+                        // Add fade out effect before redirect
+                        document.body.style.transition = 'opacity 0.5s ease-out';
+                        document.body.style.opacity = '0';
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 500);
+                    }
+                }, 1000);
+            }
+
+            // Add subtle mouse interaction
+            const messageBox = document.querySelector('.message-box');
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 100;
+                const y = (e.clientY / window.innerHeight) * 100;
+                
+                if (messageBox) {
+                     messageBox.style.transform = `perspective(1000px) rotateY(${(x - 50) * 0.05}deg) rotateX(${-(y - 50) * 0.05}deg)`;
+                }
+            });
+             document.addEventListener('mouseleave', (e) => {
+                 if (messageBox) {
+                    messageBox.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+                 }
+             });
+        });
+
+        // Add click celebration effect
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn') || e.target.closest('.btn')) {
+                // Create temporary celebration burst
+                const celebration = document.createElement('div');
+                celebration.style.cssText = `
+                    position: fixed;
+                    top: ${e.clientY}px;
+                    left: ${e.clientX}px;
+                    width: 10px;
+                    height: 10px;
+                    background: radial-gradient(circle, #4CAF50, transparent);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    animation: celebrationBurst 0.6s ease-out;
+                    pointer-events: none;
+                    z-index: 9999;
+                `;
+                
+                document.body.appendChild(celebration);
+                setTimeout(() => celebration.remove(), 600);
             }
         });
 
-        // Add subtle parallax effect on mouse move
-        document.addEventListener('mousemove', (e) => {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            
-            const { clientX, clientY } = e;
-            const { innerWidth, innerHeight } = window;
-            
-            const xPercent = (clientX / innerWidth) * 100;
-            const yPercent = (clientY / innerHeight) * 100;
-            
-            const form = document.querySelector('.login-form');
-            if(form){
-                form.style.transform = `perspective(1000px) rotateY(${(xPercent - 50) * 0.1}deg) rotateX(${(yPercent - 50) * -0.1}deg)`;
+        // Add celebration burst animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes celebrationBurst {
+                0% {
+                    transform: translate(-50%, -50%) scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(10);
+                    opacity: 0;
+                }
             }
-        });
-
-        // Reset transform when mouse leaves
-        document.addEventListener('mouseleave', () => {
-            const form = document.querySelector('.login-form');
-            if(form){
-               form.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-            }
-        });
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

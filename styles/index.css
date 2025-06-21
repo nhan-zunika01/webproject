@@ -59,7 +59,8 @@ body::after {
 }
 
 .sidebar-header .logo i {
-    margin-right: 10px;
+    margin-right: 15px;
+    /* Tăng khoảng cách */
     color: #4CAF50;
 }
 
@@ -82,7 +83,8 @@ body::after {
 
 .sidebar-nav li a i {
     width: 20px;
-    margin-right: 15px;
+    margin-right: 20px;
+    /* Tăng khoảng cách */
     font-size: 1.1rem;
 }
 
@@ -336,7 +338,7 @@ body::after {
     gap: 10px;
 }
 
-/* === BẮT ĐẦU: Chỉnh sửa Thời tiết === */
+/* Weather Widget Styles */
 .location-changer {
     display: flex;
     gap: 15px;
@@ -375,9 +377,10 @@ body::after {
 }
 
 .weather-main .fas {
-    font-size: 5rem;
+    font-size: 7rem !important;
     color: #f1c40f;
     margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(241, 196, 15, 0.5);
 }
 
 .weather-temp {
@@ -415,9 +418,6 @@ body::after {
     font-size: 1.5rem;
     color: #bdc3c7;
 }
-
-/* === KẾT THÚC: Chỉnh sửa Thời tiết === */
-
 
 /* General Button Spacing & Styling */
 .btn {
@@ -473,7 +473,6 @@ body::after {
 .card>p+.post-actions {
     margin-top: 15px;
 }
-
 
 /* Form Styles */
 .form-group {
@@ -540,9 +539,11 @@ body::after {
         width: 100%;
         height: auto;
         flex-direction: row;
+        align-items: center;
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 10px;
+        padding: 10px 15px;
+        justify-content: space-between;
     }
 
     .sidebar-header {
@@ -566,12 +567,30 @@ body::after {
     }
 
     .main-content {
-        height: calc(100vh - 70px);
+        height: calc(100vh - 71px);
+        /* Điều chỉnh chiều cao dựa trên header mới */
+        padding: 20px;
     }
 
+    /* === BẮT ĐẦU: Sửa lỗi hiển thị trên di động === */
     .main-header-bar {
-        flex-direction: column;
+        flex-direction: row;
+        /* Đảm bảo các thành phần nằm trên một hàng */
+        align-items: center;
+        /* Căn giữa theo chiều dọc */
         gap: 15px;
-        align-items: flex-start;
+        margin-bottom: 25px;
     }
+
+    .main-header-bar h2 {
+        font-size: 1.5rem;
+        /* Giảm kích thước tiêu đề cho gọn hơn */
+    }
+
+    .user-menu .btn {
+        padding: 8px 16px;
+        /* Giảm kích thước nút */
+    }
+
+    /* === KẾT THÚC: Sửa lỗi hiển thị trên di động === */
 }

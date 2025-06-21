@@ -4,338 +4,506 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiểm tra Email - Sổ tay nông dân thông minh</title>
-    <meta name="description" content="Vui lòng kiểm tra email để xác thực tài khoản.">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
+            background: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
             min-height: 100vh;
+            color: #f8f9fa;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -2;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(165, 214, 167, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .main-header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            position: absolute;
+            top: 0;
+            animation: slideInFromTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @keyframes slideInFromTop {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .main-header .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-header .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .main-header .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(165, 214, 167, 0.5);
+        }
+        .main-header .logo i {
+            margin-right: 8px;
+            color: #a5d6a7;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .main-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
-            line-height: 1.6;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="30" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="90" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .container {
-            max-width: 650px;
             width: 100%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 20px;
         }
-        
         .message-box {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.15),
-                0 10px 25px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            padding: 50px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            animation: slideInScale 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             position: relative;
             overflow: hidden;
-            animation: slideInUp 0.8s ease-out;
         }
-        
-        @keyframes slideInUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
+
+        /* Shimmer effect on message box */
         .message-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #FF6B35, #FF9800, #FFC107);
-            background-size: 200% 100%;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-        
-        @keyframes shimmer {
-            0%, 100% { background-position: -200% 0; }
-            50% { background-position: 200% 0; }
-        }
-        
-        .icon-container {
-            position: relative;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-        
-        .icon-email {
-            font-size: 5.5rem;
-            background: linear-gradient(135deg, #FF6B35, #FF9800, #FFC107);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: bounce 2s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) scale(1);
-            }
-            40% {
-                transform: translateY(-15px) scale(1.05);
-            }
-            60% {
-                transform: translateY(-8px) scale(1.02);
-            }
-        }
-        
-        .icon-container::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(255, 152, 0, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-                opacity: 0.3;
-            }
-        }
-        
-        h1 {
-            color: #2c3e50;
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            animation: fadeInDown 0.8s ease-out 0.2s both;
-        }
-        
-        @keyframes fadeInDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        p {
-            font-size: 1.15rem;
-            color: #5a6c7d;
-            margin-bottom: 25px;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .highlight {
-            color: #FF6B35;
-            font-weight: 600;
-        }
-        
-        .btn-container {
-            margin-top: 35px;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-        
-        a.btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 18px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        a.btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
         }
-        
-        a.btn:hover::before {
-            left: 100%;
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
-        
-        a.btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
-            background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+
+        @keyframes slideInScale {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.8);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
         }
-        
-        a.btn:active {
-            transform: translateY(-1px) scale(0.98);
+
+        .message-box .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: iconPulse 2s infinite, iconFloat 3s ease-in-out infinite;
+            position: relative;
         }
-        
-        .secondary-actions {
-            margin-top: 25px;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
+
+        /* Pulsing glow effect for icon */
+        @keyframes iconPulse {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 30px rgba(243, 156, 18, 0.8);
+                transform: scale(1.05);
+            }
         }
-        
-        .resend-link {
-            color: #667eea;
+
+        /* Floating effect for icon */
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            33% { transform: translateY(-10px) scale(1.02); }
+            66% { transform: translateY(-5px) scale(1.01); }
+        }
+
+        .message-box h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        .message-box p {
+            color: #dcdcdc;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+        .message-box p:last-of-type {
+            animation-delay: 0.7s;
+        }
+        .message-box p .highlight {
+            color: #f39c12;
+            font-weight: 600;
+            position: relative;
+            animation: highlightGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes highlightGlow {
+            0%, 100% { text-shadow: 0 0 5px rgba(243, 156, 18, 0.3); }
+            50% { text-shadow: 0 0 15px rgba(243, 156, 18, 0.6); }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1em;
             text-decoration: none;
-            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.9s both;
+        }
+
+        /* Button hover wave effect */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(45deg, #5cbf60, #4CAF50);
+        }
+        .btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .secondary-actions {
+            margin-top: 20px;
+            animation: fadeInUp 0.8s ease-out 1.1s both;
+        }
+        .secondary-actions a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9em;
             transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
+            position: relative;
         }
-        
-        .resend-link:hover {
-            color: #5a67d8;
-            border-bottom-color: #5a67d8;
+        .secondary-actions a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 50%;
+            background: #a5d6a7;
+            transition: all 0.3s ease;
         }
-        
+        .secondary-actions a:hover {
+            color: #a5d6a7;
+            transform: translateY(-2px);
+        }
+        .secondary-actions a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Responsive animations */
         @media (max-width: 768px) {
             .message-box {
-                padding: 35px 25px;
-                margin: 10px;
+                padding: 30px 20px;
+                margin: 20px;
             }
-            
-            h1 {
-                font-size: 1.8rem;
+            .message-box .icon {
+                font-size: 3rem;
             }
-            
-            .icon-email {
-                font-size: 4.5rem;
-            }
-            
-            p {
-                font-size: 1rem;
-            }
-            
-            a.btn {
-                padding: 15px 25px;
-                font-size: 1rem;
+            .message-box h1 {
+                font-size: 1.5rem;
             }
         }
-        
-        @media (max-width: 480px) {
-            .message-box {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            .icon-email {
-                font-size: 4rem;
-            }
+
+        /* Loading animation for the entire page */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease-out 1.5s both;
+        }
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(165, 214, 167, 0.3);
+            border-top: 3px solid #a5d6a7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div class="particles"></div>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
+        </div>
+    </header>
+
+    <main class="main-content">
         <div class="message-box">
-            <div class="icon-container">
-                <i class="fas fa-envelope-open-text icon-email" aria-hidden="true"></i>
+            <div class="icon" style="color: #f39c12;">
+                <i class="fas fa-envelope-open-text"></i>
             </div>
-            
             <h1>Vui lòng kiểm tra email của bạn!</h1>
-            
             <p>
-                Cảm ơn bạn đã đăng ký <strong>Sổ tay nông dân thông minh</strong>. Một email xác thực đã được gửi đến địa chỉ email của bạn. Vui lòng nhấp vào liên kết trong email để kích hoạt tài khoản.
+                Cảm ơn bạn đã đăng ký. Một email xác thực đã được gửi đến địa chỉ của bạn. Vui lòng nhấp vào liên kết trong email để kích hoạt tài khoản.
             </p>
-            
-            <p>
-                Nếu không thấy email, vui lòng kiểm tra <span class="highlight">thư mục spam (thư rác)</span> hoặc thử gửi lại email xác thực.
+            <p style="font-size: 0.9em;">
+                Nếu không thấy email, vui lòng kiểm tra <span class="highlight">thư mục spam (thư rác)</span>.
             </p>
-            
-            <div class="btn-container">
-                <a href="login.html" class="btn" role="button">
-                    <i class="fas fa-arrow-left"></i>
-                    Quay lại trang Đăng nhập
-                </a>
-            </div>
-            
+            <a href="login.html" class="btn">Quay lại trang Đăng nhập</a>
             <div class="secondary-actions">
-                <a href="#" class="resend-link" onclick="alert('Tính năng gửi lại email sẽ được thêm vào sau!'); return false;">
-                    Gửi lại email xác thực
-                </a>
+                <a href="#" onclick="resendEmail()">Gửi lại email xác thực</a>
             </div>
         </div>
-    </div>
+    </main>
+
+    <script>
+        let userEmailForResend = ''; // Placeholder for user's email
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Resend email function (placeholder)
+        async function resendEmail(event) {
+            event.preventDefault();
+
+            const btn = event.target;
+            const messageEl = document.getElementById('resend-message');
+
+            if (!userEmailForResend) {
+                messageEl.textContent = 'Không tìm thấy địa chỉ email.';
+                messageEl.style.color = '#ffcccc';
+                return;
+            }
+
+            // Vô hiệu hóa nút và hiển thị trạng thái đang tải
+            const originalText = btn.textContent;
+            btn.textContent = 'Đang gửi...';
+            btn.style.pointerEvents = 'none';
+            messageEl.textContent = ''; 
+
+            try {
+                // Gọi API mới để gửi lại mail
+                const response = await fetch('/api/resend-confirmation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: userEmailForResend })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageEl.textContent = 'Đã gửi lại email thành công!';
+                    messageEl.style.color = '#a5d6a7';
+                } else {
+                    throw new Error(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+                }
+
+            } catch (error) {
+                console.error('Resend error:', error);
+                messageEl.textContent = error.message;
+                messageEl.style.color = '#ffcccc';
+            } finally {
+                // Khôi phục nút sau một khoảng thời gian
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.pointerEvents = 'auto';
+                }, 5000); // Cho phép gửi lại sau 5 giây
+            }
+        }
+
+        // Lấy email từ URL khi trang tải
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            userEmailForResend = urlParams.get('email');
+
+            if (!userEmailForResend) {
+                console.error('Không tìm thấy tham số email trong URL.');
+                const resendLink = document.querySelector('.secondary-actions a');
+                if (resendLink) {
+                    resendLink.style.display = 'none';
+                }
+            }
+        });
+
+        // Add stagger animation to text elements
+        function addStaggerAnimation() {
+            const textElements = document.querySelectorAll('.message-box p, .message-box h1');
+            textElements.forEach((el, index) => {
+                el.style.animationDelay = (0.3 + index * 0.2) + 's';
+            });
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            addStaggerAnimation();
+            
+            // Add mouse movement effect to message box
+            const messageBox = document.querySelector('.message-box');
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 100;
+                const y = (e.clientY / window.innerHeight) * 100;
+                
+                messageBox.style.transform = `translate(${(x - 50) * 0.02}px, ${(y - 50) * 0.02}px)`;
+            });
+        });
+
+        // Add click ripple effect
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn')) {
+                const btn = e.target;
+                const ripple = document.createElement('span');
+                const rect = btn.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    left: ${x}px;
+                    top: ${y}px;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

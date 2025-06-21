@@ -3,205 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng điều khiển - Sổ tay nông dân thông minh</title>
-    <!-- CSS và Font Awesome -->
-    <link rel="stylesheet" href="styles/index.css">
+    <title>Sổ tay nông dân thông minh - Nền tảng nông nghiệp 4.0</title>
+    <meta name="description" content="Tham gia cộng đồng nông dân hiện đại, học hỏi kiến thức mới với AI và công nghệ 4.0.">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="styles/home.css">
 </head>
 <body>
 
-    <div class="dashboard-layout">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <a href="#" class="logo"><i class="fas fa-seedling"></i> <span>Sổ Tay Nông Dân</span></a>
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
+            <nav class="main-nav">
+                <a href="#features" class="nav-link">Tính năng</a>
+                <a href="login.html" class="nav-btn btn-login">Đăng nhập</a>
+                <a href="register.html" class="nav-btn btn-register">Đăng ký</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Nâng Tầm Nông Nghiệp Việt Nam</h1>
+                <p>Nền tảng học tập và quản lý nông nghiệp thông minh, ứng dụng công nghệ AI và 4.0 để tối ưu hóa năng suất và hiệu quả.</p>
+                <a class="btn-primary">Bắt đầu miễn phí</a>
             </div>
-            <ul class="sidebar-nav">
-                <li><a href="#" class="nav-tab active" onclick="showSection('dashboard', this)">
-                    <i class="fas fa-home"></i> <span>Trang chủ</span>
-                </a></li>
-                <li><a href="#" class="nav-tab" onclick="showSection('courses', this)">
-                    <i class="fas fa-graduation-cap"></i> <span>Khóa học</span>
-                </a></li>
-                <li><a href="#" class="nav-tab" onclick="showSection('forum', this)">
-                    <i class="fas fa-comments"></i> <span>Diễn đàn</span>
-                </a></li>
-                <li><a href="#" class="nav-tab" onclick="showSection('weather', this)">
-                    <i class="fas fa-cloud-sun"></i> <span>Thời tiết</span>
-                </a></li>
-                <li><a href="#" class="nav-tab" onclick="showSection('quiz', this)">
-                    <i class="fas fa-clipboard-check"></i> <span>Kiểm tra</span>
-                </a></li>
-                <li><a href="#" class="nav-tab" onclick="showSection('news', this)">
-                    <i class="fas fa-newspaper"></i> <span>Tin tức</span>
-                </a></li>
-                <!-- Mục Hồ sơ này sẽ được ẩn/hiện bằng JS -->
-                <li><a href="#" class="nav-tab" onclick="showSection('profile', this)" id="profile-tab">
-                    <i class="fas fa-user"></i> <span>Hồ sơ</span>
-                </a></li>
-            </ul>
-            <div class="sidebar-footer">
-                <p style="font-size: 0.8em; text-align: center; color: #ccc;">&copy; 2025</p>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Tại sao chọn chúng tôi?</h2>
+                <p class="section-subtitle">Chúng tôi cung cấp bộ công cụ toàn diện giúp bạn thành công trong kỷ nguyên số, từ kiến thức chuyên sâu đến quản lý trang trại hiệu quả.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-graduation-cap icon"></i>
+                        <h3>Khóa học đa dạng</h3>
+                        <p>Học hỏi từ các chuyên gia hàng đầu về kỹ thuật trồng trọt, chăn nuôi và công nghệ mới nhất.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-comments icon"></i>
+                        <h3>Cộng đồng chuyên gia</h3>
+                        <p>Thảo luận, chia sẻ kinh nghiệm và giải đáp thắc mắc cùng hàng ngàn nông dân và chuyên gia khác.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cloud-sun icon"></i>
+                        <h3>Thông tin thời gian thực</h3>
+                        <p>Cập nhật thông tin thời tiết, tin tức nông nghiệp và lịch nông vụ chính xác, kịp thời.</p>
+                    </div>
+                </div>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="main-header-bar">
-                <h2 id="main-content-title">Bảng điều khiển</h2>
-                <div class="user-menu">
-                    <!-- Trạng thái đã đăng nhập (ẩn mặc định) -->
-                    <div id="user-info" style="display: none;">
-                        <span class="username"></span>
-                        <button class="logout-btn" onclick="logout()" title="Đăng xuất">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                    </div>
-                    <!-- Trạng thái khách (hiện mặc định) -->
-                    <div id="guest-menu">
-                        <a href="login.html" class="btn btn-login">Đăng nhập</a>
-                        <a href="register.html" class="btn btn-register">Đăng ký</a>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Dashboard Section -->
-            <section id="dashboard" class="content-section active">
-                 <div class="stats-grid">
-                    <div class="stat-card card">
-                        <h3>12</h3>
-                        <p>Khóa học đã hoàn thành</p>
-                    </div>
-                    <div class="stat-card card">
-                        <h3>85%</h3>
-                        <p>Điểm trung bình</p>
-                    </div>
-                    <div class="stat-card card">
-                        <h3>156</h3>
-                        <p>Giờ học tích lũy</p>
-                    </div>
-                    <div class="stat-card card">
-                        <h3>4.8★</h3>
-                        <p>Đánh giá học viên</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Courses Section -->
-            <section id="courses" class="content-section">
-                <div class="content-grid two-column">
-                    <div class="course-card card">
-                        <h3>Kỹ thuật trồng lúa hiệu quả</h3>
-                        <p>Học cách trồng lúa với năng suất cao, sử dụng công nghệ hiện đại và phương pháp canh tác bền vững.</p>
-                        <button class="btn" onclick="startCourse('rice')">Tham gia khóa học</button>
-                    </div>
-                    <div class="course-card card">
-                        <h3>Chăn nuôi gà an toàn</h3>
-                        <p>Hướng dẫn chăn nuôi gà theo tiêu chuẩn VietGAP, phòng chống dịch bệnh hiệu quả.</p>
-                        <button class="btn" onclick="startCourse('chicken')">Tham gia khóa học</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Forum Section -->
-            <section id="forum" class="content-section">
-                <div class="forum-controls">
-                    <p id="forum-login-prompt" class="login-prompt-card card" style="display: none;">
-                        Vui lòng <a href="login.html">đăng nhập</a> để tạo bài viết mới và tham gia thảo luận.
-                    </p>
-                    <button id="create-post-btn" class="btn btn-primary" onclick="createPost()" style="display: none;">
-                        <i class="fas fa-plus"></i> Tạo bài viết mới
-                    </button>
-                </div>
-                <div class="content-grid two-column">
-                    <div class="forum-post card">
-                        <div class="post-header">
-                            <div class="avatar">AN</div>
-                            <div class="post-info">
-                                <h4>Anh Nguyễn Văn An</h4>
-                                <small>2 giờ trước</small>
-                            </div>
-                        </div>
-                        <h3>Cách phòng chống sâu bệnh trên cây lúa?</h3>
-                        <p>Gần đây ruộng lúa nhà tôi có dấu hiệu sâu bệnh...</p>
-                        <div class="post-actions">
-                            <button class="btn btn-secondary"><i class="fas fa-thumbs-up"></i> 12</button>
-                            <button class="btn btn-secondary"><i class="fas fa-comment"></i> 4</button>
-                        </div>
-                    </div>
-                    <div class="forum-post card">
-                         <div class="post-header">
-                            <div class="avatar" style="background-color: #f39c12;">LT</div>
-                            <div class="post-info">
-                                <h4>Chị Lê Thị Tâm</h4>
-                                <small>5 giờ trước</small>
-                            </div>
-                        </div>
-                        <h3>Chia sẻ kinh nghiệm trồng rau thủy canh</h3>
-                        <p>Sau 6 tháng trồng rau thủy canh, mình muốn chia sẻ một số kinh nghiệm...</p>
-                         <div class="post-actions">
-                            <button class="btn btn-secondary"><i class="fas fa-thumbs-up"></i> 28</button>
-                            <button class="btn btn-secondary"><i class="fas fa-comment"></i> 9</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Weather Section -->
-            <section id="weather" class="content-section">
-                <div class="location-changer card">
-                    <input type="text" id="location-input" placeholder="Nhập tên tỉnh/thành phố...">
-                    <button class="btn btn-primary" onclick="changeWeatherLocation()">Lấy dự báo</button>
-                </div>
-                <div class="weather-widget card">
-                    <!-- Nội dung thời tiết sẽ được JS chèn vào đây -->
-                    <p>Đang tải dữ liệu thời tiết...</p>
-                </div>
-            </section>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Sổ tay nông dân thông minh. Mọi quyền được bảo lưu.</p>
             
-            <!-- Quiz Section -->
-            <section id="quiz" class="content-section">
-                <div class="card">
-                     <h3>Bài kiểm tra: Kỹ thuật trồng lúa cơ bản</h3>
-                    <p>Thời gian: 15 phút | Số câu hỏi: 20</p>
-                    <button class="btn btn-primary" onclick="submitQuiz()">Bắt đầu ngay</button>
-                </div>
-            </section>
-
-            <!-- News Section -->
-            <section id="news" class="content-section">
-                 <div class="card">
-                    <h3>Công nghệ AI giúp dự đoán sâu bệnh trên lúa</h3>
-                    <p>Các nhà khoa học Việt Nam đã phát triển thành công hệ thống AI...</p>
-                    <button class="btn">Đọc thêm</button>
-                </div>
-            </section>
-
-            <!-- Profile Section -->
-            <section id="profile" class="content-section">
-                <div class="card">
-                    <div class="form-group">
-                        <label for="profile-name">Họ và tên:</label>
-                        <input type="text" id="profile-name" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="profile-email">Email:</label>
-                        <input type="email" id="profile-email" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="profile-phone">Số điện thoại:</label>
-                        <input type="tel" id="profile-phone" readonly>
-                    </div>
-                    <button class="btn btn-primary" onclick="editProfile(this)">
-                        <i class="fas fa-edit"></i> Chỉnh sửa thông tin
-                    </button>
-                </div>
-            </section>
-
-        </main>
-    </div>
-
-    <!-- JavaScript -->
-    <script src="logic/animation.js"></script>
+        </div>
+    </footer>
+    
+    <script src="logic/home.js">
+        
+    </script>
 </body>
 </html>

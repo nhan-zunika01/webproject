@@ -67,7 +67,10 @@ async function handleRegister(event) {
     const result = await response.json();
 
     if (response.ok) {
-      window.location.href = "registration-pending.html";
+      // THAY ĐỔI QUAN TRỌNG: Truyền email qua URL
+      window.location.href = `registration-pending.html?email=${encodeURIComponent(
+        email_user
+      )}`;
     } else {
       // Display a more specific error if possible
       setMessage(`error-reg-${result.field || "name-account"}`, result.message);
@@ -86,7 +89,7 @@ async function handleRegister(event) {
 document.addEventListener("DOMContentLoaded", () => {
   // Redirect if already logged in
   if (localStorage.getItem("currentUser")) {
-    window.location.href = "dashboard.html"; // Or your main app page
+    window.location.href = "index.html"; // Chuyển đến trang dashboard
     return;
   }
 

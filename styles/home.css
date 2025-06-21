@@ -35,7 +35,7 @@ body {
 
 /* Kiểu của header khi cuộn trang */
 .main-header.scrolled {
-    background-color: rgba(33, 37, 41, 0.45);
+    background-color: rgba(33, 37, 41, 0.4);
     /* Nền tối hơn, tăng độ trong suốt */
     backdrop-filter: blur(12px);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);

@@ -110,21 +110,15 @@ function editProfile(button) {
   }
 }
 
-// === BẮT ĐẦU: Tính năng thời tiết động ===
-async function getWeather(city = null) {
+// === BẮT ĐẦU: Sửa lỗi hàm getWeather ===
+async function getWeather(location = "Hanoi") {
+  // Đặt "Hanoi" làm địa điểm mặc định
   const weatherWidget = document.querySelector(".weather-widget");
   if (!weatherWidget) return;
 
   weatherWidget.innerHTML = "<p>Đang tải dữ liệu thời tiết...</p>";
-  let location = city;
 
   try {
-    if (!location) {
-      const ipResponse = await fetch("https://ipapi.co/json/");
-      const ipData = await ipResponse.json();
-      location = ipData.city || "Hanoi";
-    }
-
     const weatherResponse = await fetch(
       `https://wttr.in/${location.trim().replace(/ /g, "+")}?format=j1`
     );
@@ -135,19 +129,34 @@ async function getWeather(city = null) {
     }
     const weatherData = await weatherResponse.json();
 
-    const currentWeather = weatherData.current_condition[0];
-    const forecast = weatherData.weather.slice(0, 4);
+    // Kiểm tra an toàn (defensive coding) để tránh lỗi
+    const currentWeather = weatherData.current_condition?.[0];
+    if (!currentWeather) {
+      throw new Error("Dữ liệu thời tiết hiện tại không có sẵn.");
+    }
+
+    const forecast = weatherData.weather?.slice(0, 4) || [];
+
+    const area = weatherData.nearest_area?.[0];
+    const locationName = area?.areaName?.[0]?.value || location; // Dùng tên nhập vào nếu API không trả về tên
+    const countryName = area?.country?.[0]?.value || "";
+
+    // Ưu tiên mô tả tiếng Việt, nếu không có thì dùng mô tả tiếng Anh
+    const weatherDescription =
+      currentWeather.lang_vi?.[0]?.value ||
+      currentWeather.weatherDesc?.[0]?.value ||
+      "Không có mô tả";
 
     const getIconClass = (weatherCode) => {
       const code = parseInt(weatherCode);
-      if ([113].includes(code)) return "fa-sun";
-      if ([116, 119, 122].includes(code)) return "fa-cloud";
+      if ([113].includes(code)) return "fa-sun"; // Clear
+      if ([116, 119, 122].includes(code)) return "fa-cloud"; // Cloudy
       if ([176, 293, 296, 302, 308, 353, 359].includes(code))
-        return "fa-cloud-rain";
-      if ([200, 386, 389].includes(code)) return "fa-bolt";
-      if ([227, 329, 332, 338, 371].includes(code)) return "fa-snowflake";
-      if ([143, 248, 260].includes(code)) return "fa-smog";
-      return "fa-cloud-sun";
+        return "fa-cloud-rain"; // Rain
+      if ([200, 386, 389].includes(code)) return "fa-bolt"; // Thunder
+      if ([227, 329, 332, 338, 371].includes(code)) return "fa-snowflake"; // Snow
+      if ([143, 248, 260].includes(code)) return "fa-smog"; // Fog
+      return "fa-cloud-sun"; // Default
     };
 
     const dayNames = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
@@ -157,24 +166,20 @@ async function getWeather(city = null) {
             <div class="weather-main">
                 <i class="fas ${getIconClass(currentWeather.weatherCode)}"></i>
                 <div class="weather-temp">${currentWeather.temp_C}°C</div>
-                <div class="weather-location">${
-                  weatherData.nearest_area[0].areaName[0].value
-                }, ${weatherData.nearest_area[0].country[0].value}</div>
-                <div class="weather-desc">${
-                  currentWeather.lang_vi[0].value
-                }</div>
+                <div class="weather-location">${locationName}${
+      countryName ? ", " + countryName : ""
+    }</div>
+                <div class="weather-desc">${weatherDescription}</div>
             </div>
             <div class="weather-forecast">
                 ${forecast
                   .map((day, index) => {
-                    // wttr.in API doesn't provide full date for forecast, so we approximate days
-                    const dayIndex = (today + index + 1) % 7;
+                    const dayIndex = (today + index) % 7; // Use modulo to loop through days
+                    const iconCode = day.hourly?.[4]?.weatherCode || "116"; // Use noon weather, default to cloudy
                     return `
                     <div class="forecast-item">
                         <div>${dayNames[dayIndex]}</div>
-                        <i class="fas ${getIconClass(
-                          day.hourly[4].weatherCode
-                        )}"></i>
+                        <i class="fas ${getIconClass(iconCode)}"></i>
                         <div>${day.maxtempC}°</div>
                     </div>
                 `;
@@ -190,14 +195,10 @@ async function getWeather(city = null) {
 
 function changeWeatherLocation() {
   const locationInput = document.getElementById("location-input");
-  if (locationInput && locationInput.value) {
-    getWeather(locationInput.value);
-  } else {
-    // If input is empty, fetch for auto location
-    getWeather();
-  }
+  const location = locationInput.value.trim();
+  getWeather(location || "Hanoi"); // If input is empty, default to Hanoi
 }
-// === KẾT THÚC: Tính năng thời tiết động ===
+// === KẾT THÚC: Sửa lỗi hàm getWeather ===
 
 // Functions for other buttons with login check
 function startCourse(id) {
@@ -233,6 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
-  // Automatically fetch weather on page load
+  // Automatically fetch weather for Hanoi on page load
   getWeather();
 });
