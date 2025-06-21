@@ -58,7 +58,7 @@ async function handleLogin(event) {
     if (response.ok) {
       if (result.user.email_confirmed_at) {
         localStorage.setItem("currentUser", JSON.stringify(result.user));
-        window.location.href = "dashboard.html"; // Ensure this is your logged-in page
+        window.location.href = "dash.html"; // Ensure this is your logged-in page
       } else {
         setMessage(
           "error-login-general",
@@ -117,7 +117,7 @@ async function handleForgotPassword(event) {
 document.addEventListener("DOMContentLoaded", () => {
   // Redirect if already logged in
   if (localStorage.getItem("currentUser")) {
-    window.location.href = "dashboard.html"; // Or your main app page
+    window.location.href = "dash.html"; // Or your main app page
     return;
   }
 
