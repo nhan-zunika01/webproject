@@ -31,7 +31,7 @@ export const onRequestPost = async (context) => {
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       // Cập nhật quan trọng: Thêm URL chuyển hướng đến trang mới
-      redirectTo: "https://your-domain.com/update-password.html",
+      redirectTo: "https://webproject-bxj.pages.dev/update-password.html",
     });
 
     // Lưu ý: Bạn cần thay 'https://your-domain.com' bằng tên miền thực tế của trang web khi triển khai.
