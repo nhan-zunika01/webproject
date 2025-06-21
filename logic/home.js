@@ -17,16 +17,12 @@ function handleRegisterRedirect(event) {
 }
 
 // Attach event to both register buttons (hero and nav)
-const heroRegisterBtn = document.querySelector("a.btn-primary");
+// Attach event to register button in nav
 const navRegisterBtn = document.querySelector("a.btn-register");
 
-if (heroRegisterBtn) {
-  heroRegisterBtn.addEventListener("click", handleRegisterRedirect);
-}
 if (navRegisterBtn) {
   navRegisterBtn.addEventListener("click", handleRegisterRedirect);
 }
-
 // === THÊM HIỆU ỨNG HEADER KHI CUỘN TRANG (PHIÊN BẢN CẢI TIẾN) ===
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".main-header");
