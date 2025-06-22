@@ -7,6 +7,19 @@ export const onRequestPost = async ({ request, env }) => {
     "Content-Type": "application/json",
   };
 
+  // Check for environment variables
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.error(
+      "Supabase environment variables are not set for password update."
+    );
+    return new Response(
+      JSON.stringify({
+        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
+      }),
+      { status: 500, headers }
+    );
+  }
+
   try {
     const supabase = createClient(
       env.SUPABASE_URL,
@@ -21,13 +34,12 @@ export const onRequestPost = async ({ request, env }) => {
       );
     }
 
-    // Use the access token to authenticate the user session
     const {
       data: { user },
       error: sessionError,
     } = await supabase.auth.getUser(access_token);
 
-    if (sessionError) {
+    if (sessionError || !user) {
       return new Response(
         JSON.stringify({
           message: "Mã khôi phục không hợp lệ hoặc đã hết hạn.",
@@ -36,7 +48,6 @@ export const onRequestPost = async ({ request, env }) => {
       );
     }
 
-    // Update the user's password
     const { error: updateError } = await supabase.auth.admin.updateUserById(
       user.id,
       { password: password }

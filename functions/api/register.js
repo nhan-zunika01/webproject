@@ -1,72 +1,106 @@
 // File: functions/api/register.js
-// Import thư viện Supabase
 import { createClient } from "@supabase/supabase-js";
 
-// Hàm xử lý CORS và các yêu cầu POST
-async function handleRequest(request, env) {
-  // Cho phép các yêu cầu từ bất kỳ đâu (CORS)
+export const onRequestPost = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json",
   };
 
-  // Cloudflare gửi yêu cầu OPTIONS trước để kiểm tra CORS
-  if (request.method === "OPTIONS") {
-    return new Response(null, { headers });
+  // Check for environment variables
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.error(
+      "Supabase environment variables are not set for registration."
+    );
+    return new Response(
+      JSON.stringify({
+        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
+      }),
+      { status: 500, headers }
+    );
   }
 
-  // Chỉ chấp nhận phương thức POST
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ message: "Method Not Allowed" }), {
-      status: 405,
-      headers,
-    });
-  }
+  try {
+    const supabase = createClient(
+      env.SUPABASE_URL,
+      env.SUPABASE_SERVICE_ROLE_KEY
+    );
 
-  // Khởi tạo Supabase client bằng biến môi trường
-  // Chúng ta sẽ cài đặt các biến này trong dashboard của Cloudflare
-  const supabase = createClient(
-    env.SUPABASE_URL,
-    env.SUPABASE_SERVICE_ROLE_KEY
-  );
+    const {
+      email_user,
+      password_account,
+      name_account,
+      name_user,
+      phone_user,
+    } = await request.json();
 
-  // Lấy dữ liệu từ body của request
-  const { email_user, password_account, name_account, name_user, phone_user } =
-    await request.json();
-
-  // Gọi hàm signUp của Supabase
-  const { data, error } = await supabase.auth.signUp({
-    email: email_user,
-    password: password_account,
-    options: {
-      data: {
-        name_account: name_account,
-        name_user: name_user,
-        phone_user: phone_user,
+    const { data, error } = await supabase.auth.signUp({
+      email: email_user,
+      password: password_account,
+      options: {
+        data: {
+          name_account: name_account,
+          name_user: name_user,
+          phone_user: phone_user,
+        },
       },
-    },
-  });
+    });
 
-  if (error) {
-    return new Response(JSON.stringify({ message: error.message }), {
-      status: 400,
-      headers,
+    if (error) {
+      // Check for specific, common errors to provide better feedback
+      if (error.message.includes("User already registered")) {
+        return new Response(
+          JSON.stringify({ message: "Email này đã được sử dụng." }),
+          {
+            status: 409, // Conflict
+            headers,
+          }
+        );
+      }
+      if (error.message.includes("Password should be at least 6 characters")) {
+        return new Response(
+          JSON.stringify({ message: "Mật khẩu phải có ít nhất 6 ký tự." }),
+          {
+            status: 400,
+            headers,
+          }
+        );
+      }
+      return new Response(JSON.stringify({ message: error.message }), {
+        status: 400,
+        headers,
+      });
+    }
+
+    // Return success message
+    return new Response(
+      JSON.stringify({
+        message: "Đăng ký thành công! Vui lòng kiểm tra email để xác thực.",
+        user: data.user,
+      }),
+      { status: 201, headers }
+    );
+  } catch (e) {
+    console.error("Registration server error:", e);
+    return new Response(
+      JSON.stringify({
+        message: "Đã xảy ra lỗi hệ thống khi đăng ký. Vui lòng thử lại.",
+      }),
+      { status: 500, headers }
+    );
+  }
+};
+
+export const onRequest = async (context) => {
+  // Handle CORS preflight request
+  if (context.request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
     });
   }
-
-  // Trả về thông báo thành công
-  return new Response(
-    JSON.stringify({
-      message: "Đăng ký thành công! Vui lòng kiểm tra email để xác thực.",
-      user: data.user,
-    }),
-    { status: 201, headers }
-  );
-}
-
-// Export hàm onRequest để Cloudflare thực thi
-export const onRequest = async (context) => {
-  return handleRequest(context.request, context.env);
+  return onRequestPost(context);
 };
