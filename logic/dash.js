@@ -1,6 +1,8 @@
 // Global variable for current user
 let currentUser = null;
-const RICE_QUIZ_ID = "rice-basics-v1"; // Define Quiz ID as a constant
+const RICE_QUIZ_ID = "rice-basics-v1"; // ID của bài kiểm tra duy nhất
+const TOTAL_COURSES_AVAILABLE = 2; // Tổng số khóa học trên nền tảng
+const TOTAL_QUIZ_QUESTIONS = 20; // Tổng số câu hỏi trong bài kiểm tra
 
 // New navigation function for the sidebar
 function showSection(sectionId, element) {
@@ -41,27 +43,123 @@ function logout() {
   }
 }
 
-// THÊM MỚI: Hàm để tải điểm của người dùng
-async function loadUserScores() {
+// --- START: HOÀN THIỆN THUẬT TOÁN TÍNH TOÁN ---
+
+// Helper function to animate numbers counting up
+function animateValue(obj, start, end, duration) {
+  if (!obj) return;
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const currentValue = Math.floor(progress * (end - start) + start);
+    obj.innerHTML = currentValue;
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+/**
+ * Calculates and updates all statistics on the dashboard.
+ * @param {object} scoreData - The score data object, e.g., { score: 15 }.
+ */
+function updateDashboardStats(scoreData) {
+  const score = scoreData ? scoreData.score || 0 : 0;
+  const animationDuration = 1500;
+
+  // 1. Khóa học đã hoàn thành: Nếu có điểm > 0, tính là đã hoàn thành 1/2 khóa học.
+  const completedCourses = score > 0 ? 1 : 0;
+  const completedCoursesEl = document.getElementById("stat-courses-completed");
+  if (completedCoursesEl)
+    animateValue(completedCoursesEl, 0, completedCourses, animationDuration);
+
+  // 2. Điểm trung bình: Tính dựa trên điểm của 1 bài kiểm tra (20 câu).
+  const averageScorePercent =
+    TOTAL_QUIZ_QUESTIONS > 0 ? (score / TOTAL_QUIZ_QUESTIONS) * 100 : 0;
+  const averageScoreEl = document.getElementById("stat-average-score");
+  if (averageScoreEl) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min(
+        (timestamp - startTimestamp) / animationDuration,
+        1
+      );
+      const currentValue = progress * averageScorePercent;
+      averageScoreEl.innerHTML = `${currentValue.toFixed(0)}%`;
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  // 3. Giờ học tích lũy (Giả định mỗi khóa học hoàn thành là 5 giờ)
+  const studyHoursPerCourse = 5;
+  const totalStudyHours = completedCourses * studyHoursPerCourse;
+  const studyHoursEl = document.getElementById("stat-study-hours");
+  if (studyHoursEl)
+    animateValue(studyHoursEl, 0, totalStudyHours, animationDuration);
+
+  // 4. Đánh giá học viên (Dựa trên điểm, thang 5 sao)
+  const rating = score > 0 ? (score / TOTAL_QUIZ_QUESTIONS) * 4 + 1 : 0;
+  const ratingEl = document.getElementById("stat-student-rating");
+  if (ratingEl) {
+    let startTimestampRating = null;
+    const stepRating = (timestamp) => {
+      if (!startTimestampRating) startTimestampRating = timestamp;
+      const progress = Math.min(
+        (timestamp - startTimestampRating) / animationDuration,
+        1
+      );
+      const currentValue = progress * rating;
+      ratingEl.innerHTML = `${currentValue.toFixed(1)}★`;
+      if (progress < 1) {
+        window.requestAnimationFrame(stepRating);
+      }
+    };
+    window.requestAnimationFrame(stepRating);
+  }
+}
+
+/**
+ * Fetches all necessary user data for the dashboard from the backend.
+ */
+async function loadDashboardData() {
   if (!currentUser) return;
 
   const highscoreEl = document.getElementById("quiz-highscore");
-  if (!highscoreEl) return;
-
   try {
     const response = await fetch(
       `/api/get-quiz-score?userId=${currentUser.id}&quizId=${RICE_QUIZ_ID}`
     );
-    if (!response.ok) {
-      throw new Error("Failed to fetch score");
+    let scoreData = { score: 0 }; // Default to 0
+    if (response.ok) {
+      scoreData = await response.json();
+    } else {
+      console.error("Failed to fetch score, defaulting to 0.");
     }
-    const data = await response.json();
-    highscoreEl.textContent = `${data.score || 0}/20`;
+
+    // Update high score display in the quiz section
+    if (highscoreEl) {
+      highscoreEl.textContent = `${
+        scoreData.score || 0
+      }/${TOTAL_QUIZ_QUESTIONS}`;
+    }
+
+    // Update the main dashboard stats based on fetched score
+    updateDashboardStats(scoreData);
   } catch (error) {
-    console.error("Error loading quiz score:", error);
-    highscoreEl.textContent = "Lỗi";
+    console.error("Error loading user data:", error);
+    if (highscoreEl) highscoreEl.textContent = "Lỗi";
+    // Update stats with zero state in case of error
+    updateDashboardStats({ score: 0 });
   }
 }
+
+// --- END: HOÀN THIỆN THUẬT TOÁN TÍNH TOÁN ---
 
 // Function to set up UI for logged-in users
 function setupUserUI() {
@@ -72,6 +170,8 @@ function setupUserUI() {
   document.getElementById("profile-tab").style.display = "flex";
   document.getElementById("create-post-btn").style.display = "inline-block";
   document.getElementById("forum-login-prompt").style.display = "none";
+  const guestMessage = document.getElementById("guest-welcome-message");
+  if (guestMessage) guestMessage.style.display = "none";
 
   const startQuizBtn = document.getElementById("start-quiz-btn");
   if (startQuizBtn) {
@@ -79,7 +179,6 @@ function setupUserUI() {
     startQuizBtn.removeAttribute("title");
   }
 
-  // Hiển thị nút "Tham gia khóa học" và ẩn thông báo đăng nhập
   document.querySelectorAll(".course-action").forEach((action) => {
     const joinButton = action.querySelector(".btn-join-course");
     const loginPrompt = action.querySelector(".course-login-prompt");
@@ -87,14 +186,8 @@ function setupUserUI() {
     if (loginPrompt) loginPrompt.style.display = "none";
   });
 
-  // Cập nhật số liệu thống kê cho người dùng đã đăng nhập (dữ liệu mẫu)
-  document.getElementById("stat-courses-completed").textContent = "12";
-  document.getElementById("stat-average-score").textContent = "85%";
-  document.getElementById("stat-study-hours").textContent = "156";
-  document.getElementById("stat-student-rating").textContent = "4.8★";
-
-  // THÊM MỚI: Gọi hàm tải điểm khi người dùng đăng nhập
-  loadUserScores();
+  // ** THAY ĐỔI QUAN TRỌNG: Gọi hàm mới để tải và tính toán dữ liệu **
+  loadDashboardData();
 
   const usernameSpan = document.querySelector(".user-menu .username");
   if (usernameSpan) {
@@ -124,7 +217,6 @@ function setupGuestUI() {
     startQuizBtn.title = "Vui lòng đăng nhập để làm bài kiểm tra";
   }
 
-  // Ẩn nút "Tham gia khóa học" và hiển thị thông báo đăng nhập
   document.querySelectorAll(".course-action").forEach((action) => {
     const joinButton = action.querySelector(".btn-join-course");
     const loginPrompt = action.querySelector(".course-login-prompt");
@@ -132,13 +224,12 @@ function setupGuestUI() {
     if (loginPrompt) loginPrompt.style.display = "block";
   });
 
-  // Đặt lại tất cả các số liệu về 0 cho khách
+  // Reset stats to 0 for guests
   document.getElementById("stat-courses-completed").textContent = "0";
   document.getElementById("stat-average-score").textContent = "0%";
   document.getElementById("stat-study-hours").textContent = "0";
   document.getElementById("stat-student-rating").textContent = "0.0★";
 
-  // THÊM MỚI: Đặt lại điểm cho khách
   const highscoreEl = document.getElementById("quiz-highscore");
   if (highscoreEl) {
     highscoreEl.textContent = "0/20";
@@ -153,7 +244,11 @@ function setupGuestUI() {
     guestMessage.id = "guest-welcome-message";
     guestMessage.innerHTML =
       '<h3>Chào mừng bạn đến với Sổ Tay Nông Dân!</h3><p>Vui lòng <a href="login.html">đăng nhập</a> hoặc <a href="register.html">đăng ký</a> để truy cập tất cả các tính năng.</p>';
-    dashboardSection.prepend(guestMessage);
+    if (dashboardSection.firstChild) {
+      dashboardSection.insertBefore(guestMessage, dashboardSection.firstChild);
+    } else {
+      dashboardSection.appendChild(guestMessage);
+    }
   }
 }
 
@@ -182,65 +277,11 @@ function editProfile(button) {
   }
 }
 
-// === BẮT ĐẦU: CẬP NHẬT HÀM THỜI TIẾT ===
+// Weather function
 async function getWeather(location = "Hanoi") {
   const weatherWidget = document.querySelector(".weather-widget");
   if (!weatherWidget) return;
-
   weatherWidget.innerHTML = "<p>Đang tải dữ liệu thời tiết...</p>";
-
-  const weatherTranslations = {
-    Sunny: "Trời nắng",
-    Clear: "Trời quang",
-    "Partly cloudy": "Trời có mây",
-    Cloudy: "Trời nhiều mây",
-    Overcast: "Trời u ám",
-    Mist: "Sương mù",
-    "Patchy rain possible": "Có thể có mưa vài nơi",
-    "Patchy snow possible": "Có thể có tuyết vài nơi",
-    "Patchy sleet possible": "Có thể có mưa tuyết vài nơi",
-    "Patchy freezing drizzle possible": "Có thể có mưa phùn băng giá",
-    "Thundery outbreaks possible": "Có khả năng có dông",
-    "Blowing snow": "Bão tuyết",
-    Blizzard: "Trận bão tuyết",
-    Fog: "Sương mù",
-    "Freezing fog": "Sương mù băng giá",
-    "Patchy light drizzle": "Mưa phùn nhẹ",
-    "Light drizzle": "Mưa phùn nhẹ",
-    "Freezing drizzle": "Mưa phùn băng giá",
-    "Heavy freezing drizzle": "Mưa phùn băng giá dày đặc",
-    "Patchy light rain": "Mưa nhẹ vài nơi",
-    "Light rain": "Mưa nhỏ",
-    "Moderate rain at times": "Đôi lúc có mưa vừa",
-    "Moderate rain": "Mưa vừa",
-    "Heavy rain at times": "Đôi lúc có mưa to",
-    "Heavy rain": "Mưa to",
-    "Light freezing rain": "Mưa băng nhẹ",
-    "Moderate or heavy freezing rain": "Mưa băng vừa hoặc nặng",
-    "Light sleet": "Mưa tuyết nhẹ",
-    "Moderate or heavy sleet": "Mưa tuyết vừa hoặc nặng",
-    "Patchy light snow": "Tuyết nhẹ vài nơi",
-    "Light snow": "Tuyết nhẹ",
-    "Patchy moderate snow": "Tuyết vừa vài nơi",
-    "Moderate snow": "Tuyết vừa",
-    "Patchy heavy snow": "Tuyết dày vài nơi",
-    "Heavy snow": "Tuyết dày",
-    "Ice pellets": "Mưa đá",
-    "Light rain shower": "Mưa rào nhẹ",
-    "Moderate or heavy rain shower": "Mưa rào vừa hoặc nặng",
-    "Torrential rain shower": "Mưa như trút nước",
-    "Light sleet showers": "Mưa tuyết nhẹ",
-    "Moderate or heavy sleet showers": "Mưa tuyết vừa hoặc nặng",
-    "Light snow showers": "Mưa tuyết nhẹ",
-    "Moderate or heavy snow showers": "Mưa tuyết vừa hoặc nặng",
-    "Light showers of ice pellets": "Mưa đá nhẹ",
-    "Moderate or heavy showers of ice pellets": "Mưa đá vừa hoặc nặng",
-    "Patchy light rain with thunder": "Mưa dông vài nơi",
-    "Moderate or heavy rain with thunder": "Mưa dông vừa hoặc nặng",
-    "Patchy light snow with thunder": "Tuyết và dông vài nơi",
-    "Moderate or heavy snow with thunder": "Tuyết và dông vừa hoặc nặng",
-  };
-
   try {
     const weatherResponse = await fetch(
       `https://wttr.in/${location.trim().replace(/ /g, "+")}?format=j1&lang=vi`
@@ -257,28 +298,39 @@ async function getWeather(location = "Hanoi") {
       throw new Error("Dữ liệu thời tiết hiện tại không có sẵn.");
     }
 
-    const forecast = weatherData.weather?.slice(0, 4) || [];
-    const area = weatherData.nearest_area?.[0];
-    const locationName = area?.areaName?.[0]?.value || location;
-    const countryName = area?.country?.[0]?.value || "";
-
+    const weatherTranslations = {
+      Sunny: "Trời nắng",
+      Clear: "Trời quang",
+      "Partly cloudy": "Trời có mây",
+      Cloudy: "Trời nhiều mây",
+      Overcast: "Trời u ám",
+      Mist: "Sương mù",
+      "Patchy rain possible": "Có thể có mưa vài nơi",
+      Fog: "Sương mù",
+      "Light rain": "Mưa nhỏ",
+      "Moderate rain": "Mưa vừa",
+      "Heavy rain": "Mưa to",
+    };
     const englishDescription = currentWeather.weatherDesc?.[0]?.value || "";
     const weatherDescription =
       weatherTranslations[englishDescription] ||
       englishDescription ||
       "Không có mô tả";
+    const getIconClass = (code) =>
+      ({
+        113: "fa-sun",
+        116: "fa-cloud-sun",
+        119: "fa-cloud",
+        122: "fa-cloud",
+        266: "fa-cloud-rain",
+        296: "fa-cloud-showers-heavy",
+        302: "fa-cloud-showers-heavy",
+      }[code] || "fa-cloud-sun");
 
-    const getIconClass = (weatherCode) => {
-      const code = parseInt(weatherCode);
-      if ([113].includes(code)) return "fa-sun";
-      if ([116, 119, 122].includes(code)) return "fa-cloud";
-      if ([176, 293, 296, 302, 308, 353, 359].includes(code))
-        return "fa-cloud-rain";
-      if ([200, 386, 389].includes(code)) return "fa-bolt";
-      if ([227, 329, 332, 338, 371].includes(code)) return "fa-snowflake";
-      if ([143, 248, 260].includes(code)) return "fa-smog";
-      return "fa-cloud-sun";
-    };
+    const forecast = weatherData.weather?.slice(0, 4) || [];
+    const area = weatherData.nearest_area?.[0];
+    const locationName = area?.areaName?.[0]?.value || location;
+    const countryName = area?.country?.[0]?.value || "";
 
     const dayNames = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
     const today = new Date().getDay();
@@ -294,17 +346,14 @@ async function getWeather(location = "Hanoi") {
             </div>
             <div class="weather-forecast">
                 ${forecast
-                  .map((day, index) => {
-                    const dayIndex = (today + index) % 7;
-                    const iconCode = day.hourly?.[4]?.weatherCode || "116";
-                    return `
-                    <div class="forecast-item">
-                        <div>${dayNames[dayIndex]}</div>
-                        <i class="fas ${getIconClass(iconCode)}"></i>
-                        <div>${day.maxtempC}°</div>
-                    </div>
-                `;
-                  })
+                  .map(
+                    (day, index) =>
+                      `<div class="forecast-item"><div>${
+                        dayNames[(today + index) % 7]
+                      }</div><i class="fas ${getIconClass(
+                        day.hourly?.[4]?.weatherCode || "116"
+                      )}"></i><div>${day.maxtempC}°</div></div>`
+                  )
                   .join("")}
             </div>
         `;
@@ -319,7 +368,6 @@ function changeWeatherLocation() {
   const location = locationInput.value.trim();
   getWeather(location || "Hanoi");
 }
-// === KẾT THÚC: CẬP NHẬT HÀM THỜI TIẾT ===
 
 // Functions for other buttons with login check
 function startCourse(id) {
@@ -349,6 +397,5 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
-  // Automatically fetch weather for Hanoi on page load
   getWeather();
 });

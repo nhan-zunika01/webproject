@@ -1,263 +1,294 @@
-/* General Resets and Body Styles */
+/* General Resets */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+/* --- START: ENHANCED GLASS THEME STYLES WITH ANIMATIONS --- */
+
+body.glass-theme {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    line-height: 1.7;
+    background: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
+    background-attachment: fixed;
+    /* Parallax effect */
     min-height: 100vh;
+    color: #f8f9fa;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: fadeInPage 1s ease-out;
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body.glass-theme::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: -1;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* --- Header --- */
-.main-header {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Header Animations */
+.glass-theme .main-header {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
     padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(-100%);
+    animation: slideDown 0.8s ease-out 0.2s forwards;
 }
 
-.main-header .container {
+@keyframes slideDown {
+    to {
+        transform: translateY(0);
+    }
+}
+
+.glass-theme .main-header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-.main-header .logo {
-    color: #2c5530;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.main-header .logo i {
-    margin-right: 8px;
-    color: #4CAF50;
-}
-
-.main-header .logo:hover {
-    color: #4CAF50;
-}
-
-.main-header .nav-btn {
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    background-color: #4CAF50;
+.glass-theme .main-header .logo {
     color: white;
-    border: 1px solid transparent;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
 }
 
-.main-header .nav-btn:hover {
-    background-color: #45a049;
+.glass-theme .main-header .logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+/* Back Button */
+.back-button-wrapper {
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-out 0.8s both;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-btn:hover {
+    background: rgba(76, 175, 80, 0.25);
+    border-color: #4CAF50;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* --- Main Content --- */
-.main-content {
+/* Main Content & Card */
+.glass-theme .main-content {
     padding: 40px 0;
+    flex-grow: 1;
 }
 
-.news-article {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+.glass-theme .news-article.card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
 }
 
-.article-header {
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Article Header */
+.glass-theme .article-header {
     padding: 30px 40px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.article-header h1 {
+.glass-theme .article-header h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #fff;
     margin-bottom: 15px;
     line-height: 1.3;
 }
 
-.article-meta {
+.glass-theme .article-meta {
+    color: #bdc3c7;
     display: flex;
+    gap: 20px;
     flex-wrap: wrap;
-    gap: 10px 20px;
-    color: #7f8c8d;
-    font-size: 0.9em;
 }
 
-.meta-item i {
+.glass-theme .meta-item i {
     margin-right: 5px;
-    color: #95a5a6;
 }
 
-.article-image-container {
+/* Image Container */
+.glass-theme .article-image-container {
     width: 100%;
     max-height: 450px;
     overflow: hidden;
     position: relative;
 }
 
-.article-image-container img {
+.glass-theme .article-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
 }
 
-.image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    color: white;
-    padding: 20px 40px 15px;
-    font-size: 0.9em;
-    font-style: italic;
+.glass-theme .article-image-container:hover img {
+    transform: scale(1.05);
 }
 
-
-.article-body {
+/* Article Body */
+.glass-theme .article-body {
     padding: 30px 40px;
     font-size: 1.1rem;
+    line-height: 1.8;
 }
 
-.sapo {
+.glass-theme .sapo {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #34495e;
-    margin-bottom: 25px;
+    color: #ecf0f1;
     border-left: 4px solid #4CAF50;
     padding-left: 20px;
+    margin-bottom: 30px;
 }
 
-.article-body h2 {
+.glass-theme .article-body h2 {
     font-size: 1.8rem;
-    color: #2c5530;
+    color: #a5d6a7;
     margin-top: 35px;
     margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.article-body p {
+.glass-theme .article-body p {
+    color: #dcdcdc;
     margin-bottom: 20px;
 }
 
-.article-body ul {
+.glass-theme .article-body ul {
     list-style-type: none;
     padding-left: 0;
     margin-bottom: 20px;
 }
 
-.article-body li {
+.glass-theme .article-body li {
     padding-left: 25px;
     position: relative;
     margin-bottom: 10px;
 }
 
-.article-body li::before {
+.glass-theme .article-body li::before {
     content: '\f058';
-    /* Font Awesome check-circle */
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     color: #4CAF50;
     position: absolute;
     left: 0;
-    top: 4px;
+    top: 5px;
 }
 
-.quote {
+.glass-theme .quote {
     margin: 30px 0;
     padding: 25px;
-    background-color: #f8f9fa;
+    background-color: rgba(0, 0, 0, 0.2);
     border-left: 5px solid #bdc3c7;
+    border-radius: 8px;
     position: relative;
 }
 
-.quote p {
+.glass-theme .quote p {
     font-style: italic;
-    color: #555;
+    color: #ecf0f1;
     font-size: 1.1rem;
     margin-bottom: 10px;
 }
 
-.quote footer {
+.glass-theme .quote footer {
     text-align: right;
     font-weight: 600;
-    color: #777;
+    color: #bdc3c7;
 }
 
-.quote i {
+.glass-theme .quote i {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 20px;
+    left: 20px;
     font-size: 1.5rem;
-    color: #e0e0e0;
+    color: rgba(255, 255, 255, 0.2);
 }
 
-
-/* --- Footer --- */
-.main-footer {
-    background: #333;
+/* Footer */
+.glass-theme .main-footer {
+    background: transparent;
     color: #ccc;
     padding: 30px 0;
     text-align: center;
-    margin-top: 40px;
     font-size: 0.9em;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
-    .article-header h1 {
+    .glass-theme .article-header h1 {
         font-size: 2rem;
     }
 
-    .article-header,
-    .article-body {
+    .glass-theme .article-header,
+    .glass-theme .article-body {
         padding: 25px 20px;
-    }
-
-    .image-caption {
-        padding: 15px 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-header .container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .article-header h1 {
-        font-size: 1.6rem;
-    }
-
-    .sapo {
-        font-size: 1.1rem;
-    }
-
-    .article-body {
-        font-size: 1rem;
-        padding: 20px 15px;
-    }
-
-    .article-header {
-        padding: 20px 15px;
     }
 }

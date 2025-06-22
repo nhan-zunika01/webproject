@@ -60,7 +60,6 @@ body::after {
 
 .sidebar-header .logo i {
     margin-right: 15px;
-    /* Tăng khoảng cách */
     color: #4CAF50;
 }
 
@@ -84,7 +83,6 @@ body::after {
 .sidebar-nav li a i {
     width: 20px;
     margin-right: 20px;
-    /* Tăng khoảng cách */
     font-size: 1.1rem;
 }
 
@@ -241,7 +239,8 @@ body::after {
 }
 
 .card a {
-    color: #4CAF50;
+    color: #a5d6a7;
+    /* Light green for links */
     font-weight: bold;
     text-decoration: none;
 }
@@ -297,12 +296,9 @@ body::after {
     margin-bottom: 10px;
 }
 
-/* ADDED: Styling for course card action area */
 .course-action {
     margin-top: auto;
-    /* Pushes action to the bottom */
     padding-top: 15px;
-    /* Add some space above the button/text */
     text-align: center;
 }
 
@@ -310,11 +306,6 @@ body::after {
     font-size: 0.9em;
     color: #e0e0e0;
     margin-bottom: 0 !important;
-}
-
-.course-login-prompt a {
-    color: #a5d6a7;
-    font-weight: bold;
 }
 
 /* Forum Styles */
@@ -492,16 +483,13 @@ body::after {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* THÊM MỚI: Định dạng cho nút bị vô hiệu hóa */
 .btn.disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
-    /* Quan trọng: Ngăn chặn mọi sự kiện click */
     box-shadow: none;
     transform: none;
 }
-
 
 .card .btn {
     margin-top: auto;
@@ -543,6 +531,93 @@ body::after {
     background-color: rgba(0, 0, 0, 0.2);
     cursor: not-allowed;
 }
+
+/* === START: BỐ CỤC LƯỚI THẺ TIN TỨC === */
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.news-card {
+    padding: 0;
+    /* Xóa padding của card để ảnh vừa khít */
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    /* Thẻ a không có gạch chân */
+    color: #e0e0e0;
+}
+
+.news-card-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.4s ease;
+}
+
+.news-card:hover .news-card-image img {
+    transform: scale(1.05);
+}
+
+.news-card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Giúp đẩy meta xuống dưới */
+}
+
+.news-card-tag {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    align-self: flex-start;
+    /* Chỉ co lại theo nội dung */
+}
+
+.news-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #f0f0f0;
+    line-height: 1.4;
+}
+
+.news-card-excerpt {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 0;
+    /* Xóa margin-bottom của p */
+    flex-grow: 1;
+    /* Đẩy meta xuống */
+}
+
+.news-card-meta {
+    margin-top: 20px;
+    font-size: 0.85em;
+    color: #999;
+}
+
+.news-card-meta i {
+    margin-right: 5px;
+}
+
+/* === END: BỐ CỤC LƯỚI THẺ TIN TỨC === */
+
 
 /* Responsive */
 @media (max-width: 992px) {
@@ -606,165 +681,21 @@ body::after {
 
     .main-content {
         height: calc(100vh - 71px);
-        /* Điều chỉnh chiều cao dựa trên header mới */
         padding: 20px;
     }
 
-    /* === BẮT ĐẦU: Sửa lỗi hiển thị trên di động === */
     .main-header-bar {
         flex-direction: row;
-        /* Đảm bảo các thành phần nằm trên một hàng */
         align-items: center;
-        /* Căn giữa theo chiều dọc */
         gap: 15px;
         margin-bottom: 25px;
     }
 
     .main-header-bar h2 {
         font-size: 1.5rem;
-        /* Giảm kích thước tiêu đề cho gọn hơn */
     }
 
     .user-menu .btn {
         padding: 8px 16px;
-        /* Giảm kích thước nút */
     }
-/* News Article Styles (Integrated) */
-.news-article.card {
-    padding: 0;
-    color: #e0e0e0;
-    line-height: 1.8;
-}
-
-.article-header {
-    padding: 30px 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.article-header h1 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 15px;
-    line-height: 1.3;
-}
-
-.article-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 20px;
-    color: #bdc3c7;
-    font-size: 0.9em;
-}
-
-.meta-item i {
-    margin-right: 5px;
-    color: #95a5a6;
-}
-
-.article-image-container {
-    width: 100%;
-    max-height: 400px;
-    overflow: hidden;
-    position: relative;
-}
-
-.article-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px 15px 0 0;
-    /* Apply rounding to the image container */
-}
-
-.image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    color: white;
-    padding: 20px 40px 15px;
-    font-size: 0.9em;
-    font-style: italic;
-}
-
-.article-body {
-    padding: 30px 40px;
-    font-size: 1.1rem;
-}
-
-.sapo {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #ecf0f1;
-    margin-bottom: 25px;
-    border-left: 4px solid #4CAF50;
-    padding-left: 20px;
-}
-
-.article-body h2 {
-    font-size: 1.8rem;
-    color: #a5d6a7;
-    margin-top: 35px;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-}
-
-.article-body p {
-    color: #dcdcdc;
-}
-
-.article-body ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 20px;
-}
-
-.article-body li {
-    padding-left: 25px;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.article-body li::before {
-    content: '\\f058';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    color: #4CAF50;
-    position: absolute;
-    left: 0;
-    top: 4px;
-}
-
-.quote {
-    margin: 30px 0;
-    padding: 25px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-left: 5px solid #bdc3c7;
-    position: relative;
-    border-radius: 5px;
-}
-
-.quote p {
-    font-style: italic;
-    color: #ecf0f1;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-.quote footer {
-    text-align: right;
-    font-weight: 600;
-    color: #bdc3c7;
-}
-
-.quote i {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.2);
-}
-   
 }
