@@ -330,7 +330,7 @@ async function getWeather(locationQuery) {
 }
 
 /**
- * NEW: Get weather based on user's IP address
+ * Get weather based on user's IP address by calling our own API
  */
 async function getWeatherByIp() {
   if (!weatherWidget) return;
@@ -338,24 +338,22 @@ async function getWeatherByIp() {
   autoLocationBtn.disabled = true;
 
   try {
-    // Use a free IP geolocation service
-    const response = await fetch("https://ipapi.co/json/");
+    // Call our own backend function on Cloudflare
+    const response = await fetch("/api/get-ip-location");
     if (!response.ok) {
-      throw new Error("Không thể xác định vị trí.");
+      const errorData = await response.json();
+      throw new Error(
+        errorData.error || "Không thể xác định vị trí từ máy chủ."
+      );
     }
     const data = await response.json();
-
-    // Construct the location query from the IP info
-    // Example: "Hanoi, Vietnam" or "District 1, Ho Chi Minh City"
     const locationQuery = `${data.city}, ${data.region}`;
-
-    // Call the main weather function with the found location
     await getWeather(locationQuery);
   } catch (error) {
     console.error("Lỗi khi lấy vị trí tự động:", error);
     weatherWidget.innerHTML = `<p style="color: #ffcccc; font-weight: bold;">Lỗi vị trí tự động: ${error.message}</p>`;
   } finally {
-    autoLocationBtn.disabled = false; // Re-enable the button
+    autoLocationBtn.disabled = false;
   }
 }
 
@@ -436,12 +434,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
-  // Attach event listener for the new auto-location button
   if (autoLocationBtn) {
     autoLocationBtn.addEventListener("click", getWeatherByIp);
   }
 
-  // Load provinces for manual selection
   loadProvinces();
-  // Don't auto-load weather on start, let the user decide.
 });
