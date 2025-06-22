@@ -1,4 +1,4 @@
-// File: login.js
+// File: logic/login.js
 
 // === HELPER FUNCTIONS ===
 
@@ -55,18 +55,15 @@ async function handleLogin(event) {
     });
 
     const result = await response.json();
+
     if (response.ok) {
-      if (result.user.email_confirmed_at) {
-        localStorage.setItem("currentUser", JSON.stringify(result.user));
-        window.location.href = "dash.html"; // Ensure this is your logged-in page
-      } else {
-        setMessage(
-          "error-login-general",
-          "Vui lòng xác thực email của bạn trước."
-        );
-      }
+      // Status 200-299
+      localStorage.setItem("currentUser", JSON.stringify(result.user));
+      window.location.href = "dash.html";
     } else {
-      setMessage("error-login-general", result.message);
+      // Handle error codes from the backend
+      // The backend now provides more specific messages and statuses
+      setMessage("error-login-general", result.message || "Đã có lỗi xảy ra.");
     }
   } catch (error) {
     console.error("Login error:", error);
@@ -115,13 +112,11 @@ async function handleForgotPassword(event) {
 // === INITIALIZATION ===
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Redirect if already logged in
   if (localStorage.getItem("currentUser")) {
-    window.location.href = "dash.html"; // Or your main app page
+    window.location.href = "dash.html";
     return;
   }
 
-  // Attach event listeners
   document
     .getElementById("login-form")
     ?.addEventListener("submit", handleLogin);
