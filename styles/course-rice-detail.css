@@ -8,7 +8,7 @@
 /* Glass Theme Base Styles */
 body.glass-theme {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
+    background: url('images/https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
     background-attachment: fixed;
     min-height: 100vh;
     color: #f8f9fa;
