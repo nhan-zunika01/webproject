@@ -179,14 +179,20 @@ function setupUserUI() {
     startQuizBtn.removeAttribute("title");
   }
 
-  document.querySelectorAll(".course-action").forEach((action) => {
-    const joinButton = action.querySelector(".btn-join-course");
-    const loginPrompt = action.querySelector(".course-login-prompt");
+  // **FIXED LOGIC**: Setup for course cards for logged-in users
+  document.querySelectorAll(".course-card").forEach((card) => {
+    const joinButton = card.querySelector(".btn-join-course");
+    const loginPrompt = card.querySelector(".course-login-prompt");
+
+    // Show the details button and hide the login prompt
     if (joinButton) joinButton.style.display = "inline-block";
     if (loginPrompt) loginPrompt.style.display = "none";
+
+    // No special click handler needed. The card is an <a> tag
+    // and will navigate to its href attribute correctly.
   });
 
-  // ** THAY ĐỔI QUAN TRỌNG: Gọi hàm mới để tải và tính toán dữ liệu **
+  // Call function to load and calculate data
   loadDashboardData();
 
   const usernameSpan = document.querySelector(".user-menu .username");
@@ -214,14 +220,27 @@ function setupGuestUI() {
   const startQuizBtn = document.getElementById("start-quiz-btn");
   if (startQuizBtn) {
     startQuizBtn.classList.add("disabled");
+    startQuizBtn.href = "#"; // Prevent navigation
+    startQuizBtn.onclick = (e) => e.preventDefault();
     startQuizBtn.title = "Vui lòng đăng nhập để làm bài kiểm tra";
   }
 
-  document.querySelectorAll(".course-action").forEach((action) => {
-    const joinButton = action.querySelector(".btn-join-course");
-    const loginPrompt = action.querySelector(".course-login-prompt");
+  // **FIXED LOGIC**: Setup for course cards for guest users
+  document.querySelectorAll(".course-card").forEach((card) => {
+    const joinButton = card.querySelector(".btn-join-course");
+    const loginPrompt = card.querySelector(".course-login-prompt");
+
+    // Hide the details button and show the login prompt
     if (joinButton) joinButton.style.display = "none";
     if (loginPrompt) loginPrompt.style.display = "block";
+
+    // Make the entire card redirect to login page
+    card.addEventListener("click", function (event) {
+      // This check allows the inner "đăng nhập" link to work correctly
+      // because it has event.stopPropagation() in the HTML.
+      event.preventDefault();
+      window.location.href = "login.html";
+    });
   });
 
   // Reset stats to 0 for guests
@@ -244,10 +263,15 @@ function setupGuestUI() {
     guestMessage.id = "guest-welcome-message";
     guestMessage.innerHTML =
       '<h3>Chào mừng bạn đến với Sổ Tay Nông Dân!</h3><p>Vui lòng <a href="login.html">đăng nhập</a> hoặc <a href="register.html">đăng ký</a> để truy cập tất cả các tính năng.</p>';
-    if (dashboardSection.firstChild) {
-      dashboardSection.insertBefore(guestMessage, dashboardSection.firstChild);
-    } else {
-      dashboardSection.appendChild(guestMessage);
+    if (dashboardSection) {
+      if (dashboardSection.firstChild) {
+        dashboardSection.insertBefore(
+          guestMessage,
+          dashboardSection.firstChild
+        );
+      } else {
+        dashboardSection.appendChild(guestMessage);
+      }
     }
   }
 }
@@ -370,14 +394,6 @@ function changeWeatherLocation() {
 }
 
 // Functions for other buttons with login check
-function startCourse(id) {
-  if (!currentUser) {
-    alert("Vui lòng đăng nhập để tham gia khóa học.");
-    return;
-  }
-  alert(`Bắt đầu khóa học ${id}...`);
-}
-
 function createPost() {
   if (!currentUser) {
     alert("Vui lòng đăng nhập để tạo bài viết.");

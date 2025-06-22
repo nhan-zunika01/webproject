@@ -90,26 +90,28 @@
             <!-- Courses Section -->
             <section id="courses" class="content-section">
                 <div class="content-grid two-column">
-                    <div class="course-card card">
+                    <!-- Course Card 1 - Updated to be a link -->
+                    <a href="course-rice-detail.html" class="course-card card" data-course-id="rice">
                         <div class="course-content">
                             <h3>Kỹ thuật trồng lúa hiệu quả</h3>
                             <p>Học cách trồng lúa với năng suất cao, sử dụng công nghệ hiện đại và phương pháp canh tác bền vững.</p>
                         </div>
                         <div class="course-action">
-                            <button class="btn btn-join-course" onclick="startCourse('rice')">Tham gia khóa học</button>
-                            <p class="course-login-prompt" style="display: none;">Vui lòng <a href="login.html">đăng nhập</a> để tham gia.</p>
+                            <span class="btn btn-join-course">Xem chi tiết</span>
+                            <p class="course-login-prompt" style="display: none;">Vui lòng <a href="login.html" onclick="event.stopPropagation()">đăng nhập</a> để tham gia.</p>
                         </div>
-                    </div>
-                    <div class="course-card card">
+                    </a>
+                    <!-- Course Card 2 - Updated to be a link -->
+                    <a href="course-chicken-detail.html" class="course-card card" data-course-id="chicken">
                         <div class="course-content">
-                            <h3>Chăn nuôi gà an toàn</h3>
+                            <h3>Chăn nuôi gà an toàn sinh học</h3>
                             <p>Hướng dẫn chăn nuôi gà theo tiêu chuẩn VietGAP, phòng chống dịch bệnh hiệu quả.</p>
                         </div>
                          <div class="course-action">
-                            <button class="btn btn-join-course" onclick="startCourse('chicken')">Tham gia khóa học</button>
-                            <p class="course-login-prompt" style="display: none;">Vui lòng <a href="login.html">đăng nhập</a> để tham gia.</p>
+                            <span class="btn btn-join-course">Xem chi tiết</span>
+                            <p class="course-login-prompt" style="display: none;">Vui lòng <a href="login.html" onclick="event.stopPropagation()">đăng nhập</a> để tham gia.</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </section>
 

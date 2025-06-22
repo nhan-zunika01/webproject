@@ -285,6 +285,12 @@ body::after {
 .course-card {
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    /* Remove underline from link */
+    color: inherit;
+    /* Inherit text color */
+    cursor: pointer;
+    /* Add pointer cursor */
 }
 
 .course-content {
