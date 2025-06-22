@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng điều khiển - Sổ tay nông dân thông minh</title>
     <!-- CSS và Font Awesome -->
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/dash.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
@@ -162,9 +162,11 @@
             <!-- Quiz Section -->
             <section id="quiz" class="content-section">
                 <div class="card">
-                     <h3>Bài kiểm tra: Kỹ thuật trồng lúa cơ bản</h3>
+                    <h3>Bài kiểm tra: Kỹ thuật trồng lúa cơ bản</h3>
                     <p>Thời gian: 15 phút | Số câu hỏi: 20</p>
-                    <button class="btn btn-primary" onclick="submitQuiz()">Bắt đầu ngay</button>
+                    <!-- THÊM MỚI: Dòng hiển thị điểm cao nhất -->
+                    <p class="highscore">Điểm cao nhất: <span id="quiz-highscore">0/20</span></p>
+                    <a href="quiz.html" id="start-quiz-btn" class="btn btn-primary">Bắt đầu ngay</a>
                 </div>
             </section>
 
@@ -202,6 +204,6 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="logic/animation.js"></script>
+    <script src="logic/dash.js"></script>
 </body>
 </html>

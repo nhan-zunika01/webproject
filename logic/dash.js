@@ -1,5 +1,6 @@
 // Global variable for current user
 let currentUser = null;
+const RICE_QUIZ_ID = "rice-basics-v1"; // Define Quiz ID as a constant
 
 // New navigation function for the sidebar
 function showSection(sectionId, element) {
@@ -40,6 +41,28 @@ function logout() {
   }
 }
 
+// THÊM MỚI: Hàm để tải điểm của người dùng
+async function loadUserScores() {
+  if (!currentUser) return;
+
+  const highscoreEl = document.getElementById("quiz-highscore");
+  if (!highscoreEl) return;
+
+  try {
+    const response = await fetch(
+      `/api/get-quiz-score?userId=${currentUser.id}&quizId=${RICE_QUIZ_ID}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch score");
+    }
+    const data = await response.json();
+    highscoreEl.textContent = `${data.score || 0}/20`;
+  } catch (error) {
+    console.error("Error loading quiz score:", error);
+    highscoreEl.textContent = "Lỗi";
+  }
+}
+
 // Function to set up UI for logged-in users
 function setupUserUI() {
   if (!currentUser) return;
@@ -49,6 +72,15 @@ function setupUserUI() {
   document.getElementById("profile-tab").style.display = "flex";
   document.getElementById("create-post-btn").style.display = "inline-block";
   document.getElementById("forum-login-prompt").style.display = "none";
+
+  const startQuizBtn = document.getElementById("start-quiz-btn");
+  if (startQuizBtn) {
+    startQuizBtn.classList.remove("disabled");
+    startQuizBtn.removeAttribute("title");
+  }
+
+  // THÊM MỚI: Gọi hàm tải điểm khi người dùng đăng nhập
+  loadUserScores();
 
   const usernameSpan = document.querySelector(".user-menu .username");
   if (usernameSpan) {
@@ -60,7 +92,7 @@ function setupUserUI() {
   const profilePhone = document.getElementById("profile-phone");
 
   if (profileName) profileName.value = currentUser.name_user;
-  if (profileEmail) profileEmail.value = currentUser.email_user;
+  if (profileEmail) profileEmail.value = currentUser.email;
   if (profilePhone) profilePhone.value = currentUser.phone_user;
 }
 
@@ -71,6 +103,18 @@ function setupGuestUI() {
   document.getElementById("profile-tab").style.display = "none";
   document.getElementById("create-post-btn").style.display = "none";
   document.getElementById("forum-login-prompt").style.display = "block";
+
+  const startQuizBtn = document.getElementById("start-quiz-btn");
+  if (startQuizBtn) {
+    startQuizBtn.classList.add("disabled");
+    startQuizBtn.title = "Vui lòng đăng nhập để làm bài kiểm tra";
+  }
+
+  // THÊM MỚI: Đặt lại điểm cho khách
+  const highscoreEl = document.getElementById("quiz-highscore");
+  if (highscoreEl) {
+    highscoreEl.textContent = "0/20";
+  }
 
   document.getElementById("main-content-title").textContent = "Trang chủ";
 
@@ -110,17 +154,68 @@ function editProfile(button) {
   }
 }
 
-// === BẮT ĐẦU: Sửa lỗi hàm getWeather ===
+// === BẮT ĐẦU: CẬP NHẬT HÀM THỜI TIẾT ===
 async function getWeather(location = "Hanoi") {
-  // Đặt "Hanoi" làm địa điểm mặc định
   const weatherWidget = document.querySelector(".weather-widget");
   if (!weatherWidget) return;
 
   weatherWidget.innerHTML = "<p>Đang tải dữ liệu thời tiết...</p>";
 
+  const weatherTranslations = {
+    Sunny: "Trời nắng",
+    Clear: "Trời quang",
+    "Partly cloudy": "Trời có mây",
+    Cloudy: "Trời nhiều mây",
+    Overcast: "Trời u ám",
+    Mist: "Sương mù",
+    "Patchy rain possible": "Có thể có mưa vài nơi",
+    "Patchy snow possible": "Có thể có tuyết vài nơi",
+    "Patchy sleet possible": "Có thể có mưa tuyết vài nơi",
+    "Patchy freezing drizzle possible": "Có thể có mưa phùn băng giá",
+    "Thundery outbreaks possible": "Có khả năng có dông",
+    "Blowing snow": "Bão tuyết",
+    Blizzard: "Trận bão tuyết",
+    Fog: "Sương mù",
+    "Freezing fog": "Sương mù băng giá",
+    "Patchy light drizzle": "Mưa phùn nhẹ",
+    "Light drizzle": "Mưa phùn nhẹ",
+    "Freezing drizzle": "Mưa phùn băng giá",
+    "Heavy freezing drizzle": "Mưa phùn băng giá dày đặc",
+    "Patchy light rain": "Mưa nhẹ vài nơi",
+    "Light rain": "Mưa nhỏ",
+    "Moderate rain at times": "Đôi lúc có mưa vừa",
+    "Moderate rain": "Mưa vừa",
+    "Heavy rain at times": "Đôi lúc có mưa to",
+    "Heavy rain": "Mưa to",
+    "Light freezing rain": "Mưa băng nhẹ",
+    "Moderate or heavy freezing rain": "Mưa băng vừa hoặc nặng",
+    "Light sleet": "Mưa tuyết nhẹ",
+    "Moderate or heavy sleet": "Mưa tuyết vừa hoặc nặng",
+    "Patchy light snow": "Tuyết nhẹ vài nơi",
+    "Light snow": "Tuyết nhẹ",
+    "Patchy moderate snow": "Tuyết vừa vài nơi",
+    "Moderate snow": "Tuyết vừa",
+    "Patchy heavy snow": "Tuyết dày vài nơi",
+    "Heavy snow": "Tuyết dày",
+    "Ice pellets": "Mưa đá",
+    "Light rain shower": "Mưa rào nhẹ",
+    "Moderate or heavy rain shower": "Mưa rào vừa hoặc nặng",
+    "Torrential rain shower": "Mưa như trút nước",
+    "Light sleet showers": "Mưa tuyết nhẹ",
+    "Moderate or heavy sleet showers": "Mưa tuyết vừa hoặc nặng",
+    "Light snow showers": "Mưa tuyết nhẹ",
+    "Moderate or heavy snow showers": "Mưa tuyết vừa hoặc nặng",
+    "Light showers of ice pellets": "Mưa đá nhẹ",
+    "Moderate or heavy showers of ice pellets": "Mưa đá vừa hoặc nặng",
+    "Patchy light rain with thunder": "Mưa dông vài nơi",
+    "Moderate or heavy rain with thunder": "Mưa dông vừa hoặc nặng",
+    "Patchy light snow with thunder": "Tuyết và dông vài nơi",
+    "Moderate or heavy snow with thunder": "Tuyết và dông vừa hoặc nặng",
+  };
+
   try {
     const weatherResponse = await fetch(
-      `https://wttr.in/${location.trim().replace(/ /g, "+")}?format=j1`
+      `https://wttr.in/${location.trim().replace(/ /g, "+")}?format=j1&lang=vi`
     );
     if (!weatherResponse.ok) {
       throw new Error(
@@ -128,35 +223,33 @@ async function getWeather(location = "Hanoi") {
       );
     }
     const weatherData = await weatherResponse.json();
-
-    // Kiểm tra an toàn (defensive coding) để tránh lỗi
     const currentWeather = weatherData.current_condition?.[0];
+
     if (!currentWeather) {
       throw new Error("Dữ liệu thời tiết hiện tại không có sẵn.");
     }
 
     const forecast = weatherData.weather?.slice(0, 4) || [];
-
     const area = weatherData.nearest_area?.[0];
-    const locationName = area?.areaName?.[0]?.value || location; // Dùng tên nhập vào nếu API không trả về tên
+    const locationName = area?.areaName?.[0]?.value || location;
     const countryName = area?.country?.[0]?.value || "";
 
-    // Ưu tiên mô tả tiếng Việt, nếu không có thì dùng mô tả tiếng Anh
+    const englishDescription = currentWeather.weatherDesc?.[0]?.value || "";
     const weatherDescription =
-      currentWeather.lang_vi?.[0]?.value ||
-      currentWeather.weatherDesc?.[0]?.value ||
+      weatherTranslations[englishDescription] ||
+      englishDescription ||
       "Không có mô tả";
 
     const getIconClass = (weatherCode) => {
       const code = parseInt(weatherCode);
-      if ([113].includes(code)) return "fa-sun"; // Clear
-      if ([116, 119, 122].includes(code)) return "fa-cloud"; // Cloudy
+      if ([113].includes(code)) return "fa-sun";
+      if ([116, 119, 122].includes(code)) return "fa-cloud";
       if ([176, 293, 296, 302, 308, 353, 359].includes(code))
-        return "fa-cloud-rain"; // Rain
-      if ([200, 386, 389].includes(code)) return "fa-bolt"; // Thunder
-      if ([227, 329, 332, 338, 371].includes(code)) return "fa-snowflake"; // Snow
-      if ([143, 248, 260].includes(code)) return "fa-smog"; // Fog
-      return "fa-cloud-sun"; // Default
+        return "fa-cloud-rain";
+      if ([200, 386, 389].includes(code)) return "fa-bolt";
+      if ([227, 329, 332, 338, 371].includes(code)) return "fa-snowflake";
+      if ([143, 248, 260].includes(code)) return "fa-smog";
+      return "fa-cloud-sun";
     };
 
     const dayNames = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
@@ -174,8 +267,8 @@ async function getWeather(location = "Hanoi") {
             <div class="weather-forecast">
                 ${forecast
                   .map((day, index) => {
-                    const dayIndex = (today + index) % 7; // Use modulo to loop through days
-                    const iconCode = day.hourly?.[4]?.weatherCode || "116"; // Use noon weather, default to cloudy
+                    const dayIndex = (today + index) % 7;
+                    const iconCode = day.hourly?.[4]?.weatherCode || "116";
                     return `
                     <div class="forecast-item">
                         <div>${dayNames[dayIndex]}</div>
@@ -196,9 +289,9 @@ async function getWeather(location = "Hanoi") {
 function changeWeatherLocation() {
   const locationInput = document.getElementById("location-input");
   const location = locationInput.value.trim();
-  getWeather(location || "Hanoi"); // If input is empty, default to Hanoi
+  getWeather(location || "Hanoi");
 }
-// === KẾT THÚC: Sửa lỗi hàm getWeather ===
+// === KẾT THÚC: CẬP NHẬT HÀM THỜI TIẾT ===
 
 // Functions for other buttons with login check
 function startCourse(id) {
@@ -208,13 +301,7 @@ function startCourse(id) {
   }
   alert(`Bắt đầu khóa học ${id}...`);
 }
-function submitQuiz() {
-  if (!currentUser) {
-    alert("Vui lòng đăng nhập để làm bài kiểm tra.");
-    return;
-  }
-  alert("Bắt đầu bài kiểm tra...");
-}
+
 function createPost() {
   if (!currentUser) {
     alert("Vui lòng đăng nhập để tạo bài viết.");

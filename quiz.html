@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra: Kỹ thuật trồng lúa cơ bản - Sổ tay nông dân</title>
+    <link rel="stylesheet" href="styles/quiz.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Screen 1: Start Screen -->
+        <div id="start-screen" class="quiz-screen active">
+            <div class="card">
+                <i class="fas fa-feather-alt icon-start"></i>
+                <h1>Kiểm tra: Kỹ thuật trồng lúa cơ bản</h1>
+                <p class="quiz-rules">
+                    <span><i class="fas fa-question-circle"></i> 20 câu hỏi</span>
+                    <span><i class="fas fa-clock"></i> 15 phút</span>
+                </p>
+                <p>Bài kiểm tra này sẽ đánh giá kiến thức của bạn về các kỹ thuật canh tác lúa. Hãy đảm bảo bạn đã sẵn sàng trước khi bắt đầu.</p>
+                <button id="start-btn" class="btn btn-primary">Tôi đã sẵn sàng!</button>
+                 <a href="dash.html" class="back-link">Quay lại trang chủ</a>
+            </div>
+        </div>
+
+        <!-- Screen 2: Quiz Screen -->
+        <div id="quiz-screen" class="quiz-screen">
+            <header class="quiz-header">
+                <div class="timer">
+                    <i class="fas fa-stopwatch"></i>
+                    <span id="time-left">15:00</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="progress-text">
+                    Câu <span id="current-question-num">1</span>/20
+                </div>
+            </header>
+            <div id="question-container" class="card">
+                <!-- Questions will be injected here by JS -->
+            </div>
+            <div class="quiz-footer">
+                <button id="submit-btn" class="btn">Nộp bài</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Results Screen -->
+        <div id="results-screen" class="quiz-screen">
+            <div class="card">
+                <i class="fas fa-trophy icon-result"></i>
+                <h1>Hoàn thành!</h1>
+                <p>Bạn đã hoàn thành bài kiểm tra.</p>
+                <div class="score-container">
+                    Điểm của bạn: <span id="score-text">0 / 20</span>
+                </div>
+                <div id="result-message"></div>
+                <div class="result-actions">
+                    <a href="dash.html" class="btn">Về trang chủ</a>
+                    <button id="review-btn" class="btn btn-primary">Xem lại bài làm</button>
+                </div>
+            </div>
+            <div id="review-container">
+                <!-- Review questions will be injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading overlay for API call -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Đang lưu kết quả...</p>
+    </div>
+
+    <script src="logic/quiz.js"></script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-/* General Resets and Body Styles */
 * {
     margin: 0;
     padding: 0;
@@ -7,198 +6,170 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.7;
     min-height: 100vh;
-    color: #f8f9fa;
-    position: relative;
-    display: flex;
 }
 
-body::after {
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+    background: transparent;
+    /* Nền ban đầu hoàn toàn trong suốt */
+    backdrop-filter: blur(5px);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Thêm hiệu ứng chuyển đổi mượt mà */
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Kiểu của header khi cuộn trang */
+.main-header.scrolled {
+    background-color: rgba(33, 37, 41, 0.4);
+    /* Nền tối hơn, tăng độ trong suốt */
+    backdrop-filter: blur(12px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0,2);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo i {
+    margin-right: 8px;
+    color: #a5d6a7;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-nav .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    padding: 8px 10px;
+}
+
+.main-nav .nav-link:hover {
+    color: #e8eaf6;
+}
+
+.nav-btn {
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.btn-login {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #673ab7;
+    transform: translateY(-2px);
+}
+
+.btn-register {
+    background: white;
+    color: #673ab7;
+}
+
+.btn-register:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* Kiểu các nút khi header được cuộn */
+.main-header.scrolled .logo,
+.main-header.scrolled .nav-link {
+    color: #f8f9fa;
+    /* Màu trắng sáng để nổi bật trên nền tối */
+}
+
+.main-header.scrolled .btn-login {
+    background-color: transparent;
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+}
+
+.main-header.scrolled .btn-login:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+    /* Chữ màu tối khi hover */
+}
+
+.main-header.scrolled .btn-register {
+    background-color: #4CAF50;
+    /* Màu xanh lá cây nổi bật */
+    color: white;
+    border-color: #4CAF50;
+}
+
+.main-header.scrolled .btn-register:hover {
+    background-color: #55b758;
+    border-color: #55b758;
+}
+
+
+/* --- Hero Section --- */
+.hero {
+    background: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=1887&auto=format&fit=crop') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.hero::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: -1;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-/* Dashboard Layout */
-.dashboard-layout {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-}
-
-/* Sidebar Navigation */
-.sidebar {
-    width: 260px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    flex-shrink: 0;
-    transition: width 0.3s ease;
-}
-
-.sidebar-header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 10px 0;
-}
-
-.sidebar-header .logo {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.sidebar-header .logo i {
-    margin-right: 15px;
-    /* Tăng khoảng cách */
-    color: #4CAF50;
-}
-
-.sidebar-nav {
-    list-style-type: none;
-    flex-grow: 1;
-}
-
-.sidebar-nav li a {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 8px;
-    color: #e0e0e0;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
-    font-weight: 500;
-}
-
-.sidebar-nav li a i {
-    width: 20px;
-    margin-right: 20px;
-    /* Tăng khoảng cách */
-    font-size: 1.1rem;
-}
-
-.sidebar-nav li a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-.sidebar-nav li a.active {
-    background-color: #4CAF50;
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
-.sidebar-footer {
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Main Content Area */
-.main-content {
-    flex-grow: 1;
-    padding: 30px;
-    overflow-y: auto;
-    height: 100vh;
-}
-
-.main-header-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.main-header-bar h2 {
-    font-size: 2rem;
-    font-weight: 600;
-}
-
-/* User Menu Styling */
-.user-menu {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-#user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 8px 15px;
-    border-radius: 50px;
-}
-
-.user-menu .username {
-    font-weight: 600;
-}
-
-.user-menu .logout-btn {
-    background: none;
-    border: none;
-    color: #ffcccc;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.user-menu .logout-btn:hover {
-    color: #f44336;
-}
-
-#guest-menu {
-    display: flex;
-    gap: 10px;
-}
-
-.user-menu .btn {
-    padding: 10px 22px;
-    font-size: 0.9em;
-    font-weight: 700;
-    border-radius: 50px;
-    border: none;
-}
-
-.user-menu .btn-login {
-    background: rgba(255, 255, 255, 0.2);
-    color: #f0f0f0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.user-menu .btn-login:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: white !important;
-}
-
-.user-menu .btn-register {
-    background: #4CAF50;
-    color: white;
-}
-
-.user-menu .btn-register:hover {
-    background: #55b758;
-}
-
-/* Content Sections & Cards */
-.content-section {
-    display: none;
-}
-
-.content-section.active {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -213,384 +184,125 @@ body::after {
     }
 }
 
-/* Universal Card Style */
-.card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#guest-welcome-message.card,
-.stats-grid {
-    margin-bottom: 30px;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.2);
-}
-
-.card p {
-    margin-bottom: 20px;
-    color: #dcdcdc;
-    line-height: 1.6;
-}
-
-.card a {
-    color: #4CAF50;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.card a:hover {
-    text-decoration: underline;
-}
-
-/* Content Grid for Spacing */
-.content-grid {
-    display: grid;
-    gap: 25px;
-    grid-template-columns: 1fr;
-}
-
-.content-grid.two-column {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.stats-grid {
-    display: grid;
-    gap: 25px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.stat-card {
-    text-align: center;
-}
-
-.stat-card h3 {
-    font-size: 2.5rem;
-    color: #4CAF50;
-    margin-bottom: 5px;
-}
-
-.stat-card p {
-    color: #ccc;
-    font-size: 0.9rem;
-    margin-bottom: 0;
-}
-
-.course-card h3 {
-    color: #e8f5e9;
-    margin-bottom: 10px;
-}
-
-.course-card p {
-    min-height: 60px;
-}
-
-/* Forum Styles */
-.forum-controls {
-    margin-bottom: 25px;
-}
-
-.login-prompt-card {
-    text-align: center;
-    padding: 20px !important;
-}
-
-.login-prompt-card p {
-    margin-bottom: 0;
-}
-
-.forum-post .post-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.forum-post .avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #2980b9;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.forum-post h3 {
-    color: #e8f5e9;
-    margin-bottom: 10px;
-}
-
-.forum-post .post-actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-/* Weather Widget Styles */
-.location-changer {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding: 20px;
-}
-
-.location-changer input {
-    flex-grow: 1;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    border-radius: 8px;
-    padding: 0 15px;
-    font-size: 1em;
-}
-
-.location-changer input::placeholder {
-    color: #ccc;
-}
-
-.location-changer input:focus {
-    outline: none;
-    border-color: #4CAF50;
-}
-
-.weather-widget {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.weather-main {
-    margin-bottom: 25px;
-}
-
-.weather-main .fas {
-    font-size: 7rem !important;
-    color: #f1c40f;
-    margin-bottom: 15px;
-    text-shadow: 0 0 30px rgba(241, 196, 15, 0.5);
-}
-
-.weather-temp {
+.hero h1 {
     font-size: 3.5rem;
-    font-weight: 600;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.weather-location {
-    font-size: 1.2rem;
-    color: #ccc;
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-weight: 300;
 }
 
-.weather-desc {
-    font-size: 1.1rem;
-    text-transform: capitalize;
-}
-
-.weather-forecast {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-}
-
-.forecast-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-}
-
-.forecast-item i {
-    font-size: 1.5rem;
-    color: #bdc3c7;
-}
-
-/* General Button Spacing & Styling */
-.btn {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #e0e0e0;
-    padding: 8px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.9em;
-}
-
-.btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.btn.btn-primary {
+.btn-primary {
     background: linear-gradient(45deg, #4CAF50, #45a049);
     color: white;
-    border: none;
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 1em;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.btn.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.btn.btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ccc;
-    border: none;
+/* --- Features Section --- */
+.features {
+    padding: 80px 0;
+    background: #f4f7f6;
 }
 
-.btn.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #2c5530;
 }
 
-.card .btn {
-    margin-top: auto;
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.card>p+.btn,
-.card>p+.post-actions {
-    margin-top: 15px;
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-/* Form Styles */
-.form-group {
+.feature-card {
+    background: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .icon {
+    font-size: 3rem;
+    color: #4CAF50;
     margin-bottom: 20px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
+.feature-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #2c5530;
+}
+
+/* --- Footer --- */
+.main-footer {
+    background: #333;
     color: #ccc;
-    font-weight: 600;
+    padding: 40px 0;
+    text-align: center;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
+.main-footer p {
+    margin-bottom: 15px;
+}
+
+.social-links a {
     color: white;
+    margin: 0 10px;
+    font-size: 1.5rem;
+    transition: color 0.3s;
 }
 
-.form-group input:focus {
-    outline: none;
-    border-color: #4CAF50;
+.social-links a:hover {
+    color: #4CAF50;
 }
 
-.form-group input[readonly] {
-    background-color: rgba(0, 0, 0, 0.2);
-    cursor: not-allowed;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .sidebar {
-        width: 70px;
-    }
-
-    .sidebar-header .logo span,
-    .sidebar-nav span {
-        display: none;
-    }
-
-    .sidebar-header .logo {
-        font-size: 1.8rem;
-    }
-
-    .sidebar-nav li a {
-        justify-content: center;
-    }
-
-    .sidebar-nav li a i {
-        margin-right: 0;
-    }
-}
-
+/* --- Responsive --- */
 @media (max-width: 768px) {
-    .dashboard-layout {
+    .main-header .container {
         flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        align-items: center;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 10px 15px;
-        justify-content: space-between;
-    }
-
-    .sidebar-header {
-        margin-bottom: 0;
-    }
-
-    .sidebar-nav {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 5px;
-    }
-
-    .sidebar-nav li a {
-        padding: 10px 15px;
-        margin-bottom: 0;
-    }
-
-    .sidebar-footer {
-        display: none;
-    }
-
-    .main-content {
-        height: calc(100vh - 71px);
-        /* Điều chỉnh chiều cao dựa trên header mới */
-        padding: 20px;
-    }
-
-    /* === BẮT ĐẦU: Sửa lỗi hiển thị trên di động === */
-    .main-header-bar {
-        flex-direction: row;
-        /* Đảm bảo các thành phần nằm trên một hàng */
-        align-items: center;
-        /* Căn giữa theo chiều dọc */
         gap: 15px;
-        margin-bottom: 25px;
     }
 
-    .main-header-bar h2 {
-        font-size: 1.5rem;
-        /* Giảm kích thước tiêu đề cho gọn hơn */
+    .hero h1 {
+        font-size: 2.5rem;
     }
 
-    .user-menu .btn {
-        padding: 8px 16px;
-        /* Giảm kích thước nút */
+    .hero p {
+        font-size: 1.1rem;
     }
-
-    /* === KẾT THÚC: Sửa lỗi hiển thị trên di động === */
 }
