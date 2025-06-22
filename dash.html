@@ -165,7 +165,6 @@
 
             <!-- Weather Section -->
             <section id="weather" class="content-section">
-                <!-- THAY ĐỔI: Chuyển từ input sang select -->
                 <div class="location-changer card">
                     <div class="select-group">
                         <select id="province-select" class="location-select">
@@ -177,12 +176,14 @@
                             <option value="">-- Chọn Quận/Huyện --</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary" onclick="changeWeatherLocation()">Lấy dự báo</button>
+                    <div class="button-group">
+                        <!-- ĐỔI TÊN NÚT -->
+                        <button class="btn btn-primary" onclick="changeWeatherLocation()">Chọn địa điểm</button>
+                        <button id="auto-location-btn" class="btn btn-secondary"><i class="fas fa-location-arrow"></i> Tự động</button>
+                    </div>
                 </div>
-                <!-- Kết thúc thay đổi -->
                 <div class="weather-widget card">
-                    <!-- Nội dung thời tiết sẽ được JS chèn vào đây -->
-                    <p>Đang tải dữ liệu thời tiết...</p>
+                    <p>Chọn một vị trí để xem dự báo thời tiết.</p>
                 </div>
             </section>
             
@@ -196,10 +197,9 @@
                 </div>
             </section>
 
-            <!-- News Section - Bố cục thẻ tin tức mới -->
+            <!-- News Section -->
             <section id="news" class="content-section">
                 <div class="news-grid">
-                    <!-- News Card 1 -->
                     <a href="news-detail.html" class="news-card card">
                         <div class="news-card-image">
                             <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop" alt="Cánh đồng lúa">
@@ -213,8 +213,6 @@
                             </div>
                         </div>
                     </a>
-
-                    <!-- News Card 2 -->
                     <a href="news-organic-fertilizer.html" class="news-card card">
                         <div class="news-card-image">
                             <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop" alt="Phân bón hữu cơ">
@@ -228,8 +226,6 @@
                             </div>
                         </div>
                     </a>
-
-                    <!-- News Card 3 (IMAGE UPDATED) -->
                 </div>
             </section>
 

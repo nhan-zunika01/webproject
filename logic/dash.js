@@ -231,6 +231,7 @@ function editProfile(button) {
 const provinceSelect = document.getElementById("province-select");
 const districtSelect = document.getElementById("district-select");
 const weatherWidget = document.querySelector(".weather-widget");
+const autoLocationBtn = document.getElementById("auto-location-btn");
 
 async function loadProvinces() {
   try {
@@ -302,38 +303,59 @@ async function getCoordinates(locationQuery) {
     locationQuery
   )}&format=json&countrycodes=vn&limit=1`;
   const response = await fetch(url);
-  if (!response.ok)
-    throw new Error("Lỗi dịch vụ chuyển đổi địa chỉ (geocoding).");
+  if (!response.ok) throw new Error("Lỗi dịch vụ chuyển đổi địa chỉ.");
   const data = await response.json();
   if (data.length === 0)
-    throw new Error(`Không tìm thấy tọa độ cho địa điểm: ${locationQuery}.`);
+    throw new Error(`Không tìm thấy tọa độ cho: ${locationQuery}.`);
   return { lat: data[0].lat, lon: data[0].lon };
 }
 
-async function getWeather(locationQuery = "Hà Nội") {
+async function getWeather(locationQuery) {
   if (!weatherWidget) return;
-  weatherWidget.innerHTML = "<p>Đang tải dữ liệu thời tiết...</p>";
+  weatherWidget.innerHTML = "<p>Đang tìm kiếm và tải dữ liệu thời tiết...</p>";
 
   try {
-    // Step 1: Chuyển đổi tên địa điểm thành tọa độ (vẫn chạy ở client)
     const { lat, lon } = await getCoordinates(locationQuery);
-
-    // Step 2: Gọi đến hàm API của chính bạn trên Cloudflare Pages
-    // API key sẽ được xử lý an toàn ở phía server
     const response = await fetch(`/api/get-weather?lat=${lat}&lon=${lon}`);
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Lỗi ${response.status}: ${errorData.message}`);
     }
-
     const weatherData = await response.json();
-
-    // Step 3: Hiển thị dữ liệu
     renderWeatherData(weatherData.current, weatherData.forecast, locationQuery);
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu thời tiết:", error);
     weatherWidget.innerHTML = `<p style="color: #ffcccc; font-weight: bold;">Lỗi: ${error.message}</p>`;
+  }
+}
+
+/**
+ * NEW: Get weather based on user's IP address
+ */
+async function getWeatherByIp() {
+  if (!weatherWidget) return;
+  weatherWidget.innerHTML = "<p>Đang xác định vị trí của bạn...</p>";
+  autoLocationBtn.disabled = true;
+
+  try {
+    // Use a free IP geolocation service
+    const response = await fetch("https://ipapi.co/json/");
+    if (!response.ok) {
+      throw new Error("Không thể xác định vị trí.");
+    }
+    const data = await response.json();
+
+    // Construct the location query from the IP info
+    // Example: "Hanoi, Vietnam" or "District 1, Ho Chi Minh City"
+    const locationQuery = `${data.city}, ${data.region}`;
+
+    // Call the main weather function with the found location
+    await getWeather(locationQuery);
+  } catch (error) {
+    console.error("Lỗi khi lấy vị trí tự động:", error);
+    weatherWidget.innerHTML = `<p style="color: #ffcccc; font-weight: bold;">Lỗi vị trí tự động: ${error.message}</p>`;
+  } finally {
+    autoLocationBtn.disabled = false; // Re-enable the button
   }
 }
 
@@ -413,6 +435,13 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     setupGuestUI();
   }
-  getWeather();
+
+  // Attach event listener for the new auto-location button
+  if (autoLocationBtn) {
+    autoLocationBtn.addEventListener("click", getWeatherByIp);
+  }
+
+  // Load provinces for manual selection
   loadProvinces();
+  // Don't auto-load weather on start, let the user decide.
 });

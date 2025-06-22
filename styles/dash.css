@@ -240,7 +240,6 @@ body::after {
 
 .card a {
     color: #a5d6a7;
-    /* Light green for links */
     font-weight: bold;
     text-decoration: none;
 }
@@ -354,7 +353,7 @@ body::after {
     gap: 10px;
 }
 
-/* THAY ĐỔI: CSS cho bộ chọn vị trí mới */
+/* CSS cho bộ chọn vị trí */
 .location-changer {
     display: flex;
     flex-wrap: wrap;
@@ -366,9 +365,7 @@ body::after {
 
 .select-group {
     flex: 1;
-    /* Cho phép các nhóm co giãn */
-    min-width: 220px;
-    /* Chiều rộng tối thiểu trước khi xuống dòng */
+    min-width: 200px;
 }
 
 .location-select {
@@ -400,12 +397,25 @@ body::after {
     color: white;
 }
 
-.location-changer .btn-primary {
+.button-group {
+    display: flex;
+    gap: 10px;
     flex-shrink: 0;
-    /* Ngăn nút bị co lại */
 }
 
-/* Kết thúc thay đổi */
+/* THAY ĐỔI: Đồng bộ kích thước và bo tròn cho các nút */
+.button-group .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 25px;
+    /* Bo tròn các nút */
+    font-weight: 600;
+    font-size: 1em;
+    border: none;
+    /* Bỏ border mặc định */
+}
 
 .weather-widget {
     display: flex;
@@ -482,19 +492,13 @@ body::after {
     border-color: rgba(255, 255, 255, 0.6);
 }
 
-.btn.btn-primary,
-.btn.btn-join-course {
+.btn.btn-primary {
     background: linear-gradient(45deg, #4CAF50, #45a049);
     color: white;
     border: none;
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 1em;
 }
 
-.btn.btn-primary:hover,
-.btn.btn-join-course:hover {
+.btn.btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
 }
@@ -502,11 +506,13 @@ body::after {
 .btn.btn-secondary {
     background: rgba(255, 255, 255, 0.1);
     color: #ccc;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn.btn-secondary:hover {
     background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
 .btn.disabled {
@@ -558,8 +564,7 @@ body::after {
     cursor: not-allowed;
 }
 
-/* === START: BỐ CỤC LƯỚI THẺ TIN TỨC === */
-
+/* News Grid */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -568,11 +573,9 @@ body::after {
 
 .news-card {
     padding: 0;
-    /* Xóa padding của card để ảnh vừa khít */
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    /* Thẻ a không có gạch chân */
     color: #e0e0e0;
 }
 
@@ -598,7 +601,6 @@ body::after {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    /* Giúp đẩy meta xuống dưới */
 }
 
 .news-card-tag {
@@ -611,7 +613,6 @@ body::after {
     font-weight: 600;
     margin-bottom: 15px;
     align-self: flex-start;
-    /* Chỉ co lại theo nội dung */
 }
 
 .news-card-title {
@@ -627,9 +628,7 @@ body::after {
     color: #ccc;
     line-height: 1.6;
     margin-bottom: 0;
-    /* Xóa margin-bottom của p */
     flex-grow: 1;
-    /* Đẩy meta xuống */
 }
 
 .news-card-meta {
@@ -641,8 +640,6 @@ body::after {
 .news-card-meta i {
     margin-right: 5px;
 }
-
-/* === END: BỐ CỤC LƯỚI THẺ TIN TỨC === */
 
 
 /* Responsive */
