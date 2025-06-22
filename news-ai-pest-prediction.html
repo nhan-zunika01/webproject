@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công nghệ AI giúp dự đoán sâu bệnh trên lúa - Sổ tay nông dân</title>
+    <!-- Link to the main dashboard stylesheet -->
+    <link rel="stylesheet" href="styles/dash.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="dash.html" class="logo"><i class="fas fa-seedling"></i> <span>Sổ Tay Nông Dân</span></a>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="dash.html" class="nav-tab" data-section="dashboard">
+                    <i class="fas fa-home"></i> <span>Trang chủ</span>
+                </a></li>
+                <li><a href="dash.html#courses" class="nav-tab" data-section="courses">
+                    <i class="fas fa-graduation-cap"></i> <span>Khóa học</span>
+                </a></li>
+                <li><a href="dash.html#forum" class="nav-tab" data-section="forum">
+                    <i class="fas fa-comments"></i> <span>Diễn đàn</span>
+                </a></li>
+                <li><a href="dash.html#weather" class="nav-tab" data-section="weather">
+                    <i class="fas fa-cloud-sun"></i> <span>Thời tiết</span>
+                </a></li>
+                <li><a href="dash.html#quiz" class="nav-tab" data-section="quiz">
+                    <i class="fas fa-clipboard-check"></i> <span>Kiểm tra</span>
+                </a></li>
+                <li><a href="news-ai-pest-prediction.html" class="nav-tab active" data-section="news">
+                    <i class="fas fa-newspaper"></i> <span>Tin tức</span>
+                </a></li>
+                <li><a href="dash.html#profile" class="nav-tab" id="profile-tab" data-section="profile">
+                    <i class="fas fa-user"></i> <span>Hồ sơ</span>
+                </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <p style="font-size: 0.8em; text-align: center; color: #ccc;">&copy; 2025</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header-bar">
+                <h2 id="main-content-title">Tin tức</h2>
+                <div class="user-menu">
+                    <div id="user-info" style="display: none;">
+                        <span class="username"></span>
+                        <button class="logout-btn" onclick="logout()" title="Đăng xuất">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                    <div id="guest-menu">
+                        <a href="login.html" class="btn btn-login">Đăng nhập</a>
+                        <a href="register.html" class="btn btn-register">Đăng ký</a>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Article Content -->
+            <article class="news-article card">
+                <header class="article-header">
+                    <h1>Công nghệ AI giúp dự đoán sâu bệnh trên lúa</h1>
+                    <div class="article-meta">
+                        <span class="meta-item"><i class="fas fa-calendar-alt"></i> 22 tháng 6, 2025</span>
+                        <span class="meta-item"><i class="fas fa-user"></i> Ban biên tập</span>
+                        <span class="meta-item"><i class="fas fa-tag"></i> Nông nghiệp 4.0</span>
+                    </div>
+                </header>
+
+                <div class="article-image-container">
+                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop" alt="Một nông dân đang kiểm tra cây lúa trên cánh đồng">
+                    <div class="image-caption">Trí tuệ nhân tạo đang mở ra hướng đi mới cho việc bảo vệ mùa màng.</div>
+                </div>
+
+                <div class="article-body">
+                    <p class="sapo">
+                        Cuộc cách mạng công nghiệp 4.0 đang len lỏi vào từng ngóc ngách của đời sống, và nông nghiệp cũng không ngoại lệ. Tại Việt Nam, các nhà khoa học đã và đang ứng dụng thành công Trí tuệ nhân tạo (AI) để xây dựng những hệ thống cảnh báo sớm sâu bệnh trên cây lúa, hứa hẹn một cuộc cách mạng trong việc bảo vệ mùa màng, tăng năng suất và giảm thiểu tác động đến môi trường.
+                    </p>
+
+                    <h2>Bài toán nan giải của nhà nông</h2>
+                    <p>
+                        Từ bao đời nay, sâu bệnh luôn là nỗi ám ảnh lớn nhất của người nông dân trồng lúa. Các phương pháp truyền thống như thăm đồng thủ công tốn nhiều thời gian, công sức và độ chính xác không cao. Việc phát hiện muộn hoặc chẩn đoán sai bệnh thường dẫn đến việc sử dụng thuốc bảo vệ thực vật (BVTV) không đúng cách, gây lãng phí, ảnh hưởng đến chất lượng nông sản và sức khỏe con người.
+                    </p>
+
+                    <h2>AI "khám bệnh" cho cây lúa như thế nào?</h2>
+                    <p>
+                        Giải pháp đột phá đến từ việc kết hợp AI, Internet vạn vật (IoT) và công nghệ xử lý ảnh. Các mô hình tiên tiến như T-Pest, đang được thử nghiệm tại các tỉnh như Bình Định, hoạt động dựa trên nguyên tắc cốt lõi: thu thập và phân tích hình ảnh.
+                    </p>
+                    <ul>
+                        <li><strong>Thu thập dữ liệu:</strong> Các camera độ phân giải cao, có thể được đặt cố định tại các trạm quan trắc hoặc tích hợp trên máy bay không người lái (drone), sẽ liên tục chụp ảnh đồng ruộng. Một số hệ thống còn sử dụng bẫy đèn UV để thu hút côn trùng vào ban đêm và chụp ảnh chúng.</li>
+                        <li><strong>Phân tích bằng AI:</strong> Những hình ảnh này được chuyển về máy chủ. Tại đây, một mô hình AI (phổ biến là các phiên bản của YOLO - You Only Look Once) đã được "huấn luyện" với hàng chục ngàn bức ảnh về các loại sâu bệnh hại lúa. AI sẽ so sánh, phân tích và nhận diện chính xác các đối tượng có trong ảnh.</li>
+                        <li><strong>Đưa ra cảnh báo:</strong> Khi phát hiện sự xuất hiện của sâu bệnh với mật độ có nguy cơ gây hại, hệ thống sẽ tự động gửi cảnh báo đến điện thoại hoặc máy tính của người nông dân thông qua ứng dụng di động hoặc website.</li>
+                    </ul>
+                    <p>
+                        Hiện tại, các hệ thống này có thể nhận diện chính xác nhiều loại bệnh phổ biến như đạo ôn, khô vằn, bạc lá, đốm nâu... và các loại côn trùng gây hại như rầy nâu, sâu đục thân, sâu cuốn lá với độ chính xác lên tới trên 90%.
+                    </p>
+                    
+                    <blockquote class="quote">
+                        <i class="fas fa-quote-left"></i>
+                        <p>Trước đây, chúng tôi phải ra đồng thường xuyên để kiểm tra, nhiều khi phát hiện bệnh thì đã muộn. Với hệ thống này, chúng tôi có thể theo dõi tình hình ruộng lúa ngay trên điện thoại và nhận cảnh báo kịp thời. Điều này giúp chúng tôi yên tâm hơn rất nhiều.</p>
+                        <footer>— Một nông dân tại Tuy Phước, Bình Định chia sẻ.</footer>
+                    </blockquote>
+
+                    <h2>Lợi ích vượt trội và triển vọng tương lai</h2>
+                    <p>
+                        Việc ứng dụng AI không chỉ giúp "số hóa" công việc của người nông dân mà còn mang lại những lợi ích kinh tế và xã hội to lớn:
+                    </p>
+                    <ul>
+                        <li><strong>Tiết kiệm chi phí:</strong> Giảm chi phí nhân công thăm đồng và chi phí thuốc BVTV nhờ việc phun thuốc đúng lúc, đúng loại, đúng liều lượng.</li>
+                        <li><strong>Tăng năng suất và chất lượng:</strong> Bảo vệ cây lúa hiệu quả giúp cây sinh trưởng tốt hơn, cho năng suất cao và hạt gạo đạt chất lượng tốt hơn.</li>
+                        <li><strong>Bảo vệ môi trường:</strong> Hạn chế việc lạm dụng thuốc BVTV, giảm ô nhiễm đất, nước và không khí, hướng tới một nền nông nghiệp xanh và bền vững.</li>
+                    </ul>
+                    <p>
+                        Dù vẫn đang trong giai đoạn đầu và cần hoàn thiện thêm, nhưng thành công của các mô hình AI dự đoán sâu bệnh cho thấy tiềm năng khổng lồ của công nghệ trong việc giải quyết các thách thức của ngành nông nghiệp. Đây là một bước tiến quan trọng, khẳng định vị thế và trí tuệ của người Việt trong việc làm chủ công nghệ, hiện đại hóa nền nông nghiệp nước nhà.
+                    </p>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <script>
+        // Simplified script for this page
+        document.addEventListener("DOMContentLoaded", function () {
+            const userData = localStorage.getItem("currentUser");
+            if (userData) {
+                const currentUser = JSON.parse(userData);
+                document.getElementById("user-info").style.display = "flex";
+                document.getElementById("guest-menu").style.display = "none";
+                document.querySelector(".user-menu .username").textContent = `Chào, ${currentUser.name_user}!`;
+                document.getElementById("profile-tab").style.display = 'flex';
+            } else {
+                document.getElementById("user-info").style.display = "none";
+                document.getElementById("guest-menu").style.display = "flex";
+                document.getElementById("profile-tab").style.display = 'none';
+            }
+        });
+
+        function logout() {
+            if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+                localStorage.removeItem("currentUser");
+                window.location.href = 'dash.html'; // Redirect to dashboard after logout
+            }
+        }
+    </script>
+</body>
+</html>

@@ -74,6 +74,8 @@ body::after {
     border: 1px solid white;
     color: white;
     background: transparent;
+    white-space: nowrap;
+    /* Prevent text from wrapping */
 }
 
 .main-header .nav-btn:hover {
@@ -87,6 +89,8 @@ body::after {
     align-items: center;
     flex-grow: 1;
     padding-top: 80px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .auth-container {
@@ -226,4 +230,24 @@ body::after {
 
 .auth-toggle-link:hover {
     color: #e8eaf6;
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 480px) {
+    .main-header .logo {
+        font-size: 1.2rem;
+        /* Make logo smaller */
+    }
+
+    .main-header .logo i {
+        margin-right: 5px;
+        /* Reduce space next to icon */
+    }
+
+    .main-header .nav-btn {
+        padding: 6px 12px;
+        /* Make button smaller */
+        font-size: 0.8rem;
+        /* Make button text smaller */
+    }
 }

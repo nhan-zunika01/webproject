@@ -79,6 +79,20 @@ function setupUserUI() {
     startQuizBtn.removeAttribute("title");
   }
 
+  // Hiển thị nút "Tham gia khóa học" và ẩn thông báo đăng nhập
+  document.querySelectorAll(".course-action").forEach((action) => {
+    const joinButton = action.querySelector(".btn-join-course");
+    const loginPrompt = action.querySelector(".course-login-prompt");
+    if (joinButton) joinButton.style.display = "inline-block";
+    if (loginPrompt) loginPrompt.style.display = "none";
+  });
+
+  // Cập nhật số liệu thống kê cho người dùng đã đăng nhập (dữ liệu mẫu)
+  document.getElementById("stat-courses-completed").textContent = "12";
+  document.getElementById("stat-average-score").textContent = "85%";
+  document.getElementById("stat-study-hours").textContent = "156";
+  document.getElementById("stat-student-rating").textContent = "4.8★";
+
   // THÊM MỚI: Gọi hàm tải điểm khi người dùng đăng nhập
   loadUserScores();
 
@@ -109,6 +123,20 @@ function setupGuestUI() {
     startQuizBtn.classList.add("disabled");
     startQuizBtn.title = "Vui lòng đăng nhập để làm bài kiểm tra";
   }
+
+  // Ẩn nút "Tham gia khóa học" và hiển thị thông báo đăng nhập
+  document.querySelectorAll(".course-action").forEach((action) => {
+    const joinButton = action.querySelector(".btn-join-course");
+    const loginPrompt = action.querySelector(".course-login-prompt");
+    if (joinButton) joinButton.style.display = "none";
+    if (loginPrompt) loginPrompt.style.display = "block";
+  });
+
+  // Đặt lại tất cả các số liệu về 0 cho khách
+  document.getElementById("stat-courses-completed").textContent = "0";
+  document.getElementById("stat-average-score").textContent = "0%";
+  document.getElementById("stat-study-hours").textContent = "0";
+  document.getElementById("stat-student-rating").textContent = "0.0★";
 
   // THÊM MỚI: Đặt lại điểm cho khách
   const highscoreEl = document.getElementById("quiz-highscore");

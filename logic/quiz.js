@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const reviewContainer = document.getElementById("review-container");
   const loadingOverlay = document.getElementById("loading-overlay");
 
+  // === MODAL ELEMENTS ===
+  const confirmationModal = document.getElementById("confirmation-modal");
+  const confirmSubmitBtn = document.getElementById("confirm-submit-btn");
+  const cancelSubmitBtn = document.getElementById("cancel-submit-btn");
+
   // === QUIZ DATA ===
   const QUIZ_ID = "rice-basics-v1";
   const questions = [
@@ -222,15 +227,28 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Attach event listeners
     startBtn.addEventListener("click", startQuiz);
     submitBtn.addEventListener("click", () => {
-      if (confirm("Bạn có chắc chắn muốn nộp bài?")) {
-        endQuiz();
-      }
+      confirmationModal.classList.add("active");
     });
     reviewBtn.addEventListener("click", () => {
       reviewContainer.style.display = "block";
       reviewBtn.style.display = "none";
+    });
+
+    // Modal event listeners
+    confirmSubmitBtn.addEventListener("click", () => {
+      confirmationModal.classList.remove("active");
+      endQuiz();
+    });
+    cancelSubmitBtn.addEventListener("click", () => {
+      confirmationModal.classList.remove("active");
+    });
+    confirmationModal.addEventListener("click", (e) => {
+      if (e.target === confirmationModal) {
+        confirmationModal.classList.remove("active");
+      }
     });
   };
 
@@ -291,11 +309,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
 
     questionContainer.innerHTML = `
-            <p class="question-text">${currentQuestionIndex + 1}. ${
+              <p class="question-text">${currentQuestionIndex + 1}. ${
       question.question
     }</p>
-            <ul class="options-list">${optionsHTML}</ul>
-        `;
+              <ul class="options-list">${optionsHTML}</ul>
+          `;
 
     document.querySelectorAll(".option").forEach((optionEl) => {
       optionEl.addEventListener("click", (e) => {
@@ -383,11 +401,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .join("");
 
       reviewHTML += `
-                <div class="question-card">
-                    <p class="question-text">${index + 1}. ${q.question}</p>
-                    <ul class="options-list review-options">${optionsHTML}</ul>
-                </div>
-            `;
+                  <div class="question-card">
+                      <p class="question-text">${index + 1}. ${q.question}</p>
+                      <ul class="options-list review-options">${optionsHTML}</ul>
+                  </div>
+              `;
     });
     reviewContainer.innerHTML = reviewHTML;
   };
@@ -402,6 +420,9 @@ document.addEventListener("DOMContentLoaded", () => {
         userId: currentUser.id,
         quizId: QUIZ_ID,
         score: score,
+        // Add a field to track the high score logic on the backend if needed
+        // Or handle it here by getting the old score first. For simplicity,
+        // the current backend uses upsert, which will just overwrite the score.
       }),
     });
 
