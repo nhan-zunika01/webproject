@@ -310,6 +310,34 @@ async function getWeather(location = "Hanoi") {
       "Light rain": "Mưa nhỏ",
       "Moderate rain": "Mưa vừa",
       "Heavy rain": "Mưa to",
+      "Light rain shower": "Mưa rào nhẹ",
+      "Moderate rain shower": "Mưa rào vừa",
+      "Heavy rain shower": "Mưa rào to",
+      "Thundery outbreaks possible": "Có thể có dông",
+      "Thundery showers": "Mưa dông",
+      "Patchy snow possible": "Có thể có tuyết rơi",
+      "Light snow": "Tuyết nhẹ",
+      "Moderate snow": "Tuyết vừa",
+      "Heavy snow": "Tuyết to",
+      "Light sleet": "Mưa tuyết nhẹ",
+      "Moderate sleet": "Mưa tuyết vừa",
+      "Heavy sleet": "Mưa tuyết to",
+      "Light freezing rain": "Mưa đá nhẹ",
+      "Moderate freezing rain": "Mưa đá vừa",
+      "Heavy freezing rain": "Mưa đá to",
+      "Patchy light rain with thunder": "Mưa nhẹ kèm dông",
+      "Patchy moderate rain with thunder": "Mưa vừa kèm dông",
+      "Patchy heavy rain with thunder": "Mưa to kèm dông",
+      "Patchy light snow with thunder": "Tuyết nhẹ kèm dông",
+      "Patchy moderate snow with thunder": "Tuyết vừa kèm dông",
+      "Patchy heavy snow with thunder": "Tuyết to kèm dông",
+      "Patchy light sleet with thunder": "Mưa tuyết nhẹ kèm dông",
+      "Patchy moderate sleet with thunder": "Mưa tuyết vừa kèm dông",
+      "Patchy heavy sleet with thunder": "Mưa tuyết to kèm dông",
+      "Patchy light freezing rain with thunder": "Mưa đá nhẹ kèm dông ",
+      "Patchy moderate freezing rain with thunder": "Mưa đá vừa kèm dông",
+      "Patchy heavy freezing rain with thunder": "Mưa đá to kèm dông",
+      "Patchy light rain with thunder": "Mưa nhẹ kèm dông"
     };
     const englishDescription = currentWeather.weatherDesc?.[0]?.value || "";
     const weatherDescription =
@@ -370,13 +398,7 @@ function changeWeatherLocation() {
 }
 
 // Functions for other buttons with login check
-function startCourse(id) {
-  if (!currentUser) {
-    alert("Vui lòng đăng nhập để tham gia khóa học.");
-    return;
-  }
-  alert(`Bắt đầu khóa học ${id}...`);
-}
+
 
 function createPost() {
   if (!currentUser) {
