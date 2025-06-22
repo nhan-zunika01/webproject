@@ -354,32 +354,58 @@ body::after {
     gap: 10px;
 }
 
-/* Weather Widget Styles */
+/* THAY ĐỔI: CSS cho bộ chọn vị trí mới */
 .location-changer {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 25px;
     padding: 20px;
+    align-items: center;
 }
 
-.location-changer input {
-    flex-grow: 1;
+.select-group {
+    flex: 1;
+    /* Cho phép các nhóm co giãn */
+    min-width: 220px;
+    /* Chiều rộng tối thiểu trước khi xuống dòng */
+}
+
+.location-select {
+    width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
     border-radius: 8px;
-    padding: 0 15px;
+    padding: 12px 15px;
     font-size: 1em;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
 }
 
-.location-changer input::placeholder {
-    color: #ccc;
+.location-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
-.location-changer input:focus {
-    outline: none;
-    border-color: #4CAF50;
+.location-select option {
+    background-color: #3a3f44;
+    color: white;
 }
+
+.location-changer .btn-primary {
+    flex-shrink: 0;
+    /* Ngăn nút bị co lại */
+}
+
+/* Kết thúc thay đổi */
 
 .weather-widget {
     display: flex;

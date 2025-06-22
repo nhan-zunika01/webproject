@@ -199,7 +199,30 @@ body {
 
 .quiz-footer {
     margin-top: 20px;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn.btn-nav {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn.btn-nav:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.btn.btn-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* --- Results Screen --- */
@@ -252,6 +275,9 @@ body {
 
 .review-options .option {
     cursor: default;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .review-options .option.correct {
@@ -262,6 +288,14 @@ body {
 .review-options .option.incorrect {
     background: rgba(231, 76, 60, 0.3);
     border-color: #e74c3c;
+}
+
+.user-answer-label {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #f1c40f;
+    margin-left: 8px;
+    white-space: nowrap;
 }
 
 
@@ -276,7 +310,12 @@ body {
     font-weight: 600;
     transition: all 0.3s ease;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    /* Changed for alignment */
+    align-items: center;
+    /* Changed for alignment */
+    gap: 8px;
+    /* Changed for alignment */
     font-size: 1em;
 }
 

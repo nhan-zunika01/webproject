@@ -165,10 +165,21 @@
 
             <!-- Weather Section -->
             <section id="weather" class="content-section">
+                <!-- THAY ĐỔI: Chuyển từ input sang select -->
                 <div class="location-changer card">
-                    <input type="text" id="location-input" placeholder="Nhập tên tỉnh/thành phố...">
+                    <div class="select-group">
+                        <select id="province-select" class="location-select">
+                            <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                        </select>
+                    </div>
+                    <div class="select-group">
+                        <select id="district-select" class="location-select" disabled>
+                            <option value="">-- Chọn Quận/Huyện --</option>
+                        </select>
+                    </div>
                     <button class="btn btn-primary" onclick="changeWeatherLocation()">Lấy dự báo</button>
                 </div>
+                <!-- Kết thúc thay đổi -->
                 <div class="weather-widget card">
                     <!-- Nội dung thời tiết sẽ được JS chèn vào đây -->
                     <p>Đang tải dữ liệu thời tiết...</p>

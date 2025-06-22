@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultMessageEl = document.getElementById("result-message");
   const reviewContainer = document.getElementById("review-container");
   const loadingOverlay = document.getElementById("loading-overlay");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
 
   // === MODAL ELEMENTS ===
   const confirmationModal = document.getElementById("confirmation-modal");
@@ -203,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Làm tăng trọng lượng",
         "Không cần thiết",
       ],
-      answer: 1,
+      answer: 2,
     },
   ];
 
@@ -215,6 +217,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let timeRemaining = 15 * 60; // 15 minutes in seconds
 
   // === FUNCTIONS ===
+  const prevQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      renderQuestion();
+    }
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      renderQuestion();
+    }
+  };
+
   const initQuiz = () => {
     const userData = localStorage.getItem("currentUser");
     if (userData) {
@@ -236,6 +252,10 @@ document.addEventListener("DOMContentLoaded", () => {
       reviewContainer.style.display = "block";
       reviewBtn.style.display = "none";
     });
+
+    // Add navigation button listeners
+    prevBtn.addEventListener("click", prevQuestion);
+    nextBtn.addEventListener("click", nextQuestion);
 
     // Modal event listeners
     confirmSubmitBtn.addEventListener("click", () => {
@@ -319,18 +339,8 @@ document.addEventListener("DOMContentLoaded", () => {
       optionEl.addEventListener("click", (e) => {
         const selectedIndex = parseInt(e.currentTarget.dataset.index);
         userAnswers[currentQuestionIndex] = selectedIndex;
-
-        // Move to next question automatically
-        if (currentQuestionIndex < questions.length - 1) {
-          currentQuestionIndex++;
-          renderQuestion();
-        } else {
-          renderQuestion(); // Re-render to show selection on last question
-          document
-            .querySelectorAll(".option")
-            .forEach((opt) => opt.classList.remove("selected"));
-          e.currentTarget.classList.add("selected");
-        }
+        // Re-render to show selection, no auto-advance
+        renderQuestion();
       });
     });
 
@@ -343,6 +353,10 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedOption.classList.add("selected");
       }
     }
+
+    // Manage button states
+    prevBtn.disabled = currentQuestionIndex === 0;
+    nextBtn.disabled = currentQuestionIndex === questions.length - 1;
   };
 
   const endQuiz = async () => {
@@ -385,18 +399,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let reviewHTML = "<h2>Xem lại bài làm</h2>";
     questions.forEach((q, index) => {
       const userAnswer = userAnswers[index];
-      const isCorrect = userAnswer === q.answer;
 
       const optionsHTML = q.options
         .map((opt, optIndex) => {
           let className = "option";
-          if (optIndex === q.answer) {
-            className += " correct"; // Always highlight correct answer
+          let label = "";
+          const isCorrectAnswer = optIndex === q.answer;
+          const isSelectedAnswer = optIndex === userAnswer;
+
+          if (isCorrectAnswer) {
+            className += " correct";
+          } else if (isSelectedAnswer) {
+            className += " incorrect";
           }
-          if (userAnswer !== null && optIndex === userAnswer && !isCorrect) {
-            className += " incorrect"; // Highlight user's wrong answer
+
+          if (isSelectedAnswer) {
+            label = ' <span class="user-answer-label">Đáp án của bạn</span>';
           }
-          return `<li class="${className}">${opt}</li>`;
+
+          return `<li class="${className}"><span>${opt}</span>${label}</li>`;
         })
         .join("");
 
@@ -420,9 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
         userId: currentUser.id,
         quizId: QUIZ_ID,
         score: score,
-        // Add a field to track the high score logic on the backend if needed
-        // Or handle it here by getting the old score first. For simplicity,
-        // the current backend uses upsert, which will just overwrite the score.
       }),
     });
 
