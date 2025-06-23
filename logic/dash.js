@@ -226,7 +226,7 @@ function editProfile(button) {
   }
 }
 
-// --- START: WEATHER LOGIC UPDATED FOR CLOUDFLARE FUNCTIONS ---
+// --- START: WEATHER LOGIC UPDATED FOR BROWSER GEOLOCATION ---
 
 const provinceSelect = document.getElementById("province-select");
 const districtSelect = document.getElementById("district-select");
@@ -292,7 +292,7 @@ function changeWeatherLocation() {
     provinceSelect.options[provinceSelect.selectedIndex].text;
   if (districtName && provinceName && provinceSelect.value) {
     const locationQuery = `${districtName}, ${provinceName}`;
-    getWeather(locationQuery);
+    getWeatherByManualSelection(locationQuery);
   } else {
     alert("Vui lòng chọn đầy đủ Tỉnh/Thành phố và Quận/Huyện.");
   }
@@ -310,7 +310,7 @@ async function getCoordinates(locationQuery) {
   return { lat: data[0].lat, lon: data[0].lon };
 }
 
-async function getWeather(locationQuery) {
+async function getWeatherByManualSelection(locationQuery) {
   if (!weatherWidget) return;
   weatherWidget.innerHTML = "<p>Đang tìm kiếm và tải dữ liệu thời tiết...</p>";
 
@@ -330,30 +330,86 @@ async function getWeather(locationQuery) {
 }
 
 /**
- * Get weather based on user's IP address by calling our own API
+ * NEW FUNCTION: Get user's location using Browser Geolocation API
  */
-async function getWeatherByIp() {
+async function getWeatherByBrowser() {
   if (!weatherWidget) return;
-  weatherWidget.innerHTML = "<p>Đang xác định vị trí của bạn...</p>";
+  weatherWidget.innerHTML = "<p>Đang yêu cầu quyền truy cập vị trí...</p>";
   autoLocationBtn.disabled = true;
 
-  try {
-    // Call our own backend function on Cloudflare
-    const response = await fetch("/api/get-ip-location");
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        errorData.error || "Không thể xác định vị trí từ máy chủ."
-      );
-    }
-    const data = await response.json();
-    const locationQuery = `${data.city}, ${data.region}`;
-    await getWeather(locationQuery);
-  } catch (error) {
-    console.error("Lỗi khi lấy vị trí tự động:", error);
-    weatherWidget.innerHTML = `<p style="color: #ffcccc; font-weight: bold;">Lỗi vị trí tự động: ${error.message}</p>`;
-  } finally {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        weatherWidget.innerHTML =
+          "<p>Đã có tọa độ, đang tải dữ liệu thời tiết...</p>";
+
+        try {
+          const response = await fetch(
+            `/api/get-weather?lat=${lat}&lon=${lon}`
+          );
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Lỗi ${response.status}: ${errorData.message}`);
+          }
+          const weatherData = await response.json();
+          const locationName = await getLocationName(lat, lon);
+          renderWeatherData(
+            weatherData.current,
+            weatherData.forecast,
+            locationName
+          );
+        } catch (error) {
+          console.error("Lỗi khi lấy dữ liệu thời tiết:", error);
+          weatherWidget.innerHTML = `<p style="color: #ffcccc; font-weight: bold;">Lỗi: ${error.message}</p>`;
+        } finally {
+          autoLocationBtn.disabled = false;
+        }
+      },
+      (error) => {
+        let message = "Không thể lấy vị trí của bạn.";
+        if (error.code === error.PERMISSION_DENIED) {
+          message =
+            "Bạn đã từ chối quyền truy cập vị trí. Vui lòng cấp quyền trong cài đặt trình duyệt nếu muốn sử dụng tính năng này.";
+        }
+        weatherWidget.innerHTML = `<p style="color: #ffcccc;">${message}</p>`;
+        autoLocationBtn.disabled = false;
+      }
+    );
+  } else {
+    weatherWidget.innerHTML =
+      "<p>Trình duyệt của bạn không hỗ trợ tính năng định vị tự động.</p>";
     autoLocationBtn.disabled = false;
+  }
+}
+
+/**
+ * NEW HELPER FUNCTION: Get location name from coordinates using reverse geocoding
+ */
+async function getLocationName(lat, lon) {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=vi`
+    );
+    const data = await response.json();
+    if (data && data.address) {
+      const { road, suburb, village, town, city_district, city, state } =
+        data.address;
+      // Build a clean, readable location string
+      const locationParts = [
+        road,
+        suburb || village || town,
+        city_district,
+        city || state,
+      ].filter(Boolean); // Filter out any undefined/null parts
+      return locationParts.join(", ");
+    }
+    return "Vị trí của bạn";
+  } catch (error) {
+    console.error("Lỗi khi lấy tên địa danh:", error);
+    return "Vị trí của bạn"; // Fallback value
   }
 }
 
@@ -434,8 +490,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
+  // UPDATED: Attach the new browser-based geolocation function to the button
   if (autoLocationBtn) {
-    autoLocationBtn.addEventListener("click", getWeatherByIp);
+    autoLocationBtn.addEventListener("click", getWeatherByBrowser);
   }
 
   loadProvinces();
