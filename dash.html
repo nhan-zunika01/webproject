@@ -255,12 +255,24 @@
         </main>
     </div>
 
-    <!-- THÊM MỚI: Cấu trúc HTML cho Modal thông báo -->
+    <!-- Modal thông báo -->
     <div id="alert-modal" class="modal-overlay">
         <div class="modal-box">
             <h3>Thông báo</h3>
             <p id="modal-message"></p>
             <button id="modal-close-btn" class="btn btn-primary">Đã hiểu</button>
+        </div>
+    </div>
+
+    <!-- THÊM MỚI: Modal xác nhận -->
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="confirm-modal-title">Xác nhận</h3>
+            <p id="confirm-modal-message"></p>
+            <div class="modal-actions">
+                <button id="confirm-modal-cancel-btn" class="btn btn-secondary">Hủy</button>
+                <button id="confirm-modal-confirm-btn" class="btn btn-danger">Đăng xuất</button>
+            </div>
         </div>
     </div>
 

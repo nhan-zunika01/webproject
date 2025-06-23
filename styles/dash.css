@@ -529,6 +529,20 @@ body::after {
     color: white;
 }
 
+/* THÊM MỚI: Định dạng cho nút nguy hiểm (đăng xuất) */
+.btn.btn-danger {
+    background-color: #c0392b;
+    border-color: #c0392b;
+    color: white;
+}
+
+.btn.btn-danger:hover {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+
 .btn.disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -655,7 +669,7 @@ body::after {
     margin-right: 5px;
 }
 
-/* THÊM MỚI: CSS cho Modal thông báo */
+/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -665,7 +679,6 @@ body::after {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
     display: none;
-    /* Ẩn mặc định */
     align-items: center;
     justify-content: center;
     z-index: 2000;
@@ -674,7 +687,6 @@ body::after {
 
 .modal-overlay.active {
     display: flex;
-    /* Hiện modal khi có class active */
 }
 
 .modal-box {
@@ -703,6 +715,18 @@ body::after {
 
 #modal-close-btn {
     padding: 10px 30px;
+    border-radius: 25px;
+}
+
+/* THÊM MỚI: Định dạng cho các nút trong modal xác nhận */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.modal-actions .btn {
+    padding: 10px 25px;
     border-radius: 25px;
 }
 

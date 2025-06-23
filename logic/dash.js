@@ -4,12 +4,22 @@ const RICE_QUIZ_ID = "rice-basics-v1"; // ID của bài kiểm tra duy nhất
 const TOTAL_COURSES_AVAILABLE = 2; // Tổng số khóa học trên nền tảng
 const TOTAL_QUIZ_QUESTIONS = 20; // Tổng số câu hỏi trong bài kiểm tra
 
-// THÊM MỚI: Lấy các phần tử Modal
+// Modal thông báo
 const alertModal = document.getElementById("alert-modal");
 const modalMessage = document.getElementById("modal-message");
 const modalCloseBtn = document.getElementById("modal-close-btn");
 
-// THÊM MỚI: Hàm hiển thị Modal thông báo
+// THÊM MỚI: Lấy các phần tử Modal xác nhận
+const confirmModal = document.getElementById("confirm-modal");
+const confirmModalMessage = document.getElementById("confirm-modal-message");
+const confirmModalConfirmBtn = document.getElementById(
+  "confirm-modal-confirm-btn"
+);
+const confirmModalCancelBtn = document.getElementById(
+  "confirm-modal-cancel-btn"
+);
+
+// Hàm hiển thị Modal thông báo
 function showAlert(message) {
   if (modalMessage && alertModal) {
     modalMessage.textContent = message;
@@ -17,21 +27,57 @@ function showAlert(message) {
   }
 }
 
-// THÊM MỚI: Hàm đóng Modal
-function closeModal() {
+// Hàm đóng Modal thông báo
+function closeAlertModal() {
   if (alertModal) {
     alertModal.classList.remove("active");
   }
 }
 
-// THÊM MỚI: Gán sự kiện cho nút đóng và lớp phủ
+// Gán sự kiện cho Modal thông báo
 if (modalCloseBtn) {
-  modalCloseBtn.addEventListener("click", closeModal);
+  modalCloseBtn.addEventListener("click", closeAlertModal);
 }
 if (alertModal) {
   alertModal.addEventListener("click", (e) => {
     if (e.target === alertModal) {
-      closeModal();
+      closeAlertModal();
+    }
+  });
+}
+
+// THÊM MỚI: Hàm hiển thị Modal xác nhận
+function showConfirm(message, onConfirm) {
+  if (
+    confirmModal &&
+    confirmModalMessage &&
+    confirmModalConfirmBtn &&
+    confirmModalCancelBtn
+  ) {
+    confirmModalMessage.textContent = message;
+    confirmModal.classList.add("active");
+
+    // Sử dụng .onclick để đảm bảo chỉ có một trình xử lý sự kiện được gắn vào
+    confirmModalConfirmBtn.onclick = () => {
+      closeConfirmModal();
+      onConfirm(); // Thực thi hàm callback khi xác nhận
+    };
+  }
+}
+
+// THÊM MỚI: Hàm đóng Modal xác nhận
+function closeConfirmModal() {
+  if (confirmModal) {
+    confirmModal.classList.remove("active");
+  }
+}
+
+// THÊM MỚI: Gán sự kiện cho Modal xác nhận
+if (confirmModal) {
+  confirmModalCancelBtn.addEventListener("click", closeConfirmModal);
+  confirmModal.addEventListener("click", (e) => {
+    if (e.target === confirmModal) {
+      closeConfirmModal();
     }
   });
 }
@@ -58,12 +104,12 @@ function showSection(sectionId, element) {
   }
 }
 
-// Function to handle user logout
+// CẬP NHẬT: Hàm xử lý đăng xuất
 function logout() {
-  if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+  showConfirm("Bạn có chắc chắn muốn đăng xuất?", () => {
     localStorage.removeItem("currentUser");
     window.location.reload();
-  }
+  });
 }
 
 // --- START: HOÀN THIỆN THUẬT TOÁN TÍNH TOÁN ---
@@ -239,7 +285,7 @@ function setupGuestUI() {
 
 function editProfile(button) {
   if (!currentUser) {
-    showAlert("Vui lòng đăng nhập để sử dụng tính năng này."); // THAY ĐỔI
+    showAlert("Vui lòng đăng nhập để sử dụng tính năng này.");
     return;
   }
   const profileForm = document.getElementById("profile");
@@ -253,11 +299,11 @@ function editProfile(button) {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
     inputs.forEach((input) => input.setAttribute("readonly", true));
     button.innerHTML = '<i class="fas fa-edit"></i> Chỉnh sửa thông tin';
-    showAlert("Thông tin đã được cập nhật!"); // THAY ĐỔI
+    showAlert("Thông tin đã được cập nhật!");
   }
 }
 
-// --- START: WEATHER LOGIC UPDATED FOR BROWSER GEOLOCATION ---
+// --- START: WEATHER LOGIC ---
 
 const provinceSelect = document.getElementById("province-select");
 const districtSelect = document.getElementById("district-select");
@@ -325,7 +371,7 @@ function changeWeatherLocation() {
     const locationQuery = `${districtName}, ${provinceName}`;
     getWeatherByManualSelection(locationQuery);
   } else {
-    showAlert("Vui lòng chọn đầy đủ Tỉnh/Thành phố và Quận/Huyện."); // THAY ĐỔI
+    showAlert("Vui lòng chọn đầy đủ Tỉnh/Thành phố và Quận/Huyện.");
   }
 }
 
@@ -498,12 +544,12 @@ function renderWeatherData(current, forecast, locationName) {
 
 function createPost() {
   if (!currentUser) {
-    showAlert("Vui lòng đăng nhập để tạo bài viết."); // THAY ĐỔI
+    showAlert("Vui lòng đăng nhập để tạo bài viết.");
     return;
   }
   showAlert(
     "Chức năng tạo bài viết mới đang được phát triển. Vui lòng quay lại sau!"
-  ); // THAY ĐỔI
+  );
 }
 
 // === INITIALIZATION ===
