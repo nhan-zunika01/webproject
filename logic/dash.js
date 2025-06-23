@@ -4,6 +4,38 @@ const RICE_QUIZ_ID = "rice-basics-v1"; // ID của bài kiểm tra duy nhất
 const TOTAL_COURSES_AVAILABLE = 2; // Tổng số khóa học trên nền tảng
 const TOTAL_QUIZ_QUESTIONS = 20; // Tổng số câu hỏi trong bài kiểm tra
 
+// THÊM MỚI: Lấy các phần tử Modal
+const alertModal = document.getElementById("alert-modal");
+const modalMessage = document.getElementById("modal-message");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+
+// THÊM MỚI: Hàm hiển thị Modal thông báo
+function showAlert(message) {
+  if (modalMessage && alertModal) {
+    modalMessage.textContent = message;
+    alertModal.classList.add("active");
+  }
+}
+
+// THÊM MỚI: Hàm đóng Modal
+function closeModal() {
+  if (alertModal) {
+    alertModal.classList.remove("active");
+  }
+}
+
+// THÊM MỚI: Gán sự kiện cho nút đóng và lớp phủ
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener("click", closeModal);
+}
+if (alertModal) {
+  alertModal.addEventListener("click", (e) => {
+    if (e.target === alertModal) {
+      closeModal();
+    }
+  });
+}
+
 // New navigation function for the sidebar
 function showSection(sectionId, element) {
   document.querySelectorAll(".content-section").forEach((section) => {
@@ -207,7 +239,7 @@ function setupGuestUI() {
 
 function editProfile(button) {
   if (!currentUser) {
-    alert("Vui lòng đăng nhập để sử dụng tính năng này.");
+    showAlert("Vui lòng đăng nhập để sử dụng tính năng này."); // THAY ĐỔI
     return;
   }
   const profileForm = document.getElementById("profile");
@@ -221,8 +253,7 @@ function editProfile(button) {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
     inputs.forEach((input) => input.setAttribute("readonly", true));
     button.innerHTML = '<i class="fas fa-edit"></i> Chỉnh sửa thông tin';
-    alert("Thông tin đã được cập nhật!");
-    setupUserUI();
+    showAlert("Thông tin đã được cập nhật!"); // THAY ĐỔI
   }
 }
 
@@ -294,7 +325,7 @@ function changeWeatherLocation() {
     const locationQuery = `${districtName}, ${provinceName}`;
     getWeatherByManualSelection(locationQuery);
   } else {
-    alert("Vui lòng chọn đầy đủ Tỉnh/Thành phố và Quận/Huyện.");
+    showAlert("Vui lòng chọn đầy đủ Tỉnh/Thành phố và Quận/Huyện."); // THAY ĐỔI
   }
 }
 
@@ -329,9 +360,6 @@ async function getWeatherByManualSelection(locationQuery) {
   }
 }
 
-/**
- * NEW FUNCTION: Get user's location using Browser Geolocation API
- */
 async function getWeatherByBrowser() {
   if (!weatherWidget) return;
   weatherWidget.innerHTML = "<p>Đang yêu cầu quyền truy cập vị trí...</p>";
@@ -385,9 +413,6 @@ async function getWeatherByBrowser() {
   }
 }
 
-/**
- * NEW HELPER FUNCTION: Get location name from coordinates using reverse geocoding
- */
 async function getLocationName(lat, lon) {
   try {
     const response = await fetch(
@@ -397,19 +422,18 @@ async function getLocationName(lat, lon) {
     if (data && data.address) {
       const { road, suburb, village, town, city_district, city, state } =
         data.address;
-      // Build a clean, readable location string
       const locationParts = [
         road,
         suburb || village || town,
         city_district,
         city || state,
-      ].filter(Boolean); // Filter out any undefined/null parts
+      ].filter(Boolean);
       return locationParts.join(", ");
     }
     return "Vị trí của bạn";
   } catch (error) {
     console.error("Lỗi khi lấy tên địa danh:", error);
-    return "Vị trí của bạn"; // Fallback value
+    return "Vị trí của bạn";
   }
 }
 
@@ -474,10 +498,12 @@ function renderWeatherData(current, forecast, locationName) {
 
 function createPost() {
   if (!currentUser) {
-    alert("Vui lòng đăng nhập để tạo bài viết.");
+    showAlert("Vui lòng đăng nhập để tạo bài viết."); // THAY ĐỔI
     return;
   }
-  alert("Mở form tạo bài viết mới...");
+  showAlert(
+    "Chức năng tạo bài viết mới đang được phát triển. Vui lòng quay lại sau!"
+  ); // THAY ĐỔI
 }
 
 // === INITIALIZATION ===
@@ -490,7 +516,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
-  // UPDATED: Attach the new browser-based geolocation function to the button
   if (autoLocationBtn) {
     autoLocationBtn.addEventListener("click", getWeatherByBrowser);
   }

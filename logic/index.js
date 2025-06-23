@@ -1,52 +1,57 @@
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth",
+// === CẬP NHẬT: Gộp tất cả logic vào một trình xử lý sự kiện ===
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Bắt đầu: Logic kiểm tra trạng thái đăng nhập ---
+  const guestNav = document.getElementById("guest-nav");
+  const userNav = document.getElementById("user-nav");
+  const currentUser = localStorage.getItem("currentUser");
+
+  if (currentUser) {
+    // Nếu người dùng đã đăng nhập
+    if (guestNav) guestNav.style.display = "none";
+    if (userNav) userNav.style.display = "block";
+  } else {
+    // Nếu là khách
+    if (guestNav) guestNav.style.display = "flex"; // Sử dụng flex để các nút nằm cạnh nhau
+    if (userNav) userNav.style.display = "none";
+  }
+  // --- Kết thúc: Logic kiểm tra trạng thái đăng nhập ---
+
+  // --- Logic hiệu ứng header khi cuộn trang ---
+  const header = document.querySelector(".main-header");
+  const featuresSection = document.querySelector("#features");
+
+  if (header && featuresSection) {
+    const handleScroll = () => {
+      const headerHeight = header.offsetHeight;
+      const featuresSectionTop = featuresSection.getBoundingClientRect().top;
+      if (featuresSectionTop <= headerHeight) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+  }
+
+  // --- Logic cuộn mượt cho các liên kết anchor ---
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth",
+      });
     });
   });
-});
 
-// Script to handle redirecting to the registration form
-function handleRegisterRedirect(event) {
-  event.preventDefault();
-  // We use a flag in localStorage because we can't directly manipulate the DOM of the next page
-  localStorage.setItem("showRegisterForm", "true");
-  window.location.href = "login.html";
-}
+  // --- Logic xử lý chuyển hướng đăng ký ---
+  function handleRegisterRedirect(event) {
+    event.preventDefault();
+    localStorage.setItem("showRegisterForm", "true");
+    window.location.href = "login.html";
+  }
 
-// Attach event to both register buttons (hero and nav)
-// Attach event to register button in nav
-const navRegisterBtn = document.querySelector("a.btn-register");
-
-if (navRegisterBtn) {
-  navRegisterBtn.addEventListener("click", handleRegisterRedirect);
-}
-// === THÊM HIỆU ỨNG HEADER KHI CUỘN TRANG (PHIÊN BẢN CẢI TIẾN) ===
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".main-header");
-  const featuresSection = document.querySelector("#features"); // Lấy phần nội dung màu trắng
-
-  // Kiểm tra xem các thành phần có tồn tại không để tránh lỗi
-  if (!header || !featuresSection) return;
-
-  // Hàm để xử lý việc thêm/bỏ class 'scrolled'
-  const handleScroll = () => {
-    const headerHeight = header.offsetHeight;
-    // Lấy vị trí của phần "features" so với top của màn hình
-    const featuresSectionTop = featuresSection.getBoundingClientRect().top;
-
-    // Nếu đỉnh của phần "features" đã cuộn lên và chạm vào đáy của header
-    // thì thêm class 'scrolled'
-    if (featuresSectionTop <= headerHeight) {
-      header.classList.add("scrolled");
-    } else {
-      // Ngược lại, xóa class 'scrolled'
-      header.classList.remove("scrolled");
-    }
-  };
-
-  // Thêm một sự kiện lắng nghe hành động cuộn của người dùng
-  window.addEventListener("scroll", handleScroll);
+  const navRegisterBtn = document.querySelector("a.btn-register");
+  if (navRegisterBtn) {
+    navRegisterBtn.addEventListener("click", handleRegisterRedirect);
+  }
 });

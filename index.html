@@ -15,8 +15,17 @@
             <a href="#" class="logo"><i class="fas fa-seedling"></i> Sổ Tay Nông Dân</a>
             <nav class="main-nav">
                 <a href="#features" class="nav-link">Tính năng</a>
-                <a href="login.html" class="nav-btn btn-login">Đăng nhập</a>
-                <a href="register.html" class="nav-btn btn-register">Đăng ký</a>
+                
+                <!-- THAY ĐỔI: Nhóm các nút cho khách -->
+                <div id="guest-nav" class="nav-button-group">
+                    <a href="login.html" class="nav-btn btn-login">Đăng nhập</a>
+                    <a href="register.html" class="nav-btn btn-register">Đăng ký</a>
+                </div>
+
+                <!-- THAY ĐỔI: Nhóm nút cho người dùng đã đăng nhập (ẩn mặc định) -->
+                <div id="user-nav" class="nav-button-group" style="display: none;">
+                    <a href="dash.html" class="nav-btn btn-dashboard">Về trang quản lý</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -59,7 +68,7 @@
     <footer class="main-footer">
         <div class="container">
             <p>&copy; 2025 Sổ tay nông dân thông minh. Mọi quyền được bảo lưu.</p>
-            <p>website version 0.7.3</p>
+            <p>Bản dựng: 23062025.1 | Cập nhật lần cuối: 23/06/2025</p>
         </div>
     </footer>
     
