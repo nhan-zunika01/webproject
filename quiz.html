@@ -18,15 +18,22 @@
                     <span><i class="fas fa-question-circle"></i> 20 câu hỏi</span>
                     <span><i class="fas fa-clock"></i> 15 phút</span>
                 </p>
+                <!-- NEW: Quiz Info (attempts, high score) -->
+                <div class="quiz-info">
+                    <span id="attempts-info">Số lần đã thi: 0</span>
+                    <span id="highscore-info">Điểm cao nhất: 0/20</span>
+                </div>
                 <p>Bài kiểm tra này sẽ đánh giá kiến thức của bạn về các kỹ thuật canh tác lúa. Hãy đảm bảo bạn đã sẵn sàng trước khi bắt đầu.</p>
                 <button id="start-btn" class="btn btn-primary">Tôi đã sẵn sàng!</button>
-                 <a href="dash.html" class="back-link">Quay lại trang chủ</a>
+                 <a href="dash.html#quiz" class="back-link">Quay lại trang Kiểm tra</a>
             </div>
         </div>
 
         <!-- Screen 2: Quiz Screen -->
         <div id="quiz-screen" class="quiz-screen">
             <header class="quiz-header">
+                 <!-- NEW: Exit button -->
+                <a href="#" id="exit-quiz-btn" class="exit-btn" title="Thoát bài kiểm tra"><i class="fas fa-times"></i></a>
                 <div class="timer">
                     <i class="fas fa-stopwatch"></i>
                     <span id="time-left">15:00</span>
@@ -42,10 +49,6 @@
                 <!-- Questions will be injected here by JS -->
             </div>
             <div class="quiz-footer">
-                <div class="navigation-buttons">
-                    <button id="prev-btn" class="btn btn-nav"><i class="fas fa-arrow-left"></i> Quay lại</button>
-                    <button id="next-btn" class="btn btn-nav">Tiếp theo <i class="fas fa-arrow-right"></i></button>
-                </div>
                 <button id="submit-btn" class="btn">Nộp bài</button>
             </div>
         </div>
@@ -61,12 +64,16 @@
                 </div>
                 <div id="result-message"></div>
                 <div class="result-actions">
-                    <a href="dash.html" class="btn">Về trang chủ</a>
+                    <a href="quiz.html" class="btn">Làm lại bài thi</a>
                     <button id="review-btn" class="btn btn-primary">Xem lại bài làm</button>
                 </div>
             </div>
             <div id="review-container">
                 <!-- Review questions will be injected here -->
+                 <!-- NEW: Back to dashboard button at the end of review -->
+                <div class="result-actions" style="margin-top: 20px;">
+                    <a href="dash.html#quiz" class="btn">Về trang Kiểm tra</a>
+                </div>
             </div>
         </div>
     </div>
@@ -77,18 +84,29 @@
         <p>Đang lưu kết quả...</p>
     </div>
 
-    <!-- Confirmation Modal -->
+    <!-- Confirmation & Resume Modals -->
     <div id="confirmation-modal" class="modal-overlay">
         <div class="modal-box">
-            <h3>Xác nhận nộp bài</h3>
-            <p>Bạn có chắc chắn muốn nộp bài và kết thúc bài kiểm tra không?</p>
+            <h3 id="confirm-title">Xác nhận</h3>
+            <p id="confirm-message">Bạn có chắc chắn muốn nộp bài và kết thúc bài kiểm tra không?</p>
             <div class="modal-actions">
                 <button id="cancel-submit-btn" class="btn btn-secondary">Hủy</button>
                 <button id="confirm-submit-btn" class="btn btn-primary">Nộp bài</button>
             </div>
         </div>
     </div>
-
+    
+    <!-- NEW: Resume Session Modal -->
+    <div id="resume-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Tiếp tục bài làm?</h3>
+            <p>Chúng tôi nhận thấy bạn có một bài kiểm tra đang dang dở. Bạn có muốn tiếp tục từ nơi đã dừng lại không?</p>
+            <div class="modal-actions">
+                <button id="resume-no-btn" class="btn btn-secondary">Làm bài mới</button>
+                <button id="resume-yes-btn" class="btn btn-primary">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
 
     <script src="logic/quiz.js"></script>
 </body>

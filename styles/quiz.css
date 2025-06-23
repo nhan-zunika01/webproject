@@ -8,7 +8,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #433c2e;
-    /* Updated background color */
     min-height: 100vh;
     color: #f8f9fa;
     position: relative;
@@ -82,6 +81,22 @@ body {
     color: #4CAF50;
 }
 
+/* NEW: Quiz Info (attempts, high score) */
+.quiz-info {
+    font-size: 1em;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.quiz-info span {
+    font-weight: 600;
+}
+
 #start-screen p {
     color: #dcdcdc;
     line-height: 1.6;
@@ -110,6 +125,19 @@ body {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     margin-bottom: 20px;
+}
+
+/* NEW: Exit Button */
+.exit-btn {
+    color: #ccc;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.exit-btn:hover {
+    color: #e74c3c;
+    transform: scale(1.2);
 }
 
 .timer {
@@ -186,7 +214,7 @@ body {
     transition: all 0.3s;
 }
 
-.option:hover {
+.option:not(.disabled):hover {
     border-color: #4CAF50;
     background: rgba(76, 175, 80, 0.2);
 }
@@ -197,32 +225,17 @@ body {
     color: white;
 }
 
+.option.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 .quiz-footer {
     margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    /* Centered submit button */
     align-items: center;
-}
-
-.navigation-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.btn.btn-nav {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.btn.btn-nav:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.btn.btn-nav:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    background: rgba(255, 255, 255, 0.1);
 }
 
 /* --- Results Screen --- */
@@ -258,6 +271,8 @@ body {
     display: flex;
     justify-content: center;
     gap: 15px;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
 }
 
 #review-container {
@@ -311,11 +326,8 @@ body {
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-flex;
-    /* Changed for alignment */
     align-items: center;
-    /* Changed for alignment */
     gap: 8px;
-    /* Changed for alignment */
     font-size: 1em;
 }
 
@@ -357,7 +369,6 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     display: none;
-    /* Hidden by default */
     align-items: center;
     justify-content: center;
     z-index: 1000;
@@ -385,7 +396,7 @@ body {
     }
 }
 
-/* Confirmation Modal Styles */
+/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -395,7 +406,6 @@ body {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
     display: none;
-    /* Hidden by default */
     align-items: center;
     justify-content: center;
     z-index: 2000;

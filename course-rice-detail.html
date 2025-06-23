@@ -16,6 +16,10 @@
 
     <main class="main-content">
         <div class="container">
+            <div class="back-button-wrapper">
+                <a href="dash.html#courses" class="nav-btn"><i class="fas fa-arrow-left"></i> Quay lại trang khóa học</a>
+            </div>
+            
             <article id="course-container" class="course-article card">
                 
                 <!-- VIEW 1: COURSE OVERVIEW -->
@@ -261,7 +265,7 @@
                 
                 const isLastLessonInCourse = (chapterIndex === courseData.length - 1 && lessonIndex === chapter.lessons.length - 1);
                 nextLessonBtn.disabled = isLastLessonInCourse;
-                if (lessonIndex === chapter.lessons.length - 1) {
+                if (lessonIndex === chapter.lessons.length - 1 && !isLastLessonInCourse) {
                     nextLessonBtn.innerHTML = 'Chương tiếp theo <i class="fas fa-arrow-right"></i>';
                 } else {
                     nextLessonBtn.innerHTML = 'Bài tiếp theo <i class="fas fa-arrow-right"></i>';

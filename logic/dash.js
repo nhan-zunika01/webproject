@@ -567,4 +567,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   loadProvinces();
+
+  // --- NEW: Handle URL Hash for Tab Navigation ---
+  const hash = window.location.hash.substring(1); // Get hash without '#'
+  if (hash) {
+    // Find the nav link that corresponds to this section
+    // e.g., for #courses, find onclick="showSection('courses', this)"
+    const targetLink = document.querySelector(`.nav-tab[onclick*="'${hash}'"]`);
+
+    if (targetLink) {
+      showSection(hash, targetLink);
+    }
+  }
+  // --- END: Handle URL Hash ---
 });

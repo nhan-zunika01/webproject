@@ -7,64 +7,66 @@ export const onRequestPost = async ({ request, env }) => {
     "Content-Type": "application/json",
   };
 
-  // 1. Check for environment variables
   if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error(
-      "Supabase environment variables are not set for saving quiz results."
-    );
+    console.error("Supabase environment variables are not set.");
     return new Response(
-      JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
-      }),
+      JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }),
       { status: 500, headers }
     );
   }
 
-  try {
-    const { userId, quizId, score } = await request.json();
+  const supabase = createClient(
+    env.SUPABASE_URL,
+    env.SUPABASE_SERVICE_ROLE_KEY
+  );
 
-    // 2. Validate input
-    if (!userId || !quizId || score === undefined) {
+  // You need an Authorization header to identify the user
+  const authHeader = request.headers.get("Authorization");
+  if (!authHeader) {
+    return new Response(
+      JSON.stringify({ message: "Missing authorization header." }),
+      { status: 401, headers }
+    );
+  }
+  const token = authHeader.split(" ")[1];
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser(token);
+
+  if (userError || !user) {
+    return new Response(JSON.stringify({ message: "Invalid token." }), {
+      status: 401,
+      headers,
+    });
+  }
+
+  try {
+    const { quizId, score } = await request.json();
+
+    if (!quizId || score === undefined) {
       return new Response(
         JSON.stringify({
-          message: "Dữ liệu không hợp lệ. Cần userId, quizId, và score.",
+          message: "Dữ liệu không hợp lệ. Cần quizId và score.",
         }),
         { status: 400, headers }
       );
     }
 
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
-    // 3. Use upsert to insert or update the score
-    // This will update the score if the user retakes the quiz
-    const { data, error } = await supabase
-      .from("quiz_results")
-      .upsert(
-        {
-          user_id: userId,
-          quiz_id: quizId,
-          score: score,
-        },
-        {
-          onConflict: "user_id, quiz_id", // Specify the columns that cause a conflict
-        }
-      )
-      .select(); // Select the data to get the result back
+    // UPDATED: Always insert a new record for each attempt.
+    const { data, error } = await supabase.from("quiz_results").insert({
+      user_id: user.id, // Use the user ID from the token
+      quiz_id: quizId,
+      score: score,
+    });
 
     if (error) {
       console.error("Supabase error saving quiz result:", error);
-      throw error; // Let the catch block handle it
+      throw error;
     }
 
-    // 4. Return success response
     return new Response(
-      JSON.stringify({
-        message: "Kết quả đã được lưu thành công.",
-        data: data,
-      }),
+      JSON.stringify({ message: "Kết quả đã được lưu thành công." }),
       { status: 200, headers }
     );
   } catch (e) {
@@ -77,16 +79,14 @@ export const onRequestPost = async ({ request, env }) => {
 };
 
 export const onRequest = (context) => {
-  // Handle CORS preflight request for OPTIONS method
   if (context.request.method === "OPTIONS") {
     return new Response(null, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
     });
   }
-  // Handle POST request
   return onRequestPost(context);
 };
