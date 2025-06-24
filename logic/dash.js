@@ -85,7 +85,6 @@ function showSection(sectionId, element) {
     titleElement.textContent = titleText;
   }
 
-  // NEW: Load forum posts when the forum tab is clicked
   if (sectionId === "forum") {
     loadForumPosts();
   }
@@ -129,8 +128,13 @@ async function loadForumPosts() {
   if (!container) return;
   container.innerHTML = "<p>Đang tải các bài viết...</p>";
 
+  const headers = {};
+  if (currentUser && currentUser.access_token) {
+    headers["Authorization"] = `Bearer ${currentUser.access_token}`;
+  }
+
   try {
-    const response = await fetch("/api/forum");
+    const response = await fetch("/api/forum", { headers });
     if (!response.ok) {
       throw new Error("Không thể kết nối đến máy chủ diễn đàn.");
     }
@@ -159,10 +163,15 @@ function renderForumPosts(posts) {
   posts.forEach((post) => {
     const postElement = document.createElement("div");
     postElement.className = "forum-post card";
+    postElement.dataset.postId = post.id; // Add post ID for easy access
 
     const randomColorClass = `color-${
       (post.user_avatar_char.charCodeAt(0) % 7) + 1
     }`;
+
+    // Determine button classes based on user's vote
+    const likeBtnClass = post.user_vote === 1 ? "liked" : "";
+    const dislikeBtnClass = post.user_vote === -1 ? "disliked" : "";
 
     postElement.innerHTML = `
             <div class="post-header">
@@ -177,14 +186,72 @@ function renderForumPosts(posts) {
             <h3>${post.title}</h3>
             <p>${post.content}</p>
             <div class="post-actions">
-                <button class="btn btn-secondary"><i class="fas fa-thumbs-up"></i> ${
-                  post.likes || 0
-                }</button>
-                <button class="btn btn-secondary"><i class="fas fa-comment"></i> Thảo luận</button>
+                <button class="btn vote-btn like-btn ${likeBtnClass}" data-vote="like">
+                    <i class="fas fa-thumbs-up"></i> <span class="like-count">${
+                      post.likes
+                    }</span>
+                </button>
+                <button class="btn vote-btn dislike-btn ${dislikeBtnClass}" data-vote="dislike">
+                    <i class="fas fa-thumbs-down"></i> <span class="dislike-count">${
+                      post.dislikes
+                    }</span>
+                </button>
+                <button class="btn btn-secondary btn-discuss">
+                    <i class="fas fa-comment"></i> Thảo luận
+                </button>
             </div>
         `;
     container.appendChild(postElement);
   });
+
+  // Add event listeners to the new vote buttons
+  document.querySelectorAll(".vote-btn").forEach((btn) => {
+    btn.addEventListener("click", handleVote);
+  });
+}
+
+/**
+ * Handles the vote (like/dislike) action.
+ * @param {Event} event The click event.
+ */
+async function handleVote(event) {
+  if (!currentUser || !currentUser.access_token) {
+    showAlert("Vui lòng đăng nhập để đánh giá bài viết.");
+    return;
+  }
+
+  const button = event.currentTarget;
+  const postElement = button.closest(".forum-post");
+  const postId = postElement.dataset.postId;
+  const voteType = button.dataset.vote; // 'like' or 'dislike'
+
+  // Disable buttons to prevent multiple clicks
+  const allVoteButtons = postElement.querySelectorAll(".vote-btn");
+  allVoteButtons.forEach((btn) => (btn.disabled = true));
+
+  try {
+    const response = await fetch("/api/vote", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${currentUser.access_token}`,
+      },
+      body: JSON.stringify({ postId, voteType }),
+    });
+
+    if (!response.ok) {
+      const errorResult = await response.json();
+      throw new Error(errorResult.message || "Lỗi khi gửi vote.");
+    }
+
+    // After a successful vote, reload all posts to get updated counts and vote statuses
+    await loadForumPosts();
+  } catch (error) {
+    console.error("Lỗi khi vote:", error);
+    showAlert(error.message);
+    // Re-enable buttons if there was an error
+    allVoteButtons.forEach((btn) => (btn.disabled = false));
+  }
 }
 
 /**
@@ -225,11 +292,10 @@ async function handleCreatePost(event) {
       throw new Error(errorResult.message || "Có lỗi xảy ra khi đăng bài.");
     }
 
-    // Success
     showAlert("Đăng bài thành công!");
     createPostModal.classList.remove("active");
     createPostForm.reset();
-    loadForumPosts(); // Refresh the forum to show the new post
+    await loadForumPosts(); // Refresh the forum to show the new post
   } catch (error) {
     console.error("Lỗi khi tạo bài viết:", error);
     showAlert(error.message);

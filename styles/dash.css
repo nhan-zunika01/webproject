@@ -347,7 +347,6 @@ body::after {
     flex-shrink: 0;
 }
 
-/* NEW: Give avatars random background colors */
 .forum-post .avatar.color-1 {
     background-color: #1abc9c;
 }
@@ -386,9 +385,39 @@ body::after {
     margin-top: 15px;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
-/* NEW: Forum post container */
+/* NEW: Styles for vote buttons */
+.vote-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.vote-btn:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.vote-btn.liked {
+    background-color: #2980b9;
+    border-color: #3498db;
+    color: white;
+}
+
+.vote-btn.disliked {
+    background-color: #c0392b;
+    border-color: #e74c3c;
+    color: white;
+}
+
+.post-actions .btn.btn-discuss {
+    margin-left: auto;
+    /* Push discuss button to the right */
+}
+
 #forum-posts-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -543,7 +572,10 @@ body::after {
     font-weight: 500;
     transition: all 0.3s ease;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Added gap for icons */
     font-size: 0.9em;
 }
 
@@ -576,7 +608,6 @@ body::after {
     color: white;
 }
 
-/* THÊM MỚI: Định dạng cho nút nguy hiểm (đăng xuất) */
 .btn.btn-danger {
     background-color: #c0392b;
     border-color: #c0392b;

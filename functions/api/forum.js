@@ -14,32 +14,57 @@ export const onRequest = async ({ request, env }) => {
     return new Response(null, { headers });
   }
 
-  // Check for environment variables
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error("Supabase environment variables are not set.");
-    return new Response(
-      JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }),
-      { status: 500, headers }
-    );
-  }
-
   const supabase = createClient(
     env.SUPABASE_URL,
     env.SUPABASE_SERVICE_ROLE_KEY
   );
 
-  // GET: Fetch all posts
+  // --- GET: Fetch all posts ---
   if (request.method === "GET") {
     try {
-      const { data, error } = await supabase
+      // First, get all posts
+      const { data: posts, error: postsError } = await supabase
         .from("posts")
         .select("*")
-        .order("created_at", { ascending: false }); // Show newest first
+        .order("created_at", { ascending: false });
 
-      if (error) {
-        throw error;
+      if (postsError) throw postsError;
+
+      // Check if a user is logged in to fetch their votes
+      const authHeader = request.headers.get("Authorization");
+      let userVotes = [];
+      if (authHeader) {
+        const token = authHeader.split(" ")[1];
+        const {
+          data: { user },
+        } = await supabase.auth.getUser(token);
+
+        if (user) {
+          const { data: votes, error: votesError } = await supabase
+            .from("post_votes")
+            .select("post_id, vote_type")
+            .eq("user_id", user.id);
+          if (votesError) throw votesError;
+          userVotes = votes;
+        }
       }
-      return new Response(JSON.stringify(data), { status: 200, headers });
+
+      // Map user votes to a more easily accessible format
+      const userVotesMap = userVotes.reduce((acc, vote) => {
+        acc[vote.post_id] = vote.vote_type;
+        return acc;
+      }, {});
+
+      // Combine post data with the current user's vote status
+      const postsWithVotes = posts.map((post) => ({
+        ...post,
+        user_vote: userVotesMap[post.id] || 0, // 0 means no vote, 1 like, -1 dislike
+      }));
+
+      return new Response(JSON.stringify(postsWithVotes), {
+        status: 200,
+        headers,
+      });
     } catch (e) {
       console.error("Error fetching posts:", e);
       return new Response(
@@ -52,9 +77,8 @@ export const onRequest = async ({ request, env }) => {
     }
   }
 
-  // POST: Create a new post
+  // --- POST: Create a new post ---
   if (request.method === "POST") {
-    // User must be authenticated to create a post
     const authHeader = request.headers.get("Authorization");
     if (!authHeader) {
       return new Response(
@@ -85,7 +109,6 @@ export const onRequest = async ({ request, env }) => {
         );
       }
 
-      // Get user metadata for name and avatar
       const userName = user.user_metadata?.name_user || "Người dùng ẩn danh";
       const avatarChar = (userName.charAt(0) || "A").toUpperCase();
 
@@ -101,12 +124,14 @@ export const onRequest = async ({ request, env }) => {
         .select()
         .single();
 
-      if (insertError) {
-        console.error("Supabase insert error:", insertError);
-        throw insertError;
-      }
+      if (insertError) throw insertError;
 
-      return new Response(JSON.stringify(data), { status: 201, headers });
+      // Return the new post with the user's vote status as 0 (no vote)
+      const newPostWithVote = { ...data, user_vote: 0 };
+      return new Response(JSON.stringify(newPostWithVote), {
+        status: 201,
+        headers,
+      });
     } catch (e) {
       console.error("Error creating post:", e);
       return new Response(
