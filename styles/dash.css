@@ -380,14 +380,45 @@ body::after {
     background-color: #e74c3c;
 }
 
+.post-body-content {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
 
-.forum-post h3 {
+.post-body-content h3 {
     color: #e8f5e9;
     margin-bottom: 10px;
-    /* FIX: Add word wrap for long titles */
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+
+/* THÊM MỚI: Định dạng cho nội dung bài đăng và các nút Xem thêm/Ẩn đi */
+.post-content-container {
+    color: #dcdcdc;
+    line-height: 1.6;
+    margin: 0;
+    /* Các thuộc tính này đảm bảo văn bản dài không có dấu cách sẽ được ngắt dòng */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+    /* Tôn trọng các ký tự xuống dòng mà người dùng nhập */
+}
+
+.expand-link {
+    color: #a5d6a7;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 5px;
+    display: inline-block;
+    /* Để tránh ngắt dòng không mong muốn */
+}
+
+.expand-link:hover {
+    text-decoration: underline;
+}
+
 
 .forum-post .post-actions {
     margin-top: 15px;
@@ -396,6 +427,8 @@ body::after {
     align-items: center;
     flex-wrap: wrap;
     /* Allow buttons to wrap on small screens */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
 }
 
 .vote-btn {

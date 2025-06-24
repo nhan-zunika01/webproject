@@ -115,6 +115,49 @@ function timeAgo(date) {
   return "Vừa xong";
 }
 
+/**
+ * Cập nhật nội dung của một bài đăng để hiển thị text và các nút "Xem thêm"/"Ẩn đi".
+ * @param {HTMLElement} contentElement - Phần tử <p> chứa nội dung.
+ */
+function managePostContent(contentElement) {
+  const fullText = contentElement.dataset.fullText;
+  const currentLength = parseInt(contentElement.dataset.currentLength, 10);
+
+  // Sử dụng textContent để tránh lỗi XSS, sau đó thay thế ký tự xuống dòng bằng thẻ <br>
+  const tempDiv = document.createElement("div");
+  tempDiv.textContent = fullText.substring(0, currentLength);
+  const visibleHtml = tempDiv.innerHTML.replace(/\n/g, "<br />");
+
+  const canExpand = currentLength < fullText.length;
+  const isExpanded = currentLength > 200;
+
+  let controlsHTML = "";
+  if (canExpand) {
+    // data-action được sử dụng bởi trình xử lý sự kiện được ủy quyền
+    controlsHTML += ` <a href="#" class="expand-link" data-action="more">... Xem thêm</a>`;
+  }
+  if (isExpanded) {
+    controlsHTML += ` <a href="#" class="expand-link" data-action="less"> Ẩn đi</a>`;
+  }
+
+  contentElement.innerHTML = visibleHtml + controlsHTML;
+}
+
+/**
+ * Lặp qua tất cả các bài đăng và thiết lập nội dung có thể mở rộng nếu cần.
+ */
+function setupExpandableContent() {
+  document.querySelectorAll(".post-content-container").forEach((p) => {
+    // Sử dụng textContent để lấy toàn bộ văn bản, trim để loại bỏ khoảng trắng thừa
+    const fullText = p.textContent.trim();
+    if (fullText.length > 200) {
+      p.dataset.fullText = fullText;
+      p.dataset.currentLength = 200;
+      managePostContent(p); // Thiết lập trạng thái ban đầu
+    }
+  });
+}
+
 async function loadForumPosts() {
   const container = document.getElementById("forum-posts-container");
   if (!container) return;
@@ -159,18 +202,25 @@ function renderForumPosts(posts) {
     const likeBtnClass = post.user_vote === 1 ? "liked" : "";
     const dislikeBtnClass = post.user_vote === -1 ? "disliked" : "";
 
+    // Sử dụng textContent để gán nội dung an toàn, tránh lỗi XSS
+    const tempDiv = document.createElement("div");
+    tempDiv.textContent = post.content || "";
+    const safeContentHTML = tempDiv.innerHTML.replace(/\n/g, "<br />");
+
     postElement.innerHTML = `
             <div class="post-header">
                 <div class="avatar ${randomColorClass}">${
       post.user_avatar_char
     }</div>
                 <div class="post-info">
-                    <h4>${post.user_name}</h4>
+                    <h4></h4>
                     <small>${timeAgo(post.created_at)}</small>
                 </div>
             </div>
-            <h3>${post.title}</h3>
-            <p>${post.content}</p>
+            <div class="post-body-content">
+                <h3></h3>
+                <p class="post-content-container">${safeContentHTML}</p>
+            </div>
             <div class="post-actions">
                 <button class="btn vote-btn like-btn ${likeBtnClass}" data-vote="like">
                     <i class="fas fa-thumbs-up"></i> <span class="like-count">${
@@ -194,8 +244,16 @@ function renderForumPosts(posts) {
               post.id
             }"></div>
         `;
+
+    // Gán tiêu đề và tên người dùng một cách an toàn
+    postElement.querySelector(".post-info h4").textContent = post.user_name;
+    postElement.querySelector(".post-body-content h3").textContent = post.title;
+
     container.appendChild(postElement);
   });
+
+  // Chạy hàm thiết lập nội dung có thể mở rộng sau khi tất cả các bài đăng đã được thêm vào DOM
+  setupExpandableContent();
 
   document.querySelectorAll(".vote-btn").forEach((btn) => {
     btn.addEventListener("click", handleVote);
@@ -900,6 +958,36 @@ document.addEventListener("DOMContentLoaded", function () {
   if (autoLocationBtn)
     autoLocationBtn.addEventListener("click", getWeatherByBrowser);
   loadProvinces();
+
+  // --- THÊM MỚI: Event Listener được ủy quyền cho các nút "Xem thêm" / "Ẩn đi" ---
+  const forumContainer = document.getElementById("forum-posts-container");
+  if (forumContainer) {
+    forumContainer.addEventListener("click", function (e) {
+      // Chỉ xử lý nếu mục tiêu là một liên kết có class 'expand-link'
+      if (e.target.matches("a.expand-link")) {
+        e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
+        const action = e.target.dataset.action;
+        const contentP = e.target.closest(".post-content-container");
+        if (!contentP) return;
+
+        const fullText = contentP.dataset.fullText;
+        let currentLength = parseInt(contentP.dataset.currentLength, 10);
+
+        if (action === "more") {
+          currentLength += 200;
+          // Đảm bảo không vượt quá độ dài tối đa
+          if (currentLength > fullText.length) {
+            currentLength = fullText.length;
+          }
+        } else if (action === "less") {
+          currentLength = 200;
+        }
+
+        contentP.dataset.currentLength = currentLength;
+        managePostContent(contentP); // Render lại nội dung của bài đăng này
+      }
+    });
+  }
 
   // --- Handle Hash Navigation ---
   const hash = window.location.hash.substring(1);
