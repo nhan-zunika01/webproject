@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resumeYesBtn = document.getElementById("resume-yes-btn");
   const resumeNoBtn = document.getElementById("resume-no-btn");
 
-  // === QUIZ DATA ===
+  // === QUIZ DATA (Remains the same) ===
   const questions = [
     {
       question: "Giai đoạn nào cây lúa cần nhiều nước nhất?",
@@ -218,76 +218,17 @@ document.addEventListener("DOMContentLoaded", () => {
       answer: 2,
     },
   ];
-  async function loadInitialInfo() {
-    if (!currentUser) return;
-    try {
-      // Gọi đến API mới, đã được tối ưu
-      const response = await fetch(
-        `/api/get-quiz-stats?userId=${currentUser.id}&quizId=${QUIZ_ID}`
-      );
-      if (response.ok) {
-        const stats = await response.json();
 
-        // Dữ liệu trả về giờ đã được tính toán sẵn, chỉ việc hiển thị
-        const attempts = stats.attempts || 0;
-        const highScore = stats.high_score || 0;
-
-        attemptsInfoEl.textContent = `Số lần đã thi: ${attempts}`;
-        highscoreInfoEl.textContent = `Điểm cao nhất: ${highScore}/${questions.length}`;
-      } else {
-        // Xử lý trường hợp API lỗi
-        attemptsInfoEl.textContent = `Số lần đã thi: Lỗi`;
-        highscoreInfoEl.textContent = `Điểm cao nhất: Lỗi`;
-      }
-    } catch (error) {
-      console.error("Failed to load quiz stats:", error);
-      attemptsInfoEl.textContent = `Số lần đã thi: Lỗi`;
-      highscoreInfoEl.textContent = `Điểm cao nhất: Lỗi`;
-    }
-  }
   // === STATE VARIABLES ===
   let currentUser = null;
   let currentQuestionIndex = 0;
   let userAnswers = [];
   let timer;
-  let timeRemaining = 15 * 60; // 15 minutes
+  let timeRemaining = 15 * 60;
   let quizInProgress = false;
-  let quizStateKey = ""; // Will be set after user logs in
+  let quizStateKey = "";
 
   // === CORE FUNCTIONS ===
-
-  // ... (các hằng số và DOM elements giữ nguyên)
-
-  async function loadInitialInfo() {
-    if (!currentUser) return;
-    try {
-      // Gọi đến API mới, đã được tối ưu
-      const response = await fetch(
-        `/api/get-quiz-stats?userId=${currentUser.id}&quizId=${QUIZ_ID}`
-      );
-      if (response.ok) {
-        const stats = await response.json();
-
-        // Dữ liệu trả về giờ đã được tính toán sẵn, chỉ việc hiển thị
-        const attempts = stats.attempts || 0;
-        const highScore = stats.high_score || 0;
-
-        attemptsInfoEl.textContent = `Số lần đã thi: ${attempts}`;
-        highscoreInfoEl.textContent = `Điểm cao nhất: ${highScore}/${questions.length}`;
-      } else {
-        // Xử lý trường hợp API lỗi
-        attemptsInfoEl.textContent = `Số lần đã thi: Lỗi`;
-        highscoreInfoEl.textContent = `Điểm cao nhất: Lỗi`;
-      }
-    } catch (error) {
-      console.error("Failed to load quiz stats:", error);
-      attemptsInfoEl.textContent = `Số lần đã thi: Lỗi`;
-      highscoreInfoEl.textContent = `Điểm cao nhất: Lỗi`;
-    }
-  }
-
-  // ... (các hàm còn lại của file logic/quiz.js giữ nguyên)
-
   const showScreen = (screenId) => {
     document
       .querySelectorAll(".quiz-screen")
@@ -322,14 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // --- Quiz State Management (Using localStorage) ---
   const saveQuizState = () => {
     if (!quizInProgress || !currentUser) return;
-    const state = {
-      currentQuestionIndex,
-      userAnswers,
-      timeRemaining,
-    };
+    const state = { currentQuestionIndex, userAnswers, timeRemaining };
     localStorage.setItem(quizStateKey, JSON.stringify(state));
   };
 
@@ -339,64 +275,71 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const loadInitialInfo = async () => {
-    if (!currentUser) return;
+    if (!currentUser || !currentUser.access_token) {
+      attemptsInfoEl.textContent = `Số lần đã thi: -`;
+      highscoreInfoEl.textContent = `Điểm cao nhất: -`;
+      return;
+    }
     try {
-      // This part still uses the database to show past results, which is correct.
-      const response = await fetch(
-        `/api/get-quiz-history?userId=${currentUser.id}`
-      );
-      if (response.ok) {
-        const history = await response.json();
-        const riceQuizHistory = history.filter((r) => r.quiz_id === QUIZ_ID);
+      // *** FIX: Send authorization token with the request ***
+      const response = await fetch(`/api/get-quiz-history`, {
+        headers: {
+          Authorization: `Bearer ${currentUser.access_token}`,
+        },
+      });
 
-        const attempts = riceQuizHistory.length;
-        attemptsInfoEl.textContent = `Số lần đã thi: ${attempts}`;
+      if (!response.ok) {
+        throw new Error("Failed to fetch history");
+      }
 
-        if (attempts > 0) {
-          const highScore = Math.max(...riceQuizHistory.map((r) => r.score), 0);
-          highscoreInfoEl.textContent = `Điểm cao nhất: ${highScore}/${questions.length}`;
-        } else {
-          highscoreInfoEl.textContent = `Điểm cao nhất: 0/${questions.length}`;
-        }
+      const history = await response.json();
+      const riceQuizHistory = history.filter((r) => r.quiz_id === QUIZ_ID);
+      const attempts = riceQuizHistory.length;
+      attemptsInfoEl.textContent = `Số lần đã thi: ${attempts}`;
+
+      if (attempts > 0) {
+        const highScore = Math.max(...riceQuizHistory.map((r) => r.score), 0);
+        highscoreInfoEl.textContent = `Điểm cao nhất: ${highScore}/${questions.length}`;
+      } else {
+        highscoreInfoEl.textContent = `Điểm cao nhất: 0/${questions.length}`;
       }
     } catch (error) {
       console.error("Failed to load quiz history:", error);
+      attemptsInfoEl.textContent = `Số lần đã thi: Lỗi`;
+      highscoreInfoEl.textContent = `Điểm cao nhất: Lỗi`;
     }
   };
 
-  const checkAndResume = () => {
-    if (!currentUser) {
-      showScreen("start-screen");
-      loadInitialInfo();
-      return;
-    }
+  const checkAndResume = async () => {
+    await loadInitialInfo(); // Load history first
     const savedStateJSON = localStorage.getItem(quizStateKey);
     if (savedStateJSON) {
       resumeModal.classList.add("active");
     } else {
       showScreen("start-screen");
-      loadInitialInfo();
     }
   };
 
   const resumeQuiz = () => {
     const savedStateJSON = localStorage.getItem(quizStateKey);
     if (!savedStateJSON) return;
-
     const savedState = JSON.parse(savedStateJSON);
     currentQuestionIndex = savedState.currentQuestionIndex;
     userAnswers = savedState.userAnswers;
     timeRemaining = savedState.timeRemaining;
-
+    quizInProgress = true;
     startTimer();
     showScreen("quiz-screen");
     renderQuestion();
   };
 
-  // --- Quiz Flow ---
-
   const startQuiz = () => {
-    clearQuizState(); // Start fresh
+    if (!currentUser) {
+      alert("Vui lòng đăng nhập để bắt đầu bài kiểm tra.");
+      window.location.href = "login.html";
+      return;
+    }
+    clearQuizState();
     currentQuestionIndex = 0;
     userAnswers = Array(questions.length).fill(null);
     timeRemaining = 15 * 60;
@@ -408,14 +351,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startTimer = () => {
     updateTimerDisplay();
-    clearInterval(timer); // Clear any existing timer
+    clearInterval(timer);
     timer = setInterval(() => {
       timeRemaining--;
       updateTimerDisplay();
       if (timeRemaining <= 0) {
         clearInterval(timer);
-        alert("Hết giờ làm bài!");
-        endQuiz();
+        endQuiz(true); // Automatically submit when time is up
       }
     }, 1000);
   };
@@ -432,14 +374,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleOptionSelect = (e) => {
     const selectedIndex = parseInt(e.currentTarget.dataset.index);
     userAnswers[currentQuestionIndex] = selectedIndex;
-
     document
       .querySelectorAll(".option")
       .forEach((opt) => opt.classList.add("disabled"));
     e.currentTarget.classList.add("selected");
-
     saveQuizState();
-
     setTimeout(() => {
       if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
@@ -456,7 +395,6 @@ document.addEventListener("DOMContentLoaded", () => {
     progressBar.style.width = `${
       ((currentQuestionIndex + 1) / questions.length) * 100
     }%`;
-
     questionContainer.innerHTML = `
       <p class="question-text">${currentQuestionIndex + 1}. ${
       question.question
@@ -466,41 +404,41 @@ document.addEventListener("DOMContentLoaded", () => {
           (option, index) =>
             `<li class="option" data-index="${index}">${option}</li>`
         )
-        .join("")}</ul>
-    `;
-
+        .join("")}</ul>`;
     document.querySelectorAll(".option").forEach((optionEl) => {
       optionEl.addEventListener("click", handleOptionSelect);
     });
-
-    submitBtn.style.display =
-      currentQuestionIndex === questions.length - 1 ? "inline-flex" : "none";
+    submitBtn.style.display = "none";
   };
 
-  const endQuiz = async () => {
+  const endQuiz = async (isTimeUp = false) => {
+    if (!isTimeUp) {
+      const confirmed = await showModal(
+        confirmationModal,
+        "Xác nhận nộp bài",
+        "Bạn có chắc chắn muốn nộp bài và kết thúc bài kiểm tra không?",
+        "Nộp bài"
+      );
+      if (!confirmed) return;
+    }
+
     quizInProgress = false;
     clearInterval(timer);
-
-    let score = userAnswers.reduce((total, answer, index) => {
-      return answer === questions[index].answer ? total + 1 : total;
-    }, 0);
-
+    let score = userAnswers.reduce(
+      (total, answer, index) =>
+        answer === questions[index].answer ? total + 1 : total,
+      0
+    );
     scoreTextEl.textContent = `${score} / ${questions.length}`;
-
-    if (score >= 15)
-      resultMessageEl.textContent =
-        "Xuất sắc! Bạn có kiến thức rất tốt về trồng lúa.";
-    else if (score >= 10)
-      resultMessageEl.textContent =
-        "Khá tốt! Hãy tiếp tục học hỏi để cải thiện nhé.";
-    else
-      resultMessageEl.textContent =
-        "Cần cố gắng hơn. Hãy xem lại bài làm để củng cố kiến thức nhé!";
-
+    resultMessageEl.textContent =
+      score >= 15
+        ? "Xuất sắc! Bạn có kiến thức rất tốt về trồng lúa."
+        : score >= 10
+        ? "Khá tốt! Hãy tiếp tục học hỏi để cải thiện nhé."
+        : "Cần cố gắng hơn. Hãy xem lại bài làm để củng cố kiến thức nhé!";
     renderReview();
     showScreen("results-screen");
-
-    clearQuizState(); // Clear the saved progress upon successful submission
+    clearQuizState();
 
     try {
       loadingOverlay.style.display = "flex";
@@ -522,7 +460,6 @@ document.addEventListener("DOMContentLoaded", () => {
           let className = "option";
           if (optIndex === q.answer) className += " correct";
           else if (optIndex === userAnswer) className += " incorrect";
-
           const label =
             optIndex === userAnswer
               ? ' <span class="user-answer-label">Đáp án của bạn</span>'
@@ -530,14 +467,12 @@ document.addEventListener("DOMContentLoaded", () => {
           return `<li class="${className}"><span>${opt}</span>${label}</li>`;
         })
         .join("");
-
       reviewHTML += `<div class="question-card"><p class="question-text">${
         index + 1
       }. ${
         q.question
       }</p><ul class="options-list review-options">${optionsHTML}</ul></div>`;
     });
-    // Prepend the review HTML but keep the action buttons at the end
     const reviewActionButtons =
       reviewContainer.querySelector(".result-actions");
     reviewContainer.innerHTML = reviewHTML;
@@ -552,10 +487,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${currentUser.access_token}`,
       },
-      body: JSON.stringify({
-        quizId: QUIZ_ID,
-        score: score,
-      }),
+      body: JSON.stringify({ quizId: QUIZ_ID, score: score }),
     });
     if (!response.ok) {
       const errorData = await response.json();
@@ -569,24 +501,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const userData = localStorage.getItem("currentUser");
     if (userData) {
       currentUser = JSON.parse(userData);
-      quizStateKey = `${QUIZ_STATE_KEY_PREFIX}_${currentUser.id}`; // Set the user-specific key
+      quizStateKey = `${QUIZ_STATE_KEY_PREFIX}_${currentUser.id}`;
       checkAndResume();
     } else {
-      alert("Vui lòng đăng nhập để làm bài kiểm tra.");
-      window.location.href = "login.html";
-      return;
+      showScreen("start-screen");
+      loadInitialInfo();
     }
 
     startBtn.addEventListener("click", startQuiz);
-    submitBtn.addEventListener("click", async () => {
-      const confirmed = await showModal(
-        confirmationModal,
-        "Xác nhận nộp bài",
-        "Bạn có chắc chắn muốn nộp bài và kết thúc bài kiểm tra không?",
-        "Nộp bài"
-      );
-      if (confirmed) endQuiz();
-    });
+    submitBtn.addEventListener("click", () => endQuiz(false));
     reviewBtn.addEventListener("click", () => {
       reviewContainer.style.display = "block";
       reviewBtn.style.display = "none";
@@ -594,14 +517,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     exitQuizBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      const confirmed = await showModal(
-        confirmationModal,
-        "Xác nhận rời đi",
-        "Tiến trình hiện tại sẽ được lưu lại. Bạn có chắc chắn muốn thoát không?",
-        "Thoát"
-      );
-      if (confirmed) {
-        saveQuizState();
+      if (quizInProgress) {
+        const confirmed = await showModal(
+          confirmationModal,
+          "Xác nhận rời đi",
+          "Tiến trình hiện tại sẽ được lưu lại. Bạn có chắc chắn muốn thoát không?",
+          "Thoát"
+        );
+        if (confirmed) {
+          saveQuizState();
+          window.location.href = "dash.html#quiz";
+        }
+      } else {
         window.location.href = "dash.html#quiz";
       }
     });
@@ -613,11 +540,13 @@ document.addEventListener("DOMContentLoaded", () => {
     resumeNoBtn.addEventListener("click", () => {
       resumeModal.classList.remove("active");
       clearQuizState();
-      showScreen("start-screen");
-      loadInitialInfo();
+      startQuiz();
     });
-
-    window.addEventListener("beforeunload", saveQuizState);
+    window.addEventListener("beforeunload", () => {
+      if (quizInProgress) {
+        saveQuizState();
+      }
+    });
   };
 
   init();

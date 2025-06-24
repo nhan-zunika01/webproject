@@ -1,16 +1,14 @@
 // File: functions/api/get-quiz-history.js
 import { createClient } from "@supabase/supabase-js";
 
-// This function fetches all quiz results for a specific user.
-// It's used to calculate the number of attempts and the high score on the client-side.
+// This function now requires authentication
 export const onRequestGet = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   };
 
-  // 1. Check for environment variables
-  if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
     console.error("Supabase environment variables are not set.");
     return new Response(
       JSON.stringify({
@@ -21,31 +19,42 @@ export const onRequestGet = async ({ request, env }) => {
   }
 
   try {
-    const url = new URL(request.url);
-    const userId = url.searchParams.get("userId");
+    const supabase = createClient(
+      env.SUPABASE_URL,
+      env.SUPABASE_SERVICE_ROLE_KEY
+    );
 
-    // 2. Validate input
-    if (!userId) {
-      return new Response(JSON.stringify({ message: "Cần có userId." }), {
-        status: 400,
-        headers,
-      });
+    // *** FIX: Get user from Authorization token for security ***
+    const authHeader = request.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }),
+        { status: 401, headers }
+      );
+    }
+    const token = authHeader.split(" ")[1];
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser(token);
+
+    if (userError || !user) {
+      return new Response(
+        JSON.stringify({ message: "Mã xác thực không hợp lệ." }),
+        { status: 401, headers }
+      );
     }
 
-    const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
-
-    // 3. Query the database for all results for the given user
-    // The RLS policy on the 'quiz_results' table ensures a user can only read their own data.
+    // Query using the authenticated user's ID
     const { data, error } = await supabase
       .from("quiz_results")
       .select("quiz_id, score, created_at")
-      .eq("user_id", userId);
+      .eq("user_id", user.id); // Use the validated user.id
 
     if (error) {
-      throw error; // Let the catch block handle it
+      throw error;
     }
 
-    // 4. Return the array of results
     return new Response(JSON.stringify(data || []), {
       status: 200,
       headers,
@@ -66,7 +75,7 @@ export const onRequest = (context) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow Authorization header
       },
     });
   }

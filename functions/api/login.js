@@ -15,7 +15,6 @@ export const onRequestPost = async (context) => {
     return new Response(null, { headers });
   }
 
-  // 1. Check for environment variables
   if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
     console.error("Supabase environment variables are not set.");
     return new Response(
@@ -43,15 +42,13 @@ export const onRequestPost = async (context) => {
     });
 
     if (error) {
-      // This handles incorrect credentials
       return new Response(
         JSON.stringify({ message: "Email hoặc mật khẩu không chính xác." }),
         { status: 401, headers }
       );
     }
 
-    // 2. Guard against null user object
-    if (!data || !data.user) {
+    if (!data || !data.user || !data.session) {
       console.error(
         "Supabase authentication returned no user data without an error."
       );
@@ -63,29 +60,28 @@ export const onRequestPost = async (context) => {
       );
     }
 
-    // 3. Add backend check for verified email
     if (!data.user.email_confirmed_at) {
       return new Response(
         JSON.stringify({
           message:
             "Tài khoản của bạn chưa được xác thực. Vui lòng kiểm tra email.",
         }),
-        { status: 403, headers } // 403 Forbidden is more appropriate
+        { status: 403, headers }
       );
     }
 
-    // Merge user_metadata for easy access on the frontend
-    const user = {
+    // *** FIX: Merge user data with the access token from the session ***
+    const userPayload = {
       ...data.user,
       ...data.user.user_metadata,
+      access_token: data.session.access_token, // Crucial for future API calls
     };
 
     return new Response(
-      JSON.stringify({ message: "Đăng nhập thành công!", user: user }),
+      JSON.stringify({ message: "Đăng nhập thành công!", user: userPayload }),
       { status: 200, headers }
     );
   } catch (e) {
-    // 4. More informative catch block
     console.error("Lỗi máy chủ khi đăng nhập:", e);
     return new Response(
       JSON.stringify({
