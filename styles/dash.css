@@ -386,6 +386,8 @@ body::after {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
+    /* Allow buttons to wrap on small screens */
 }
 
 /* NEW: Styles for vote buttons */
@@ -413,7 +415,7 @@ body::after {
     color: white;
 }
 
-.post-actions .btn.btn-discuss {
+.post-actions .btn-discuss {
     margin-left: auto;
     /* Push discuss button to the right */
 }
@@ -427,6 +429,84 @@ body::after {
 #forum-posts-container .forum-post {
     width: 100%;
 }
+
+/* --- START: NEW COMMENT STYLES --- */
+.comments-section {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 15px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    /* Hidden by default */
+}
+
+.comment-form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    flex-grow: 1;
+    min-height: 40px;
+    height: 40px;
+    padding: 10px 15px;
+}
+
+.comment-form .btn-primary {
+    flex-shrink: 0;
+    padding: 8px 18px;
+    height: 40px;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.comment-item .avatar {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+}
+
+.comment-body {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 12px 15px;
+    border-radius: 10px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.comment-header .user-name {
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+.comment-content {
+    color: #dcdcdc;
+    line-height: 1.5;
+    margin: 0;
+    /* Override default p margin */
+}
+
+/* --- END: NEW COMMENT STYLES --- */
 
 
 /* CSS cho bộ chọn vị trí */

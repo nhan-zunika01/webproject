@@ -22,7 +22,7 @@ export const onRequest = async ({ request, env }) => {
   // --- GET: Fetch all posts ---
   if (request.method === "GET") {
     try {
-      // First, get all posts
+      // First, get all posts, now including comment_count
       const { data: posts, error: postsError } = await supabase
         .from("posts")
         .select("*")
@@ -49,7 +49,6 @@ export const onRequest = async ({ request, env }) => {
         }
       }
 
-      // Map user votes to a more easily accessible format
       const userVotesMap = userVotes.reduce((acc, vote) => {
         acc[vote.post_id] = vote.vote_type;
         return acc;
@@ -126,7 +125,6 @@ export const onRequest = async ({ request, env }) => {
 
       if (insertError) throw insertError;
 
-      // Return the new post with the user's vote status as 0 (no vote)
       const newPostWithVote = { ...data, user_vote: 0 };
       return new Response(JSON.stringify(newPostWithVote), {
         status: 201,

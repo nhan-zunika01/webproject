@@ -100,11 +100,6 @@ function logout() {
 
 // === START: FORUM FUNCTIONS ===
 
-/**
- * Calculates how long ago a date was from now.
- * @param {string | Date} date - The date to compare.
- * @returns {string} A human-readable string like "5 phút trước".
- */
 function timeAgo(date) {
   const seconds = Math.floor((new Date() - new Date(date)) / 1000);
   let interval = seconds / 31536000;
@@ -120,9 +115,6 @@ function timeAgo(date) {
   return "Vừa xong";
 }
 
-/**
- * Fetches posts from the API and renders them.
- */
 async function loadForumPosts() {
   const container = document.getElementById("forum-posts-container");
   if (!container) return;
@@ -153,23 +145,17 @@ async function loadForumPosts() {
   }
 }
 
-/**
- * Renders an array of post objects into the DOM.
- * @param {Array<Object>} posts - The array of posts to render.
- */
 function renderForumPosts(posts) {
   const container = document.getElementById("forum-posts-container");
-  container.innerHTML = ""; // Clear previous content
+  container.innerHTML = "";
   posts.forEach((post) => {
     const postElement = document.createElement("div");
     postElement.className = "forum-post card";
-    postElement.dataset.postId = post.id; // Add post ID for easy access
+    postElement.dataset.postId = post.id;
 
     const randomColorClass = `color-${
       (post.user_avatar_char.charCodeAt(0) % 7) + 1
     }`;
-
-    // Determine button classes based on user's vote
     const likeBtnClass = post.user_vote === 1 ? "liked" : "";
     const dislikeBtnClass = post.user_vote === -1 ? "disliked" : "";
 
@@ -196,24 +182,26 @@ function renderForumPosts(posts) {
                       post.dislikes
                     }</span>
                 </button>
-                <button class="btn btn-secondary btn-discuss">
-                    <i class="fas fa-comment"></i> Thảo luận
+                <button class="btn btn-secondary btn-discuss" onclick="toggleComments(this, '${
+                  post.id
+                }')">
+                    <i class="fas fa-comment"></i> Thảo luận (<span class="comment-count">${
+                      post.comment_count
+                    }</span>)
                 </button>
             </div>
+            <div class="comments-section" id="comments-section-${
+              post.id
+            }"></div>
         `;
     container.appendChild(postElement);
   });
 
-  // Add event listeners to the new vote buttons
   document.querySelectorAll(".vote-btn").forEach((btn) => {
     btn.addEventListener("click", handleVote);
   });
 }
 
-/**
- * Handles the vote (like/dislike) action.
- * @param {Event} event The click event.
- */
 async function handleVote(event) {
   if (!currentUser || !currentUser.access_token) {
     showAlert("Vui lòng đăng nhập để đánh giá bài viết.");
@@ -223,14 +211,13 @@ async function handleVote(event) {
   const button = event.currentTarget;
   const postElement = button.closest(".forum-post");
   const postId = postElement.dataset.postId;
-  const voteType = button.dataset.vote; // 'like' or 'dislike'
+  const voteType = button.dataset.vote;
 
-  // Disable buttons to prevent multiple clicks
   const allVoteButtons = postElement.querySelectorAll(".vote-btn");
   allVoteButtons.forEach((btn) => (btn.disabled = true));
 
   try {
-    const response = await fetch("/api/vote", {
+    await fetch("/api/vote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -238,26 +225,14 @@ async function handleVote(event) {
       },
       body: JSON.stringify({ postId, voteType }),
     });
-
-    if (!response.ok) {
-      const errorResult = await response.json();
-      throw new Error(errorResult.message || "Lỗi khi gửi vote.");
-    }
-
-    // After a successful vote, reload all posts to get updated counts and vote statuses
     await loadForumPosts();
   } catch (error) {
     console.error("Lỗi khi vote:", error);
     showAlert(error.message);
-    // Re-enable buttons if there was an error
     allVoteButtons.forEach((btn) => (btn.disabled = false));
   }
 }
 
-/**
- * Handles the submission of the create post form.
- * @param {Event} event - The form submission event.
- */
 async function handleCreatePost(event) {
   event.preventDefault();
   if (!currentUser || !currentUser.access_token) {
@@ -278,7 +253,7 @@ async function handleCreatePost(event) {
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng...';
 
   try {
-    const response = await fetch("/api/forum", {
+    await fetch("/api/forum", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -287,15 +262,10 @@ async function handleCreatePost(event) {
       body: JSON.stringify({ title, content }),
     });
 
-    if (!response.ok) {
-      const errorResult = await response.json();
-      throw new Error(errorResult.message || "Có lỗi xảy ra khi đăng bài.");
-    }
-
     showAlert("Đăng bài thành công!");
     createPostModal.classList.remove("active");
     createPostForm.reset();
-    await loadForumPosts(); // Refresh the forum to show the new post
+    await loadForumPosts();
   } catch (error) {
     console.error("Lỗi khi tạo bài viết:", error);
     showAlert(error.message);
@@ -304,6 +274,132 @@ async function handleCreatePost(event) {
     submitBtn.innerHTML = "Đăng bài";
   }
 }
+
+// === START: NEW COMMENT-RELATED FUNCTIONS ===
+
+async function toggleComments(button, postId) {
+  const commentsSection = document.getElementById(`comments-section-${postId}`);
+  if (!commentsSection) return;
+
+  // Toggle visibility
+  const isVisible = commentsSection.style.display === "block";
+  commentsSection.style.display = isVisible ? "none" : "block";
+
+  // If we are showing it for the first time or it's empty, fetch comments
+  if (!isVisible) {
+    commentsSection.innerHTML = `<p>Đang tải bình luận...</p>`;
+    await fetchAndRenderComments(postId);
+  }
+}
+
+async function fetchAndRenderComments(postId) {
+  const commentsSection = document.getElementById(`comments-section-${postId}`);
+  try {
+    const response = await fetch(`/api/comments?postId=${postId}`);
+    if (!response.ok) throw new Error("Không thể tải bình luận.");
+    const comments = await response.json();
+
+    renderComments(postId, comments);
+  } catch (error) {
+    commentsSection.innerHTML = `<p style="color: #ffcccc;">${error.message}</p>`;
+  }
+}
+
+function renderComments(postId, comments) {
+  const commentsSection = document.getElementById(`comments-section-${postId}`);
+
+  let commentsHTML = '<div class="comment-list">';
+  if (comments.length > 0) {
+    comments.forEach((comment) => {
+      const randomColorClass = `color-${
+        (comment.user_avatar_char.charCodeAt(0) % 7) + 1
+      }`;
+      commentsHTML += `
+                <div class="comment-item">
+                    <div class="avatar ${randomColorClass}">${
+        comment.user_avatar_char
+      }</div>
+                    <div class="comment-body">
+                        <div class="comment-header">
+                            <span class="user-name">${comment.user_name}</span>
+                            <span class="timestamp">${timeAgo(
+                              comment.created_at
+                            )}</span>
+                        </div>
+                        <p class="comment-content">${comment.content}</p>
+                    </div>
+                </div>
+            `;
+    });
+  } else {
+    commentsHTML += "<p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>";
+  }
+  commentsHTML += "</div>";
+
+  let commentFormHTML = "";
+  if (currentUser) {
+    commentFormHTML = `
+            <form class="comment-form" data-post-id="${postId}">
+                <textarea name="comment-content" placeholder="Viết bình luận của bạn..." required></textarea>
+                <button type="submit" class="btn btn-primary">Gửi</button>
+            </form>
+        `;
+  } else {
+    commentFormHTML = `<p>Vui lòng <a href="login.html">đăng nhập</a> để bình luận.</p>`;
+  }
+
+  commentsSection.innerHTML = commentFormHTML + commentsHTML;
+
+  // Add event listener to the new form
+  if (currentUser) {
+    const form = commentsSection.querySelector(".comment-form");
+    form.addEventListener("submit", handleCommentSubmit);
+  }
+}
+
+async function handleCommentSubmit(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const postId = form.dataset.postId;
+  const textarea = form.querySelector("textarea");
+  const content = textarea.value.trim();
+  const submitBtn = form.querySelector("button");
+
+  if (!content) {
+    showAlert("Vui lòng nhập nội dung bình luận.");
+    return;
+  }
+
+  submitBtn.disabled = true;
+
+  try {
+    await fetch("/api/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${currentUser.access_token}`,
+      },
+      body: JSON.stringify({ postId, content }),
+    });
+
+    // Refresh comments for this post
+    await fetchAndRenderComments(postId);
+
+    // Also refresh all posts to update the comment count on the button
+    await loadForumPosts();
+    // After reloading, make sure the comment section stays open
+    const commentsSection = document.getElementById(
+      `comments-section-${postId}`
+    );
+    if (commentsSection) commentsSection.style.display = "block";
+  } catch (error) {
+    console.error("Lỗi khi gửi bình luận:", error);
+    showAlert("Không thể gửi bình luận của bạn. Vui lòng thử lại.");
+    submitBtn.disabled = false;
+  }
+}
+
+// === END: NEW COMMENT-RELATED FUNCTIONS ===
 
 // === END: FORUM FUNCTIONS ===
 
