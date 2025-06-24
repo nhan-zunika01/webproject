@@ -2,15 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // === CONSTANTS ===
   const QUIZ_ID = "rice-basics-v1";
   const QUIZ_STATE_KEY_PREFIX = `quizState_${QUIZ_ID}`;
-  const AUTO_ADVANCE_DELAY = 600; // ms
 
   // === DOM ELEMENTS ===
   const startScreen = document.getElementById("start-screen");
   const quizScreen = document.getElementById("quiz-screen");
   const resultsScreen = document.getElementById("results-screen");
   const startBtn = document.getElementById("start-btn");
-  const submitBtn = document.getElementById("submit-btn");
-  const reviewBtn = document.getElementById("review-btn");
   const questionContainer = document.getElementById("question-container");
   const timeLeftEl = document.getElementById("time-left");
   const progressBar = document.getElementById("progress-bar");
@@ -22,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const exitQuizBtn = document.getElementById("exit-quiz-btn");
   const attemptsInfoEl = document.getElementById("attempts-info");
   const highscoreInfoEl = document.getElementById("highscore-info");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const submitBtn = document.getElementById("submit-btn");
 
   // === MODAL ELEMENTS ===
   const confirmationModal = document.getElementById("confirmation-modal");
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resumeYesBtn = document.getElementById("resume-yes-btn");
   const resumeNoBtn = document.getElementById("resume-no-btn");
 
-  // === QUIZ DATA (Remains the same) ===
+  // === QUIZ DATA ===
   const questions = [
     {
       question: "Giai đoạn nào cây lúa cần nhiều nước nhất?",
@@ -281,22 +281,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     try {
-      // *** FIX: Send authorization token with the request ***
+      // SỬA LỖI: Gửi token xác thực cùng với yêu cầu
       const response = await fetch(`/api/get-quiz-history`, {
-        headers: {
-          Authorization: `Bearer ${currentUser.access_token}`,
-        },
+        headers: { Authorization: `Bearer ${currentUser.access_token}` },
       });
-
       if (!response.ok) {
-        throw new Error("Failed to fetch history");
+        throw new Error("Không thể lấy lịch sử làm bài.");
       }
-
       const history = await response.json();
       const riceQuizHistory = history.filter((r) => r.quiz_id === QUIZ_ID);
       const attempts = riceQuizHistory.length;
       attemptsInfoEl.textContent = `Số lần đã thi: ${attempts}`;
-
       if (attempts > 0) {
         const highScore = Math.max(...riceQuizHistory.map((r) => r.score), 0);
         highscoreInfoEl.textContent = `Điểm cao nhất: ${highScore}/${questions.length}`;
@@ -304,14 +299,14 @@ document.addEventListener("DOMContentLoaded", () => {
         highscoreInfoEl.textContent = `Điểm cao nhất: 0/${questions.length}`;
       }
     } catch (error) {
-      console.error("Failed to load quiz history:", error);
+      console.error("Lỗi khi tải lịch sử bài kiểm tra:", error);
       attemptsInfoEl.textContent = `Số lần đã thi: Lỗi`;
       highscoreInfoEl.textContent = `Điểm cao nhất: Lỗi`;
     }
   };
 
   const checkAndResume = async () => {
-    await loadInitialInfo(); // Load history first
+    await loadInitialInfo();
     const savedStateJSON = localStorage.getItem(quizStateKey);
     if (savedStateJSON) {
       resumeModal.classList.add("active");
@@ -357,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateTimerDisplay();
       if (timeRemaining <= 0) {
         clearInterval(timer);
-        endQuiz(true); // Automatically submit when time is up
+        endQuiz(true);
       }
     }, 1000);
   };
@@ -374,23 +369,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleOptionSelect = (e) => {
     const selectedIndex = parseInt(e.currentTarget.dataset.index);
     userAnswers[currentQuestionIndex] = selectedIndex;
-    document
-      .querySelectorAll(".option")
-      .forEach((opt) => opt.classList.add("disabled"));
-    e.currentTarget.classList.add("selected");
+    renderQuestion();
     saveQuizState();
-    setTimeout(() => {
-      if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        renderQuestion();
-      } else {
-        submitBtn.style.display = "inline-flex";
-      }
-    }, AUTO_ADVANCE_DELAY);
+  };
+
+  const navigateQuestion = (direction) => {
+    if (direction === "next" && currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+    } else if (direction === "prev" && currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+    }
+    renderQuestion();
   };
 
   const renderQuestion = () => {
     const question = questions[currentQuestionIndex];
+    const userAnswer = userAnswers[currentQuestionIndex];
     currentQuesNumEl.textContent = currentQuestionIndex + 1;
     progressBar.style.width = `${
       ((currentQuestionIndex + 1) / questions.length) * 100
@@ -402,13 +396,22 @@ document.addEventListener("DOMContentLoaded", () => {
       <ul class="options-list">${question.options
         .map(
           (option, index) =>
-            `<li class="option" data-index="${index}">${option}</li>`
+            `<li class="option ${
+              index === userAnswer ? "selected" : ""
+            }" data-index="${index}">${option}</li>`
         )
         .join("")}</ul>`;
     document.querySelectorAll(".option").forEach((optionEl) => {
       optionEl.addEventListener("click", handleOptionSelect);
     });
-    submitBtn.style.display = "none";
+    prevBtn.disabled = currentQuestionIndex === 0;
+    if (currentQuestionIndex === questions.length - 1) {
+      nextBtn.style.display = "none";
+      submitBtn.style.display = "inline-flex";
+    } else {
+      nextBtn.style.display = "inline-flex";
+      submitBtn.style.display = "none";
+    }
   };
 
   const endQuiz = async (isTimeUp = false) => {
@@ -416,10 +419,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const confirmed = await showModal(
         confirmationModal,
         "Xác nhận nộp bài",
-        "Bạn có chắc chắn muốn nộp bài và kết thúc bài kiểm tra không?",
+        "Bạn có chắc chắn muốn nộp bài không?",
         "Nộp bài"
       );
       if (!confirmed) return;
+    } else {
+      alert("Hết giờ làm bài! Bài của bạn sẽ được nộp tự động.");
     }
 
     quizInProgress = false;
@@ -459,7 +464,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .map((opt, optIndex) => {
           let className = "option";
           if (optIndex === q.answer) className += " correct";
-          else if (optIndex === userAnswer) className += " incorrect";
+          else if (optIndex === userAnswer && userAnswer !== q.answer)
+            className += " incorrect";
           const label =
             optIndex === userAnswer
               ? ' <span class="user-answer-label">Đáp án của bạn</span>'
@@ -509,11 +515,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     startBtn.addEventListener("click", startQuiz);
-    submitBtn.addEventListener("click", () => endQuiz(false));
     reviewBtn.addEventListener("click", () => {
       reviewContainer.style.display = "block";
       reviewBtn.style.display = "none";
     });
+
+    prevBtn.addEventListener("click", () => navigateQuestion("prev"));
+    nextBtn.addEventListener("click", () => navigateQuestion("next"));
+    submitBtn.addEventListener("click", () => endQuiz(false));
 
     exitQuizBtn.addEventListener("click", async (e) => {
       e.preventDefault();

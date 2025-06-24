@@ -18,7 +18,6 @@
                     <span><i class="fas fa-question-circle"></i> 20 câu hỏi</span>
                     <span><i class="fas fa-clock"></i> 15 phút</span>
                 </p>
-                <!-- NEW: Quiz Info (attempts, high score) -->
                 <div class="quiz-info">
                     <span id="attempts-info">Số lần đã thi: 0</span>
                     <span id="highscore-info">Điểm cao nhất: 0/20</span>
@@ -32,7 +31,6 @@
         <!-- Screen 2: Quiz Screen -->
         <div id="quiz-screen" class="quiz-screen">
             <header class="quiz-header">
-                 <!-- NEW: Exit button -->
                 <a href="#" id="exit-quiz-btn" class="exit-btn" title="Thoát bài kiểm tra"><i class="fas fa-times"></i></a>
                 <div class="timer">
                     <i class="fas fa-stopwatch"></i>
@@ -48,12 +46,15 @@
             <div id="question-container" class="card">
                 <!-- Questions will be injected here by JS -->
             </div>
-            <div class="quiz-footer">
+            <!-- *** NEW: Navigation buttons footer *** -->
+            <div id="navigation-footer" class="quiz-footer">
+                <button id="prev-btn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Câu trước</button>
+                <button id="next-btn" class="btn btn-primary">Câu tiếp theo <i class="fas fa-arrow-right"></i></button>
                 <button id="submit-btn" class="btn">Nộp bài</button>
             </div>
         </div>
 
-        <!-- Screen 3: Results Screen -->
+        <!-- Screen 3: Results Screen (no changes) -->
         <div id="results-screen" class="quiz-screen">
             <div class="card">
                 <i class="fas fa-trophy icon-result"></i>
@@ -69,8 +70,6 @@
                 </div>
             </div>
             <div id="review-container">
-                <!-- Review questions will be injected here -->
-                 <!-- NEW: Back to dashboard button at the end of review -->
                 <div class="result-actions" style="margin-top: 20px;">
                     <a href="dash.html#quiz" class="btn">Về trang Kiểm tra</a>
                 </div>
@@ -78,13 +77,11 @@
         </div>
     </div>
     
-    <!-- Loading overlay for API call -->
+    <!-- Modals and Overlays (no changes) -->
     <div id="loading-overlay">
         <div class="spinner"></div>
         <p>Đang lưu kết quả...</p>
     </div>
-
-    <!-- Confirmation & Resume Modals -->
     <div id="confirmation-modal" class="modal-overlay">
         <div class="modal-box">
             <h3 id="confirm-title">Xác nhận</h3>
@@ -95,8 +92,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- NEW: Resume Session Modal -->
     <div id="resume-modal" class="modal-overlay">
         <div class="modal-box">
             <h3>Tiếp tục bài làm?</h3>

@@ -70,11 +70,11 @@ export const onRequestPost = async (context) => {
       );
     }
 
-    // *** FIX: Merge user data with the access token from the session ***
+    // SỬA LỖI: Gộp dữ liệu người dùng với access_token từ session
     const userPayload = {
       ...data.user,
       ...data.user.user_metadata,
-      access_token: data.session.access_token, // Crucial for future API calls
+      access_token: data.session.access_token, // Rất quan trọng cho các lệnh gọi API sau này
     };
 
     return new Response(

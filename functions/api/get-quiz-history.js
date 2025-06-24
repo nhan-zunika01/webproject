@@ -1,7 +1,6 @@
 // File: functions/api/get-quiz-history.js
 import { createClient } from "@supabase/supabase-js";
 
-// This function now requires authentication
 export const onRequestGet = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -24,7 +23,7 @@ export const onRequestGet = async ({ request, env }) => {
       env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    // *** FIX: Get user from Authorization token for security ***
+    // SỬA LỖI: Lấy thông tin người dùng từ token trong header để bảo mật
     const authHeader = request.headers.get("Authorization");
     if (!authHeader) {
       return new Response(
@@ -45,11 +44,11 @@ export const onRequestGet = async ({ request, env }) => {
       );
     }
 
-    // Query using the authenticated user's ID
+    // Truy vấn bằng ID của người dùng đã được xác thực
     const { data, error } = await supabase
       .from("quiz_results")
       .select("quiz_id, score, created_at")
-      .eq("user_id", user.id); // Use the validated user.id
+      .eq("user_id", user.id);
 
     if (error) {
       throw error;
@@ -68,14 +67,14 @@ export const onRequestGet = async ({ request, env }) => {
   }
 };
 
-// Handle CORS preflight requests
+// Xử lý các yêu cầu CORS preflight
 export const onRequest = (context) => {
   if (context.request.method === "OPTIONS") {
     return new Response(null, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow Authorization header
+        "Access-Control-Allow-Headers": "Content-Type, Authorization", // Cho phép header Authorization
       },
     });
   }
