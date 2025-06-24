@@ -477,18 +477,36 @@ body::after {
 }
 
 .comment-form textarea {
-    /* Inherits styles from .form-group textarea */
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Glassy background */
+    color: white;
+    /* Light text color */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 50px;
     height: 50px;
-    transition: height 0.2s ease;
-    padding: 12px 15px;
+    resize: vertical;
+    transition: height 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.comment-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    /* Lighter placeholder */
 }
 
 .comment-form textarea:focus {
     height: 80px;
+    outline: none;
+    border-color: #4CAF50;
+    /* Highlight on focus */
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
-.comment-form .btn-primary {
+.comment-form .btn {
     align-self: flex-end;
     /* Align button to the right */
 }
