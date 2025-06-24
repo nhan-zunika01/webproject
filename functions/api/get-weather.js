@@ -24,11 +24,19 @@ export const onRequestGet = async ({ request, env }) => {
     const location = url.searchParams.get("location");
     const apiKey = env.OPENWEATHER_API_KEY;
 
-    // --- FIX START: Xử lý tìm kiếm theo tên địa điểm ---
     // Nếu có tham số 'location' (và không có lat/lon), chúng ta sẽ chuyển đổi nó thành tọa độ
     if (location && (!lat || !lon)) {
+      // --- FIX START: Tự động xóa các tiền tố "Huyện", "Tỉnh", v.v. ---
+      // Điều này giúp API Geocoding của OpenWeatherMap hiểu đúng tên địa danh.
+      const cleanLocation = location.replace(
+        /(Huyện|Quận|Thị xã|Thành phố|Tỉnh)\s/g,
+        ""
+      );
+      // Ví dụ: "Huyện Văn Chấn, Tỉnh Yên Bái" -> "Văn Chấn,Yên Bái"
+      // --- FIX END ---
+
       const geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
-        location
+        cleanLocation // Sử dụng tên địa danh đã được làm sạch
       )},VN&limit=1&appid=${apiKey}`;
 
       const geocodeRes = await fetch(geocodeUrl);
@@ -51,7 +59,6 @@ export const onRequestGet = async ({ request, env }) => {
       lat = geocodeData[0].lat;
       lon = geocodeData[0].lon;
     }
-    // --- FIX END ---
 
     // Sau khi đã có tọa độ (từ request hoặc từ chuyển đổi), kiểm tra lại lần cuối
     if (!lat || !lon) {
