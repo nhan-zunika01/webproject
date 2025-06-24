@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   const submitBtn = document.getElementById("submit-btn");
+  const retakeBtn = document.getElementById("retake-btn");
+  const reviewBtn = document.getElementById("review-btn");
 
   // === MODAL ELEMENTS ===
   const confirmationModal = document.getElementById("confirmation-modal");
@@ -32,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const resumeModal = document.getElementById("resume-modal");
   const resumeYesBtn = document.getElementById("resume-yes-btn");
   const resumeNoBtn = document.getElementById("resume-no-btn");
+  const alertModal = document.getElementById("alert-modal");
+  const alertMessage = document.getElementById("alert-message");
+  const alertCloseBtn = document.getElementById("alert-close-btn");
 
   // === QUIZ DATA ===
   const questions = [
@@ -236,25 +241,32 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(screenId).classList.add("active");
   };
 
-  const showModal = (modal, title, message, confirmText) => {
+  const showInfoModal = (message, title = "Thông báo") => {
+    if (alertModal && alertMessage) {
+      document.getElementById("alert-title").textContent = title;
+      alertMessage.textContent = message;
+      alertModal.classList.add("active");
+    }
+  };
+
+  const showConfirmModal = (message, title = "Xác nhận") => {
     confirmTitleEl.textContent = title;
     confirmMessageEl.textContent = message;
-    confirmSubmitBtn.textContent = confirmText;
-    modal.classList.add("active");
+    confirmationModal.classList.add("active");
     return new Promise((resolve) => {
       confirmSubmitBtn.onclick = () => {
-        modal.classList.remove("active");
+        confirmationModal.classList.remove("active");
         resolve(true);
       };
       cancelSubmitBtn.onclick = () => {
-        modal.classList.remove("active");
+        confirmationModal.classList.remove("active");
         resolve(false);
       };
-      modal.addEventListener(
+      confirmationModal.addEventListener(
         "click",
         (e) => {
-          if (e.target === modal) {
-            modal.classList.remove("active");
+          if (e.target === confirmationModal) {
+            confirmationModal.classList.remove("active");
             resolve(false);
           }
         },
@@ -270,8 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const clearQuizState = () => {
-    if (!currentUser) return;
-    localStorage.removeItem(quizStateKey);
+    if (currentUser) {
+      localStorage.removeItem(quizStateKey);
+    }
   };
 
   const loadInitialInfo = async () => {
@@ -281,7 +294,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     try {
-      // SỬA LỖI: Gửi token xác thực cùng với yêu cầu
       const response = await fetch(`/api/get-quiz-history`, {
         headers: { Authorization: `Bearer ${currentUser.access_token}` },
       });
@@ -307,9 +319,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const checkAndResume = async () => {
     await loadInitialInfo();
-    const savedStateJSON = localStorage.getItem(quizStateKey);
-    if (savedStateJSON) {
-      resumeModal.classList.add("active");
+    if (currentUser) {
+      const savedStateJSON = localStorage.getItem(quizStateKey);
+      if (savedStateJSON) {
+        resumeModal.classList.add("active");
+      } else {
+        showScreen("start-screen");
+      }
     } else {
       showScreen("start-screen");
     }
@@ -330,8 +346,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startQuiz = () => {
     if (!currentUser) {
-      alert("Vui lòng đăng nhập để bắt đầu bài kiểm tra.");
-      window.location.href = "login.html";
+      showInfoModal("Vui lòng đăng nhập để bắt đầu bài kiểm tra.");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
       return;
     }
     clearQuizState();
@@ -415,16 +433,15 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const endQuiz = async (isTimeUp = false) => {
+    if (!quizInProgress) return;
+
     if (!isTimeUp) {
-      const confirmed = await showModal(
-        confirmationModal,
-        "Xác nhận nộp bài",
-        "Bạn có chắc chắn muốn nộp bài không?",
-        "Nộp bài"
+      const confirmed = await showConfirmModal(
+        "Bạn có chắc chắn muốn nộp bài không?"
       );
       if (!confirmed) return;
     } else {
-      alert("Hết giờ làm bài! Bài của bạn sẽ được nộp tự động.");
+      showInfoModal("Hết giờ làm bài! Bài của bạn sẽ được nộp tự động.");
     }
 
     quizInProgress = false;
@@ -443,16 +460,19 @@ document.addEventListener("DOMContentLoaded", () => {
         : "Cần cố gắng hơn. Hãy xem lại bài làm để củng cố kiến thức nhé!";
     renderReview();
     showScreen("results-screen");
-    clearQuizState();
 
+    // Lưu kết quả trước khi xóa state
     try {
       loadingOverlay.style.display = "flex";
       await saveResultToDB(score);
     } catch (error) {
       console.error("Failed to save score:", error);
-      alert("Không thể lưu kết quả. Vui lòng kiểm tra kết nối và thử lại.");
+      showInfoModal(
+        "Không thể lưu kết quả. Vui lòng kiểm tra kết nối và thử lại."
+      );
     } finally {
       loadingOverlay.style.display = "none";
+      clearQuizState();
     }
   };
 
@@ -486,7 +506,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const saveResultToDB = async (score) => {
-    if (!currentUser || !currentUser.access_token) return;
+    if (!currentUser || !currentUser.access_token) {
+      throw new Error("Người dùng không được xác thực.");
+    }
     const response = await fetch("/api/save-quiz-result", {
       method: "POST",
       headers: {
@@ -515,11 +537,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     startBtn.addEventListener("click", startQuiz);
+    retakeBtn.addEventListener("click", () => window.location.reload());
     reviewBtn.addEventListener("click", () => {
       reviewContainer.style.display = "block";
       reviewBtn.style.display = "none";
     });
-
     prevBtn.addEventListener("click", () => navigateQuestion("prev"));
     nextBtn.addEventListener("click", () => navigateQuestion("next"));
     submitBtn.addEventListener("click", () => endQuiz(false));
@@ -527,11 +549,9 @@ document.addEventListener("DOMContentLoaded", () => {
     exitQuizBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       if (quizInProgress) {
-        const confirmed = await showModal(
-          confirmationModal,
-          "Xác nhận rời đi",
+        const confirmed = await showConfirmModal(
           "Tiến trình hiện tại sẽ được lưu lại. Bạn có chắc chắn muốn thoát không?",
-          "Thoát"
+          "Xác nhận rời đi"
         );
         if (confirmed) {
           saveQuizState();
@@ -551,6 +571,21 @@ document.addEventListener("DOMContentLoaded", () => {
       clearQuizState();
       startQuiz();
     });
+
+    // Listeners for the new Alert Modal
+    if (alertCloseBtn) {
+      alertCloseBtn.addEventListener("click", () =>
+        alertModal.classList.remove("active")
+      );
+    }
+    if (alertModal) {
+      alertModal.addEventListener("click", (e) => {
+        if (e.target === alertModal) {
+          alertModal.classList.remove("active");
+        }
+      });
+    }
+
     window.addEventListener("beforeunload", () => {
       if (quizInProgress) {
         saveQuizState();

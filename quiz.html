@@ -46,7 +46,6 @@
             <div id="question-container" class="card">
                 <!-- Questions will be injected here by JS -->
             </div>
-            <!-- *** NEW: Navigation buttons footer *** -->
             <div id="navigation-footer" class="quiz-footer">
                 <button id="prev-btn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Câu trước</button>
                 <button id="next-btn" class="btn btn-primary">Câu tiếp theo <i class="fas fa-arrow-right"></i></button>
@@ -54,7 +53,7 @@
             </div>
         </div>
 
-        <!-- Screen 3: Results Screen (no changes) -->
+        <!-- Screen 3: Results Screen -->
         <div id="results-screen" class="quiz-screen">
             <div class="card">
                 <i class="fas fa-trophy icon-result"></i>
@@ -65,7 +64,8 @@
                 </div>
                 <div id="result-message"></div>
                 <div class="result-actions">
-                    <a href="quiz.html" class="btn">Làm lại bài thi</a>
+                    <!-- SỬA LỖI: Chuyển thẻ <a> thành <button> -->
+                    <button id="retake-btn" class="btn">Làm lại bài thi</button>
                     <button id="review-btn" class="btn btn-primary">Xem lại bài làm</button>
                 </div>
             </div>
@@ -77,7 +77,7 @@
         </div>
     </div>
     
-    <!-- Modals and Overlays (no changes) -->
+    <!-- Overlays & Modals -->
     <div id="loading-overlay">
         <div class="spinner"></div>
         <p>Đang lưu kết quả...</p>
@@ -85,7 +85,7 @@
     <div id="confirmation-modal" class="modal-overlay">
         <div class="modal-box">
             <h3 id="confirm-title">Xác nhận</h3>
-            <p id="confirm-message">Bạn có chắc chắn muốn nộp bài và kết thúc bài kiểm tra không?</p>
+            <p id="confirm-message"></p>
             <div class="modal-actions">
                 <button id="cancel-submit-btn" class="btn btn-secondary">Hủy</button>
                 <button id="confirm-submit-btn" class="btn btn-primary">Nộp bài</button>
@@ -99,6 +99,17 @@
             <div class="modal-actions">
                 <button id="resume-no-btn" class="btn btn-secondary">Làm bài mới</button>
                 <button id="resume-yes-btn" class="btn btn-primary">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SỬA LỖI: Thêm modal thông báo chung -->
+    <div id="alert-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="alert-title">Thông báo</h3>
+            <p id="alert-message"></p>
+            <div class="modal-actions">
+                <button id="alert-close-btn" class="btn btn-primary">Đã hiểu</button>
             </div>
         </div>
     </div>
