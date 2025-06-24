@@ -1,7 +1,6 @@
 // Global variable for current user
 let currentUser = null;
 const RICE_QUIZ_ID = "rice-basics-v1"; // ID của bài kiểm tra duy nhất
-const TOTAL_COURSES_AVAILABLE = 2; // Tổng số khóa học trên nền tảng
 const TOTAL_QUIZ_QUESTIONS = 20; // Tổng số câu hỏi trong bài kiểm tra
 
 // Modal thông báo
@@ -9,7 +8,6 @@ const alertModal = document.getElementById("alert-modal");
 const modalMessage = document.getElementById("modal-message");
 const modalCloseBtn = document.getElementById("modal-close-btn");
 
-// THÊM MỚI: Lấy các phần tử Modal xác nhận
 const confirmModal = document.getElementById("confirm-modal");
 const confirmModalMessage = document.getElementById("confirm-modal-message");
 const confirmModalConfirmBtn = document.getElementById(
@@ -19,22 +17,22 @@ const confirmModalCancelBtn = document.getElementById(
   "confirm-modal-cancel-btn"
 );
 
-// Hàm hiển thị Modal thông báo
 function showAlert(message) {
+  const alertModal = document.getElementById("alert-modal");
+  const modalMessage = document.getElementById("modal-message");
   if (modalMessage && alertModal) {
     modalMessage.textContent = message;
     alertModal.classList.add("active");
   }
 }
 
-// Hàm đóng Modal thông báo
+
 function closeAlertModal() {
   if (alertModal) {
     alertModal.classList.remove("active");
   }
 }
 
-// Gán sự kiện cho Modal thông báo
 if (modalCloseBtn) {
   modalCloseBtn.addEventListener("click", closeAlertModal);
 }
@@ -46,7 +44,6 @@ if (alertModal) {
   });
 }
 
-// THÊM MỚI: Hàm hiển thị Modal xác nhận
 function showConfirm(message, onConfirm) {
   if (
     confirmModal &&
@@ -56,23 +53,19 @@ function showConfirm(message, onConfirm) {
   ) {
     confirmModalMessage.textContent = message;
     confirmModal.classList.add("active");
-
-    // Sử dụng .onclick để đảm bảo chỉ có một trình xử lý sự kiện được gắn vào
     confirmModalConfirmBtn.onclick = () => {
       closeConfirmModal();
-      onConfirm(); // Thực thi hàm callback khi xác nhận
+      onConfirm();
     };
   }
 }
 
-// THÊM MỚI: Hàm đóng Modal xác nhận
 function closeConfirmModal() {
   if (confirmModal) {
     confirmModal.classList.remove("active");
   }
 }
 
-// THÊM MỚI: Gán sự kiện cho Modal xác nhận
 if (confirmModal) {
   confirmModalCancelBtn.addEventListener("click", closeConfirmModal);
   confirmModal.addEventListener("click", (e) => {
@@ -82,7 +75,6 @@ if (confirmModal) {
   });
 }
 
-// New navigation function for the sidebar
 function showSection(sectionId, element) {
   document.querySelectorAll(".content-section").forEach((section) => {
     section.classList.remove("active");
@@ -104,7 +96,6 @@ function showSection(sectionId, element) {
   }
 }
 
-// CẬP NHẬT: Hàm xử lý đăng xuất
 function logout() {
   showConfirm("Bạn có chắc chắn muốn đăng xuất?", () => {
     localStorage.removeItem("currentUser");
@@ -112,7 +103,6 @@ function logout() {
   });
 }
 
-// --- START: HOÀN THIỆN THUẬT TOÁN TÍNH TOÁN ---
 function animateValue(obj, start, end, duration) {
   if (!obj) return;
   let startTimestamp = null;
@@ -128,8 +118,8 @@ function animateValue(obj, start, end, duration) {
   window.requestAnimationFrame(step);
 }
 
-function updateDashboardStats(scoreData) {
-  const score = scoreData ? scoreData.score || 0 : 0;
+function updateDashboardStats(highScore) {
+  const score = highScore || 0;
   const animationDuration = 1500;
   const completedCourses = score > 0 ? 1 : 0;
   const completedCoursesEl = document.getElementById("stat-courses-completed");
@@ -183,32 +173,38 @@ function updateDashboardStats(scoreData) {
 }
 
 async function loadDashboardData() {
-  if (!currentUser) return;
+  // SỬA LỖI: Kiểm tra cả currentUser và access_token
+  if (!currentUser || !currentUser.access_token) return;
+
   const highscoreEl = document.getElementById("quiz-highscore");
   try {
-    const response = await fetch(
-      `/api/get-quiz-score?userId=${currentUser.id}&quizId=${RICE_QUIZ_ID}`
-    );
-    let scoreData = { score: 0 };
+    // SỬA LỖI: Gửi header Authorization và sử dụng đúng API
+    const response = await fetch(`/api/get-quiz-score?quizId=${RICE_QUIZ_ID}`, {
+      headers: {
+        Authorization: `Bearer ${currentUser.access_token}`,
+      },
+    });
+    let scoreData = { high_score: 0 };
     if (response.ok) {
       scoreData = await response.json();
     } else {
-      console.error("Failed to fetch score, defaulting to 0.");
+      console.error("Không thể lấy điểm, sử dụng giá trị mặc định là 0.");
     }
+
+    const highScore = scoreData.high_score || 0;
+
     if (highscoreEl) {
-      highscoreEl.textContent = `${
-        scoreData.score || 0
-      }/${TOTAL_QUIZ_QUESTIONS}`;
+      highscoreEl.textContent = `${highScore}/${TOTAL_QUIZ_QUESTIONS}`;
     }
-    updateDashboardStats(scoreData);
+    // SỬA LỖI: Chỉ truyền điểm cao nhất vào hàm thống kê
+    updateDashboardStats(highScore);
   } catch (error) {
-    console.error("Error loading user data:", error);
+    console.error("Lỗi khi tải dữ liệu người dùng:", error);
     if (highscoreEl) highscoreEl.textContent = "Lỗi";
-    updateDashboardStats({ score: 0 });
+    updateDashboardStats(0); // Truyền 0 khi có lỗi
   }
 }
 
-// --- END: HOÀN THIỆN THUẬT TOÁN TÍNH TOÁN ---
 function setupUserUI() {
   if (!currentUser) return;
   document.getElementById("user-info").style.display = "flex";
@@ -283,32 +279,89 @@ function setupGuestUI() {
   }
 }
 
-function editProfile(button) {
+async function editProfile(button) {
+  // Kiểm tra xem người dùng đã đăng nhập chưa
   if (!currentUser) {
     showAlert("Vui lòng đăng nhập để sử dụng tính năng này.");
     return;
   }
+
   const profileForm = document.getElementById("profile");
   const inputs = profileForm.querySelectorAll('input:not([type="email"])');
+
+  // Nếu người dùng đang ở chế độ xem và nhấn "Chỉnh sửa"
   if (button.textContent.includes("Chỉnh sửa")) {
+    // Cho phép chỉnh sửa các ô nhập liệu
     inputs.forEach((input) => input.removeAttribute("readonly"));
+    // Đổi nút thành "Lưu thay đổi"
     button.innerHTML = '<i class="fas fa-save"></i> Lưu thay đổi';
-  } else {
-    currentUser.name_user = document.getElementById("profile-name").value;
-    currentUser.phone_user = document.getElementById("profile-phone").value;
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    inputs.forEach((input) => input.setAttribute("readonly", true));
-    button.innerHTML = '<i class="fas fa-edit"></i> Chỉnh sửa thông tin';
-    showAlert("Thông tin đã được cập nhật!");
+  }
+  // Nếu người dùng đang ở chế độ chỉnh sửa và nhấn "Lưu thay đổi"
+  else {
+    // Vô hiệu hóa nút và hiển thị trạng thái "Đang lưu..." để tránh nhấp nhiều lần
+    button.disabled = true;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang lưu...';
+
+    // Lấy dữ liệu mới từ các ô nhập liệu
+    const newName = document.getElementById("profile-name").value;
+    const newPhone = document.getElementById("profile-phone").value;
+
+    try {
+      // Gọi API ở máy chủ để cập nhật thông tin
+      const response = await fetch("/api/update-profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Gửi kèm token xác thực để máy chủ biết ai đang yêu cầu
+          Authorization: `Bearer ${currentUser.access_token}`,
+        },
+        body: JSON.stringify({ name_user: newName, phone_user: newPhone }),
+      });
+
+      const result = await response.json();
+
+      // Nếu máy chủ trả về lỗi, ném lỗi để khối catch xử lý
+      if (!response.ok) {
+        throw new Error(result.message || "Có lỗi xảy ra khi cập nhật.");
+      }
+
+      // Nếu cập nhật thành công trên máy chủ:
+      // 1. Cập nhật thông tin người dùng trong biến `currentUser`
+      currentUser.name_user = newName;
+      currentUser.phone_user = newPhone;
+      // 2. Cập nhật lại dữ liệu trong localStorage của trình duyệt
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      // 3. Khóa các ô nhập liệu lại
+      inputs.forEach((input) => input.setAttribute("readonly", true));
+
+      // 4. Cập nhật lại tên chào mừng ở góc trên bên phải
+      const usernameSpan = document.querySelector(".user-menu .username");
+      if (usernameSpan) {
+        usernameSpan.textContent = `Chào, ${newName}!`;
+      }
+
+      // 5. Thông báo thành công cho người dùng
+      showAlert("Thông tin đã được cập nhật thành công!");
+      // 6. Đổi nút trở lại trạng thái "Chỉnh sửa"
+      button.innerHTML = '<i class="fas fa-edit"></i> Chỉnh sửa thông tin';
+    } catch (error) {
+      // Nếu có bất kỳ lỗi nào xảy ra, thông báo cho người dùng
+      console.error("Lỗi khi cập nhật hồ sơ:", error);
+      showAlert(error.message);
+      // Trả lại trạng thái "Lưu thay đổi" để người dùng có thể thử lại
+      button.innerHTML = '<i class="fas fa-save"></i> Lưu thay đổi';
+    } finally {
+      // Dù thành công hay thất bại, luôn bật lại nút sau khi xử lý xong
+      button.disabled = false;
+    }
   }
 }
 
-// --- START: WEATHER LOGIC ---
-
-const provinceSelect = document.getElementById("province-select");
-const districtSelect = document.getElementById("district-select");
 const weatherWidget = document.querySelector(".weather-widget");
 const autoLocationBtn = document.getElementById("auto-location-btn");
+const provinceSelect = document.getElementById("province-select");
+const districtSelect = document.getElementById("district-select");
 
 async function loadProvinces() {
   try {
@@ -375,25 +428,14 @@ function changeWeatherLocation() {
   }
 }
 
-async function getCoordinates(locationQuery) {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-    locationQuery
-  )}&format=json&countrycodes=vn&limit=1`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error("Lỗi dịch vụ chuyển đổi địa chỉ.");
-  const data = await response.json();
-  if (data.length === 0)
-    throw new Error(`Không tìm thấy tọa độ cho: ${locationQuery}.`);
-  return { lat: data[0].lat, lon: data[0].lon };
-}
-
 async function getWeatherByManualSelection(locationQuery) {
   if (!weatherWidget) return;
   weatherWidget.innerHTML = "<p>Đang tìm kiếm và tải dữ liệu thời tiết...</p>";
 
   try {
-    const { lat, lon } = await getCoordinates(locationQuery);
-    const response = await fetch(`/api/get-weather?lat=${lat}&lon=${lon}`);
+    const response = await fetch(
+      `/api/get-weather?location=${encodeURIComponent(locationQuery)}`
+    );
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Lỗi ${response.status}: ${errorData.message}`);
@@ -540,8 +582,6 @@ function renderWeatherData(current, forecast, locationName) {
   `;
 }
 
-// --- END: WEATHER LOGIC ---
-
 function createPost() {
   if (!currentUser) {
     showAlert("Vui lòng đăng nhập để tạo bài viết.");
@@ -552,7 +592,6 @@ function createPost() {
   );
 }
 
-// === INITIALIZATION ===
 document.addEventListener("DOMContentLoaded", function () {
   const userData = localStorage.getItem("currentUser");
   if (userData) {
@@ -568,16 +607,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadProvinces();
 
-  // --- NEW: Handle URL Hash for Tab Navigation ---
-  const hash = window.location.hash.substring(1); // Get hash without '#'
+  const hash = window.location.hash.substring(1);
   if (hash) {
-    // Find the nav link that corresponds to this section
-    // e.g., for #courses, find onclick="showSection('courses', this)"
     const targetLink = document.querySelector(`.nav-tab[onclick*="'${hash}'"]`);
-
     if (targetLink) {
       showSection(hash, targetLink);
     }
   }
-  // --- END: Handle URL Hash ---
 });
