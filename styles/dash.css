@@ -108,6 +108,8 @@ body::after {
     flex-grow: 1;
     padding: 30px;
     overflow-y: auto;
+    /* FIX: Prevent horizontal scroll on the main container */
+    overflow-x: hidden;
     height: 100vh;
 }
 
@@ -236,6 +238,9 @@ body::after {
     margin-bottom: 20px;
     color: #dcdcdc;
     line-height: 1.6;
+    /* FIX: Add word wrap for paragraphs inside cards */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .card a {
@@ -379,6 +384,9 @@ body::after {
 .forum-post h3 {
     color: #e8f5e9;
     margin-bottom: 10px;
+    /* FIX: Add word wrap for long titles */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .forum-post .post-actions {
@@ -558,7 +566,11 @@ body::after {
     line-height: 1.5;
     margin: 0;
     /* Override default p margin */
+    /* FIX: Add word wrap for long comments */
+    overflow-wrap: break-word;
     word-wrap: break-word;
+    word-break: break-word;
+    /* More aggressive for unbreakable strings */
 }
 
 /* --- END: UPDATED COMMENT STYLES --- */
