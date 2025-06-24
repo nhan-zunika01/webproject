@@ -3,7 +3,7 @@ let currentUser = null;
 const RICE_QUIZ_ID = "rice-basics-v1"; // ID của bài kiểm tra duy nhất
 const TOTAL_QUIZ_QUESTIONS = 20; // Tổng số câu hỏi trong bài kiểm tra
 
-// Modal thông báo
+// === START: MODAL AND ALERT ELEMENTS ===
 const alertModal = document.getElementById("alert-modal");
 const modalMessage = document.getElementById("modal-message");
 const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -17,31 +17,30 @@ const confirmModalCancelBtn = document.getElementById(
   "confirm-modal-cancel-btn"
 );
 
-function showAlert(message) {
-  const alertModal = document.getElementById("alert-modal");
-  const modalMessage = document.getElementById("modal-message");
-  if (modalMessage && alertModal) {
+// New modal for creating posts
+const createPostModal = document.getElementById("create-post-modal");
+const createPostBtn = document.getElementById("create-post-btn");
+const closeCreatePostModalBtn = document.getElementById(
+  "close-create-post-modal-btn"
+);
+const cancelCreatePostBtn = document.getElementById("cancel-create-post-btn");
+const createPostForm = document.getElementById("create-post-form");
+// === END: MODAL AND ALERT ELEMENTS ===
+
+// === START: GENERAL UI FUNCTIONS (MODALS, TABS) ===
+function showAlert(message, title = "Thông báo") {
+  const alertTitle = document.getElementById("alert-modal-title");
+  if (modalMessage && alertModal && alertTitle) {
+    alertTitle.textContent = title;
     modalMessage.textContent = message;
     alertModal.classList.add("active");
   }
 }
 
-
 function closeAlertModal() {
   if (alertModal) {
     alertModal.classList.remove("active");
   }
-}
-
-if (modalCloseBtn) {
-  modalCloseBtn.addEventListener("click", closeAlertModal);
-}
-if (alertModal) {
-  alertModal.addEventListener("click", (e) => {
-    if (e.target === alertModal) {
-      closeAlertModal();
-    }
-  });
 }
 
 function showConfirm(message, onConfirm) {
@@ -66,15 +65,6 @@ function closeConfirmModal() {
   }
 }
 
-if (confirmModal) {
-  confirmModalCancelBtn.addEventListener("click", closeConfirmModal);
-  confirmModal.addEventListener("click", (e) => {
-    if (e.target === confirmModal) {
-      closeConfirmModal();
-    }
-  });
-}
-
 function showSection(sectionId, element) {
   document.querySelectorAll(".content-section").forEach((section) => {
     section.classList.remove("active");
@@ -94,6 +84,11 @@ function showSection(sectionId, element) {
     const titleText = element.querySelector("span").textContent;
     titleElement.textContent = titleText;
   }
+
+  // NEW: Load forum posts when the forum tab is clicked
+  if (sectionId === "forum") {
+    loadForumPosts();
+  }
 }
 
 function logout() {
@@ -102,7 +97,151 @@ function logout() {
     window.location.reload();
   });
 }
+// === END: GENERAL UI FUNCTIONS (MODALS, TABS) ===
 
+// === START: FORUM FUNCTIONS ===
+
+/**
+ * Calculates how long ago a date was from now.
+ * @param {string | Date} date - The date to compare.
+ * @returns {string} A human-readable string like "5 phút trước".
+ */
+function timeAgo(date) {
+  const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+  let interval = seconds / 31536000;
+  if (interval > 1) return Math.floor(interval) + " năm trước";
+  interval = seconds / 2592000;
+  if (interval > 1) return Math.floor(interval) + " tháng trước";
+  interval = seconds / 86400;
+  if (interval > 1) return Math.floor(interval) + " ngày trước";
+  interval = seconds / 3600;
+  if (interval > 1) return Math.floor(interval) + " giờ trước";
+  interval = seconds / 60;
+  if (interval > 1) return Math.floor(interval) + " phút trước";
+  return "Vừa xong";
+}
+
+/**
+ * Fetches posts from the API and renders them.
+ */
+async function loadForumPosts() {
+  const container = document.getElementById("forum-posts-container");
+  if (!container) return;
+  container.innerHTML = "<p>Đang tải các bài viết...</p>";
+
+  try {
+    const response = await fetch("/api/forum");
+    if (!response.ok) {
+      throw new Error("Không thể kết nối đến máy chủ diễn đàn.");
+    }
+    const posts = await response.json();
+
+    if (posts.length === 0) {
+      container.innerHTML =
+        '<p class="card">Chưa có bài viết nào. Hãy là người đầu tiên bắt đầu cuộc thảo luận!</p>';
+      return;
+    }
+
+    renderForumPosts(posts);
+  } catch (error) {
+    console.error("Lỗi khi tải bài viết:", error);
+    container.innerHTML = `<p class="card" style="color: #ffcccc;">${error.message}</p>`;
+  }
+}
+
+/**
+ * Renders an array of post objects into the DOM.
+ * @param {Array<Object>} posts - The array of posts to render.
+ */
+function renderForumPosts(posts) {
+  const container = document.getElementById("forum-posts-container");
+  container.innerHTML = ""; // Clear previous content
+  posts.forEach((post) => {
+    const postElement = document.createElement("div");
+    postElement.className = "forum-post card";
+
+    const randomColorClass = `color-${
+      (post.user_avatar_char.charCodeAt(0) % 7) + 1
+    }`;
+
+    postElement.innerHTML = `
+            <div class="post-header">
+                <div class="avatar ${randomColorClass}">${
+      post.user_avatar_char
+    }</div>
+                <div class="post-info">
+                    <h4>${post.user_name}</h4>
+                    <small>${timeAgo(post.created_at)}</small>
+                </div>
+            </div>
+            <h3>${post.title}</h3>
+            <p>${post.content}</p>
+            <div class="post-actions">
+                <button class="btn btn-secondary"><i class="fas fa-thumbs-up"></i> ${
+                  post.likes || 0
+                }</button>
+                <button class="btn btn-secondary"><i class="fas fa-comment"></i> Thảo luận</button>
+            </div>
+        `;
+    container.appendChild(postElement);
+  });
+}
+
+/**
+ * Handles the submission of the create post form.
+ * @param {Event} event - The form submission event.
+ */
+async function handleCreatePost(event) {
+  event.preventDefault();
+  if (!currentUser || !currentUser.access_token) {
+    showAlert("Vui lòng đăng nhập để đăng bài.");
+    return;
+  }
+
+  const title = document.getElementById("post-title").value.trim();
+  const content = document.getElementById("post-content").value.trim();
+  const submitBtn = document.getElementById("submit-post-btn");
+
+  if (!title || !content) {
+    showAlert("Vui lòng nhập đầy đủ tiêu đề và nội dung.");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng...';
+
+  try {
+    const response = await fetch("/api/forum", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${currentUser.access_token}`,
+      },
+      body: JSON.stringify({ title, content }),
+    });
+
+    if (!response.ok) {
+      const errorResult = await response.json();
+      throw new Error(errorResult.message || "Có lỗi xảy ra khi đăng bài.");
+    }
+
+    // Success
+    showAlert("Đăng bài thành công!");
+    createPostModal.classList.remove("active");
+    createPostForm.reset();
+    loadForumPosts(); // Refresh the forum to show the new post
+  } catch (error) {
+    console.error("Lỗi khi tạo bài viết:", error);
+    showAlert(error.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "Đăng bài";
+  }
+}
+
+// === END: FORUM FUNCTIONS ===
+
+// === START: DASHBOARD STATS FUNCTIONS ===
 function animateValue(obj, start, end, duration) {
   if (!obj) return;
   let startTimestamp = null;
@@ -173,12 +312,10 @@ function updateDashboardStats(highScore) {
 }
 
 async function loadDashboardData() {
-  // SỬA LỖI: Kiểm tra cả currentUser và access_token
   if (!currentUser || !currentUser.access_token) return;
 
   const highscoreEl = document.getElementById("quiz-highscore");
   try {
-    // SỬA LỖI: Gửi header Authorization và sử dụng đúng API
     const response = await fetch(`/api/get-quiz-score?quizId=${RICE_QUIZ_ID}`, {
       headers: {
         Authorization: `Bearer ${currentUser.access_token}`,
@@ -196,15 +333,16 @@ async function loadDashboardData() {
     if (highscoreEl) {
       highscoreEl.textContent = `${highScore}/${TOTAL_QUIZ_QUESTIONS}`;
     }
-    // SỬA LỖI: Chỉ truyền điểm cao nhất vào hàm thống kê
     updateDashboardStats(highScore);
   } catch (error) {
     console.error("Lỗi khi tải dữ liệu người dùng:", error);
     if (highscoreEl) highscoreEl.textContent = "Lỗi";
-    updateDashboardStats(0); // Truyền 0 khi có lỗi
+    updateDashboardStats(0);
   }
 }
+// === END: DASHBOARD STATS FUNCTIONS ===
 
+// === START: USER & PROFILE FUNCTIONS ===
 function setupUserUI() {
   if (!currentUser) return;
   document.getElementById("user-info").style.display = "flex";
@@ -280,84 +418,55 @@ function setupGuestUI() {
 }
 
 async function editProfile(button) {
-  // Kiểm tra xem người dùng đã đăng nhập chưa
   if (!currentUser) {
     showAlert("Vui lòng đăng nhập để sử dụng tính năng này.");
     return;
   }
-
   const profileForm = document.getElementById("profile");
   const inputs = profileForm.querySelectorAll('input:not([type="email"])');
-
-  // Nếu người dùng đang ở chế độ xem và nhấn "Chỉnh sửa"
   if (button.textContent.includes("Chỉnh sửa")) {
-    // Cho phép chỉnh sửa các ô nhập liệu
     inputs.forEach((input) => input.removeAttribute("readonly"));
-    // Đổi nút thành "Lưu thay đổi"
     button.innerHTML = '<i class="fas fa-save"></i> Lưu thay đổi';
-  }
-  // Nếu người dùng đang ở chế độ chỉnh sửa và nhấn "Lưu thay đổi"
-  else {
-    // Vô hiệu hóa nút và hiển thị trạng thái "Đang lưu..." để tránh nhấp nhiều lần
+  } else {
     button.disabled = true;
     button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang lưu...';
-
-    // Lấy dữ liệu mới từ các ô nhập liệu
     const newName = document.getElementById("profile-name").value;
     const newPhone = document.getElementById("profile-phone").value;
-
     try {
-      // Gọi API ở máy chủ để cập nhật thông tin
       const response = await fetch("/api/update-profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Gửi kèm token xác thực để máy chủ biết ai đang yêu cầu
           Authorization: `Bearer ${currentUser.access_token}`,
         },
         body: JSON.stringify({ name_user: newName, phone_user: newPhone }),
       });
-
       const result = await response.json();
-
-      // Nếu máy chủ trả về lỗi, ném lỗi để khối catch xử lý
       if (!response.ok) {
         throw new Error(result.message || "Có lỗi xảy ra khi cập nhật.");
       }
-
-      // Nếu cập nhật thành công trên máy chủ:
-      // 1. Cập nhật thông tin người dùng trong biến `currentUser`
       currentUser.name_user = newName;
       currentUser.phone_user = newPhone;
-      // 2. Cập nhật lại dữ liệu trong localStorage của trình duyệt
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-      // 3. Khóa các ô nhập liệu lại
       inputs.forEach((input) => input.setAttribute("readonly", true));
-
-      // 4. Cập nhật lại tên chào mừng ở góc trên bên phải
       const usernameSpan = document.querySelector(".user-menu .username");
       if (usernameSpan) {
         usernameSpan.textContent = `Chào, ${newName}!`;
       }
-
-      // 5. Thông báo thành công cho người dùng
       showAlert("Thông tin đã được cập nhật thành công!");
-      // 6. Đổi nút trở lại trạng thái "Chỉnh sửa"
       button.innerHTML = '<i class="fas fa-edit"></i> Chỉnh sửa thông tin';
     } catch (error) {
-      // Nếu có bất kỳ lỗi nào xảy ra, thông báo cho người dùng
       console.error("Lỗi khi cập nhật hồ sơ:", error);
       showAlert(error.message);
-      // Trả lại trạng thái "Lưu thay đổi" để người dùng có thể thử lại
       button.innerHTML = '<i class="fas fa-save"></i> Lưu thay đổi';
     } finally {
-      // Dù thành công hay thất bại, luôn bật lại nút sau khi xử lý xong
       button.disabled = false;
     }
   }
 }
+// === END: USER & PROFILE FUNCTIONS ===
 
+// === START: WEATHER FUNCTIONS ===
 const weatherWidget = document.querySelector(".weather-widget");
 const autoLocationBtn = document.getElementById("auto-location-btn");
 const provinceSelect = document.getElementById("province-select");
@@ -458,10 +567,8 @@ async function getWeatherByBrowser() {
       async (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-
         weatherWidget.innerHTML =
           "<p>Đã có tọa độ, đang tải dữ liệu thời tiết...</p>";
-
         try {
           const response = await fetch(
             `/api/get-weather?lat=${lat}&lon=${lon}`
@@ -578,21 +685,13 @@ function renderWeatherData(current, forecast, locationName) {
             </div>`
           )
           .join("")}
-    </div>
-  `;
+    </div>`;
 }
+// === END: WEATHER FUNCTIONS ===
 
-function createPost() {
-  if (!currentUser) {
-    showAlert("Vui lòng đăng nhập để tạo bài viết.");
-    return;
-  }
-  showAlert(
-    "Chức năng tạo bài viết mới đang được phát triển. Vui lòng quay lại sau!"
-  );
-}
-
+// === START: INITIALIZATION AND EVENT LISTENERS ===
 document.addEventListener("DOMContentLoaded", function () {
+  // --- Authentication Check ---
   const userData = localStorage.getItem("currentUser");
   if (userData) {
     currentUser = JSON.parse(userData);
@@ -601,17 +700,55 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
-  if (autoLocationBtn) {
-    autoLocationBtn.addEventListener("click", getWeatherByBrowser);
-  }
+  // --- Modal Event Listeners ---
+  if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeAlertModal);
+  if (alertModal)
+    alertModal.addEventListener("click", (e) => {
+      if (e.target === alertModal) closeAlertModal();
+    });
+  if (confirmModalCancelBtn)
+    confirmModalCancelBtn.addEventListener("click", closeConfirmModal);
+  if (confirmModal)
+    confirmModal.addEventListener("click", (e) => {
+      if (e.target === confirmModal) closeConfirmModal();
+    });
 
+  // --- Forum Modal Event Listeners ---
+  if (createPostBtn)
+    createPostBtn.addEventListener("click", () =>
+      createPostModal.classList.add("active")
+    );
+  if (closeCreatePostModalBtn)
+    closeCreatePostModalBtn.addEventListener("click", () =>
+      createPostModal.classList.remove("active")
+    );
+  if (cancelCreatePostBtn)
+    cancelCreatePostBtn.addEventListener("click", () =>
+      createPostModal.classList.remove("active")
+    );
+  if (createPostModal)
+    createPostModal.addEventListener("click", (e) => {
+      if (e.target === createPostModal)
+        createPostModal.classList.remove("active");
+    });
+  if (createPostForm)
+    createPostForm.addEventListener("submit", handleCreatePost);
+
+  // --- Weather Event Listeners ---
+  if (autoLocationBtn)
+    autoLocationBtn.addEventListener("click", getWeatherByBrowser);
   loadProvinces();
 
+  // --- Handle Hash Navigation ---
   const hash = window.location.hash.substring(1);
   if (hash) {
     const targetLink = document.querySelector(`.nav-tab[onclick*="'${hash}'"]`);
     if (targetLink) {
       showSection(hash, targetLink);
     }
+  } else {
+    // Default to dashboard if no hash
+    showSection("dashboard", document.querySelector(".nav-tab.active"));
   }
 });
+// === END: INITIALIZATION AND EVENT LISTENERS ===

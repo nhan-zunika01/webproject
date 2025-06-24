@@ -125,41 +125,14 @@
                     <p id="forum-login-prompt" class="login-prompt-card card" style="display: none;">
                         Vui lòng <a href="login.html">đăng nhập</a> để tạo bài viết mới và tham gia thảo luận.
                     </p>
-                    <button id="create-post-btn" class="btn btn-primary" onclick="createPost()" style="display: none;">
+                    <!-- Button to open the create post modal -->
+                    <button id="create-post-btn" class="btn btn-primary" style="display: none;">
                         <i class="fas fa-plus"></i> Tạo bài viết mới
                     </button>
                 </div>
-                <div class="content-grid two-column">
-                    <div class="forum-post card">
-                        <div class="post-header">
-                            <div class="avatar">AN</div>
-                            <div class="post-info">
-                                <h4>Anh Nguyễn Văn An</h4>
-                                <small>2 giờ trước</small>
-                            </div>
-                        </div>
-                        <h3>Cách phòng chống sâu bệnh trên cây lúa?</h3>
-                        <p>Gần đây ruộng lúa nhà tôi có dấu hiệu sâu bệnh...</p>
-                        <div class="post-actions">
-                            <button class="btn btn-secondary"><i class="fas fa-thumbs-up"></i> 12</button>
-                            <button class="btn btn-secondary"><i class="fas fa-comment"></i> 4</button>
-                        </div>
-                    </div>
-                    <div class="forum-post card">
-                         <div class="post-header">
-                            <div class="avatar" style="background-color: #f39c12;">LT</div>
-                            <div class="post-info">
-                                <h4>Chị Lê Thị Tâm</h4>
-                                <small>5 giờ trước</small>
-                            </div>
-                        </div>
-                        <h3>Chia sẻ kinh nghiệm trồng rau thủy canh</h3>
-                        <p>Sau 6 tháng trồng rau thủy canh, mình muốn chia sẻ một số kinh nghiệm...</p>
-                         <div class="post-actions">
-                            <button class="btn btn-secondary"><i class="fas fa-thumbs-up"></i> 28</button>
-                            <button class="btn btn-secondary"><i class="fas fa-comment"></i> 9</button>
-                        </div>
-                    </div>
+                <!-- Container for forum posts -->
+                <div id="forum-posts-container">
+                    <!-- Forum posts will be loaded here by JS -->
                 </div>
             </section>
 
@@ -255,19 +228,29 @@
         </main>
     </div>
 
-    <!-- Modal thông báo -->
+    <!-- ===== START: NEW MODALS ===== -->
+
+    <!-- Modal for General Alerts -->
     <div id="alert-modal" class="modal-overlay">
         <div class="modal-box">
-            <h3>Thông báo</h3>
+             <div class="modal-header">
+                <h3 id="alert-modal-title">Thông báo</h3>
+                <button class="close-modal-btn" onclick="closeAlertModal()">&times;</button>
+            </div>
             <p id="modal-message"></p>
-            <button id="modal-close-btn" class="btn btn-primary">Đã hiểu</button>
+            <div class="modal-actions">
+                 <button id="modal-close-btn" class="btn btn-primary">Đã hiểu</button>
+            </div>
         </div>
     </div>
 
-    <!-- THÊM MỚI: Modal xác nhận -->
+    <!-- Modal for Confirmations -->
     <div id="confirm-modal" class="modal-overlay">
         <div class="modal-box">
-            <h3 id="confirm-modal-title">Xác nhận</h3>
+            <div class="modal-header">
+                <h3 id="confirm-modal-title">Xác nhận</h3>
+                 <button class="close-modal-btn" onclick="closeConfirmModal()">&times;</button>
+            </div>
             <p id="confirm-modal-message"></p>
             <div class="modal-actions">
                 <button id="confirm-modal-cancel-btn" class="btn btn-secondary">Hủy</button>
@@ -275,6 +258,32 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for Creating a New Forum Post -->
+    <div id="create-post-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Tạo bài viết mới</h3>
+                <button id="close-create-post-modal-btn" class="close-modal-btn">&times;</button>
+            </div>
+            <form id="create-post-form">
+                <div class="form-group">
+                    <label for="post-title">Tiêu đề</label>
+                    <input type="text" id="post-title" name="title" required placeholder="Câu hỏi hoặc chủ đề của bạn là gì?">
+                </div>
+                <div class="form-group">
+                    <label for="post-content">Nội dung</label>
+                    <textarea id="post-content" name="content" required placeholder="Mô tả chi tiết vấn đề hoặc kinh nghiệm bạn muốn chia sẻ..."></textarea>
+                </div>
+                 <div class="modal-actions">
+                    <button type="button" id="cancel-create-post-btn" class="btn btn-secondary">Hủy</button>
+                    <button type="submit" id="submit-post-btn" class="btn btn-primary">Đăng bài</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== END: NEW MODALS ===== -->
 
 
     <!-- JavaScript -->
