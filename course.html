@@ -95,8 +95,10 @@
         </div>
     </footer>
 
-    <!-- Nạp file dữ liệu và file logic -->
-    <script src="data/courses-data.js"></script>
-    <script src="logic/course.js"></script>
+    <!-- === UPDATED SCRIPT TAGS === -->
+    <!-- Thêm "defer" để đảm bảo các file script được nạp và chạy đúng thứ tự -->
+    <!-- Trình duyệt sẽ chạy data/courses-data.js trước, sau đó mới đến logic/course.js -->
+    <script src="data/courses-data.js" defer></script>
+    <script src="logic/course.js" defer></script>
 </body>
 </html>
