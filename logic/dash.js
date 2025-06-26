@@ -17,7 +17,6 @@ const confirmModalCancelBtn = document.getElementById(
   "confirm-modal-cancel-btn"
 );
 
-// New modal for creating posts
 const createPostModal = document.getElementById("create-post-modal");
 const createPostBtn = document.getElementById("create-post-btn");
 const closeCreatePostModalBtn = document.getElementById(
@@ -98,6 +97,59 @@ function logout() {
 }
 // === END: GENERAL UI FUNCTIONS (MODALS, TABS) ===
 
+// === CẬP NHẬT: THÊM HÀM TẢI KHÓA HỌC DYNAMIC ===
+async function loadAndRenderCourses() {
+  const coursesGrid = document.getElementById("courses-grid");
+  if (!coursesGrid) return;
+
+  coursesGrid.innerHTML = '<p class="card">Đang tải danh sách khóa học...</p>';
+
+  try {
+    const response = await fetch("data/courses.json");
+    if (!response.ok) {
+      throw new Error("Không thể tải dữ liệu khóa học.");
+    }
+    const coursesData = await response.json();
+
+    coursesGrid.innerHTML = ""; // Xóa thông báo đang tải
+
+    const isUserLoggedIn = !!localStorage.getItem("currentUser");
+
+    for (const courseId in coursesData) {
+      if (Object.hasOwnProperty.call(coursesData, courseId)) {
+        const course = coursesData[courseId];
+
+        const courseCard = document.createElement("div");
+        courseCard.className = "course-card card";
+
+        // KHÔI PHỤC LOGIC CŨ: Render cả nút và thông báo, sau đó ẩn/hiện bằng CSS
+        const actionHTML = `
+                    <a href="course.html?id=${courseId}" class="btn btn-primary btn-join-course" style="display: ${
+          isUserLoggedIn ? "inline-block" : "none"
+        };">Tham gia khóa học</a>
+                    <p class="course-login-prompt" style="display: ${
+                      isUserLoggedIn ? "none" : "block"
+                    };">Vui lòng <a href="login.html">đăng nhập</a> để tham gia.</p>
+                `;
+
+        courseCard.innerHTML = `
+                    <div class="course-content">
+                        <h3>${course.title}</h3>
+                        <p>${course.sapo}</p>
+                    </div>
+                    <div class="course-action">
+                        ${actionHTML}
+                    </div>
+                `;
+        coursesGrid.appendChild(courseCard);
+      }
+    }
+  } catch (error) {
+    console.error("Lỗi khi tải khóa học:", error);
+    coursesGrid.innerHTML = `<p class="card" style="color: #ffcccc;">${error.message}</p>`;
+  }
+}
+
 // === START: FORUM FUNCTIONS ===
 
 function timeAgo(date) {
@@ -115,45 +167,31 @@ function timeAgo(date) {
   return "Vừa xong";
 }
 
-/**
- * Cập nhật nội dung của một bài đăng để hiển thị text và các nút "Xem thêm"/"Ẩn đi".
- * @param {HTMLElement} contentElement - Phần tử <p> chứa nội dung.
- */
 function managePostContent(contentElement) {
   const fullText = contentElement.dataset.fullText;
   const currentLength = parseInt(contentElement.dataset.currentLength, 10);
-
-  // Sử dụng textContent để tránh lỗi XSS, sau đó thay thế ký tự xuống dòng bằng thẻ <br>
   const tempDiv = document.createElement("div");
   tempDiv.textContent = fullText.substring(0, currentLength);
   const visibleHtml = tempDiv.innerHTML.replace(/\n/g, "<br />");
-
   const canExpand = currentLength < fullText.length;
   const isExpanded = currentLength > 200;
-
   let controlsHTML = "";
   if (canExpand) {
-    // data-action được sử dụng bởi trình xử lý sự kiện được ủy quyền
     controlsHTML += ` <a href="#" class="expand-link" data-action="more">... Xem thêm</a>`;
   }
   if (isExpanded) {
     controlsHTML += ` <a href="#" class="expand-link" data-action="less"> Ẩn đi</a>`;
   }
-
   contentElement.innerHTML = visibleHtml + controlsHTML;
 }
 
-/**
- * Lặp qua tất cả các bài đăng và thiết lập nội dung có thể mở rộng nếu cần.
- */
 function setupExpandableContent() {
   document.querySelectorAll(".post-content-container").forEach((p) => {
-    // Sử dụng textContent để lấy toàn bộ văn bản, trim để loại bỏ khoảng trắng thừa
     const fullText = p.textContent.trim();
     if (fullText.length > 200) {
       p.dataset.fullText = fullText;
       p.dataset.currentLength = 200;
-      managePostContent(p); // Thiết lập trạng thái ban đầu
+      managePostContent(p);
     }
   });
 }
@@ -201,8 +239,6 @@ function renderForumPosts(posts) {
     }`;
     const likeBtnClass = post.user_vote === 1 ? "liked" : "";
     const dislikeBtnClass = post.user_vote === -1 ? "disliked" : "";
-
-    // Sử dụng textContent để gán nội dung an toàn, tránh lỗi XSS
     const tempDiv = document.createElement("div");
     tempDiv.textContent = post.content || "";
     const safeContentHTML = tempDiv.innerHTML.replace(/\n/g, "<br />");
@@ -244,15 +280,11 @@ function renderForumPosts(posts) {
               post.id
             }"></div>
         `;
-
-    // Gán tiêu đề và tên người dùng một cách an toàn
     postElement.querySelector(".post-info h4").textContent = post.user_name;
     postElement.querySelector(".post-body-content h3").textContent = post.title;
-
     container.appendChild(postElement);
   });
 
-  // Chạy hàm thiết lập nội dung có thể mở rộng sau khi tất cả các bài đăng đã được thêm vào DOM
   setupExpandableContent();
 
   document.querySelectorAll(".vote-btn").forEach((btn) => {
@@ -333,17 +365,13 @@ async function handleCreatePost(event) {
   }
 }
 
-// === START: NEW COMMENT-RELATED FUNCTIONS ===
-
 async function toggleComments(button, postId) {
   const commentsSection = document.getElementById(`comments-section-${postId}`);
   if (!commentsSection) return;
 
-  // Toggle visibility
   const isVisible = commentsSection.style.display === "block";
   commentsSection.style.display = isVisible ? "none" : "block";
 
-  // If we are showing it for the first time or it's empty, fetch comments
   if (!isVisible) {
     commentsSection.innerHTML = `<p>Đang tải bình luận...</p>`;
     await fetchAndRenderComments(postId);
@@ -356,7 +384,6 @@ async function fetchAndRenderComments(postId) {
     const response = await fetch(`/api/comments?postId=${postId}`);
     if (!response.ok) throw new Error("Không thể tải bình luận.");
     const comments = await response.json();
-
     renderComments(postId, comments);
   } catch (error) {
     commentsSection.innerHTML = `<p style="color: #ffcccc;">${error.message}</p>`;
@@ -365,7 +392,6 @@ async function fetchAndRenderComments(postId) {
 
 function renderComments(postId, comments) {
   const commentsSection = document.getElementById(`comments-section-${postId}`);
-
   let commentsHTML = '<div class="comment-list">';
   if (comments.length > 0) {
     comments.forEach((comment) => {
@@ -405,10 +431,7 @@ function renderComments(postId, comments) {
   } else {
     commentFormHTML = `<p>Vui lòng <a href="login.html">đăng nhập</a> để bình luận.</p>`;
   }
-
   commentsSection.innerHTML = commentFormHTML + commentsHTML;
-
-  // Add event listener to the new form
   if (currentUser) {
     const form = commentsSection.querySelector(".comment-form");
     form.addEventListener("submit", handleCommentSubmit);
@@ -427,7 +450,6 @@ async function handleCommentSubmit(event) {
     showAlert("Vui lòng nhập nội dung bình luận.");
     return;
   }
-
   submitBtn.disabled = true;
 
   try {
@@ -439,13 +461,8 @@ async function handleCommentSubmit(event) {
       },
       body: JSON.stringify({ postId, content }),
     });
-
-    // Refresh comments for this post
     await fetchAndRenderComments(postId);
-
-    // Also refresh all posts to update the comment count on the button
     await loadForumPosts();
-    // After reloading, make sure the comment section stays open
     const commentsSection = document.getElementById(
       `comments-section-${postId}`
     );
@@ -456,9 +473,6 @@ async function handleCommentSubmit(event) {
     submitBtn.disabled = false;
   }
 }
-
-// === END: NEW COMMENT-RELATED FUNCTIONS ===
-
 // === END: FORUM FUNCTIONS ===
 
 // === START: DASHBOARD STATS FUNCTIONS ===
@@ -577,12 +591,6 @@ function setupUserUI() {
     startQuizBtn.classList.remove("disabled");
     startQuizBtn.removeAttribute("title");
   }
-  document.querySelectorAll(".course-action").forEach((action) => {
-    const joinButton = action.querySelector(".btn-join-course");
-    const loginPrompt = action.querySelector(".course-login-prompt");
-    if (joinButton) joinButton.style.display = "inline-block";
-    if (loginPrompt) loginPrompt.style.display = "none";
-  });
   loadDashboardData();
   const usernameSpan = document.querySelector(".user-menu .username");
   if (usernameSpan) {
@@ -607,12 +615,6 @@ function setupGuestUI() {
     startQuizBtn.classList.add("disabled");
     startQuizBtn.title = "Vui lòng đăng nhập để làm bài kiểm tra";
   }
-  document.querySelectorAll(".course-action").forEach((action) => {
-    const joinButton = action.querySelector(".btn-join-course");
-    const loginPrompt = action.querySelector(".course-login-prompt");
-    if (joinButton) joinButton.style.display = "none";
-    if (loginPrompt) loginPrompt.style.display = "block";
-  });
   document.getElementById("stat-courses-completed").textContent = "0";
   document.getElementById("stat-average-score").textContent = "0%";
   document.getElementById("stat-study-hours").textContent = "0";
@@ -911,7 +913,9 @@ function renderWeatherData(current, forecast, locationName) {
 
 // === START: INITIALIZATION AND EVENT LISTENERS ===
 document.addEventListener("DOMContentLoaded", function () {
-  // --- Authentication Check ---
+  // CẬP NHẬT: Gọi hàm tải khóa học ngay khi DOM sẵn sàng
+  loadAndRenderCourses();
+
   const userData = localStorage.getItem("currentUser");
   if (userData) {
     currentUser = JSON.parse(userData);
@@ -920,7 +924,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setupGuestUI();
   }
 
-  // --- Modal Event Listeners ---
   if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeAlertModal);
   if (alertModal)
     alertModal.addEventListener("click", (e) => {
@@ -933,7 +936,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.target === confirmModal) closeConfirmModal();
     });
 
-  // --- Forum Modal Event Listeners ---
   if (createPostBtn)
     createPostBtn.addEventListener("click", () =>
       createPostModal.classList.add("active")
@@ -954,18 +956,15 @@ document.addEventListener("DOMContentLoaded", function () {
   if (createPostForm)
     createPostForm.addEventListener("submit", handleCreatePost);
 
-  // --- Weather Event Listeners ---
   if (autoLocationBtn)
     autoLocationBtn.addEventListener("click", getWeatherByBrowser);
   loadProvinces();
 
-  // --- THÊM MỚI: Event Listener được ủy quyền cho các nút "Xem thêm" / "Ẩn đi" ---
   const forumContainer = document.getElementById("forum-posts-container");
   if (forumContainer) {
     forumContainer.addEventListener("click", function (e) {
-      // Chỉ xử lý nếu mục tiêu là một liên kết có class 'expand-link'
       if (e.target.matches("a.expand-link")) {
-        e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
+        e.preventDefault();
         const action = e.target.dataset.action;
         const contentP = e.target.closest(".post-content-container");
         if (!contentP) return;
@@ -975,7 +974,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (action === "more") {
           currentLength += 200;
-          // Đảm bảo không vượt quá độ dài tối đa
           if (currentLength > fullText.length) {
             currentLength = fullText.length;
           }
@@ -984,12 +982,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         contentP.dataset.currentLength = currentLength;
-        managePostContent(contentP); // Render lại nội dung của bài đăng này
+        managePostContent(contentP);
       }
     });
   }
 
-  // --- Handle Hash Navigation ---
   const hash = window.location.hash.substring(1);
   if (hash) {
     const targetLink = document.querySelector(`.nav-tab[onclick*="'${hash}'"]`);
@@ -997,7 +994,6 @@ document.addEventListener("DOMContentLoaded", function () {
       showSection(hash, targetLink);
     }
   } else {
-    // Default to dashboard if no hash
     showSection("dashboard", document.querySelector(".nav-tab.active"));
   }
 });

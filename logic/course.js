@@ -1,17 +1,11 @@
 // File: logic/course.js
 // Script này sẽ điều khiển trang course.html
-// Nó đọc ID khóa học từ URL, tải dữ liệu từ courses-data.js và hiển thị nội dung phù hợp.
+// PHIÊN BẢN CẬP NHẬT: Tải dữ liệu từ file JSON.
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Bọc toàn bộ logic trong khối try...catch để bắt và hiển thị bất kỳ lỗi nào
+function initializeCoursePage(allCourses) {
+  // Nhận dữ liệu khóa học làm tham số
+  // Bọc toàn bộ logic trong khối try...catch để xử lý lỗi an toàn
   try {
-    // KIỂM TRA 1: File dữ liệu `courses-data.js` đã được nạp chưa?
-    if (typeof window.allCourses === "undefined" || !window.allCourses) {
-      throw new Error(
-        "Không thể tải file dữ liệu 'data/courses-data.js'. Vui lòng kiểm tra lại đường dẫn và đảm bảo file không có lỗi cú pháp."
-      );
-    }
-
     // --- LẤY DỮ LIỆU KHÓA HỌC HIỆN TẠI ---
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get("id");
@@ -22,12 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    const course = window.allCourses[courseId];
+    const course = allCourses[courseId]; // Sử dụng dữ liệu đã được truyền vào
 
-    // KIỂM TRA 2: ID khóa học có tồn tại trong dữ liệu không?
     if (!course) {
       throw new Error(
-        `Không tìm thấy dữ liệu cho khóa học với ID: "${courseId}". Vui lòng kiểm tra lại ID trong file 'data/courses-data.js'.`
+        `Không tìm thấy dữ liệu cho khóa học với ID: "${courseId}". Vui lòng kiểm tra lại ID trong file 'data/courses.json'.`
       );
     }
 
@@ -282,7 +275,8 @@ document.addEventListener("DOMContentLoaded", function () {
       renderLesson(nextChapter, nextLesson);
     }
 
-    async function init() {
+    // Hàm init chính, được gọi sau khi dữ liệu sẵn sàng
+    async function main() {
       const userData = localStorage.getItem("currentUser");
       if (userData) {
         currentUser = JSON.parse(userData);
@@ -298,10 +292,10 @@ document.addEventListener("DOMContentLoaded", function () {
       nextLessonBtn.addEventListener("click", () => handleNavigation("next"));
     }
 
-    // Bắt đầu chạy ứng dụng
-    init();
+    // Chạy hàm chính
+    main();
   } catch (error) {
-    // Nếu có bất kỳ lỗi nào từ khối try ở trên, nó sẽ được bắt ở đây và hiển thị
+    // Nếu có bất kỳ lỗi nào, hiển thị thông báo thân thiện
     console.error("Lỗi nghiêm trọng khi khởi tạo trang khóa học:", error);
     const container = document.getElementById("course-container");
     if (container) {
@@ -315,4 +309,33 @@ document.addEventListener("DOMContentLoaded", function () {
               </div>`;
     }
   }
-});
+}
+
+// Hàm khởi động ứng dụng, sẽ tải dữ liệu JSON trước
+async function startApp() {
+  try {
+    const response = await fetch("data/courses.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const allCourses = await response.json();
+    initializeCoursePage(allCourses); // Bắt đầu ứng dụng với dữ liệu đã tải
+  } catch (error) {
+    const errorMessage = `Không thể tải hoặc phân tích tệp 'data/courses.json'. Vui lòng kiểm tra lại đường dẫn và đảm bảo tệp có định dạng JSON hợp lệ. Chi tiết: ${error.message}`;
+    console.error(errorMessage);
+    const container = document.getElementById("course-container");
+    if (container) {
+      container.innerHTML = `
+                <div style="padding: 40px; text-align: center;">
+                    <h1>Đã xảy ra lỗi</h1>
+                    <p>Không thể tải nội dung khóa học. Vui lòng thử lại sau.</p>
+                    <p style="background: rgba(255, 100, 100, 0.1); color: #ffcccc; padding: 15px; border-radius: 8px; font-family: monospace; text-align: left; margin-top: 20px; border: 1px solid rgba(255, 100, 100, 0.2);">
+                        <strong>Chi tiết lỗi:</strong> ${errorMessage}
+                    </p>
+                </div>`;
+    }
+  }
+}
+
+// Bắt đầu ứng dụng khi DOM đã sẵn sàng
+document.addEventListener("DOMContentLoaded", startApp);

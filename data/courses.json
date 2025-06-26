@@ -1,0 +1,2164 @@
+{
+  "rice-course-v1": {
+    "title": "Kỹ thuật trồng lúa hiệu quả",
+    "meta": {
+      "expert": "GS.TS. Bùi Chí Bửu",
+      "field": "Trồng trọt",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop",
+    "imageAlt": "Cánh đồng lúa xanh mướt",
+    "sapo": "Khóa học này cung cấp kiến thức toàn diện từ cơ bản đến nâng cao về kỹ thuật canh tác lúa, giúp bà con nông dân tối ưu hóa năng suất, giảm chi phí và canh tác bền vững theo các tiêu chuẩn hiện đại.",
+    "quizUrl": "quiz.html",
+    "chapters": [
+      {
+        "title": "Chương 1: Chuẩn bị đất và chọn giống",
+        "lessons": [
+          {
+            "id": "rice-c1l1",
+            "title": "Phân tích và cải tạo đất",
+            "content": "<h3>Tại sao cần phân tích đất?</h3><p>Phân tích đất giúp xác định độ pH, hàm lượng hữu cơ, và các chất dinh dưỡng đa, trung, vi lượng. Từ đó, ta có thể đưa ra biện pháp cải tạo phù hợp, tránh bón phân thừa hoặc thiếu.</p><h3>Các bước cải tạo đất cơ bản:</h3><ul><li>Đối với đất phèn: Bón vôi để nâng pH, kết hợp rửa phèn bằng nước ngọt.</li><li>Đối với đất mặn: Xây dựng hệ thống kênh mương để rửa mặn, trồng các giống cây chịu mặn.</li><li>Đối với đất bạc màu: Tăng cường bón phân hữu cơ, phân chuồng ủ hoai để bổ sung mùn và vi sinh vật.</li></ul>"
+          },
+          {
+            "id": "rice-c1l2",
+            "title": "Phương pháp làm đất hiện đại",
+            "content": "<h3>Làm đất tối thiểu:</h3><p>Phương pháp này hạn chế xới lật đất, chỉ làm đất trên hàng gieo trồng. Giúp giữ cấu trúc đất, chống xói mòn và giữ ẩm.</p><h3>San phẳng mặt ruộng bằng laser:</h3><p>Sử dụng công nghệ laser giúp mặt ruộng bằng phẳng tuyệt đối. Lợi ích: tiết kiệm nước tưới, lúa sinh trưởng đồng đều, giảm cỏ dại, dễ dàng cơ giới hóa.</p>"
+          },
+          {
+            "id": "rice-c1l3",
+            "title": "Lựa chọn giống lúa phù hợp",
+            "content": "<h3>Tiêu chí chọn giống:</h3><ul><li>Phù hợp với điều kiện khí hậu, thổ nhưỡng của địa phương.</li><li>Khả năng chống chịu sâu bệnh tốt.</li><li>Thời gian sinh trưởng phù hợp với khung thời vụ.</li><li>Năng suất cao, chất lượng gạo tốt, đáp ứng thị hiệu thị trường.</li></ul><p>Ví dụ: Vùng Đồng bằng sông Cửu Long thường chuộng các giống như OM5451, Đài Thơm 8...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Kỹ thuật gieo sạ và chăm sóc",
+        "lessons": [
+          {
+            "id": "rice-c2l1",
+            "title": "Ngâm ủ và xử lý hạt giống",
+            "content": "<h3>Mục đích:</h3><p>Giúp hạt giống nảy mầm đều và khỏe, loại bỏ mầm bệnh tồn tại trên vỏ hạt.</p><h3>Các bước thực hiện:</h3><ul><li>Phơi lại hạt giống dưới nắng nhẹ 2-3 giờ.</li><li>Ngâm hạt trong nước sạch 24-36 giờ.</li><li>Vớt ra, rửa sạch và ủ trong bao tải hoặc thúng có lót rơm, giữ ẩm. Sau 24-36 giờ ủ, rễ và mầm sẽ nhú ra đều.</li></ul>"
+          },
+          {
+            "id": "rice-c2l2",
+            "title": "Kỹ thuật gieo sạ tiên tiến",
+            "content": "<h3>Các phương pháp gieo sạ:</h3><ul><li>Sạ lan: Phổ biến nhưng tốn nhiều giống, lúa mọc không đều.</li><li>Sạ hàng: Tiết kiệm giống, dễ chăm sóc, lúa thông thoáng.</li><li>Sạ cụm (sạ khóm): Sử dụng máy sạ, tiết kiệm giống tối đa, hạn chế đổ ngã.</li></ul>"
+          },
+          {
+            "id": "rice-c2l3",
+            "title": "Quản lý nước tưới theo giai đoạn",
+            "content": "<h3>Phương pháp tưới 'ngập khô xen kẽ' (AWD):</h3><p>Đây là kỹ thuật tưới tiên tiến giúp tiết kiệm 20-30% lượng nước, giảm phát thải khí metan và giúp bộ rễ lúa ăn sâu, cứng cây. Cần giữ mực nước ngập trong các giai đoạn quan trọng và để ruộng khô nứt chân chim ở các giai đoạn khác.</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý dinh dưỡng và sâu bệnh",
+        "lessons": [
+          {
+            "id": "rice-c3l1",
+            "title": "Bón phân cân đối và hiệu quả",
+            "content": "<h3>Nguyên tắc 4 đúng:</h3><ul><li>Đúng loại: Bón đúng loại phân mà cây cần ở từng giai đoạn.</li><li>Đúng liều: Bón đủ liều lượng theo khuyến cáo.</li><li>Đúng lúc: Bón đúng thời điểm cây cần dinh dưỡng nhất.</li><li>Đúng cách: Bón đúng phương pháp để cây hấp thu tốt nhất.</li></ul>"
+          },
+          {
+            "id": "rice-c3l2",
+            "title": "Nhận diện sâu bệnh hại chính",
+            "content": "<h3>Các loại sâu bệnh phổ biến:</h3><ul><li><strong>Sâu hại:</strong> Rầy nâu, sâu cuốn lá, sâu đục thân.</li><li><strong>Bệnh hại:</strong> Bệnh đạo ôn, bệnh khô vằn, bệnh bạc lá.</li></ul><p>Việc nhận diện sớm triệu chứng giúp đưa ra biện pháp phòng trừ kịp thời.</p>"
+          },
+          {
+            "id": "rice-c3l3",
+            "title": "Quản lý dịch hại tổng hợp (IPM)",
+            "content": "<h3>IPM là gì?</h3><p>Là phương pháp quản lý sâu bệnh bằng cách kết hợp nhiều biện pháp một cách hài hòa: sử dụng giống kháng, thiên địch, biện pháp canh tác, và chỉ sử dụng thuốc bảo vệ thực vật khi thật sự cần thiết.</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và bảo quản",
+        "lessons": [
+          {
+            "id": "rice-c4l1",
+            "title": "Xác định thời điểm thu hoạch tối ưu",
+            "content": "<h3>Dấu hiệu lúa chín:</h3><p>Thu hoạch khi 85-90% số hạt trên bông đã chín vàng. Thu hoạch quá sớm làm giảm năng suất, quá muộn làm tăng tỷ lệ hao hụt và gãy vỡ khi xay xát.</p>"
+          },
+          {
+            "id": "rice-c4l2",
+            "title": "Phương pháp thu hoạch hiện đại",
+            "content": "<h3>Cơ giới hóa:</h3><p>Sử dụng máy gặt đập liên hợp giúp giảm thiểu thất thoát sau thu hoạch, tiết kiệm thời gian và chi phí nhân công so với gặt tay thủ công.</p>"
+          },
+          {
+            "id": "rice-c4l3",
+            "title": "Kỹ thuật phơi sấy và bảo quản",
+            "content": "<h3>Mục tiêu:</h3><p>Đưa độ ẩm của hạt lúa xuống dưới 14% để bảo quản được lâu, tránh nấm mốc và côn trùng gây hại. Có thể phơi nắng hoặc sử dụng lò sấy. Bảo quản nơi khô ráo, thoáng mát.</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "chicken-course-v1": {
+    "title": "Chăn nuôi gà an toàn sinh học",
+    "meta": {
+      "expert": "PGS.TS. Nguyễn Thị Minh",
+      "field": "Chăn nuôi",
+      "duration": "9 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1587303213013-106c4a86a644?q=80&w=1974&auto=format&fit=crop",
+    "imageAlt": "Đàn gà khỏe mạnh trong trang trại",
+    "sapo": "Trang bị kiến thức và kỹ năng thực hành chăn nuôi gà theo hướng an toàn sinh học, giúp phòng chống dịch bệnh hiệu quả, nâng cao chất lượng sản phẩm và tối đa hóa lợi nhuận.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Thiết kế và xây dựng chuồng trại",
+        "lessons": [
+          {
+            "id": "chicken-c1l1",
+            "title": "Lựa chọn địa điểm và hướng chuồng",
+            "content": "<h3>Địa điểm lý tưởng:</h3><p>Cần chọn nơi cao ráo, thoát nước tốt, xa khu dân cư và nguồn ô nhiễm. Lý tưởng nhất là có cây xanh che mát xung quanh.</p><h3>Hướng chuồng:</h3><p>Nên chọn hướng Nam hoặc Đông Nam để đón gió mát vào mùa hè và tránh gió lạnh vào mùa đông, đồng thời nhận được ánh sáng mặt trời vừa đủ.</p>"
+          },
+          {
+            "id": "chicken-c1l2",
+            "title": "Vật liệu và kết cấu chuồng trại",
+            "content": "<h3>Yêu cầu vật liệu:</h3><p>Nền chuồng phải dễ dọn vệ sinh. Mái chuồng cần chống nóng tốt. Tường bao có thể xây bằng gạch hoặc lưới B40 tùy điều kiện, đảm bảo thông thoáng.</p>"
+          },
+          {
+            "id": "chicken-c1l3",
+            "title": "Mật độ chăn nuôi phù hợp",
+            "content": "<h3>Tại sao mật độ quan trọng?</h3><p>Nuôi quá dày làm tăng nguy cơ bùng phát dịch bệnh, gà cắn mổ nhau, chậm lớn. Mật độ khuyến cáo thay đổi tùy theo giống gà và giai đoạn phát triển.</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chọn giống và kỹ thuật úm gà con",
+        "lessons": [
+          {
+            "id": "chicken-c2l1",
+            "title": "Đặc điểm các giống gà phổ biến",
+            "content": "<h3>Phân loại giống:</h3><ul><li><strong>Gà hướng thịt:</strong> Lớn nhanh, thịt nhiều (ví dụ: gà Lương Phượng).</li><li><strong>Gà hướng trứng:</strong> Đẻ nhiều trứng (ví dụ: gà Ai Cập).</li><li><strong>Gà kiêm dụng:</strong> Cả thịt và trứng đều tốt (ví dụ: gà Ri, gà Hồ).</li></ul>"
+          },
+          {
+            "id": "chicken-c2l2",
+            "title": "Kỹ thuật úm gà con hiệu quả",
+            "content": "<h3>Giai đoạn úm:</h3><p>Là giai đoạn quan trọng nhất, từ 1 đến 28 ngày tuổi. Cần đảm bảo nhiệt độ, ánh sáng, thức ăn, nước uống đầy đủ và phù hợp để gà con phát triển khỏe mạnh, đồng đều.</p>"
+          },
+          {
+            "id": "chicken-c2l3",
+            "title": "Chọn gà con khỏe mạnh",
+            "content": "<h3>Dấu hiệu gà khỏe:</h3><p>Nhanh nhẹn, mắt sáng, lông bông, bụng thon gọn, chân bóng, không dị tật. Việc chọn giống tốt ngay từ đầu là tiền đề cho một lứa nuôi thành công.</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Dinh dưỡng và thức ăn",
+        "lessons": [
+          {
+            "id": "chicken-c3l1",
+            "title": "Nhu cầu dinh dưỡng của gà",
+            "content": "<h3>Các chất dinh dưỡng cần thiết:</h3><p>Bao gồm protein (đạm), năng lượng, vitamin, và khoáng chất. Nhu cầu này thay đổi tùy theo giống, lứa tuổi và hướng sản xuất (lấy thịt hay trứng).</p>"
+          },
+          {
+            "id": "chicken-c3l2",
+            "title": "Các loại thức ăn phổ biến",
+            "content": "<h3>Phân loại:</h3><ul><li><strong>Thức ăn công nghiệp:</strong> Dạng viên, đã được phối trộn đầy đủ dinh dưỡng, tiện lợi.</li><li><strong>Thức ăn tự phối trộn:</strong> Tận dụng các nguyên liệu sẵn có như ngô, cám gạo, đỗ tương... giúp giảm chi phí nhưng đòi hỏi kiến thức phối trộn.</li></ul>"
+          },
+          {
+            "id": "chicken-c3l3",
+            "title": "Kỹ thuật cho ăn và uống",
+            "content": "<h3>Lưu ý:</h3><p>Luôn cung cấp nước sạch và mát. Máng ăn, máng uống phải được vệ sinh thường xuyên. Cho gà ăn nhiều lần trong ngày để kích thích tiêu hóa và tránh lãng phí.</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Vệ sinh và phòng bệnh",
+        "lessons": [
+          {
+            "id": "chicken-c4l1",
+            "title": "Quy trình vệ sinh chuồng trại",
+            "content": "<h3>Các bước vệ sinh:</h3><p>Dọn dẹp phân và chất độn chuồng thường xuyên. Định kỳ phun thuốc sát trùng để tiêu diệt mầm bệnh. Rắc vôi bột trước khi thả lứa mới.</p>"
+          },
+          {
+            "id": "chicken-c4l2",
+            "title": "Lịch vaccine quan trọng cho gà",
+            "content": "<h3>Phòng bệnh hơn chữa bệnh:</h3><p>Tiêm phòng đầy đủ các loại vaccine thiết yếu như Newcastle, Gumboro, Cúm gia cầm... theo đúng lịch trình là biện pháp phòng bệnh hiệu quả và tiết kiệm nhất.</p>"
+          },
+          {
+            "id": "chicken-c4l3",
+            "title": "An toàn sinh học trong chăn nuôi",
+            "content": "<h3>Nguyên tắc:</h3><p>Là một loạt các biện pháp nhằm ngăn chặn mầm bệnh từ bên ngoài xâm nhập vào trang trại và lây lan trong trại. Ví dụ: hố sát trùng trước cửa chuồng, hạn chế người lạ vào khu chăn nuôi, nuôi cách ly khu vực gà mới nhập.</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "coffee-course-v1": {
+    "title": "Canh tác Cà phê Robusta bền vững",
+    "meta": {
+      "expert": "ThS. Trần Văn Hùng",
+      "field": "Cây công nghiệp",
+      "duration": "10 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1599399325946-53243f789547?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Vườn cà phê với những quả chín đỏ",
+    "sapo": "Học cách trồng và chăm sóc cà phê Robusta để đạt năng suất cao, chất lượng tốt và thân thiện với môi trường, đáp ứng các tiêu chuẩn xuất khẩu.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chọn giống và thiết kế vườn",
+        "lessons": [
+          {
+            "id": "coffee-c1l1",
+            "title": "Lựa chọn giống cà phê Robusta",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c1l2",
+            "title": "Thiết kế vườn và trồng cây che bóng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c1l3",
+            "title": "Kỹ thuật trồng và bón lót",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăm sóc và tưới nước",
+        "lessons": [
+          {
+            "id": "coffee-c2l1",
+            "title": "Tưới nước tiết kiệm và hiệu quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c2l2",
+            "title": "Kỹ thuật cắt cành, tạo tán",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c2l3",
+            "title": "Quản lý cỏ dại và thảm phủ thực vật",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Phòng trừ sâu bệnh hại",
+        "lessons": [
+          {
+            "id": "coffee-c3l1",
+            "title": "Nhận diện sâu bệnh phổ biến",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c3l2",
+            "title": "Biện pháp sinh học và IPM",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c3l3",
+            "title": "Sử dụng thuốc BVTV an toàn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và chế biến",
+        "lessons": [
+          {
+            "id": "coffee-c4l1",
+            "title": "Thu hái cà phê đúng độ chín",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c4l2",
+            "title": "Các phương pháp chế biến (khô, ướt)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "coffee-c4l3",
+            "title": "Bảo quản cà phê nhân xanh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "pepper-course-v1": {
+    "title": "Thâm canh Hồ tiêu theo tiêu chuẩn VietGAP",
+    "meta": {
+      "expert": "KS. Lê Thị Lan Anh",
+      "field": "Cây công nghiệp",
+      "duration": "9 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1629033819974-272d3637651a?q=80&w=1964&auto=format&fit=crop",
+    "imageAlt": "Dây hồ tiêu đen trên trụ",
+    "sapo": "Cung cấp quy trình kỹ thuật trồng và chăm sóc hồ tiêu tiên tiến, tập trung vào việc phòng trừ bệnh hại và tạo ra sản phẩm an toàn, chất lượng cao.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Giống và trụ tiêu",
+        "lessons": [
+          {
+            "id": "pepper-c1l1",
+            "title": "Chọn giống tiêu và nhân giống",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c1l2",
+            "title": "Lựa chọn và xử lý trụ (trụ sống, trụ chết)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c1l3",
+            "title": "Kỹ thuật trồng và chăm sóc cây con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Quản lý dinh dưỡng",
+        "lessons": [
+          {
+            "id": "pepper-c2l1",
+            "title": "Bón phân hữu cơ và vô cơ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c2l2",
+            "title": "Quản lý đất và độ ẩm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c2l3",
+            "title": "Tỉa cành và tạo hình cho cây tiêu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Phòng bệnh hại",
+        "lessons": [
+          {
+            "id": "pepper-c3l1",
+            "title": "Bệnh chết nhanh, chết chậm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c3l2",
+            "title": "Bệnh thán thư và tuyến trùng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c3l3",
+            "title": "Biện pháp phòng trừ tổng hợp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và bảo quản",
+        "lessons": [
+          {
+            "id": "pepper-c4l1",
+            "title": "Xác định thời điểm thu hoạch",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c4l2",
+            "title": "Kỹ thuật thu hái và sơ chế",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pepper-c4l3",
+            "title": "Bảo quản tiêu đen và tiêu sọ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "dragonfruit-course-v1": {
+    "title": "Kỹ thuật trồng Thanh long ruột đỏ xuất khẩu",
+    "meta": {
+      "expert": "Chuyên gia Nguyễn Văn Thành",
+      "field": "Cây ăn quả",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1617124694534-17ec933e4555?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Thanh long ruột đỏ trên cây",
+    "sapo": "Hướng dẫn chi tiết kỹ thuật trồng và chăm sóc thanh long ruột đỏ theo tiêu chuẩn GlobalGAP, đặc biệt là kỹ thuật xử lý ra hoa trái vụ.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Thiết lập vườn trồng",
+        "lessons": [
+          {
+            "id": "dragonfruit-c1l1",
+            "title": "Chọn giống và chuẩn bị trụ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c1l2",
+            "title": "Kỹ thuật trồng và tạo tán",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c1l3",
+            "title": "Hệ thống tưới và chiếu sáng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăm sóc cây",
+        "lessons": [
+          {
+            "id": "dragonfruit-c2l1",
+            "title": "Bón phân và quản lý dinh dưỡng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c2l2",
+            "title": "Tỉa cành, tạo tai quả đẹp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c2l3",
+            "title": "Phòng trừ sâu bệnh thường gặp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Xử lý ra hoa",
+        "lessons": [
+          {
+            "id": "dragonfruit-c3l1",
+            "title": "Nguyên lý xử lý ra hoa trái vụ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c3l2",
+            "title": "Kỹ thuật chong đèn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c3l3",
+            "title": "Dinh dưỡng cho giai đoạn nuôi quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và sau thu hoạch",
+        "lessons": [
+          {
+            "id": "dragonfruit-c4l1",
+            "title": "Thu hoạch đúng thời điểm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c4l2",
+            "title": "Sơ chế và đóng gói",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "dragonfruit-c4l3",
+            "title": "Bảo quản và vận chuyển",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "pomelo-course-v1": {
+    "title": "Trồng và chăm sóc Bưởi da xanh",
+    "meta": {
+      "expert": "KS. Phạm Thị Thu Hà",
+      "field": "Cây ăn quả",
+      "duration": "7 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1624334321948-cb28859e9c12?q=80&w=1974&auto=format&fit=crop",
+    "imageAlt": "Những quả bưởi trên cây",
+    "sapo": "Khóa học cung cấp kiến thức toàn diện về kỹ thuật trồng, chăm sóc, và phòng trừ sâu bệnh cho cây bưởi da xanh để đạt năng suất và chất lượng cao.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chuẩn bị trồng",
+        "lessons": [
+          {
+            "id": "pomelo-c1l1",
+            "title": "Chọn đất và thiết kế vườn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c1l2",
+            "title": "Chọn giống và kỹ thuật trồng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c1l3",
+            "title": "Bón lót và hệ thống tưới",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăm sóc cây non",
+        "lessons": [
+          {
+            "id": "pomelo-c2l1",
+            "title": "Tưới nước và quản lý cỏ dại",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c2l2",
+            "title": "Bón phân định kỳ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c2l3",
+            "title": "Tạo tán và tỉa cành",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Giai đoạn kinh doanh",
+        "lessons": [
+          {
+            "id": "pomelo-c3l1",
+            "title": "Xử lý ra hoa, đậu quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c3l2",
+            "title": "Phòng trừ sâu bệnh hại chính",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c3l3",
+            "title": "Dinh dưỡng nuôi quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch",
+        "lessons": [
+          {
+            "id": "pomelo-c4l1",
+            "title": "Nhận biết bưởi chín",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c4l2",
+            "title": "Kỹ thuật thu hái",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pomelo-c4l3",
+            "title": "Bảo quản sau thu hoạch",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "durian-course-v1": {
+    "title": "Kỹ thuật canh tác Sầu riêng Monthong & Ri6",
+    "meta": {
+      "expert": "ThS. Hoàng Minh Đức",
+      "field": "Cây ăn quả",
+      "duration": "12 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1608783459362-34d1d91b5a2f?q=80&w=1964&auto=format&fit=crop",
+    "imageAlt": "Quả sầu riêng trên cây",
+    "sapo": "Làm chủ kỹ thuật trồng và chăm sóc sầu riêng, từ khâu chọn giống, xử lý ra hoa đến phòng trừ bệnh xì mủ, thán thư để tối đa hóa lợi nhuận.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Kiến thức cơ bản",
+        "lessons": [
+          {
+            "id": "durian-c1l1",
+            "title": "Đặc điểm sinh thái cây sầu riêng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c1l2",
+            "title": "So sánh giống Monthong và Ri6",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c1l3",
+            "title": "Thiết kế vườn và hệ thống tưới",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăm sóc kiến thiết",
+        "lessons": [
+          {
+            "id": "durian-c2l1",
+            "title": "Kỹ thuật trồng và chăm sóc cây con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c2l2",
+            "title": "Tạo tán, tỉa cành giai đoạn nhỏ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c2l3",
+            "title": "Quản lý dinh dưỡng và cỏ dại",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Xử lý ra hoa, đậu quả",
+        "lessons": [
+          {
+            "id": "durian-c3l1",
+            "title": "Tạo mầm hoa và xử lý ra hoa",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c3l2",
+            "title": "Thụ phấn bổ sung và tỉa quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c3l3",
+            "title": "Phòng trừ sâu bệnh giai đoạn mang trái",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Phục hồi cây sau thu hoạch",
+        "lessons": [
+          {
+            "id": "durian-c4l1",
+            "title": "Kỹ thuật thu hoạch và bảo quản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c4l2",
+            "title": "Tỉa cành và vệ sinh vườn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "durian-c4l3",
+            "title": "Bón phân phục hồi cây",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "pig-farming-v1": {
+    "title": "Chăn nuôi heo thịt an toàn sinh học",
+    "meta": {
+      "expert": "TS. Vũ Ngọc Sơn",
+      "field": "Chăn nuôi",
+      "duration": "10 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1516427132953-b54920d912a7?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Đàn heo khỏe mạnh trong chuồng sạch",
+    "sapo": "Hướng dẫn xây dựng quy trình chăn nuôi heo thịt khép kín, an toàn sinh học, phòng chống dịch tả heo châu Phi và các dịch bệnh nguy hiểm khác.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chuồng trại và Giống",
+        "lessons": [
+          {
+            "id": "pig-c1l1",
+            "title": "Thiết kế chuồng trại hiện đại",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c1l2",
+            "title": "Lựa chọn giống heo siêu nạc",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c1l3",
+            "title": "Quy trình nhập heo và cách ly",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Dinh dưỡng theo giai đoạn",
+        "lessons": [
+          {
+            "id": "pig-c2l1",
+            "title": "Dinh dưỡng cho heo con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c2l2",
+            "title": "Thức ăn cho heo thịt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c2l3",
+            "title": "Quản lý nước uống và phụ gia",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý và Phòng bệnh",
+        "lessons": [
+          {
+            "id": "pig-c3l1",
+            "title": "An toàn sinh học trong chăn nuôi",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c3l2",
+            "title": "Lịch vaccine và tẩy giun sán",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c3l3",
+            "title": "Phòng chống dịch tả heo châu Phi (ASF)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Xuất chuồng và Môi trường",
+        "lessons": [
+          {
+            "id": "pig-c4l1",
+            "title": "Kỹ thuật xuất chuồng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c4l2",
+            "title": "Xử lý chất thải và biogas",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "pig-c4l3",
+            "title": "Hạch toán kinh tế",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "cattle-farming-v1": {
+    "title": "Chăn nuôi bò thịt và bò sữa",
+    "meta": {
+      "expert": "Chuyên gia Lê Minh Tuấn",
+      "field": "Chăn nuôi",
+      "duration": "11 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1590390311824-a2353320f7c2?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Đàn bò đang gặm cỏ trên đồng",
+    "sapo": "Khóa học tổng hợp về kỹ thuật chăn nuôi bò, từ bò thịt vỗ béo đến bò sữa cao sản, giúp người nuôi nâng cao hiệu quả kinh tế.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Cơ sở chăn nuôi",
+        "lessons": [
+          {
+            "id": "cattle-c1l1",
+            "title": "Các giống bò phổ biến tại Việt Nam",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c1l2",
+            "title": "Thiết kế chuồng trại bò",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c1l3",
+            "title": "Trồng cỏ và chuẩn bị thức ăn thô",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăn nuôi bò thịt",
+        "lessons": [
+          {
+            "id": "cattle-c2l1",
+            "title": "Kỹ thuật vỗ béo bò",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c2l2",
+            "title": "Phối trộn thức ăn tinh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c2l3",
+            "title": "Phòng bệnh cho bò thịt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Chăn nuôi bò sữa",
+        "lessons": [
+          {
+            "id": "cattle-c3l1",
+            "title": "Chăm sóc bò sữa mang thai",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c3l2",
+            "title": "Kỹ thuật khai thác sữa",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c3l3",
+            "title": "Phòng bệnh viêm vú",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Sinh sản và Thú y",
+        "lessons": [
+          {
+            "id": "cattle-c4l1",
+            "title": "Phối giống và quản lý sinh sản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c4l2",
+            "title": "Chăm sóc bê con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cattle-c4l3",
+            "title": "Các bệnh thường gặp ở bò",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "shrimp-farming-v1": {
+    "title": "Nuôi tôm thẻ chân trắng công nghệ cao",
+    "meta": {
+      "expert": "KS. Bùi Quang Tề",
+      "field": "Thủy sản",
+      "duration": "12 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1594917951152-7b5634a41e6c?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Một tay đang cầm một con tôm thẻ chân trắng",
+    "sapo": "Làm chủ quy trình nuôi tôm thẻ chân trắng 2-3 giai đoạn, ứng dụng công nghệ biofloc, lót bạt HDPE để đạt năng suất cao và kiểm soát dịch bệnh.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chuẩn bị ao nuôi",
+        "lessons": [
+          {
+            "id": "shrimp-c1l1",
+            "title": "Thiết kế ao nuôi công nghệ cao",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c1l2",
+            "title": "Cải tạo và xử lý nước đầu vào",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c1l3",
+            "title": "Gây màu nước và tạo biofloc",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Giống và Thả nuôi",
+        "lessons": [
+          {
+            "id": "shrimp-c2l1",
+            "title": "Chọn và kiểm tra chất lượng tôm giống",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c2l2",
+            "title": "Thuần hóa và thả giống đúng cách",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c2l3",
+            "title": "Quản lý tôm trong giai đoạn đầu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý trong quá trình nuôi",
+        "lessons": [
+          {
+            "id": "shrimp-c3l1",
+            "title": "Quản lý thức ăn và sức khỏe tôm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c3l2",
+            "title": "Quản lý các yếu tố môi trường nước",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c3l3",
+            "title": "Sử dụng vi sinh và chế phẩm sinh học",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Phòng bệnh và Thu hoạch",
+        "lessons": [
+          {
+            "id": "shrimp-c4l1",
+            "title": "Phòng bệnh hoại tử gan tụy (AHPND)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c4l2",
+            "title": "Phòng bệnh đốm trắng (WSSV)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "shrimp-c4l3",
+            "title": "Kỹ thuật thu hoạch và bảo quản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "fish-farming-v1": {
+    "title": "Nuôi cá tra thương phẩm xuất khẩu",
+    "meta": {
+      "expert": "GS.TS. Nguyễn Thanh Phương",
+      "field": "Thủy sản",
+      "duration": "9 giờ"
+    },
+    "image": "https://plus.unsplash.com/premium_photo-1661963953696-e137452d2f7f?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Đàn cá tra trong ao nuôi",
+    "sapo": "Cung cấp quy trình nuôi cá tra thâm canh, quản lý môi trường nước, phòng trị bệnh và đáp ứng các tiêu chuẩn an toàn thực phẩm cho xuất khẩu.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Cơ sở hạ tầng",
+        "lessons": [
+          {
+            "id": "fish-c1l1",
+            "title": "Thiết kế và xây dựng ao nuôi",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c1l2",
+            "title": "Hệ thống cấp và thoát nước",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c1l3",
+            "title": "Trang thiết bị cho ao nuôi",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Con giống và Thức ăn",
+        "lessons": [
+          {
+            "id": "fish-c2l1",
+            "title": "Lựa chọn cá giống chất lượng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c2l2",
+            "title": "Dinh dưỡng và thức ăn cho cá tra",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c2l3",
+            "title": "Kỹ thuật cho ăn hiệu quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý và Phòng bệnh",
+        "lessons": [
+          {
+            "id": "fish-c3l1",
+            "title": "Quản lý chất lượng nước ao",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c3l2",
+            "title": "Các bệnh thường gặp trên cá tra",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c3l3",
+            "title": "Biện pháp phòng trị bệnh tổng hợp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và Chất lượng",
+        "lessons": [
+          {
+            "id": "fish-c4l1",
+            "title": "Kỹ thuật thu hoạch cá",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c4l2",
+            "title": "Vận chuyển và sơ chế",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "fish-c4l3",
+            "title": "Đảm bảo chất lượng theo tiêu chuẩn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "organic-veg-v1": {
+    "title": "Trồng rau hữu cơ trong nhà kính",
+    "meta": {
+      "expert": "KS. Nguyễn Thị Hồng",
+      "field": "Trồng trọt công nghệ cao",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1587351173893-a99b421714b6?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Rau hữu cơ tươi xanh trong nhà kính",
+    "sapo": "Làm chủ quy trình trồng rau hữu cơ từ khâu làm đất, chọn giống, tự làm phân bón hữu cơ đến phòng trừ sâu bệnh bằng biện pháp sinh học.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Nền tảng hữu cơ",
+        "lessons": [
+          {
+            "id": "organic-c1l1",
+            "title": "Nguyên tắc nông nghiệp hữu cơ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c1l2",
+            "title": "Thiết kế nhà kính trồng rau",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c1l3",
+            "title": "Chuẩn bị giá thể và đất trồng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Dinh dưỡng hữu cơ",
+        "lessons": [
+          {
+            "id": "organic-c2l1",
+            "title": "Ủ phân compost và phân trùn quế",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c2l2",
+            "title": "Sử dụng phân bón lá hữu cơ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c2l3",
+            "title": "Luân canh và xen canh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Phòng trừ sâu bệnh sinh học",
+        "lessons": [
+          {
+            "id": "organic-c3l1",
+            "title": "Nhận diện sâu bệnh hại rau",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c3l2",
+            "title": "Sử dụng thiên địch",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c3l3",
+            "title": "Tự làm thuốc trừ sâu thảo mộc",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Chứng nhận và Thị trường",
+        "lessons": [
+          {
+            "id": "organic-c4l1",
+            "title": "Tiêu chuẩn hữu cơ Việt Nam",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c4l2",
+            "title": "Xây dựng thương hiệu và truy xuất nguồn gốc",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "organic-c4l3",
+            "title": "Kết nối với thị trường tiêu thụ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "hydroponics-v1": {
+    "title": "Nông nghiệp công nghệ cao: Thủy canh",
+    "meta": {
+      "expert": "ThS. Đỗ Anh Khoa",
+      "field": "Trồng trọt công nghệ cao",
+      "duration": "7 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1605578334826-42756ad28a42?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Hệ thống rau thủy canh trong trang trại",
+    "sapo": "Khám phá và ứng dụng kỹ thuật trồng rau bằng phương pháp thủy canh, từ quy mô gia đình đến trang trại thương mại.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Giới thiệu về thủy canh",
+        "lessons": [
+          {
+            "id": "hydro-c1l1",
+            "title": "Lịch sử và ưu điểm của thủy canh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c1l2",
+            "title": "Các hệ thống thủy canh phổ biến",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c1l3",
+            "title": "Lựa chọn cây trồng phù hợp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Thiết lập hệ thống",
+        "lessons": [
+          {
+            "id": "hydro-c2l1",
+            "title": "Vật liệu và thiết bị cần thiết",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c2l2",
+            "title": "Tự lắp đặt hệ thống thủy canh tĩnh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c2l3",
+            "title": "Tự lắp đặt hệ thống thủy canh hồi lưu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Dung dịch dinh dưỡng",
+        "lessons": [
+          {
+            "id": "hydro-c3l1",
+            "title": "Vai trò của các nguyên tố dinh dưỡng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c3l2",
+            "title": "Cách pha dung dịch thủy canh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c3l3",
+            "title": "Đo và điều chỉnh pH, EC",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Vận hành và Chăm sóc",
+        "lessons": [
+          {
+            "id": "hydro-c4l1",
+            "title": "Ươm cây con cho hệ thống thủy canh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c4l2",
+            "title": "Quản lý sâu bệnh trong thủy canh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "hydro-c4l3",
+            "title": "Thu hoạch và xử lý hệ thống",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "mushroom-v1": {
+    "title": "Kỹ thuật trồng Nấm bào ngư và Nấm rơm",
+    "meta": {
+      "expert": "KS. Trần Thị Bích Thủy",
+      "field": "Trồng trọt",
+      "duration": "6 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1594218840534-31945f1b6238?q=80&w=1939&auto=format&fit=crop",
+    "imageAlt": "Nấm bào ngư đang phát triển",
+    "sapo": "Học quy trình trồng các loại nấm phổ biến như nấm bào ngư, nấm rơm, từ khâu xử lý nguyên liệu, cấy meo đến chăm sóc và thu hái.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Nguyên liệu và Meo giống",
+        "lessons": [
+          {
+            "id": "mushroom-c1l1",
+            "title": "Nguyên liệu trồng nấm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c1l2",
+            "title": "Lựa chọn và bảo quản meo giống",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c1l3",
+            "title": "Xử lý và thanh trùng nguyên liệu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Trồng Nấm Bào Ngư",
+        "lessons": [
+          {
+            "id": "mushroom-c2l1",
+            "title": "Đóng bịch và cấy meo",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c2l2",
+            "title": "Giai đoạn ươm sợi và rạch bịch",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c2l3",
+            "title": "Chăm sóc và thu hái nấm bào ngư",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Trồng Nấm Rơm",
+        "lessons": [
+          {
+            "id": "mushroom-c3l1",
+            "title": "Chuẩn bị mô rơm và cấy meo",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c3l2",
+            "title": "Chăm sóc giai đoạn tơ nấm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c3l3",
+            "title": "Thu hái và bảo quản nấm rơm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Phòng trừ bệnh và thị trường",
+        "lessons": [
+          {
+            "id": "mushroom-c4l1",
+            "title": "Các bệnh thường gặp ở nấm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c4l2",
+            "title": "Sơ chế và đóng gói",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mushroom-c4l3",
+            "title": "Tìm kiếm thị trường đầu ra",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "drone-course-v1": {
+    "title": "Ứng dụng Drone trong nông nghiệp",
+    "meta": {
+      "expert": "Kỹ sư AI Nguyễn Phi Hùng",
+      "field": "Nông nghiệp công nghệ cao",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1621358944805-40a413342217?q=80&w=1932&auto=format&fit=crop",
+    "imageAlt": "Drone đang phun thuốc trên cánh đồng lúa",
+    "sapo": "Tìm hiểu và làm chủ công nghệ sử dụng máy bay không người lái (drone) để phun thuốc, bón phân, và khảo sát sức khỏe cây trồng.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Tổng quan về Drone nông nghiệp",
+        "lessons": [
+          {
+            "id": "drone-c1l1",
+            "title": "Lợi ích của Drone trong nông nghiệp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c1l2",
+            "title": "Các loại Drone và tính năng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c1l3",
+            "title": "Quy định pháp lý về sử dụng Drone",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Kỹ thuật vận hành",
+        "lessons": [
+          {
+            "id": "drone-c2l1",
+            "title": "An toàn bay và bảo trì cơ bản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c2l2",
+            "title": "Thiết lập đường bay tự động",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c2l3",
+            "title": "Kỹ thuật phun thuốc hiệu quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Phân tích dữ liệu ảnh",
+        "lessons": [
+          {
+            "id": "drone-c3l1",
+            "title": "Thu thập dữ liệu ảnh đa phổ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c3l2",
+            "title": "Sử dụng chỉ số NDVI để đánh giá sức khỏe cây",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c3l3",
+            "title": "Tạo bản đồ sức khỏe cây trồng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Hiệu quả kinh tế",
+        "lessons": [
+          {
+            "id": "drone-c4l1",
+            "title": "Phân tích chi phí và lợi ích",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c4l2",
+            "title": "Mô hình kinh doanh dịch vụ Drone",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "drone-c4l3",
+            "title": "Tương lai của Drone trong nông nghiệp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "iot-course-v1": {
+    "title": "Cảm biến IoT và Nông nghiệp chính xác",
+    "meta": {
+      "expert": "Chuyên gia công nghệ Đinh Quang Huy",
+      "field": "Nông nghiệp công nghệ cao",
+      "duration": "9 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1544795594-279376662489?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Một nông dân đang kiểm tra dữ liệu trên máy tính bảng trong trang trại",
+    "sapo": "Học cách ứng dụng các cảm biến IoT để theo dõi độ ẩm đất, nhiệt độ, ánh sáng và tự động hóa hệ thống tưới tiêu, bón phân.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Giới thiệu về IoT nông nghiệp",
+        "lessons": [
+          {
+            "id": "iot-c1l1",
+            "title": "IoT là gì và vai trò trong nông nghiệp?",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c1l2",
+            "title": "Các loại cảm biến phổ biến",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c1l3",
+            "title": "Kiến trúc một hệ thống IoT",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Lắp đặt và Cấu hình",
+        "lessons": [
+          {
+            "id": "iot-c2l1",
+            "title": "Lắp đặt cảm biến độ ẩm đất",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c2l2",
+            "title": "Kết nối cảm biến với bộ điều khiển trung tâm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c2l3",
+            "title": "Thiết lập phần mềm theo dõi",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Tự động hóa",
+        "lessons": [
+          {
+            "id": "iot-c3l1",
+            "title": "Tự động hóa hệ thống tưới nhỏ giọt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c3l2",
+            "title": "Tự động điều khiển quạt, mái che",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c3l3",
+            "title": "Cảnh báo sớm qua điện thoại",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Phân tích dữ liệu",
+        "lessons": [
+          {
+            "id": "iot-c4l1",
+            "title": "Đọc và hiểu biểu đồ dữ liệu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c4l2",
+            "title": "Ra quyết định dựa trên dữ liệu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "iot-c4l3",
+            "title": "Tích hợp IoT và AI",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "cashew-course-v1": {
+    "title": "Thâm canh và Chế biến Điều",
+    "meta": {
+      "expert": "KS. Nguyễn Thế Vinh",
+      "field": "Cây công nghiệp",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1620706857373-53470373e274?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Hạt điều và quả điều",
+    "sapo": "Quy trình kỹ thuật trồng, chăm sóc, thu hoạch cây điều và các phương pháp chế biến hạt điều nhân chất lượng cao.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Trồng và Chăm sóc",
+        "lessons": [
+          {
+            "id": "cashew-c1l1",
+            "title": "Chọn giống và kỹ thuật trồng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c1l2",
+            "title": "Bón phân và tỉa cành tạo tán",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c1l3",
+            "title": "Phòng trừ sâu bệnh hại điều",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Thu hoạch",
+        "lessons": [
+          {
+            "id": "cashew-c2l1",
+            "title": "Xác định thời điểm thu hoạch",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c2l2",
+            "title": "Phương pháp thu hoạch hạt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c2l3",
+            "title": "Sơ chế và phơi khô hạt điều thô",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Chế biến hạt điều",
+        "lessons": [
+          {
+            "id": "cashew-c3l1",
+            "title": "Phân loại hạt điều thô",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c3l2",
+            "title": "Quy trình hấp và cắt tách vỏ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c3l3",
+            "title": "Sấy và bóc vỏ lụa",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Chất lượng và Thị trường",
+        "lessons": [
+          {
+            "id": "cashew-c4l1",
+            "title": "Phân loại hạt điều nhân",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c4l2",
+            "title": "Đóng gói và bảo quản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "cashew-c4l3",
+            "title": "Tiêu chuẩn xuất khẩu hạt điều",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "rubber-course-v1": {
+    "title": "Kỹ thuật khai thác mủ Cao su",
+    "meta": {
+      "expert": "Chuyên gia Huỳnh Văn Lợi",
+      "field": "Cây công nghiệp",
+      "duration": "7 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1620673322108-a51b53c7c4e5?q=80&w=1974&auto=format&fit=crop",
+    "imageAlt": "Khai thác mủ từ cây cao su",
+    "sapo": "Hướng dẫn chi tiết kỹ thuật cạo mủ cao su đúng cách, sử dụng thuốc kích thích mủ và quản lý vườn cây trong giai đoạn khai thác.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chuẩn bị khai thác",
+        "lessons": [
+          {
+            "id": "rubber-c1l1",
+            "title": "Xác định cây đủ tiêu chuẩn khai thác",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c1l2",
+            "title": "Dụng cụ và trang thiết bị cần thiết",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c1l3",
+            "title": "Mở miệng cạo và trang bị kiềng, chén",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Kỹ thuật cạo mủ",
+        "lessons": [
+          {
+            "id": "rubber-c2l1",
+            "title": "Các chế độ cạo mủ phổ biến",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c2l2",
+            "title": "Thao tác cạo mủ đúng kỹ thuật",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c2l3",
+            "title": "Những lỗi thường gặp khi cạo mủ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý vườn cây khai thác",
+        "lessons": [
+          {
+            "id": "rubber-c3l1",
+            "title": "Bón phân cho cao su kinh doanh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c3l2",
+            "title": "Sử dụng chất kích thích mủ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c3l3",
+            "title": "Phòng trị bệnh loét sọc mặt cạo",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và Chất lượng",
+        "lessons": [
+          {
+            "id": "rubber-c4l1",
+            "title": "Thu hoạch và vận chuyển mủ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c4l2",
+            "title": "Pha chế chất chống đông",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "rubber-c4l3",
+            "title": "Đánh giá chất lượng mủ (độ DRC)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "mango-course-v1": {
+    "title": "Trồng Xoài Cát Hòa Lộc theo VietGAP",
+    "meta": {
+      "expert": "ThS. Võ Thanh Phong",
+      "field": "Cây ăn quả",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1591073113125-e4571194235b?q=80&w=1935&auto=format&fit=crop",
+    "imageAlt": "Những quả xoài chín vàng trên cây",
+    "sapo": "Quy trình canh tác xoài Cát Hòa Lộc tiên tiến, từ kỹ thuật xử lý ra hoa, bao trái đến các biện pháp phòng trừ sâu bệnh để đạt chuẩn xuất khẩu.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Giống và Trồng",
+        "lessons": [
+          {
+            "id": "mango-c1l1",
+            "title": "Chọn giống và thiết kế vườn xoài",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c1l2",
+            "title": "Kỹ thuật trồng và bón lót",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c1l3",
+            "title": "Tạo tán và tỉa cành cho cây con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăm sóc định kỳ",
+        "lessons": [
+          {
+            "id": "mango-c2l1",
+            "title": "Bón phân và tưới nước",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c2l2",
+            "title": "Quản lý sâu bệnh hại thân lá",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c2l3",
+            "title": "Tỉa cành sau thu hoạch",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Xử lý ra hoa và đậu quả",
+        "lessons": [
+          {
+            "id": "mango-c3l1",
+            "title": "Kỹ thuật xử lý ra hoa nghịch vụ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c3l2",
+            "title": "Tăng đậu quả và nuôi dưỡng quả non",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c3l3",
+            "title": "Kỹ thuật bao trái và phòng trừ ruồi đục quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và Bảo quản",
+        "lessons": [
+          {
+            "id": "mango-c4l1",
+            "title": "Xác định độ chín và thu hái",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c4l2",
+            "title": "Xử lý sau thu hoạch (rửa, làm khô)",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "mango-c4l3",
+            "title": "Đóng gói và bảo quản xoài",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "duck-farming-v1": {
+    "title": "Chăn nuôi Vịt an toàn sinh học",
+    "meta": {
+      "expert": "KS. Mai Anh Tuấn",
+      "field": "Chăn nuôi",
+      "duration": "7 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1563502392901-2d9987285bcb?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Đàn vịt đang bơi trong ao",
+    "sapo": "Hướng dẫn kỹ thuật chăn nuôi vịt thịt và vịt đẻ trứng an toàn, hiệu quả, đặc biệt là các biện pháp phòng chống cúm gia cầm.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chuẩn bị chăn nuôi",
+        "lessons": [
+          {
+            "id": "duck-c1l1",
+            "title": "Chọn giống vịt phù hợp",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c1l2",
+            "title": "Thiết kế chuồng trại và ao",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c1l3",
+            "title": "Kỹ thuật úm vịt con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Dinh dưỡng",
+        "lessons": [
+          {
+            "id": "duck-c2l1",
+            "title": "Nhu cầu dinh dưỡng của vịt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c2l2",
+            "title": "Các loại thức ăn cho vịt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c2l3",
+            "title": "Kỹ thuật cho ăn và quản lý",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý sức khỏe",
+        "lessons": [
+          {
+            "id": "duck-c3l1",
+            "title": "Vệ sinh và sát trùng chuồng trại",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c3l2",
+            "title": "Lịch vaccine cho vịt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c3l3",
+            "title": "Phòng chống bệnh cúm gia cầm H5N1",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Chăn nuôi vịt đẻ",
+        "lessons": [
+          {
+            "id": "duck-c4l1",
+            "title": "Chăm sóc vịt giai đoạn hậu bị",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c4l2",
+            "title": "Dinh dưỡng cho vịt đẻ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "duck-c4l3",
+            "title": "Thu hoạch và bảo quản trứng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "goat-farming-v1": {
+    "title": "Kỹ thuật chăn nuôi Dê",
+    "meta": {
+      "expert": "Chuyên gia Trần Văn Nam",
+      "field": "Chăn nuôi",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1524024922129-528577023b37?q=80&w=2073&auto=format&fit=crop",
+    "imageAlt": "Một con dê đang ăn cỏ",
+    "sapo": "Khóa học toàn diện về chăn nuôi dê, từ chọn giống, làm chuồng trại, trồng cỏ, đến phòng bệnh và kỹ thuật sinh sản.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Giống và Chuồng trại",
+        "lessons": [
+          {
+            "id": "goat-c1l1",
+            "title": "Các giống dê phổ biến",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c1l2",
+            "title": "Thiết kế chuồng trại trên sàn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c1l3",
+            "title": "Trồng và chế biến thức ăn thô xanh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Dinh dưỡng và Chăm sóc",
+        "lessons": [
+          {
+            "id": "goat-c2l1",
+            "title": "Nhu cầu dinh dưỡng của dê",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c2l2",
+            "title": "Phối trộn thức ăn tinh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c2l3",
+            "title": "Chăm sóc dê con và dê cái sinh sản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Sức khỏe và Sinh sản",
+        "lessons": [
+          {
+            "id": "goat-c3l1",
+            "title": "Các bệnh thường gặp ở dê",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c3l2",
+            "title": "Tẩy giun sán và phòng bệnh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c3l3",
+            "title": "Quản lý sinh sản và phối giống",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Khai thác sản phẩm",
+        "lessons": [
+          {
+            "id": "goat-c4l1",
+            "title": "Nuôi dê lấy thịt",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c4l2",
+            "title": "Nuôi dê lấy sữa",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "goat-c4l3",
+            "title": "Xử lý phân dê làm phân bón",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "finance-course-v1": {
+    "title": "Quản lý tài chính cho nông hộ",
+    "meta": {
+      "expert": "Chuyên gia tài chính Đào Thu Trang",
+      "field": "Kinh tế nông nghiệp",
+      "duration": "6 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=2070&auto=format&fit=crop",
+    "imageAlt": "Một người đang tính toán với máy tính và sổ sách",
+    "sapo": "Học cách quản lý dòng tiền, ghi chép sổ sách, tính toán chi phí - lợi nhuận, và tiếp cận các nguồn vốn vay ưu đãi cho nông nghiệp.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Nguyên tắc cơ bản",
+        "lessons": [
+          {
+            "id": "finance-c1l1",
+            "title": "Tại sao cần quản lý tài chính?",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c1l2",
+            "title": "Phân biệt chi phí và đầu tư",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c1l3",
+            "title": "Các công cụ ghi chép đơn giản",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Lập kế hoạch và Dự toán",
+        "lessons": [
+          {
+            "id": "finance-c2l1",
+            "title": "Lập kế hoạch sản xuất kinh doanh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c2l2",
+            "title": "Dự toán chi phí cho một vụ mùa",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c2l3",
+            "title": "Phân tích điểm hòa vốn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Quản lý dòng tiền",
+        "lessons": [
+          {
+            "id": "finance-c3l1",
+            "title": "Theo dõi thu chi hàng ngày",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c3l2",
+            "title": "Tối ưu hóa chi phí sản xuất",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c3l3",
+            "title": "Lập quỹ dự phòng rủi ro",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Tiếp cận nguồn vốn",
+        "lessons": [
+          {
+            "id": "finance-c4l1",
+            "title": "Các nguồn vốn vay ưu đãi",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c4l2",
+            "title": "Xây dựng phương án vay vốn",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "finance-c4l3",
+            "title": "Quản lý và trả nợ hiệu quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "orange-course-v1": {
+    "title": "Canh tác Cam sành theo tiêu chuẩn VietGAP",
+    "meta": {
+      "expert": "KS. Bùi Thế Trung",
+      "field": "Cây ăn quả",
+      "duration": "8 giờ"
+    },
+    "image": "https://images.unsplash.com/photo-1611080279831-9a72315a6b09?q=80&w=1974&auto=format&fit=crop",
+    "imageAlt": "Những quả cam sành mọng nước trên cây",
+    "sapo": "Quy trình toàn diện về trồng, chăm sóc, và phòng trừ sâu bệnh cho cây cam sành, giúp nâng cao năng suất, chất lượng và giá trị thương phẩm.",
+    "quizUrl": null,
+    "chapters": [
+      {
+        "title": "Chương 1: Chuẩn bị vườn trồng",
+        "lessons": [
+          {
+            "id": "orange-c1l1",
+            "title": "Chọn đất và chuẩn bị liếp trồng",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c1l2",
+            "title": "Lựa chọn giống cam sạch bệnh",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c1l3",
+            "title": "Kỹ thuật trồng và chăm sóc cây con",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 2: Chăm sóc cây trưởng thành",
+        "lessons": [
+          {
+            "id": "orange-c2l1",
+            "title": "Tưới nước và quản lý độ ẩm",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c2l2",
+            "title": "Bón phân và tỉa cành tạo tán",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c2l3",
+            "title": "Xử lý ra hoa và tăng đậu quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 3: Phòng trừ sâu bệnh hại",
+        "lessons": [
+          {
+            "id": "orange-c3l1",
+            "title": "Bệnh vàng lá greening và cách phòng trị",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c3l2",
+            "title": "Phòng trừ sâu vẽ bùa, nhện đỏ",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c3l3",
+            "title": "Các bệnh loét, ghẻ và thối quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      },
+      {
+        "title": "Chương 4: Thu hoạch và Bảo quản",
+        "lessons": [
+          {
+            "id": "orange-c4l1",
+            "title": "Xác định độ chín và kỹ thuật thu hái",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c4l2",
+            "title": "Phân loại và sơ chế quả",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          },
+          {
+            "id": "orange-c4l3",
+            "title": "Bảo quản quả tươi lâu",
+            "content": "<p>Nội dung đang được cập nhật...</p>"
+          }
+        ]
+      }
+    ]
+  }
+}
