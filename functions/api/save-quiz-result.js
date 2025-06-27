@@ -24,7 +24,7 @@ export const onRequestPost = async ({ request, env }) => {
   const authHeader = request.headers.get("Authorization");
   if (!authHeader) {
     return new Response(
-      JSON.stringify({ message: "Missing authorization header." }),
+      JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }),
       { status: 401, headers }
     );
   }
@@ -35,10 +35,13 @@ export const onRequestPost = async ({ request, env }) => {
   } = await supabase.auth.getUser(token);
 
   if (userError || !user) {
-    return new Response(JSON.stringify({ message: "Invalid token." }), {
-      status: 401,
-      headers,
-    });
+    return new Response(
+      JSON.stringify({ message: "Mã xác thực không hợp lệ." }),
+      {
+        status: 401,
+        headers,
+      }
+    );
   }
 
   try {
@@ -53,7 +56,7 @@ export const onRequestPost = async ({ request, env }) => {
       );
     }
 
-    // UPDATED: Always insert a new record for each attempt.
+    // Always insert a new record for each attempt.
     const { data, error } = await supabase.from("quiz_results").insert({
       user_id: user.id, // Use the user ID from the token
       quiz_id: quizId,
@@ -62,7 +65,14 @@ export const onRequestPost = async ({ request, env }) => {
 
     if (error) {
       console.error("Supabase error saving quiz result:", error);
-      throw error;
+      // CẬP NHẬT: Trả về thông báo lỗi chi tiết từ Supabase để dễ gỡ lỗi
+      return new Response(
+        JSON.stringify({ message: `Lỗi Cơ sở dữ liệu: ${error.message}` }),
+        {
+          status: 500,
+          headers,
+        }
+      );
     }
 
     return new Response(
@@ -71,8 +81,9 @@ export const onRequestPost = async ({ request, env }) => {
     );
   } catch (e) {
     console.error("Server error saving quiz result:", e);
+    // CẬP NHẬT: Trả về thông báo lỗi chi tiết từ máy chủ
     return new Response(
-      JSON.stringify({ message: "Đã xảy ra lỗi hệ thống khi lưu kết quả." }),
+      JSON.stringify({ message: `Lỗi Máy chủ: ${e.message}` }),
       { status: 500, headers }
     );
   }

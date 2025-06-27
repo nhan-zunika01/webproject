@@ -9,7 +9,7 @@
     "image": "https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop",
     "imageAlt": "Cánh đồng lúa xanh mướt",
     "sapo": "Khóa học này cung cấp kiến thức toàn diện từ cơ bản đến nâng cao về kỹ thuật canh tác lúa, giúp bà con nông dân tối ưu hóa năng suất, giảm chi phí và canh tác bền vững theo các tiêu chuẩn hiện đại.",
-    "quizUrl": "quiz.html",
+    "quizId": "rice-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuẩn bị đất và chọn giống",
@@ -103,7 +103,7 @@
     "image": "https://images.unsplash.com/photo-1587303213013-106c4a86a644?q=80&w=1974&auto=format&fit=crop",
     "imageAlt": "Đàn gà khỏe mạnh trong trang trại",
     "sapo": "Trang bị kiến thức và kỹ năng thực hành chăn nuôi gà theo hướng an toàn sinh học, giúp phòng chống dịch bệnh hiệu quả, nâng cao chất lượng sản phẩm và tối đa hóa lợi nhuận.",
-    "quizUrl": null,
+    "quizId": "chicken-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Thiết kế và xây dựng chuồng trại",
@@ -197,7 +197,7 @@
     "image": "https://images.unsplash.com/photo-1599399325946-53243f789547?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Vườn cà phê với những quả chín đỏ",
     "sapo": "Học cách trồng và chăm sóc cà phê Robusta để đạt năng suất cao, chất lượng tốt và thân thiện với môi trường, đáp ứng các tiêu chuẩn xuất khẩu.",
-    "quizUrl": null,
+    "quizId": "coffee-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Chọn giống và thiết kế vườn",
@@ -291,7 +291,7 @@
     "image": "https://images.unsplash.com/photo-1629033819974-272d3637651a?q=80&w=1964&auto=format&fit=crop",
     "imageAlt": "Dây hồ tiêu đen trên trụ",
     "sapo": "Cung cấp quy trình kỹ thuật trồng và chăm sóc hồ tiêu tiên tiến, tập trung vào việc phòng trừ bệnh hại và tạo ra sản phẩm an toàn, chất lượng cao.",
-    "quizUrl": null,
+    "quizId": "pepper-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Giống và Trụ tiêu",
@@ -385,7 +385,7 @@
     "image": "https://images.unsplash.com/photo-1617124694534-17ec933e4555?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Thanh long ruột đỏ trên cây",
     "sapo": "Hướng dẫn chi tiết kỹ thuật trồng và chăm sóc thanh long ruột đỏ theo tiêu chuẩn GlobalGAP, đặc biệt là kỹ thuật xử lý ra hoa trái vụ.",
-    "quizUrl": null,
+    "quizId": "dragonfruit-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Thiết lập vườn trồng",
@@ -479,7 +479,7 @@
     "image": "https://images.unsplash.com/photo-1624334321948-cb28859e9c12?q=80&w=1974&auto=format&fit=crop",
     "imageAlt": "Những quả bưởi trên cây",
     "sapo": "Khóa học cung cấp kiến thức toàn diện về kỹ thuật trồng, chăm sóc, và phòng trừ sâu bệnh cho cây bưởi da xanh để đạt năng suất và chất lượng cao.",
-    "quizUrl": null,
+    "quizId": "pomelo-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuẩn bị trồng",
@@ -573,7 +573,7 @@
     "image": "https://images.unsplash.com/photo-1608783459362-34d1d91b5a2f?q=80&w=1964&auto=format&fit=crop",
     "imageAlt": "Quả sầu riêng trên cây",
     "sapo": "Làm chủ kỹ thuật trồng và chăm sóc sầu riêng, từ khâu chọn giống, xử lý ra hoa đến phòng trừ bệnh xì mủ, thán thư để tối đa hóa lợi nhuận.",
-    "quizUrl": null,
+    "quizId": "durian-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Kiến thức cơ bản",
@@ -667,7 +667,7 @@
     "image": "https://images.unsplash.com/photo-1516427132953-b54920d912a7?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Đàn heo khỏe mạnh trong chuồng sạch",
     "sapo": "Hướng dẫn xây dựng quy trình chăn nuôi heo thịt khép kín, an toàn sinh học, phòng chống dịch tả heo châu Phi và các dịch bệnh nguy hiểm khác.",
-    "quizUrl": null,
+    "quizId": "pig-farming-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuồng trại và Giống",
@@ -761,7 +761,7 @@
     "image": "https://images.unsplash.com/photo-1590390311824-aZ73320f7c2?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Đàn bò đang gặm cỏ trên đồng",
     "sapo": "Khóa học tổng hợp về kỹ thuật chăn nuôi bò, từ bò thịt vỗ béo đến bò sữa cao sản, giúp người nuôi nâng cao hiệu quả kinh tế.",
-    "quizUrl": null,
+    "quizId": "cattle-farming-v1",
     "chapters": [
       {
         "title": "Chương 1: Cơ sở chăn nuôi",
@@ -855,7 +855,7 @@
     "image": "https://images.unsplash.com/photo-1594917951152-7b5634a41e6c?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Một tay đang cầm một con tôm thẻ chân trắng",
     "sapo": "Làm chủ quy trình nuôi tôm thẻ chân trắng 2-3 giai đoạn, ứng dụng công nghệ biofloc, lót bạt HDPE để đạt năng suất cao và kiểm soát dịch bệnh.",
-    "quizUrl": null,
+    "quizId": "shrimp-farming-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuẩn bị ao nuôi",
@@ -949,7 +949,7 @@
     "image": "https://plus.unsplash.com/premium_photo-1661963953696-e137452d2f7f?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Đàn cá tra trong ao nuôi",
     "sapo": "Cung cấp quy trình nuôi cá tra thâm canh, quản lý môi trường nước, phòng trị bệnh và đáp ứng các tiêu chuẩn an toàn thực phẩm cho xuất khẩu.",
-    "quizUrl": null,
+    "quizId": "fish-farming-v1",
     "chapters": [
       {
         "title": "Chương 1: Cơ sở hạ tầng",
@@ -1043,7 +1043,7 @@
     "image": "https://images.unsplash.com/photo-1587351173893-a99b421714b6?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Rau hữu cơ tươi xanh trong nhà kính",
     "sapo": "Làm chủ quy trình trồng rau hữu cơ từ khâu làm đất, chọn giống, tự làm phân bón hữu cơ đến phòng trừ sâu bệnh bằng biện pháp sinh học.",
-    "quizUrl": null,
+    "quizId": "organic-veg-v1",
     "chapters": [
       {
         "title": "Chương 1: Nền tảng hữu cơ",
@@ -1137,7 +1137,7 @@
     "image": "https://images.unsplash.com/photo-1605578334826-42756ad28a42?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Hệ thống rau thủy canh trong trang trại",
     "sapo": "Khám phá và ứng dụng kỹ thuật trồng rau bằng phương pháp thủy canh, từ quy mô gia đình đến trang trại thương mại.",
-    "quizUrl": null,
+    "quizId": "hydroponics-v1",
     "chapters": [
       {
         "title": "Chương 1: Giới thiệu về thủy canh",
@@ -1231,7 +1231,7 @@
     "image": "https://images.unsplash.com/photo-1594218840534-31945f1b6238?q=80&w=1939&auto=format&fit=crop",
     "imageAlt": "Nấm bào ngư đang phát triển",
     "sapo": "Học quy trình trồng các loại nấm phổ biến như nấm bào ngư, nấm rơm, từ khâu xử lý nguyên liệu, cấy meo đến chăm sóc và thu hái.",
-    "quizUrl": null,
+    "quizId": "mushroom-v1",
     "chapters": [
       {
         "title": "Chương 1: Nguyên liệu và Meo giống",
@@ -1325,7 +1325,7 @@
     "image": "https://images.unsplash.com/photo-1621358944805-40a413342217?q=80&w=1932&auto=format&fit=crop",
     "imageAlt": "Drone đang phun thuốc trên cánh đồng lúa",
     "sapo": "Tìm hiểu và làm chủ công nghệ sử dụng máy bay không người lái (drone) để phun thuốc, bón phân, và khảo sát sức khỏe cây trồng.",
-    "quizUrl": null,
+    "quizId": "drone-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Tổng quan về Drone nông nghiệp",
@@ -1419,7 +1419,7 @@
     "image": "https://images.unsplash.com/photo-1544795594-279376662489?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Một nông dân đang kiểm tra dữ liệu trên máy tính bảng trong trang trại",
     "sapo": "Học cách ứng dụng các cảm biến IoT để theo dõi độ ẩm đất, nhiệt độ, ánh sáng và tự động hóa hệ thống tưới tiêu, bón phân.",
-    "quizUrl": null,
+    "quizId": "iot-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Giới thiệu về IoT nông nghiệp",
@@ -1513,7 +1513,7 @@
     "image": "https://images.unsplash.com/photo-1620706857373-53470373e274?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Hạt điều và quả điều",
     "sapo": "Quy trình kỹ thuật trồng, chăm sóc, thu hoạch cây điều và các phương pháp chế biến hạt điều nhân chất lượng cao.",
-    "quizUrl": null,
+    "quizId": "cashew-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Trồng và Chăm sóc",
@@ -1607,7 +1607,7 @@
     "image": "https://images.unsplash.com/photo-1620673322108-a51b53c7c4e5?q=80&w=1974&auto=format&fit=crop",
     "imageAlt": "Khai thác mủ từ cây cao su",
     "sapo": "Hướng dẫn chi tiết kỹ thuật cạo mủ cao su đúng cách, sử dụng thuốc kích thích mủ và quản lý vườn cây trong giai đoạn khai thác.",
-    "quizUrl": null,
+    "quizId": "rubber-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuẩn bị khai thác",
@@ -1701,7 +1701,7 @@
     "image": "https://images.unsplash.com/photo-1591073113125-e4571194235b?q=80&w=1935&auto=format&fit=crop",
     "imageAlt": "Những quả xoài chín vàng trên cây",
     "sapo": "Quy trình canh tác xoài Cát Hòa Lộc tiên tiến, từ kỹ thuật xử lý ra hoa, bao trái đến các biện pháp phòng trừ sâu bệnh để đạt chuẩn xuất khẩu.",
-    "quizUrl": null,
+    "quizId": "mango-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Giống và Trồng",
@@ -1795,7 +1795,7 @@
     "image": "https://images.unsplash.com/photo-1563502392901-2d9987285bcb?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Đàn vịt đang bơi trong ao",
     "sapo": "Hướng dẫn kỹ thuật chăn nuôi vịt thịt và vịt đẻ trứng an toàn, hiệu quả, đặc biệt là các biện pháp phòng chống cúm gia cầm.",
-    "quizUrl": null,
+    "quizId": "duck-farming-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuẩn bị chăn nuôi",
@@ -1889,7 +1889,7 @@
     "image": "https://images.unsplash.com/photo-1524024922129-528577023b37?q=80&w=2073&auto=format&fit=crop",
     "imageAlt": "Một con dê đang ăn cỏ",
     "sapo": "Khóa học toàn diện về chăn nuôi dê, từ chọn giống, làm chuồng trại, trồng cỏ, đến phòng bệnh và kỹ thuật sinh sản.",
-    "quizUrl": null,
+    "quizId": "goat-farming-v1",
     "chapters": [
       {
         "title": "Chương 1: Giống và Chuồng trại",
@@ -1983,7 +1983,7 @@
     "image": "https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=2070&auto=format&fit=crop",
     "imageAlt": "Một người đang tính toán với máy tính và sổ sách",
     "sapo": "Học cách quản lý dòng tiền, ghi chép sổ sách, tính toán chi phí - lợi nhuận, và tiếp cận các nguồn vốn vay ưu đãi cho nông nghiệp.",
-    "quizUrl": null,
+    "quizId": "finance-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Nguyên tắc cơ bản",
@@ -2077,7 +2077,7 @@
     "image": "https://images.unsplash.com/photo-1611080279831-9a72315a6b09?q=80&w=1974&auto=format&fit=crop",
     "imageAlt": "Những quả cam sành mọng nước trên cây",
     "sapo": "Quy trình toàn diện về trồng, chăm sóc, và phòng trừ sâu bệnh cho cây cam sành, giúp nâng cao năng suất, chất lượng và giá trị thương phẩm.",
-    "quizUrl": null,
+    "quizId": "orange-course-v1",
     "chapters": [
       {
         "title": "Chương 1: Chuẩn bị vườn trồng",

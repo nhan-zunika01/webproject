@@ -108,11 +108,11 @@ function initializeCoursePage(allCourses) {
       courseImage.alt = course.imageAlt;
       courseSapo.textContent = course.sapo;
 
-      if (course.quizUrl) {
+      if (course.quizId) {
         quizCtaContainer.innerHTML = `
                   <h3>Kiểm tra kiến thức của bạn!</h3>
                   <p>Sau khi hoàn thành khóa học, hãy làm bài kiểm tra để củng cố kiến thức.</p>
-                  <a href="${course.quizUrl}" class="btn btn-primary">Làm bài kiểm tra ngay</a>`;
+                  <a href="${course.quizId}" class="btn btn-primary">Làm bài kiểm tra ngay</a>`;
       } else {
         quizCtaContainer.innerHTML = `
                   <h3>Kiểm tra kiến thức của bạn!</h3>

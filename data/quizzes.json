@@ -1,0 +1,3865 @@
+{
+  "rice-course-v1": {
+    "title": "Kiểm tra: Kỹ thuật trồng lúa hiệu quả",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Giai đoạn nào cây lúa cần nhiều nước nhất?",
+        "options": ["Làm đòng - trổ bông", "Mạ", "Đẻ nhánh", "Chín sáp"],
+        "answer": 0
+      },
+      {
+        "question": "Loại phân bón nào quan trọng nhất cho sự phát triển của cây lúa?",
+        "options": [
+          "Phân Lân (P)",
+          "Phân Kali (K)",
+          "Phân Đạm (N)",
+          "Phân vi lượng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sâu đục thân gây hại cho cây lúa ở giai đoạn nào?",
+        "options": [
+          "Chỉ giai đoạn mạ",
+          "Chỉ giai đoạn trổ bông",
+          "Mọi giai đoạn",
+          "Chỉ giai đoạn chín"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh đạo ôn trên lúa thường do tác nhân nào gây ra?",
+        "options": ["Vi khuẩn", "Virus", "Nấm", "Côn trùng"],
+        "answer": 2
+      },
+      {
+        "question": "Mật độ sạ lúa thích hợp là bao nhiêu?",
+        "options": [
+          "20-40 kg/ha",
+          "80-120 kg/ha",
+          "200-250 kg/ha",
+          "Trên 300 kg/ha"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Biện pháp '3 giảm 3 tăng' trong canh tác lúa là gì?",
+        "options": [
+          "Giảm đạm, sâu bệnh, thất thoát; Tăng năng suất, chất lượng, hiệu quả",
+          "Giảm nước, phân, thuốc; Tăng giống, công, vốn",
+          "Giảm giống, thuốc trừ sâu, phân đạm; Tăng năng suất, chất lượng, lợi nhuận",
+          "Giảm chi phí, thời gian, công sức; Tăng thu nhập, an toàn, bền vững"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thời điểm thu hoạch lúa tốt nhất là khi nào?",
+        "options": [
+          "Khi lúa còn xanh",
+          "Khi 85-90% số hạt trên bông đã chín vàng",
+          "Khi 100% hạt đã chín vàng",
+          "Bất kỳ lúc nào sau khi trổ bông"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Phương pháp tưới 'ngập khô xen kẽ' giúp gì?",
+        "options": [
+          "Tăng sâu bệnh",
+          "Lãng phí nước",
+          "Giảm phát thải khí nhà kính và tiết kiệm nước",
+          "Làm đất chai cứng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Cây lúa thuộc họ thực vật nào?",
+        "options": ["Họ Cà", "Họ Đậu", "Họ Hòa thảo (Cỏ)", "Họ Bầu bí"],
+        "answer": 2
+      },
+      {
+        "question": "Rầy nâu hại lúa bằng cách nào?",
+        "options": [
+          "Ăn lá",
+          "Cắn rễ",
+          "Chích hút nhựa cây và truyền bệnh virus",
+          "Đục vào thân cây"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Làm đất kỹ trước khi gieo sạ có tác dụng gì?",
+        "options": [
+          "Tăng cỏ dại",
+          "Tạo điều kiện cho rễ phát triển, diệt mầm bệnh",
+          "Làm đất mất dinh dưỡng",
+          "Không có tác dụng gì"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Phân chuồng hoai mục tốt cho đất vì:",
+        "options": [
+          "Cung cấp nhiều đạm tức thì",
+          "Làm chua đất",
+          "Cải tạo đất, tăng độ phì nhiêu, cung cấp vi sinh vật có lợi",
+          "Không có lợi ích"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bón vôi cho đất trồng lúa nhằm mục đích gì?",
+        "options": [
+          "Tăng độ phì nhiêu",
+          "Cung cấp dinh dưỡng",
+          "Khử chua, hạ phèn cho đất",
+          "Diệt côn trùng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Giống lúa kháng sâu bệnh có nghĩa là gì?",
+        "options": [
+          "Không bao giờ bị sâu bệnh",
+          "Có khả năng chống chịu sâu bệnh tốt hơn giống thường",
+          "Chỉ cần bón ít phân hơn",
+          "Năng suất luôn cao hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giai đoạn 'ngậm sữa' của cây lúa là giai đoạn nào?",
+        "options": [
+          "Trước khi trổ bông",
+          "Sau khi thụ phấn, hạt lúa bắt đầu tích lũy tinh bột dạng lỏng",
+          "Khi hạt lúa cứng lại",
+          "Lúc cây đẻ nhánh"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao cần phải quản lý cỏ dại trên ruộng lúa?",
+        "options": [
+          "Để ruộng đẹp hơn",
+          "Cỏ dại không ảnh hưởng gì",
+          "Cỏ dại cạnh tranh dinh dưỡng, ánh sáng, nước với cây lúa",
+          "Cỏ dại giúp giữ ẩm cho đất"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Nhiệt độ thích hợp cho sự sinh trưởng của cây lúa là khoảng bao nhiêu?",
+        "options": ["Dưới 15°C", "15-20°C", "25-32°C", "Trên 40°C"],
+        "answer": 2
+      },
+      {
+        "question": "Bón phân không cân đối (thừa đạm) sẽ dẫn đến hậu quả gì?",
+        "options": [
+          "Cây lúa cứng cáp, ít sâu bệnh",
+          "Lúa chín sớm hơn",
+          "Cây lúa yếu, dễ đổ ngã và dễ bị sâu bệnh tấn công",
+          "Không ảnh hưởng gì"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thuật ngữ 'lúa chét' có nghĩa là gì?",
+        "options": [
+          "Một giống lúa mới",
+          "Lúa mọc từ gốc rạ của vụ trước",
+          "Lúa bị bệnh",
+          "Lúa trồng trên cạn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mục đích của việc phơi thóc sau khi thu hoạch là gì?",
+        "options": [
+          "Để thóc có màu đẹp hơn",
+          "Giảm độ ẩm của hạt để dễ bảo quản, tránh nấm mốc",
+          "Làm tăng trọng lượng",
+          "Không cần thiết"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "chicken-course-v1": {
+    "title": "Kiểm tra: Chăn nuôi gà an toàn sinh học",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Hướng chuồng nào được khuyến khích nhất cho chăn nuôi gà ở Việt Nam?",
+        "options": [
+          "Hướng Bắc",
+          "Hướng Tây",
+          "Hướng Đông hoặc Đông-Nam",
+          "Hướng bất kỳ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Mật độ chăn nuôi gà thịt công nghiệp phù hợp là bao nhiêu?",
+        "options": ["1-2 con/m²", "3-5 con/m²", "8-10 con/m²", "15-20 con/m²"],
+        "answer": 2
+      },
+      {
+        "question": "Nhiệt độ tuần đầu tiên trong quây úm gà con cần duy trì ở mức nào?",
+        "options": ["20-22°C", "25-27°C", "28-30°C", "32-35°C"],
+        "answer": 3
+      },
+      {
+        "question": "Vaccine ND-IB giúp phòng bệnh nào cho gà?",
+        "options": [
+          "Gumboro và Cúm gia cầm",
+          "Newcastle và Viêm phế quản truyền nhiễm",
+          "Đậu gà và Tụ huyết trùng",
+          "Tiêu chảy và Thương hàn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "An toàn sinh học trong chăn nuôi có nghĩa là gì?",
+        "options": [
+          "Chỉ cho gà ăn thức ăn hữu cơ",
+          "Tổng hợp các biện pháp ngăn chặn sự xâm nhập và lây lan của mầm bệnh",
+          "Chỉ sử dụng thuốc nam để trị bệnh",
+          "Nuôi gà với mật độ rất thưa"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mục đích chính của việc để trống chuồng giữa hai lứa nuôi là gì?",
+        "options": [
+          "Để sửa chữa chuồng trại",
+          "Để chuồng được nghỉ ngơi",
+          "Để cắt đứt vòng đời của mầm bệnh",
+          "Không có mục đích cụ thể"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thành phần dinh dưỡng nào gà đẻ cần nhiều nhất để tạo vỏ trứng?",
+        "options": ["Protein", "Năng lượng", "Vitamin", "Canxi"],
+        "answer": 3
+      },
+      {
+        "question": "Khi gà con tụm lại dưới đèn sưởi, điều đó có nghĩa là gì?",
+        "options": [
+          "Nhiệt độ quá nóng",
+          "Nhiệt độ phù hợp",
+          "Nhiệt độ quá lạnh",
+          "Gà bị bệnh"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Giống gà nào sau đây là giống chuyên trứng nổi tiếng?",
+        "options": [
+          "Gà Cobb 500",
+          "Gà Ri",
+          "Gà Ai Cập (Leghorn)",
+          "Gà Đông Tảo"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Nguyên tắc 'Cùng vào - Cùng ra' có ý nghĩa gì?",
+        "options": [
+          "Mua giống và bán gà cùng một ngày",
+          "Nuôi cùng một lứa gà, xuất bán cùng lúc và thực hiện vệ sinh trước khi nhập lứa mới",
+          "Mở cửa chuồng và đóng cửa chuồng cùng một lúc",
+          "Cho ăn và cho uống cùng một thời điểm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Chất độn chuồng (litter) như trấu, mùn cưa có tác dụng chính là gì?",
+        "options": [
+          "Làm thức ăn cho gà",
+          "Giữ ấm và thấm hút chất thải",
+          "Làm cho chuồng đẹp hơn",
+          "Để gà không bị trơn trượt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc chiếu sáng 24/24 trong 3 ngày đầu úm gà có mục đích gì?",
+        "options": [
+          "Để xua đuổi chuột",
+          "Để gà không ngủ",
+          "Để gà quen với máng ăn, máng uống",
+          "Để tiết kiệm điện"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Đặc điểm nào sau đây KHÔNG phải là tiêu chí chọn gà con khỏe mạnh?",
+        "options": [
+          "Nhanh nhẹn",
+          "Lông ướt và bết",
+          "Mắt sáng",
+          "Rốn kín và khô"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Thức ăn tự phối trộn có ưu điểm gì so với thức ăn công nghiệp?",
+        "options": [
+          "Dinh dưỡng cân đối hơn",
+          "Tận dụng được nguyên liệu địa phương, giảm chi phí",
+          "Dễ bảo quản hơn",
+          "Gà ăn nhiều hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao nên treo máng ăn, máng uống ngang tầm lưng của gà?",
+        "options": [
+          "Để gà phải với lên ăn",
+          "Để tránh làm rơi vãi thức ăn và nước uống",
+          "Để gà không nhìn thấy thức ăn",
+          "Không có lý do cụ thể"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Hố sát trùng ở cổng trại có tác dụng gì?",
+        "options": [
+          "Để rửa xe",
+          "Để chứa nước",
+          "Để tiêu diệt mầm bệnh trên giày dép, bánh xe",
+          "Để trang trí"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Gà ISA Brown là giống gà chuyên dụng cho mục đích gì?",
+        "options": ["Chuyên thịt", "Chuyên trứng", "Kiêm dụng", "Gà chọi"],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh Gumboro (IBD) trên gà chủ yếu tấn công vào cơ quan nào?",
+        "options": [
+          "Hệ hô hấp",
+          "Hệ tiêu hóa",
+          "Túi Fabricius (cơ quan miễn dịch)",
+          "Hệ thần kinh"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi nào nên thực hiện vệ sinh, sát trùng toàn bộ chuồng trại một cách kỹ lưỡng nhất?",
+        "options": [
+          "Hàng ngày",
+          "Hàng tuần",
+          "Khi có gà bệnh",
+          "Sau khi xuất bán hết một lứa gà"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Protein trong thức ăn chăn nuôi có vai trò chính là gì?",
+        "options": [
+          "Cung cấp năng lượng",
+          "Giúp phát triển xương",
+          "Giúp phát triển cơ bắp, các mô cơ quan",
+          "Giúp lông bóng mượt"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "coffee-course-v1": {
+    "title": "Kiểm tra: Canh tác Cà phê Robusta",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Giống cà phê nào sau đây KHÔNG phải là dòng vô tính Robusta phổ biến do WASI chọn lọc?",
+        "options": ["TR4", "TR9", "Thiện Trường", "TR11"],
+        "answer": 2
+      },
+      {
+        "question": "Mục đích chính của việc trồng cây che bóng cho cà phê là gì?",
+        "options": [
+          "Để lấy gỗ",
+          "Để trang trí",
+          "Điều hòa tiểu khí hậu, giữ ẩm và cải tạo đất",
+          "Để làm hàng rào"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Phương pháp tưới nào được xem là hiệu quả và tiết kiệm nước nhất cho cây cà phê?",
+        "options": [
+          "Tưới tràn",
+          "Tưới phun mưa toàn vườn",
+          "Tưới nhỏ giọt",
+          "Tưới thủ công"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh nào sau đây là bệnh hại nguy hiểm và phổ biến nhất trên cây cà phê Robusta, gây ra các đốm bột màu da cam dưới lá?",
+        "options": ["Bệnh thán thư", "Bệnh gỉ sắt", "Rệp sáp", "Mọt đục quả"],
+        "answer": 1
+      },
+      {
+        "question": "Phương pháp chế biến cà phê nào tạo ra sản phẩm có hương vị trong trẻo, tinh tế và độ chua rõ nét?",
+        "options": [
+          "Chế biến khô (Natural)",
+          "Chế biến ướt (Washed)",
+          "Chế biến mật ong (Honey)",
+          "Tất cả đều sai"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Độ ẩm lý tưởng của hạt cà phê nhân xanh để bảo quản lâu dài là bao nhiêu?",
+        "options": ["Dưới 10%", "12.5%", "15%", "Trên 18%"],
+        "answer": 1
+      },
+      {
+        "question": "Việc hãm ngọn cây cà phê được thực hiện khi nào?",
+        "options": [
+          "Ngay sau khi trồng",
+          "Khi cây đạt chiều cao 1.8 - 2m",
+          "Khi cây bắt đầu ra hoa",
+          "Không cần hãm ngọn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để phòng trừ mọt đục quả (Hypothenemus hampei) một cách sinh học, người ta có thể sử dụng biện pháp nào?",
+        "options": [
+          "Phun thuốc trừ sâu hóa học",
+          "Sử dụng nấm đối kháng Beauveria bassiana",
+          "Trồng cây che bóng",
+          "Bón nhiều phân đạm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Phương pháp thu hái nào cho chất lượng hạt cà phê cao nhất, phù hợp để chế biến cà phê đặc sản?",
+        "options": [
+          "Tuốt cành (Stripping)",
+          "Hái lựa (Selective Picking)",
+          "Dùng máy rung",
+          "Chờ quả tự rụng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong chế biến ướt, công đoạn nào được thực hiện để loại bỏ lớp nhớt bao quanh hạt cà phê?",
+        "options": ["Xát vỏ", "Phơi khô", "Lên men", "Rửa sạch"],
+        "answer": 2
+      },
+      {
+        "question": "Khoảng cách trồng cà phê Robusta phổ biến là bao nhiêu?",
+        "options": ["1m x 1m", "2m x 2m", "3m x 3m", "5m x 5m"],
+        "answer": 2
+      },
+      {
+        "question": "Cây lạc dại (Arachis pintoi) thường được trồng trong vườn cà phê với mục đích gì?",
+        "options": [
+          "Làm cảnh",
+          "Lấy củ",
+          "Làm cây thảm phủ, giữ ẩm và cải tạo đất",
+          "Làm thuốc"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Cà phê cần nhiều nước nhất vào giai đoạn nào?",
+        "options": [
+          "Kiến thiết cơ bản",
+          "Sau khi thu hoạch",
+          "Ra hoa và quả lớn nhanh",
+          "Mùa đông"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Rệp sáp gây hại cho cà phê thường cộng sinh với loài côn trùng nào?",
+        "options": ["Ong", "Bướm", "Kiến", "Ruồi"],
+        "answer": 2
+      },
+      {
+        "question": "Nguyên tắc '4 đúng' trong sử dụng thuốc BVTV bao gồm những gì?",
+        "options": [
+          "Đúng giá, đúng nơi, đúng lúc, đúng người",
+          "Đúng thuốc, đúng lúc, đúng liều lượng, đúng cách",
+          "Đúng mùa, đúng vườn, đúng cây, đúng bệnh",
+          "Đúng loại, đúng hiệu, đúng màu, đúng mùi"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc bón lót cho hố trồng cà phê bằng phân lân có tác dụng chính là gì?",
+        "options": [
+          "Giúp lá xanh hơn",
+          "Kích thích bộ rễ phát triển mạnh ban đầu",
+          "Làm quả ngọt hơn",
+          "Xua đuổi côn trùng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bao bì nào được xem là tốt nhất để bảo quản cà phê nhân xanh?",
+        "options": [
+          "Bao nilon mỏng",
+          "Bao giấy",
+          "Bao đay thông thường",
+          "Bao GrainPro có lớp lót nhựa"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Cắt cành kinh doanh cho cà phê thường được thực hiện vào thời điểm nào?",
+        "options": [
+          "Trước khi ra hoa",
+          "Khi quả đang lớn",
+          "Sau khi thu hoạch",
+          "Bất kỳ lúc nào trong năm"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chế biến khô (Natural) thường tạo ra cà phê có hương vị đặc trưng như thế nào?",
+        "options": [
+          "Vị chua thanh, trong trẻo",
+          "Vị đắng gắt, ít hương thơm",
+          "Vị ngọt đậm, body dày, ít chua",
+          "Không có hương vị đặc trưng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trong các biện pháp IPM, biện pháp nào nên được ưu tiên hàng đầu?",
+        "options": [
+          "Phun thuốc hóa học",
+          "Canh tác (chọn giống, cắt cành, vệ sinh)",
+          "Sử dụng bẫy",
+          "Thả thiên địch"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "pepper-course-v1": {
+    "title": "Kiểm tra: Thâm canh Hồ tiêu",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Bệnh nào được xem là nguy hiểm và gây hại nặng nề nhất cho cây hồ tiêu, thường do úng nước vào mùa mưa?",
+        "options": [
+          "Bệnh thán thư",
+          "Bệnh chết nhanh (do Phytophthora)",
+          "Bệnh chết chậm (do tuyến trùng)",
+          "Bệnh gỉ sắt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Loại trụ nào có ưu điểm là không cạnh tranh dinh dưỡng với cây tiêu và giúp vườn thông thoáng?",
+        "options": [
+          "Trụ sống (cây lồng mức)",
+          "Trụ chết (bê tông, gỗ)",
+          "Tất cả đều đúng",
+          "Tất cả đều sai"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để phòng bệnh chết chậm do tuyến trùng và nấm Fusarium, biện pháp canh tác nào là quan trọng nhất?",
+        "options": [
+          "Phun thuốc hóa học thường xuyên",
+          "Bón nhiều phân hữu cơ để cải tạo đất",
+          "Tưới nhiều nước",
+          "Để cỏ mọc tự nhiên"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Thời điểm thu hoạch hồ tiêu tốt nhất là khi nào?",
+        "options": [
+          "Khi tất cả các quả trên gié còn xanh",
+          "Khi trên gié có khoảng 5-10% số quả chuyển sang màu vàng hoặc đỏ",
+          "Khi tất cả các quả đã chín đỏ",
+          "Khi quả đã rụng hết"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mục đích chính của việc ủ phân chuồng hoai mục trước khi bón cho tiêu là gì?",
+        "options": [
+          "Để giảm trọng lượng",
+          "Để tăng nhiệt độ cho đất",
+          "Để tiêu diệt mầm bệnh và phân giải chất hữu cơ",
+          "Không cần thiết phải ủ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Để chế biến tiêu sọ (tiêu trắng), công đoạn đầu tiên sau khi thu hái là gì?",
+        "options": [
+          "Phơi khô ngay lập tức",
+          "Ngâm hạt tiêu trong nước để loại bỏ vỏ",
+          "Rang hạt tiêu",
+          "Xay nhỏ hạt tiêu"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong canh tác tiêu, việc thoát nước tốt cho vườn là để phòng bệnh nào hiệu quả nhất?",
+        "options": [
+          "Bệnh thán thư",
+          "Bệnh chết nhanh",
+          "Tuyến trùng rễ",
+          "Bệnh gỉ sắt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giống tiêu nào sau đây có đặc điểm gié dài, hạt to nhưng yêu cầu thâm canh cao?",
+        "options": [
+          "Giống Vĩnh Linh",
+          "Giống Lộc Ninh",
+          "Giống Sẻ",
+          "Giống Ấn Độ (Anbipur)"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Việc đôn tiêu (bấm ngọn) được thực hiện nhằm mục đích gì?",
+        "options": [
+          "Để cây tiêu ngừng phát triển",
+          "Để cây tiêu phát triển cành ngang (cành cho quả)",
+          "Để cây tiêu cao hơn",
+          "Để thu hoạch lá tiêu"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Độ ẩm tiêu chuẩn của hạt tiêu đen khô để bảo quản là khoảng bao nhiêu?",
+        "options": ["Dưới 10%", "12-13%", "15-16%", "Trên 20%"],
+        "answer": 1
+      },
+      {
+        "question": "Nhân giống hồ tiêu chủ yếu bằng phương pháp nào?",
+        "options": ["Gieo hạt", "Chiết cành", "Giâm hom", "Ghép cành"],
+        "answer": 2
+      },
+      {
+        "question": "Trụ sống có nhược điểm gì so với trụ chết?",
+        "options": [
+          "Chi phí ban đầu cao hơn",
+          "Không bền bằng",
+          "Cạnh tranh dinh dưỡng và có thể là ký chủ của sâu bệnh",
+          "Làm vườn cây bị nóng hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Nấm đối kháng Trichoderma thường được sử dụng trong vườn tiêu để làm gì?",
+        "options": [
+          "Làm thuốc diệt cỏ",
+          "Xua đuổi côn trùng",
+          "Phòng trừ các bệnh về rễ như chết nhanh, chết chậm",
+          "Kích thích tiêu ra hoa"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tiêu Vĩnh Linh là một giống tiêu phổ biến, nhưng có nhược điểm lớn là gì?",
+        "options": [
+          "Năng suất thấp",
+          "Chất lượng hạt kém",
+          "Dễ nhiễm bệnh chết nhanh",
+          "Khó trồng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi bón phân cho tiêu giai đoạn kinh doanh, cần tăng cường hàm lượng chất nào để tăng đậu quả và chất lượng hạt?",
+        "options": ["Đạm (N)", "Lân (P)", "Kali (K)", "Lưu huỳnh (S)"],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần cắt bỏ các cành tiêu ở gần mặt đất?",
+        "options": [
+          "Để dễ đi lại",
+          "Để các cành đó không cho quả",
+          "Để tránh lây bệnh từ đất lên cây",
+          "Để cây trông đẹp hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Piperine là chất tạo ra đặc tính gì của hạt tiêu?",
+        "options": ["Vị ngọt", "Màu đen", "Vị cay", "Mùi thơm"],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh thán thư trên cây tiêu thường phát triển mạnh trong điều kiện thời tiết nào?",
+        "options": ["Nắng gắt", "Khô hạn", "Ẩm ướt, mưa nhiều", "Lạnh giá"],
+        "answer": 2
+      },
+      {
+        "question": "Việc ghi chép nhật ký sử dụng thuốc BVTV là yêu cầu của tiêu chuẩn nào?",
+        "options": [
+          "Tiêu chuẩn cộng đồng",
+          "Tiêu chuẩn cá nhân",
+          "Tiêu chuẩn VietGAP",
+          "Không có tiêu chuẩn nào yêu cầu"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi bón lót cho hố trồng tiêu, vôi được sử dụng với mục đích chính là gì?",
+        "options": [
+          "Cung cấp canxi",
+          "Làm đất tơi xốp",
+          "Khử chua và sát trùng đất",
+          "Giữ ẩm cho đất"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "dragonfruit-course-v1": {
+    "title": "Kiểm tra: Trồng Thanh long ruột đỏ",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Nguyên lý của việc chong đèn để xử lý thanh long ra hoa trái vụ là gì?",
+        "options": [
+          "Dùng nhiệt độ của đèn để sưởi ấm cây",
+          "Dùng ánh sáng để xua đuổi côn trùng",
+          "Làm cho cây tưởng rằng ngày dài ra, phá vỡ trạng thái ngủ nghỉ",
+          "Ánh sáng đèn giúp quả ngọt hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Giai đoạn nào cây thanh long cần bón phân có hàm lượng Kali (K) cao?",
+        "options": [
+          "Sau khi thu hoạch",
+          "Trước khi chong đèn",
+          "Giai đoạn nụ và hoa",
+          "Giai đoạn nuôi quả"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Tại sao phải tỉa bớt quả trên một cành thanh long?",
+        "options": [
+          "Để cây nhẹ hơn",
+          "Để các quả còn lại to, đồng đều và chất lượng hơn",
+          "Để quả nhanh chín hơn",
+          "Không cần thiết phải tỉa"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nhiệt độ bảo quản tối ưu cho quả thanh long sau thu hoạch là bao nhiêu?",
+        "options": ["Dưới 0°C", "0-2°C", "5-8°C", "Trên 15°C"],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh nào là phổ biến nhất trên cành và quả thanh long, gây ra các đốm nâu tròn?",
+        "options": [
+          "Bệnh thối đầu cành",
+          "Bệnh vàng cành",
+          "Bệnh đốm nâu (thán thư)",
+          "Bệnh gỉ sắt"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Giống thanh long ruột đỏ nào được ưa chuộng cho xuất khẩu nhất hiện nay?",
+        "options": [
+          "Giống ruột trắng",
+          "LD1 (Long Định 1)",
+          "Giống địa phương",
+          "Tất cả các giống ruột đỏ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc phun Canxi và Bo trong giai đoạn nuôi quả non có tác dụng chính là gì?",
+        "options": [
+          "Làm quả nhanh lớn",
+          "Giúp quả ngọt hơn",
+          "Giúp vỏ quả cứng, bóng đẹp và hạn chế nứt quả",
+          "Làm cho tai quả dài ra"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thời điểm nào nên ngừng chong đèn cho thanh long?",
+        "options": [
+          "Ngay sau khi thấy nụ đầu tiên",
+          "Khi thấy nụ hoa đã ra đều khắp vườn",
+          "Sau khi hoa đã nở",
+          "Phải chong đèn cho đến khi thu hoạch"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Hom giống thanh long đủ tiêu chuẩn để trồng nên có độ tuổi và màu sắc như thế nào?",
+        "options": [
+          "Cành non, màu xanh nhạt",
+          "Cành già (1-2 năm), màu xanh đậm",
+          "Cành có nhiều hoa",
+          "Bất kỳ cành nào"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trụ bê tông được ưa chuộng trong trồng thanh long xuất khẩu vì lý do gì?",
+        "options": [
+          "Rẻ tiền nhất",
+          "Nhẹ và dễ di chuyển",
+          "Độ bền cao và dễ quản lý",
+          "Giữ ẩm tốt cho cây"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Công đoạn nào sau đây KHÔNG thuộc quy trình sơ chế thanh long xuất khẩu?",
+        "options": [
+          "Làm sạch bằng khăn mềm",
+          "Phân loại theo kích thước",
+          "Rửa quả trực tiếp dưới vòi nước mạnh",
+          "Dán tem truy xuất nguồn gốc"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi bấm ngọn cành thanh long leo đến đỉnh trụ, mục đích chính là gì?",
+        "options": [
+          "Để cây ngừng phát triển",
+          "Để cây phân nhánh, tạo bộ tán chính",
+          "Để thu hoạch ngọn",
+          "Để cây ra rễ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh thối đầu cành trên cây thanh long thường phát triển mạnh trong điều kiện nào?",
+        "options": [
+          "Nắng nóng, khô hạn",
+          "Thời tiết ẩm ướt",
+          "Đất bị phèn",
+          "Đất thiếu dinh dưỡng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để có tai quả xanh, thẳng và dài đáp ứng tiêu chuẩn xuất khẩu, người trồng cần làm gì?",
+        "options": [
+          "Tưới nhiều nước hơn",
+          "Phun chất điều hòa sinh trưởng (GA3) và vi lượng",
+          "Bón nhiều phân đạm",
+          "Che nắng cho quả"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Thời gian từ lúc hoa thanh long nở đến lúc thu hoạch quả là khoảng bao lâu?",
+        "options": ["10-15 ngày", "28-32 ngày", "50-60 ngày", "Trên 3 tháng"],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao phải duy trì chuỗi lạnh không bị đứt gãy khi vận chuyển thanh long xuất khẩu?",
+        "options": [
+          "Để tiết kiệm chi phí vận chuyển",
+          "Để quả chín nhanh hơn trên đường đi",
+          "Để đảm bảo chất lượng và độ tươi của sản phẩm",
+          "Chỉ là yêu cầu của nhà vận chuyển"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi bón phân cho thanh long sau thu hoạch, cần ưu tiên loại phân nào?",
+        "options": [
+          "Phân có hàm lượng Kali cao",
+          "Phân hữu cơ và NPK có hàm lượng Đạm cao",
+          "Chỉ bón vôi",
+          "Không cần bón phân"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Hệ thống tưới nào được khuyến khích nhất cho canh tác thanh long theo tiêu chuẩn xuất khẩu?",
+        "options": [
+          "Tưới tràn",
+          "Tưới bằng tay",
+          "Tưới nhỏ giọt hoặc phun mưa tại gốc",
+          "Để cây tự hút nước từ mương"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dấu hiệu nào cho thấy quả thanh long đã chín và có thể thu hoạch?",
+        "options": [
+          "Vỏ quả còn xanh",
+          "Vỏ chuyển đỏ hoàn toàn, tai quả hơi mềm",
+          "Quả bị nứt",
+          "Quả có kích thước rất nhỏ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc ghi chép nhật ký bón phân, phun thuốc là yêu cầu của tiêu chuẩn nào?",
+        "options": [
+          "VietGAP, GlobalG.A.P",
+          "Tiêu chuẩn của chủ vườn",
+          "Tiêu chuẩn của thương lái",
+          "Không có tiêu chuẩn nào"
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  "pomelo-course-v1": {
+    "title": "Kiểm tra: Trồng Bưởi da xanh",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Bệnh nào được xem là nguy hiểm nhất đối với cây có múi và được lây truyền qua rầy chổng cánh?",
+        "options": [
+          "Bệnh loét",
+          "Bệnh ghẻ",
+          "Bệnh vàng lá Greening",
+          "Bệnh thối gốc"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Mục đích của việc 'xiết nước' trước khi xử lý cho bưởi ra hoa là gì?",
+        "options": [
+          "Để tiết kiệm nước",
+          "Để diệt cỏ dại",
+          "Để tạo stress, giúp cây phân hóa mầm hoa",
+          "Để rễ cây ăn sâu hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần phải bao trái cho bưởi da xanh?",
+        "options": [
+          "Để quả không bị rám nắng",
+          "Để quả ngọt hơn",
+          "Để ngăn chặn sâu đục trái và giúp vỏ quả đẹp",
+          "Để quả nhanh lớn hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dấu hiệu nào cho thấy bưởi da xanh đã đến thời điểm thu hoạch?",
+        "options": [
+          "Vỏ quả chuyển sang màu vàng hoàn toàn",
+          "Vỏ căng bóng, các túi tinh dầu nở to, quả nảy",
+          "Quả tự rụng xuống đất",
+          "Khi quả còn non"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc 'để bưởi xuống đường' sau khi thu hoạch có tác dụng gì?",
+        "options": [
+          "Làm bưởi nhẹ hơn",
+          "Làm bưởi nhanh hỏng hơn",
+          "Giúp tăng độ ngọt và đậm vị cho bưởi",
+          "Không có tác dụng gì"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trong giai đoạn kiến thiết (1-3 năm đầu), cây bưởi cần được bón phân có hàm lượng chất nào cao?",
+        "options": ["Kali (K)", "Canxi (Ca)", "Đạm (N) và Lân (P)", "Vi lượng"],
+        "answer": 2
+      },
+      {
+        "question": "Sâu vẽ bùa gây hại chủ yếu trên bộ phận nào của cây bưởi?",
+        "options": ["Rễ cây", "Thân cây già", "Quả chín", "Lá non và đọt non"],
+        "answer": 3
+      },
+      {
+        "question": "Ở vùng đất thấp, tại sao phải lên liếp (mô) cao khi trồng bưởi?",
+        "options": [
+          "Để cây dễ lấy ánh sáng",
+          "Để chống ngập úng cho bộ rễ",
+          "Để dễ bón phân",
+          "Để vườn đẹp hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nên chọn cây giống bưởi có gốc ghép là loại cây nào để kháng bệnh thối rễ tốt?",
+        "options": [
+          "Gốc bưởi da xanh",
+          "Gốc xoài",
+          "Gốc bưởi Bung, cam Sành",
+          "Gốc bất kỳ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi tạo tán cho cây bưởi non, nên chọn giữ lại bao nhiêu cành cấp 1 là hợp lý?",
+        "options": ["1-2 cành", "3-4 cành", "5-6 cành", "Càng nhiều càng tốt"],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh nào gây ra các vết sần sùi màu xám trên vỏ quả bưởi?",
+        "options": ["Bệnh loét", "Bệnh thán thư", "Bệnh ghẻ", "Bệnh Greening"],
+        "answer": 2
+      },
+      {
+        "question": "Thời gian từ lúc bưởi đậu quả đến lúc thu hoạch là khoảng bao lâu?",
+        "options": ["2-3 tháng", "4-5 tháng", "7-8 tháng", "12 tháng"],
+        "answer": 2
+      },
+      {
+        "question": "Để hạn chế bệnh loét do vi khuẩn, biện pháp canh tác nào là hiệu quả?",
+        "options": [
+          "Bón nhiều phân đạm",
+          "Tưới nước lên tán lá thường xuyên",
+          "Trồng dày, giữ vườn rậm rạp",
+          "Trồng cây chắn gió, tỉa cành thông thoáng"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Việc phun bổ sung Canxi và Bo trong giai đoạn nuôi trái có tác dụng gì?",
+        "options": [
+          "Làm quả chua hơn",
+          "Chống nứt quả và giúp quả phát triển đều",
+          "Làm quả nhanh rụng",
+          "Diệt sâu bệnh"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mật độ trồng bưởi da xanh phổ biến là bao nhiêu cây/ha?",
+        "options": [
+          "50-100 cây/ha",
+          "150-200 cây/ha",
+          "400-500 cây/ha",
+          "Trên 800 cây/ha"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Kỹ thuật thu hái bưởi đúng cách là gì?",
+        "options": [
+          "Dùng tay vặn mạnh",
+          "Rung cây cho quả rụng",
+          "Dùng sào đập",
+          "Dùng kéo sắc cắt sát cuống quả"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Bón vôi vào đất trồng bưởi có tác dụng chính là gì?",
+        "options": [
+          "Cung cấp đạm",
+          "Làm đất chua hơn",
+          "Nâng pH đất và khử trùng",
+          "Giữ ẩm cho đất"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Loại phân bón nào cần được cung cấp nhiều nhất sau khi thu hoạch để cây phục hồi?",
+        "options": [
+          "Phân Kali",
+          "Phân hữu cơ và phân có hàm lượng đạm cao",
+          "Phân lân",
+          "Chỉ cần tưới nước"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nhện đỏ gây hại cho quả bưởi, tạo ra triệu chứng nào?",
+        "options": [
+          "Quả bị thối đen",
+          "Quả có các đường ngoằn ngoèo",
+          "Vỏ quả bị nám, sần sùi (da cám)",
+          "Quả bị rỗng ruột"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao không nên thu hoạch bưởi ngay sau cơn mưa?",
+        "options": [
+          "Vì quả nặng hơn",
+          "Vì quả sẽ ít ngọt hơn",
+          "Vì quả dễ bị thối hỏng khi bảo quản",
+          "Vì khó trèo lên cây"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "durian-course-v1": {
+    "title": "Kiểm tra: Canh tác Sầu riêng",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Yếu tố đất đai nào là quan trọng nhất đối với cây sầu riêng?",
+        "options": [
+          "Đất phải thật nhiều dinh dưỡng",
+          "Đất phải có độ pH cao",
+          "Đất phải thoát nước cực tốt",
+          "Đất phải giữ nước tốt"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Giống sầu riêng nào nổi tiếng với cơm dày, màu vàng nhạt và phù hợp cho xuất khẩu?",
+        "options": ["Ri6", "Monthong", "Sữa hạt lép", "Khổ qua"],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao việc thụ phấn bổ sung cho hoa sầu riêng vào ban đêm lại quan trọng?",
+        "options": [
+          "Để tránh nắng",
+          "Vì hoa sầu riêng chỉ nở vào ban đêm và tỷ lệ thụ phấn tự nhiên thấp",
+          "Để tăng mùi thơm cho hoa",
+          "Không cần thiết, cây tự thụ phấn tốt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh nào gây ra hiện tượng chảy nhựa (xì mủ) và thối rễ trên cây sầu riêng, đặc biệt khi vườn bị úng nước?",
+        "options": [
+          "Bệnh thán thư",
+          "Bệnh cháy lá",
+          "Bệnh do nấm Phytophthora",
+          "Sâu đục thân"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Công việc nào được xem là quan trọng nhất cần làm ngay sau khi thu hoạch sầu riêng?",
+        "options": [
+          "Bón phân ngay lập tức",
+          "Tưới thật nhiều nước",
+          "Tỉa cành và vệ sinh vườn",
+          "Để cây nghỉ ngơi tự nhiên"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc tỉa quả sầu riêng nhằm mục đích chính là gì?",
+        "options": [
+          "Để bán quả non",
+          "Để cây nhẹ hơn, tránh gãy cành",
+          "Để tập trung dinh dưỡng nuôi các quả còn lại to, đều, chất lượng cao",
+          "Để quả nhanh chín hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Để xử lý sầu riêng ra hoa, người ta thường áp dụng biện pháp nào đầu tiên?",
+        "options": [
+          "Tưới thật nhiều nước",
+          "Bón nhiều phân đạm",
+          "Tạo khô hạn (xiết nước)",
+          "Phun thuốc trừ sâu"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sâu đục trái là một trong những đối tượng gây hại nghiêm trọng nhất. Biện pháp nào sau đây KHÔNG phải là cách phòng trừ?",
+        "options": [
+          "Bao trái",
+          "Phun thuốc hóa học",
+          "Tỉa bỏ những cành yếu",
+          "Sử dụng bẫy Pheromone"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Cơi đọt sầu riêng như thế nào được xem là sẵn sàng để xử lý ra hoa?",
+        "options": [
+          "Khi đọt còn non, màu đồng",
+          "Khi lá đã già, dày và có màu xanh đậm",
+          "Bất kỳ lúc nào",
+          "Khi cây đang rụng lá"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mật độ trồng sầu riêng được khuyến cáo là bao nhiêu?",
+        "options": [
+          "Rất dày, 500 cây/ha",
+          "Rất thưa, 50 cây/ha",
+          "Thưa, khoảng 100-125 cây/ha",
+          "Trung bình, 300 cây/ha"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Ở vùng đất bằng phẳng, tại sao phải lên mô (liếp) cao khi trồng sầu riêng?",
+        "options": [
+          "Để cây trông cao hơn",
+          "Để đảm bảo thoát nước tốt, tránh bệnh thối rễ",
+          "Để dễ bón phân",
+          "Để thu hoạch dễ dàng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Cành cấp 1 đầu tiên của cây sầu riêng nên cách mặt đất ít nhất bao nhiêu?",
+        "options": ["10-20 cm", "30-50 cm", "0.8m", "Càng thấp càng tốt"],
+        "answer": 2
+      },
+      {
+        "question": "Khi phun thuốc tạo mầm hoa cho sầu riêng, nên sử dụng loại phân bón có hàm lượng chất nào cao?",
+        "options": ["Đạm (N)", "Lân (P) và Kali (K)", "Canxi (Ca)", "Sắt (Fe)"],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh thối trái sầu riêng do nấm Phytophthora thường phát triển mạnh trong điều kiện nào?",
+        "options": [
+          "Mùa khô, nắng nóng",
+          "Mùa mưa, ẩm độ cao",
+          "Mùa đông, lạnh giá",
+          "Điều kiện nào cũng phát triển"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để có được những quả sầu riêng chất lượng cao, mỗi chùm hoa chỉ nên giữ lại bao nhiêu quả?",
+        "options": ["Tất cả các quả", "5-6 quả", "3-4 quả", "1-2 quả"],
+        "answer": 3
+      },
+      {
+        "question": "Làm thế nào để xác định sầu riêng đã chín và có thể thu hoạch?",
+        "options": [
+          "Khi quả có màu xanh đậm",
+          "Dựa vào mùi thơm, tiếng gõ và số ngày từ khi hoa nở",
+          "Khi quả tự rụng xuống đất",
+          "Khi gai còn nhọn và khít nhau"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Sau khi thu hoạch, việc bón phân phục hồi cho cây sầu riêng nên ưu tiên loại phân nào?",
+        "options": [
+          "Phân Kali",
+          "Phân hữu cơ và NPK giàu đạm",
+          "Phân lân",
+          "Không cần bón"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "So với Ri6, sầu riêng Monthong có ưu điểm gì cho mục đích xuất khẩu?",
+        "options": [
+          "Mùi thơm nồng hơn",
+          "Cơm màu vàng đậm hơn",
+          "Thời gian bảo quản sau thu hoạch dài hơn",
+          "Dễ trồng hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Hệ thống tưới nào được cho là phù hợp nhất với cây sầu riêng?",
+        "options": [
+          "Tưới tràn cả vườn",
+          "Tưới phun mưa tại gốc hoặc tưới nhỏ giọt",
+          "Không cần tưới",
+          "Chỉ tưới khi cây bị héo"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao cần phải che nắng cho cây sầu riêng con trong vài tháng đầu sau khi trồng?",
+        "options": [
+          "Để cây không bị quá cao",
+          "Để cây không bị sốc nhiệt và cháy lá",
+          "Để tiết kiệm nước",
+          "Để cây không quang hợp"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "shrimp-farming-v1": {
+    "title": "Kiểm tra: Nuôi tôm thẻ chân trắng",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Mục đích chính của việc lót bạt HDPE trong ao nuôi tôm công nghệ cao là gì?",
+        "options": [
+          "Để ao đẹp hơn",
+          "Để giữ nước ấm hơn",
+          "Cách ly ao nuôi với môi trường đất, ngăn phèn và mầm bệnh",
+          "Để tôm không đào hang"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Công nghệ Biofloc mang lại lợi ích kép nào trong nuôi tôm?",
+        "options": [
+          "Làm nước trong và tăng oxy",
+          "Làm sạch nước và cung cấp nguồn thức ăn giàu protein cho tôm",
+          "Giảm độ mặn và tăng độ kiềm",
+          "Diệt virus và vi khuẩn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để tạo và duy trì hạt floc, người nuôi cần bổ sung chất gì vào ao để cân bằng tỷ lệ C:N?",
+        "options": [
+          "Vôi (Canxi)",
+          "Oxy",
+          "Nguồn Carbon (rỉ mật đường, cám gạo)",
+          "Muối (NaCl)"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi kiểm tra tôm giống (Post-larvae), phương pháp nào được dùng để đánh giá sức khỏe và khả năng chống sốc của tôm?",
+        "options": [
+          "Đo chiều dài",
+          "Kiểm tra bằng kính hiển vi",
+          "Sốc formol hoặc sốc độ mặn",
+          "Cho tôm ăn thử"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh hoại tử gan tụy cấp (AHPND) trên tôm thường nguy hiểm nhất ở giai đoạn nào?",
+        "options": [
+          "Giai đoạn tôm sắp thu hoạch",
+          "Trong 30 ngày nuôi đầu tiên",
+          "Giai đoạn lột xác",
+          "Bất kỳ giai đoạn nào"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Chỉ số môi trường nào sau đây cần được duy trì ở mức trên 120 mg/L để ổn định pH trong ao nuôi tôm?",
+        "options": ["Độ trong", "Độ mặn", "Độ kiềm (Alkalinity)", "Nhiệt độ"],
+        "answer": 2
+      },
+      {
+        "question": "Sử dụng sàng ăn (nhá) trong nuôi tôm giúp người nuôi làm gì?",
+        "options": [
+          "Bắt tôm để kiểm tra",
+          "Đo độ sâu của ao",
+          "Kiểm tra sức ăn và điều chỉnh lượng thức ăn chính xác",
+          "Trang trí cho ao nuôi"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh đốm trắng (WSSV) do tác nhân nào gây ra và biện pháp phòng ngừa hiệu quả nhất là gì?",
+        "options": [
+          "Do vi khuẩn, phòng bằng kháng sinh",
+          "Do virus, phòng bằng an toàn sinh học triệt để",
+          "Do nấm, phòng bằng vôi",
+          "Do môi trường, phòng bằng cách thay nước"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Hệ thống xi-phông trung tâm trong ao lót bạt có tác dụng gì?",
+        "options": [
+          "Cung cấp oxy cho đáy ao",
+          "Tạo dòng chảy",
+          "Giúp dễ dàng loại bỏ chất thải gom tụ ở giữa ao",
+          "Là nơi cho tôm trú ẩn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sau khi thu hoạch, tôm cần được xử lý ngay lập tức bằng phương pháp nào để giữ được chất lượng tốt nhất?",
+        "options": [
+          "Để khô tự nhiên",
+          "Rửa bằng nước ao",
+          "Gây sốc nhiệt bằng cách ngâm vào nước đá sạch",
+          "Ướp muối"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Hình dạng ao nào được cho là tối ưu nhất cho việc gom tụ chất thải trong nuôi tôm công nghệ cao?",
+        "options": [
+          "Hình vuông",
+          "Hình chữ nhật",
+          "Hình tròn hoặc góc bo tròn",
+          "Hình dạng không quan trọng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trước khi thả giống, việc thuần hóa tôm giống có mục đích gì?",
+        "options": [
+          "Để tôm quen với người",
+          "Để giảm stress cho tôm khi thay đổi môi trường",
+          "Để tôm ăn nhiều hơn",
+          "Để tôm lớn nhanh hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong 10 ngày đầu sau khi thả, tại sao nên cho tôm ăn nhiều cữ nhỏ trong ngày?",
+        "options": [
+          "Để tiết kiệm thức ăn",
+          "Vì hệ tiêu hóa của tôm còn yếu",
+          "Để nước đỡ bẩn",
+          "Vì tôm chỉ ăn vào ban đêm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc sử dụng vi sinh có lợi (probiotics) định kỳ trong ao nuôi có tác dụng gì?",
+        "options": [
+          "Làm tôm có màu đẹp hơn",
+          "Ức chế vi khuẩn có hại và phân hủy chất thải",
+          "Làm tăng độ mặn của nước",
+          "Thay thế hoàn toàn thức ăn công nghiệp"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Yêu cầu nào là quan trọng nhất khi chọn mua tôm giống?",
+        "options": [
+          "Tôm phải có kích thước thật to",
+          "Tôm có nguồn gốc rõ ràng và có giấy xét nghiệm PCR sạch bệnh",
+          "Tôm có giá rẻ nhất",
+          "Tôm có màu sắc sặc sỡ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Khí độc NH3 và NO2 trong ao nuôi chủ yếu sinh ra từ đâu?",
+        "options": [
+          "Từ không khí",
+          "Từ con người",
+          "Từ chất thải của tôm và thức ăn thừa phân hủy",
+          "Từ bạt HDPE"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Độ pH lý tưởng cho ao nuôi tôm thẻ chân trắng là bao nhiêu?",
+        "options": ["5.5 - 6.5", "6.5 - 7.5", "7.8 - 8.3", "Trên 8.5"],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần phải có ao lắng trong hệ thống nuôi tôm thâm canh?",
+        "options": [
+          "Để chứa tôm bệnh",
+          "Để xử lý nước trước khi cấp vào ao nuôi",
+          "Để trồng rau",
+          "Để nuôi cá"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Oxy hòa tan (DO) trong ao nuôi tôm cần được duy trì ở mức tối thiểu bao nhiêu?",
+        "options": ["1 mg/L", "2 mg/L", "3 mg/L", "5 mg/L"],
+        "answer": 3
+      },
+      {
+        "question": "Tảo Silic (Diatom) có vai trò gì trong ao nuôi tôm giai đoạn đầu?",
+        "options": [
+          "Gây bệnh cho tôm",
+          "Làm đục nước",
+          "Là nguồn thức ăn tự nhiên và giúp ổn định môi trường",
+          "Cạnh tranh oxy với tôm"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "fish-farming-v1": {
+    "title": "Kiểm tra: Nuôi cá tra thương phẩm",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Trong nuôi cá tra thâm canh, ao lắng có vai trò chính là gì?",
+        "options": [
+          "Để nuôi cá con",
+          "Để xử lý nước (lắng phèn, diệt khuẩn) trước khi cấp vào ao nuôi",
+          "Để chứa nước mưa",
+          "Là nơi thu hoạch cá"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Hệ số chuyển đổi thức ăn (FCR) lý tưởng cho cá tra là khoảng bao nhiêu?",
+        "options": ["Dưới 1.0", "1.5 - 1.7", "2.0 - 2.5", "Trên 3.0"],
+        "answer": 1
+      },
+      {
+        "question": "Giai đoạn nào cá tra cần thức ăn có hàm lượng protein cao nhất?",
+        "options": [
+          "Giai đoạn cá giống",
+          "Giai đoạn cá thịt",
+          "Giai đoạn vỗ béo",
+          "Nhu cầu protein không đổi"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Bệnh nào trên cá tra gây ra hiện tượng gan, thận có nhiều đốm mủ trắng li ti?",
+        "options": [
+          "Bệnh xuất huyết",
+          "Bệnh trùng bánh xe",
+          "Bệnh gan thận mủ",
+          "Bệnh trắng mang"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần ngưng cho cá tra ăn 1-2 ngày trước khi thu hoạch?",
+        "options": [
+          "Để tiết kiệm thức ăn",
+          "Để cá gầy đi",
+          "Để làm sạch đường ruột, giảm ô nhiễm và nâng cao chất lượng thịt",
+          "Để cá dễ bắt hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chỉ số nào cần được theo dõi và duy trì > 4 mg/L, đặc biệt là vào ban đêm?",
+        "options": ["pH", "Độ trong", "NH3", "Oxy hòa tan (DO)"],
+        "answer": 3
+      },
+      {
+        "question": "Kích cỡ cá tra thương phẩm phù hợp để chế biến phi-lê xuất khẩu là bao nhiêu?",
+        "options": [
+          "200-300 g/con",
+          "500-600 g/con",
+          "800g - 1.2kg/con",
+          "Trên 2kg/con"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Để phi-lê cá tra có màu trắng đẹp đáp ứng thị trường xuất khẩu, người nuôi cần làm gì?",
+        "options": [
+          "Cho cá ăn nhiều rau",
+          "Quản lý tốt môi trường nước, tránh tảo độc",
+          "Nuôi cá với mật độ rất cao",
+          "Cho cá nhịn đói lâu ngày"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Độ sâu mực nước lý tưởng cho ao nuôi cá tra thâm canh là bao nhiêu?",
+        "options": ["1.0 - 1.5 m", "1.5 - 2.0 m", "2.5 - 3.5 m", "Trên 4 m"],
+        "answer": 2
+      },
+      {
+        "question": "Trước khi thả cá giống vào ao, nên tắm cá bằng dung dịch gì để sát khuẩn?",
+        "options": [
+          "Nước đường",
+          "Nước vôi trong",
+          "Nước muối loãng (2-3%)",
+          "Thuốc tím"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thiết bị nào là quan trọng nhất để cung cấp oxy cho ao nuôi cá tra?",
+        "options": [
+          "Máy bơm",
+          "Hệ thống quạt nước",
+          "Máy cho ăn tự động",
+          "Lưới"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh xuất huyết ở cá tra thường do tác nhân nào gây ra?",
+        "options": ["Virus", "Nấm", "Ký sinh trùng", "Vi khuẩn (Aeromonas)"],
+        "answer": 3
+      },
+      {
+        "question": "Việc sử dụng sàng ăn (nhá) trong nuôi cá tra giúp điều chỉnh yếu tố nào?",
+        "options": [
+          "Nhiệt độ nước",
+          "Độ pH",
+          "Lượng thức ăn hàng ngày",
+          "Màu nước"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Cá tra là loài cá có đặc tính ăn uống như thế nào?",
+        "options": ["Ăn thực vật", "Ăn thịt", "Ăn tạp", "Chỉ ăn vào ban đêm"],
+        "answer": 2
+      },
+      {
+        "question": "Chứng nhận nào sau đây KHÔNG phải là chứng nhận phổ biến cho cá tra xuất khẩu?",
+        "options": ["ASC", "GlobalG.A.P", "VietGAP Organic", "BAP"],
+        "answer": 2
+      },
+      {
+        "question": "Việc sử dụng chế phẩm sinh học (probiotics) trong ao nuôi cá tra có tác dụng gì?",
+        "options": [
+          "Làm cá lớn nhanh hơn",
+          "Cải thiện chất lượng nước và ức chế vi khuẩn có hại",
+          "Thay đổi màu sắc của cá",
+          "Làm tăng độ đục của nước"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong các chi phí nuôi cá tra, chi phí nào chiếm tỷ trọng cao nhất?",
+        "options": [
+          "Chi phí giống",
+          "Chi phí điện, nước",
+          "Chi phí thuốc",
+          "Chi phí thức ăn"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Tại sao ao nuôi cá tra cần có hình chữ nhật?",
+        "options": [
+          "Vì lý do phong thủy",
+          "Để dễ dàng kéo lưới thu hoạch và lắp đặt quạt nước",
+          "Để tiết kiệm diện tích",
+          "Vì dễ xây dựng hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Độ trong của nước ao nuôi cá tra nên được duy trì ở mức nào?",
+        "options": [
+          "Càng trong càng tốt",
+          "Càng đục càng tốt",
+          "25 - 35 cm",
+          "Trên 50 cm"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Biện pháp nào là nền tảng và quan trọng nhất để phòng bệnh cho cá tra?",
+        "options": [
+          "Sử dụng kháng sinh thường xuyên",
+          "Chọn con giống chất lượng và quản lý tốt môi trường nước",
+          "Cho cá ăn thật no",
+          "Không thay nước ao"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "organic-veg-v1": {
+    "title": "Kiểm tra: Trồng rau hữu cơ",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Nguyên tắc nào sau đây KHÔNG phải là một trong bốn nguyên tắc chính của nông nghiệp hữu cơ?",
+        "options": ["Sức khỏe", "Sinh thái", "Công bằng", "Năng suất tối đa"],
+        "answer": 3
+      },
+      {
+        "question": "Trong nhà kính trồng rau hữu cơ, việc lắp lưới chắn côn trùng ở các ô thoáng có mục đích gì?",
+        "options": [
+          "Để cản gió",
+          "Để che nắng",
+          "Để ngăn chặn sâu bệnh từ bên ngoài xâm nhập",
+          "Để giữ nhiệt"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Phân trùn quế được coi là 'vàng đen' trong nông nghiệp hữu cơ vì sao?",
+        "options": [
+          "Vì nó có màu đen",
+          "Vì nó rất đắt tiền",
+          "Vì nó không chỉ giàu dinh dưỡng mà còn chứa nhiều vi sinh vật có lợi",
+          "Vì nó chỉ dùng được cho cây vàng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Luân canh cây trồng có tác dụng gì?",
+        "options": [
+          "Làm đất chai cứng hơn",
+          "Làm cho sâu bệnh quen với một loại cây",
+          "Cắt đứt vòng đời của sâu bệnh và cân bằng dinh dưỡng đất",
+          "Không có tác dụng rõ rệt"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Để phòng trừ rệp và bọ phấn trong vườn rau hữu cơ, biện pháp nào được ưu tiên?",
+        "options": [
+          "Phun thuốc hóa học mạnh",
+          "Bảo vệ và thu hút thiên địch như bọ rùa",
+          "Tưới nhiều nước lên lá",
+          "Bón nhiều phân đạm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Công thức tự làm thuốc trừ sâu thảo mộc nào sau đây là phổ biến?",
+        "options": [
+          "Dung dịch nước muối",
+          "Dung dịch tỏi, ớt, gừng ngâm rượu",
+          "Dung dịch đường",
+          "Dung dịch vôi"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Yêu cầu nào là bắt buộc và quan trọng nhất để được cấp chứng nhận hữu cơ?",
+        "options": [
+          "Vườn phải rộng",
+          "Phải sử dụng nhà kính",
+          "Ghi chép nhật ký sản xuất đầy đủ, minh bạch",
+          "Chỉ trồng một loại rau duy nhất"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Xen canh cây húng quế, cúc vạn thọ vào luống rau có tác dụng gì?",
+        "options": [
+          "Làm đẹp cho vườn",
+          "Xua đuổi côn trùng gây hại một cách tự nhiên",
+          "Cung cấp thêm dinh dưỡng cho rau",
+          "Làm cho rau có mùi thơm hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong quá trình ủ phân compost, vật liệu 'nâu' (lá khô, rơm) cung cấp chủ yếu chất gì?",
+        "options": ["Nitơ", "Carbon", "Kali", "Phốt pho"],
+        "answer": 1
+      },
+      {
+        "question": "Để xử lý đất/giá thể trồng hữu cơ mà không dùng hóa chất, có thể áp dụng phương pháp nào?",
+        "options": [
+          "Tưới thuốc trừ sâu",
+          "Bón nhiều vôi",
+          "Phơi ải dưới nắng gắt",
+          "Trộn lẫn với đất cũ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dịch chuối, dịch trứng sữa tự ủ là một loại phân bón lá hữu cơ cung cấp chủ yếu chất gì?",
+        "options": [
+          "Chất xơ",
+          "Chất diệt cỏ",
+          "Dinh dưỡng, vitamin và amino acid",
+          "Chất làm mặn đất"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh phấn trắng trên rau có biểu hiện đặc trưng là gì?",
+        "options": [
+          "Các đốm đen trên lá",
+          "Lá bị vàng và rụng",
+          "Lớp bột màu trắng trên bề mặt lá",
+          "Rễ bị thối"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc thiết kế cửa hai lớp (phòng đệm) cho nhà kính có tác dụng gì?",
+        "options": [
+          "Để chứa đồ",
+          "Hạn chế tối đa côn trùng bay vào khi ra vào",
+          "Để trang trí",
+          "Để làm mát nhà kính"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong canh tác hữu cơ, nấm đối kháng Trichoderma thường được trộn vào giá thể để làm gì?",
+        "options": [
+          "Cung cấp đạm",
+          "Phòng bệnh thối rễ do nấm hại",
+          "Giúp giá thể tơi xốp hơn",
+          "Làm cho giá thể có màu xanh"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao nông nghiệp hữu cơ lại chú trọng đến việc bảo vệ đa dạng sinh học?",
+        "options": [
+          "Để vườn trông đẹp hơn",
+          "Vì một hệ sinh thái cân bằng sẽ giúp tự kiểm soát sâu bệnh",
+          "Để thu hút khách du lịch",
+          "Không có lý do cụ thể"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Sử dụng mã QR trên bao bì sản phẩm rau hữu cơ giúp người tiêu dùng làm gì?",
+        "options": [
+          "Thanh toán nhanh hơn",
+          "Xem quảng cáo",
+          "Truy xuất nguồn gốc và xem nhật ký sản xuất",
+          "Nhận mã giảm giá"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bọ rùa được xem là thiên địch của loài sâu hại nào?",
+        "options": ["Sâu đất", "Sâu đục thân", "Rầy mềm (rệp)", "Chuột"],
+        "answer": 2
+      },
+      {
+        "question": "Giá thể làm từ xơ dừa cần được xử lý chất gì trước khi sử dụng?",
+        "options": [
+          "Xử lý ngọt (đường)",
+          "Xử lý mặn (muối)",
+          "Xử lý chát (tanin, lignin)",
+          "Xử lý chua (axit)"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Nguyên tắc 'công bằng' trong nông nghiệp hữu cơ có nghĩa là gì?",
+        "options": [
+          "Mọi sản phẩm phải được bán với giá bằng nhau",
+          "Phải đối xử công bằng với người lao động và môi trường",
+          "Chỉ bán cho người giàu",
+          "Phải chia đều sản phẩm cho mọi người"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Kênh phân phối nào được xem là bền vững nhất, tạo sự kết nối trực tiếp giữa nông dân và người tiêu dùng?",
+        "options": [
+          "Bán cho thương lái tại vườn",
+          "Mô hình CSA (Nông nghiệp được cộng đồng hỗ trợ)",
+          "Bán ở chợ đầu mối",
+          "Xuất khẩu"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "hydroponics-v1": {
+    "title": "Kiểm tra: Nông nghiệp thủy canh",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Hệ thống thủy canh nào có nguyên lý là rễ cây được ngâm trực tiếp trong bể dinh dưỡng có sục khí liên tục?",
+        "options": [
+          "Thủy canh hồi lưu (NFT)",
+          "Hệ thống nhỏ giọt",
+          "Thủy canh tĩnh (DWC)",
+          "Hệ thống bấc"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Hai dụng cụ đo nào là bắt buộc phải có để quản lý dung dịch thủy canh?",
+        "options": [
+          "Nhiệt kế và ẩm kế",
+          "Thước đo và cân",
+          "Bút đo pH và bút đo EC",
+          "Máy đo ánh sáng và máy đo gió"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Ngưỡng pH lý tưởng cho hầu hết các loại rau trồng thủy canh là bao nhiêu?",
+        "options": ["4.5 - 5.5", "5.5 - 6.5", "7.0 - 8.0", "Trên 8.0"],
+        "answer": 1
+      },
+      {
+        "question": "Khi pha dung dịch thủy canh từ cặp dung dịch A và B, nguyên tắc nào là tuyệt đối KHÔNG được vi phạm?",
+        "options": [
+          "Pha B trước A",
+          "Trộn trực tiếp dung dịch A và B đậm đặc với nhau",
+          "Pha trong thùng chứa tối màu",
+          "Phải khuấy đều"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Chỉ số EC trong dung dịch thủy canh cho biết điều gì?",
+        "options": [
+          "Nhiệt độ dung dịch",
+          "Độ sạch của dung dịch",
+          "Tổng nồng độ các chất dinh dưỡng hòa tan",
+          "Mức oxy hòa tan"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao phải ươm cây con riêng trước khi đưa vào hệ thống thủy canh?",
+        "options": [
+          "Vì hạt không nảy mầm trong nước",
+          "Để tiết kiệm dung dịch dinh dưỡng",
+          "Để chọn lọc cây khỏe và tiết kiệm không gian hệ thống chính",
+          "Tất cả các lý do trên"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Trong hệ thống thủy canh tĩnh (DWC), máy sục khí oxy có vai trò gì?",
+        "options": [
+          "Làm mát dung dịch",
+          "Pha trộn dung dịch",
+          "Cung cấp oxy cho rễ cây để tránh bị úng, thối",
+          "Tạo bọt cho đẹp"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sau mỗi vụ thu hoạch, tại sao việc vệ sinh toàn bộ hệ thống lại cực kỳ quan trọng?",
+        "options": [
+          "Để hệ thống trông như mới",
+          "Để tiết kiệm nước cho vụ sau",
+          "Để ngăn ngừa sự tích tụ của mầm bệnh và muối khoáng",
+          "Không quan trọng lắm"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trong hệ thống NFT (Nutrient Film Technique), dung dịch dinh dưỡng chảy như thế nào?",
+        "options": [
+          "Ngâm toàn bộ rễ",
+          "Chảy thành một lớp phim mỏng lướt qua rễ",
+          "Nhỏ giọt vào gốc",
+          "Phun sương lên lá"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giá thể nào sau đây thường được dùng để ươm cây con thủy canh?",
+        "options": [
+          "Đất sét",
+          "Viên nén xơ dừa hoặc mút xốp",
+          "Cát xây dựng",
+          "Sỏi lớn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Ưu điểm lớn nhất của thủy canh so với trồng đất là gì?",
+        "options": [
+          "Chi phí đầu tư thấp",
+          "Không cần chăm sóc",
+          "Tăng năng suất, tiết kiệm nước và kiểm soát được sâu bệnh từ đất",
+          "Cây có vị ngon hơn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Nếu chỉ số EC của dung dịch quá cao, bạn cần làm gì?",
+        "options": [
+          "Thêm dung dịch dinh dưỡng A và B",
+          "Thêm nước sạch để pha loãng",
+          "Tăng độ pH",
+          "Giảm độ pH"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nếu chỉ số pH của dung dịch là 7.5, bạn cần làm gì để đưa về ngưỡng lý tưởng?",
+        "options": [
+          "Thêm nước vôi trong",
+          "Thêm dung dịch 'pH down' (axit loãng)",
+          "Thêm dung dịch 'pH up' (kiềm loãng)",
+          "Không cần làm gì"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Loại cây nào sau đây phù hợp nhất cho người mới bắt đầu trồng thủy canh?",
+        "options": [
+          "Cây lúa",
+          "Cây khoai lang",
+          "Các loại rau ăn lá như xà lách, cải",
+          "Cây sầu riêng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao bể chứa dung dịch thủy canh nên làm bằng vật liệu tối màu?",
+        "options": [
+          "Để hấp thụ nhiệt tốt hơn",
+          "Để ngăn ánh sáng, tránh rêu tảo phát triển",
+          "Để trông chuyên nghiệp hơn",
+          "Để dễ dàng vệ sinh"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nguyên tố dinh dưỡng đa lượng nào giúp cây phát triển thân, lá?",
+        "options": ["Lân (P)", "Kali (K)", "Canxi (Ca)", "Đạm (N)"],
+        "answer": 3
+      },
+      {
+        "question": "Phương pháp thu hoạch 'Cut-and-come-again' có nghĩa là gì?",
+        "options": [
+          "Thu hoạch cả cây",
+          "Cắt các lá lớn bên ngoài, chừa lại ngọn để cây ra lá mới",
+          "Chỉ thu hoạch rễ",
+          "Thu hoạch khi cây đã chết"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để phòng trừ rệp trong hệ thống thủy canh, biện pháp hữu cơ nào có thể áp dụng?",
+        "options": [
+          "Phun thuốc diệt cỏ",
+          "Sử dụng dầu Neem",
+          "Tăng nồng độ dinh dưỡng",
+          "Ngừng cung cấp oxy"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Cây con được xem là đủ khỏe để chuyển vào hệ thống thủy canh khi nào?",
+        "options": [
+          "Khi vừa nảy mầm",
+          "Khi ra được 2-4 lá thật",
+          "Khi cao 30cm",
+          "Khi bắt đầu ra hoa"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong thủy canh, nếu rễ cây chuyển sang màu nâu và bị thối, nguyên nhân chính thường là gì?",
+        "options": [
+          "Thừa ánh sáng",
+          "Thiếu dinh dưỡng",
+          "Thiếu oxy hòa tan trong dung dịch",
+          "Dung dịch quá lạnh"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "mushroom-v1": {
+    "title": "Kiểm tra: Kỹ thuật trồng Nấm",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Nguyên liệu chính, giàu cellulose để trồng nấm bào ngư và nấm rơm là gì?",
+        "options": ["Đất sét", "Cát", "Mùn cưa, rơm rạ", "Phân hóa học"],
+        "answer": 2
+      },
+      {
+        "question": "Mục đích quan trọng nhất của việc thanh trùng nguyên liệu trồng nấm là gì?",
+        "options": [
+          "Để làm nguyên liệu mềm hơn",
+          "Tiêu diệt các vi sinh vật cạnh tranh (mốc, vi khuẩn)",
+          "Để tăng độ ẩm",
+          "Để nguyên liệu có màu đẹp hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Khi ươm sợi (nuôi tơ) cho nấm bào ngư, điều kiện nào sau đây là cần thiết?",
+        "options": [
+          "Nhiều ánh sáng",
+          "Tối và thoáng khí",
+          "Độ ẩm rất thấp",
+          "Nhiệt độ rất lạnh"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nấm rơm cho chất lượng ngon nhất khi thu hoạch ở giai đoạn nào?",
+        "options": [
+          "Khi nấm còn là nụ nhỏ li ti",
+          "Khi nấm ở dạng hình trứng (búp)",
+          "Khi mũ nấm đã xòe ra hoàn toàn",
+          "Khi nấm đã ngả màu"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc rạch bịch phôi nấm bào ngư có tác dụng gì?",
+        "options": [
+          "Để không khí lọt vào làm hỏng phôi",
+          "Để tưới nước vào bên trong",
+          "Để kích thích nấm ra quả thể tại các vết rạch",
+          "Để kiểm tra xem tơ đã ăn trắng chưa"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi thấy một bịch nấm bị mốc xanh hoặc mốc đen, hành động đúng đắn đầu tiên là gì?",
+        "options": [
+          "Cố gắng cạo lớp mốc đi",
+          "Phun thuốc trừ sâu vào bịch nấm",
+          "Nhanh chóng loại bỏ bịch nấm đó ra khỏi khu vực trồng",
+          "Để nguyên vì không ảnh hưởng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Meo giống nấm tốt có đặc điểm cảm quan như thế nào?",
+        "options": [
+          "Có nhiều đốm màu xanh đen",
+          "Có mùi chua, hắc",
+          "Tơ nấm mọc yếu, không đều",
+          "Tơ nấm mọc đều, trắng muốt, có mùi thơm đặc trưng"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Nhà trồng nấm bào ngư cần duy trì điều kiện môi trường như thế nào?",
+        "options": [
+          "Nóng và khô",
+          "Lạnh và tối",
+          "Ẩm độ cao (85-95%) và thông thoáng",
+          "Khô ráo và kín gió"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Độ ẩm lý tưởng của nguyên liệu (mùn cưa, rơm rạ) trước khi đóng bịch là bao nhiêu?",
+        "options": ["20-30%", "40-50%", "60-65%", "80-90%"],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao phải dùng bông không thấm nước để đậy miệng bịch phôi nấm?",
+        "options": [
+          "Để bịch nấm đẹp hơn",
+          "Để ngăn nước mưa",
+          "Cho phép trao đổi khí nhưng ngăn vi sinh vật lạ xâm nhập",
+          "Để giữ nhiệt độ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi thu hái nấm bào ngư, nên làm gì?",
+        "options": [
+          "Dùng dao cắt sát gốc",
+          "Dùng kéo tỉa từng tai nấm",
+          "Xoay nhẹ cả cụm nấm để lấy ra",
+          "Chờ nấm tự rụng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc đảo mô trong quá trình ủ rơm trồng nấm rơm có tác dụng gì?",
+        "options": [
+          "Làm cho mô rơm nhỏ lại",
+          "Giúp tơ nấm phát triển đều và đảo nhiệt",
+          "Để phơi khô mô rơm",
+          "Không có tác dụng gì"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nấm bào ngư thường cho thu hoạch bao nhiêu lứa trên một bịch phôi?",
+        "options": ["Chỉ 1 lứa", "2 lứa", "4-5 lứa", "Trên 10 lứa"],
+        "answer": 2
+      },
+      {
+        "question": "Mốc cam (Neurospora) nguy hiểm như thế nào trong nhà trồng nấm?",
+        "options": [
+          "Nó không gây hại",
+          "Nó giúp nấm ngon hơn",
+          "Nó lây lan cực nhanh và rất khó xử lý",
+          "Nó chỉ xuất hiện trên gỗ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Để bảo quản nấm rơm tươi lâu, nên làm gì?",
+        "options": [
+          "Rửa sạch và phơi nắng",
+          "Để ở nhiệt độ phòng",
+          "Chần qua nước sôi rồi cấp đông hoặc bảo quản lạnh",
+          "Ngâm trong nước muối"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc bổ sung cám gạo, bột ngô vào nguyên liệu trồng nấm có mục đích gì?",
+        "options": [
+          "Làm cho nguyên liệu nặng hơn",
+          "Tăng cường dinh dưỡng cho meo nấm phát triển",
+          "Làm cho nguyên liệu có màu vàng",
+          "Để hút ẩm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nhiệt độ thích hợp cho giai đoạn ươm sợi của nấm bào ngư là bao nhiêu?",
+        "options": ["Dưới 20°C", "25-30°C", "35-40°C", "Trên 40°C"],
+        "answer": 1
+      },
+      {
+        "question": "Thời gian ươm sợi cho bịch nấm bào ngư thường kéo dài bao lâu?",
+        "options": ["1-2 ngày", "7-10 ngày", "25-30 ngày", "Trên 2 tháng"],
+        "answer": 2
+      },
+      {
+        "question": "Khi tưới nước cho nhà trồng nấm, nên dùng dạng nào?",
+        "options": [
+          "Tưới xối thẳng vào bịch nấm",
+          "Tưới phun sương để tăng độ ẩm không khí",
+          "Không cần tưới",
+          "Chỉ tưới nền nhà"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Kênh tiêu thụ nào yêu cầu cao nhất về mẫu mã, bao bì và truy xuất nguồn gốc của nấm?",
+        "options": [
+          "Chợ địa phương",
+          "Bán cho nhà hàng",
+          "Siêu thị, cửa hàng thực phẩm sạch",
+          "Bán dạo"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "drone-course-v1": {
+    "title": "Kiểm tra: Ứng dụng Drone nông nghiệp",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Lợi ích nào sau đây KHÔNG phải là lợi ích chính của việc sử dụng drone phun thuốc?",
+        "options": [
+          "Tiết kiệm thời gian và nhân công",
+          "Bảo vệ sức khỏe nông dân",
+          "Làm cho đất tơi xốp hơn",
+          "Tiết kiệm thuốc BVTV và nước"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trước mỗi chuyến bay, việc kiểm tra nào là quan trọng nhất để đảm bảo drone bay ổn định và tự động?",
+        "options": [
+          "Kiểm tra màu sắc của drone",
+          "Kiểm tra tín hiệu GPS đã bắt đủ vệ tinh",
+          "Kiểm tra xem pin có quá mới không",
+          "Kiểm tra tiếng kêu của động cơ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Camera đa phổ (Multispectral) trên drone quan trắc giúp phát hiện sức khỏe cây trồng bằng cách nào?",
+        "options": [
+          "Chụp ảnh cây từ rất gần",
+          "Đo nhiệt độ của lá cây",
+          "Ghi lại các dải ánh sáng mắt người không thấy được như cận hồng ngoại",
+          "Nghe âm thanh phát ra từ cây"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chỉ số NDVI (Normalized Difference Vegetation Index) cao cho thấy điều gì về cây trồng?",
+        "options": [
+          "Cây đang bị thiếu nước",
+          "Cây khỏe mạnh và quang hợp tốt",
+          "Cây đang bị sâu bệnh nặng",
+          "Khu vực đó là đất trống"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nguyên lý phun của drone nông nghiệp hiện đại là gì?",
+        "options": [
+          "Phun bằng áp lực cao như bình bơm tay",
+          "Phun ly tâm, xé nhỏ giọt nước thành dạng sương",
+          "Rải dung dịch thành dòng lớn",
+          "Nhỏ giọt từ trên cao"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Theo quy định tại Việt Nam, người dùng cần làm gì trước khi thực hiện một chuyến bay drone?",
+        "options": [
+          "Thông báo cho hàng xóm",
+          "Chỉ cần sạc đầy pin là bay",
+          "Xin giấy phép bay từ cơ quan chức năng (Cục Tác chiến)",
+          "Không cần làm gì cả"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi drone phun thuốc tự động hết thuốc giữa chừng, nó sẽ làm gì?",
+        "options": [
+          "Tiếp tục bay không cho đến khi hết pin",
+          "Tự động bay về điểm cất cánh",
+          "Rơi tại chỗ",
+          "Bay lơ lửng chờ người điều khiển"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc sử dụng drone giúp giải quyết vấn đề gì khi phun thuốc cho ruộng lúa giai đoạn sắp thu hoạch?",
+        "options": [
+          "Làm lúa chín nhanh hơn",
+          "Tránh việc người đi bộ làm dập nát, hư hại lúa",
+          "Giúp hạt lúa to hơn",
+          "Không có lợi ích gì đặc biệt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Drone phun thuốc giúp tiết kiệm nước so với phun tay vì sao?",
+        "options": [
+          "Drone bay nhanh hơn",
+          "Drone không cần dùng nước",
+          "Công nghệ phun sương tạo hạt siêu nhỏ, bao phủ tốt hơn với lượng nước ít hơn",
+          "Drone có thể tự tạo ra nước"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chỉ số NDVI được tính toán dựa trên sự khác biệt của hai dải ánh sáng nào?",
+        "options": [
+          "Xanh lá và Xanh dương",
+          "Đỏ và Vàng",
+          "Cận hồng ngoại và Đỏ",
+          "Tím và Cam"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trong bản đồ sức khỏe cây trồng tạo từ ảnh drone, màu đỏ thường biểu thị điều gì?",
+        "options": [
+          "Cây rất khỏe mạnh",
+          "Cây có sức khỏe trung bình",
+          "Khu vực cây rất yếu hoặc đất trống",
+          "Khu vực có nhiều nước"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc thiết lập đường bay tự động cho drone được thực hiện ở đâu?",
+        "options": [
+          "Trên thân drone",
+          "Trên một phần mềm máy tính riêng biệt",
+          "Trên ứng dụng điện thoại hoặc máy tính bảng kết nối với tay cầm",
+          "Không cần thiết lập, drone tự biết đường bay"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Luồng gió từ cánh quạt drone có tác dụng gì đối với việc phun thuốc?",
+        "options": [
+          "Làm thuốc bay đi xa hơn",
+          "Ép các hạt sương thuốc bám đều vào cả mặt trên và mặt dưới lá",
+          "Làm cho thuốc nhanh khô hơn",
+          "Không có tác dụng gì"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Thời điểm nào được cho là tốt nhất để tiến hành phun thuốc bằng drone?",
+        "options": [
+          "Giữa trưa nắng gắt",
+          "Khi trời có gió to",
+          "Sáng sớm hoặc chiều mát, trời lặng gió",
+          "Bất kỳ lúc nào"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Vùng cấm bay đối với drone bao gồm khu vực nào?",
+        "options": [
+          "Chỉ có sân bay",
+          "Chỉ có khu vực quân sự",
+          "Sân bay, khu vực quân sự, cơ quan nhà nước...",
+          "Chỉ có các thành phố lớn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Mô hình kinh doanh nào là phổ biến nhất đối với các đội bay dịch vụ drone nông nghiệp?",
+        "options": [
+          "Bán drone cũ",
+          "Sửa chữa drone",
+          "Cung cấp dịch vụ phun thuốc, bón phân, gieo sạ thuê",
+          "Cho thuê tay cầm điều khiển"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc cập nhật firmware cho drone và tay cầm có quan trọng không?",
+        "options": [
+          "Không, chỉ cần dùng phiên bản gốc",
+          "Rất quan trọng, để đảm bảo hoạt động ổn định và có tính năng mới",
+          "Chỉ quan trọng khi drone bị hỏng",
+          "Chỉ cần cập nhật cho tay cầm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong tương lai, công nghệ 'Drone Swarms' có nghĩa là gì?",
+        "options": [
+          "Một loại drone mới",
+          "Nhiều drone cùng hoạt động và phối hợp với nhau",
+          "Drone có thể bơi dưới nước",
+          "Drone có khả năng tự sửa chữa"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao cần phải lau chùi drone sau mỗi ngày bay?",
+        "options": [
+          "Để drone trông đẹp hơn",
+          "Để loại bỏ bụi bẩn và hóa chất bám vào, tránh ăn mòn",
+          "Để drone nhẹ hơn",
+          "Không cần thiết phải lau chùi"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Pin drone bị phồng có nên tiếp tục sử dụng không?",
+        "options": [
+          "Có, chỉ cần sạc đầy là được",
+          "Có, nhưng phải bay cẩn thận hơn",
+          "Tuyệt đối không, cần phải thay thế ngay vì rất nguy hiểm",
+          "Có, chỉ cần dán băng dính lại"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "iot-course-v1": {
+    "title": "Kiểm tra: Cảm biến IoT và Nông nghiệp",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Trong nông nghiệp, IoT là viết tắt của cụm từ nào?",
+        "options": [
+          "Internet of Trees",
+          "Internet of Things",
+          "Internal Office Tools",
+          "International Organic Trade"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Loại cảm biến nào giúp quyết định khi nào cần tưới và tưới bao nhiêu nước là đủ?",
+        "options": [
+          "Cảm biến nhiệt độ",
+          "Cảm biến ánh sáng",
+          "Cảm biến độ ẩm đất",
+          "Cảm biến pH"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Trong kiến trúc hệ thống IoT, lớp nào được xem là 'bộ não' nơi dữ liệu được lưu trữ và phân tích?",
+        "options": [
+          "Lớp thiết bị (Cảm biến)",
+          "Lớp cổng kết nối (Gateway)",
+          "Lớp nền tảng đám mây (Cloud)",
+          "Lớp ứng dụng (Application)"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Ứng dụng phổ biến và hiệu quả nhất của IoT trong nông nghiệp là gì?",
+        "options": [
+          "Theo dõi gia súc từ xa",
+          "Tự động hóa hệ thống tưới tiêu",
+          "Dự báo thời tiết",
+          "Điều khiển drone"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để thiết lập một kịch bản tưới tự động, hệ thống cần ít nhất những thành phần nào?",
+        "options": [
+          "Camera và máy tính",
+          "Cảm biến độ ẩm đất, bộ điều khiển, và van điện từ/máy bơm",
+          "Điện thoại thông minh và Wifi",
+          "Drone và cảm biến nhiệt độ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc chuyển từ canh tác dựa trên kinh nghiệm sang canh tác dựa trên dữ liệu có ý nghĩa gì?",
+        "options": [
+          "Làm cho việc canh tác phức tạp hơn",
+          "Giúp đưa ra quyết định chính xác hơn, tiết kiệm tài nguyên",
+          "Không có nhiều khác biệt",
+          "Chỉ phù hợp với các trang trại lớn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Cổng kết nối (Gateway) trong hệ thống IoT có nhiệm vụ chính là gì?",
+        "options": [
+          "Trực tiếp tưới nước cho cây",
+          "Phân tích dữ liệu tại chỗ",
+          "Thu thập dữ liệu từ các cảm biến và gửi lên Internet",
+          "Hiển thị dữ liệu cho người dùng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sự kết hợp giữa IoT và AI (Trí tuệ nhân tạo) có thể mang lại khả năng gì cho trang trại thông minh?",
+        "options": [
+          "Chỉ để lưu trữ dữ liệu",
+          "Dự báo (nhu cầu nước, dịch bệnh) và chẩn đoán bệnh sớm",
+          "Làm cho cảm biến bền hơn",
+          "Thay thế hoàn toàn con người"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Cảm biến NPK dùng để đo lường những chất dinh dưỡng nào trong đất?",
+        "options": [
+          "Canxi, Magie, Kẽm",
+          "Đạm, Lân, Kali",
+          "Sắt, Đồng, Bo",
+          "pH, EC, Nhiệt độ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong một trang trại lớn, phương thức kết nối không dây nào cho phép kết nối cảm biến ở khoảng cách xa (vài km)?",
+        "options": ["Wifi", "Bluetooth", "LoRaWAN", "NFC"],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần đặt cảm biến độ ẩm đất ở độ sâu vùng rễ chính của cây?",
+        "options": [
+          "Để cảm biến không bị nắng chiếu",
+          "Vì đó là nơi cây hấp thụ nước và dinh dưỡng chủ yếu",
+          "Để tránh bị máy cày làm hỏng",
+          "Để dễ dàng tháo lắp"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Lớp ứng dụng (Application) trong hệ thống IoT thường là gì?",
+        "options": [
+          "Một loại cảm biến mới",
+          "Một loại phân bón thông minh",
+          "Giao diện trên điện thoại/web để người dùng tương tác",
+          "Một máy bơm nước tự động"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc tự động bật quạt thông gió trong nhà kính khi nhiệt độ cao là một ví dụ về điều khiển của thiết bị nào?",
+        "options": [
+          "Cảm biến",
+          "Thiết bị chấp hành (Actuator)",
+          "Gateway",
+          "Cloud"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Khi phân tích biểu đồ dữ liệu độ ẩm đất, nếu thấy đường biểu đồ dốc xuống quá nhanh sau khi tưới, điều đó có thể có nghĩa là gì?",
+        "options": [
+          "Cảm biến bị hỏng",
+          "Đất bị úng nước",
+          "Đất thoát nước tốt nhưng cũng nhanh khô",
+          "Cây không hút nước"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Nền tảng nào sau đây KHÔNG phải là một nền tảng IoT phổ biến?",
+        "options": ["Blynk", "ThingsBoard", "Microsoft Excel", "AWS IoT"],
+        "answer": 2
+      },
+      {
+        "question": "Cảnh báo sớm qua điện thoại giúp người nông dân làm gì?",
+        "options": [
+          "Biết được giá nông sản",
+          "Phản ứng kịp thời với các sự cố dù không có mặt tại trang trại",
+          "Trò chuyện với các nông dân khác",
+          "Xem phim"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Canh tác chính xác (Precision Agriculture) có nghĩa là gì?",
+        "options": [
+          "Trồng cây theo hàng thẳng tuyệt đối",
+          "Cung cấp đúng thứ cây cần, đúng lúc, đúng vị trí",
+          "Sử dụng các loại giống đắt tiền nhất",
+          "Chỉ canh tác vào một thời điểm chính xác trong ngày"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Cảm biến ánh sáng có thể được dùng để tự động hóa hệ thống nào?",
+        "options": [
+          "Hệ thống tưới",
+          "Hệ thống bón phân",
+          "Hệ thống lưới che nắng hoặc đèn chiếu sáng bổ sung",
+          "Hệ thống báo trộm"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Để hệ thống IoT hoạt động, yếu tố nào là bắt buộc phải có?",
+        "options": ["Máy cày", "Nhà kho", "Kết nối Internet", "Drone"],
+        "answer": 2
+      },
+      {
+        "question": "Việc phân tích dữ liệu nhiệt độ và độ ẩm trong nhà kính có thể giúp dự báo nguy cơ bùng phát của loại dịch hại nào?",
+        "options": ["Chuột", "Sâu đất", "Các bệnh do nấm", "Cỏ dại"],
+        "answer": 2
+      }
+    ]
+  },
+  "cashew-course-v1": {
+    "title": "Kiểm tra: Thâm canh và Chế biến Điều",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Đối tượng sâu bệnh nào được xem là nguy hiểm và gây hại nặng nhất cho cây điều, đặc biệt là giai đoạn ra hoa và quả non?",
+        "options": ["Sâu đục thân", "Bọ xít muỗi", "Bệnh thán thư", "Rệp sáp"],
+        "answer": 1
+      },
+      {
+        "question": "Thời điểm nào được xem là tốt nhất để thu hoạch hạt điều?",
+        "options": [
+          "Khi quả giả còn xanh",
+          "Khi hạt điều đã già, vỏ cứng và quả giả tự rụng",
+          "Khi hạt còn non",
+          "Bất kỳ lúc nào"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Độ ẩm tiêu chuẩn của hạt điều thô sau khi phơi để bảo quản là bao nhiêu?",
+        "options": ["5-6%", "10-11%", "15-16%", "Trên 20%"],
+        "answer": 1
+      },
+      {
+        "question": "Trong quy trình chế biến, công đoạn hấp hạt điều thô có mục đích chính là gì?",
+        "options": [
+          "Để làm hạt chín",
+          "Để làm vỏ hạt giòn hơn và dễ tách",
+          "Để tăng trọng lượng hạt",
+          "Để loại bỏ nhân bên trong"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Ký hiệu 'W320' trong phân loại hạt điều nhân có ý nghĩa gì?",
+        "options": [
+          "Nhân bị vỡ, loại 320",
+          "Nhân màu trắng, có 320 hạt trong 1 kg",
+          "Nhân màu trắng, có khoảng 320 hạt trong 1 pound",
+          "Trọng lượng của một hạt là 320 gram"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao trong công nghệ đóng gói hạt điều xuất khẩu, người ta thường bơm khí Nitơ vào bao bì?",
+        "options": [
+          "Để bao bì phồng to hơn",
+          "Để ngăn chặn quá trình oxy hóa, giữ hạt giòn và không bị hôi dầu",
+          "Để tăng vị mặn cho hạt",
+          "Để diệt côn trùng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giống điều ghép cao sản như AB29, PN1 được ưa chuộng vì lý do gì?",
+        "options": [
+          "Cây rất cao và to",
+          "Lá rất xanh",
+          "Ra hoa đậu quả sớm, năng suất cao, hạt to",
+          "Chỉ trồng được ở vùng đất xấu"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bảo vệ loài kiến vàng trong vườn điều có tác dụng gì?",
+        "options": [
+          "Giúp thụ phấn cho hoa điều",
+          "Là thiên địch giúp kiểm soát bọ xít muỗi",
+          "Làm cho đất tơi xốp hơn",
+          "Không có tác dụng gì, cần phải tiêu diệt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mùa thu hoạch chính của cây điều ở Việt Nam thường là khi nào?",
+        "options": [
+          "Tháng 6 - tháng 8",
+          "Tháng 9 - tháng 11",
+          "Tháng 2 - tháng 5",
+          "Tháng 11 - tháng 1"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dầu vỏ hạt điều (CNSL) có đặc tính gì?",
+        "options": [
+          "Là dầu ăn cao cấp",
+          "Là một loại axit, có thể gây bỏng da",
+          "Có mùi thơm dễ chịu",
+          "Không có đặc tính gì đặc biệt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc tỉa cành, tạo tán cho cây điều thường được thực hiện vào thời điểm nào?",
+        "options": [
+          "Khi cây đang ra hoa",
+          "Sau khi thu hoạch xong",
+          "Vào mùa khô",
+          "Không cần tỉa cành"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh thán thư trên cây điều thường tấn công các bộ phận nào của cây?",
+        "options": ["Chỉ rễ", "Chỉ thân", "Lá, hoa và quả", "Chỉ quả chín"],
+        "answer": 2
+      },
+      {
+        "question": "Khi bón phân cho cây điều giai đoạn kinh doanh, cần tăng cường hàm lượng chất nào để tăng chất lượng hạt?",
+        "options": ["Đạm (N)", "Lân (P)", "Kali (K)", "Sắt (Fe)"],
+        "answer": 2
+      },
+      {
+        "question": "Phương pháp thu hoạch hạt điều chủ yếu là gì?",
+        "options": [
+          "Trèo lên cây hái",
+          "Dùng máy rung",
+          "Nhặt những quả đã rụng xuống đất",
+          "Dùng sào đập"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sau khi tách vỏ cứng, tại sao nhân điều cần được sấy khô?",
+        "options": [
+          "Để nhân to hơn",
+          "Để làm cho lớp vỏ lụa giòn và dễ bóc",
+          "Để nhân có vị ngọt",
+          "Không cần sấy"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Trong các loại nhân điều nguyên, loại nào có giá trị cao nhất?",
+        "options": ["W450", "W320", "W240", "W180"],
+        "answer": 3
+      },
+      {
+        "question": "Chứng nhận nào sau đây liên quan đến hệ thống quản lý an toàn thực phẩm trong nhà máy chế biến điều?",
+        "options": ["ISO 9001", "HACCP", "VietGAP", "GlobalG.A.P"],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao không nên để hạt điều thô bị ẩm ướt sau khi thu hoạch?",
+        "options": [
+          "Vì sẽ khó tách vỏ",
+          "Vì hạt sẽ nhẹ đi",
+          "Vì hạt sẽ dễ bị nấm mốc, hỏng",
+          "Vì hạt sẽ mất vị ngọt"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Mật độ trồng điều phổ biến là bao nhiêu cây trên một hecta?",
+        "options": [
+          "50-100 cây/ha",
+          "200-250 cây/ha",
+          "500-600 cây/ha",
+          "Trên 1000 cây/ha"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Quả giả của cây điều có thể được sử dụng để làm gì?",
+        "options": [
+          "Làm thức ăn cho người",
+          "Làm nước ép, rượu",
+          "Làm thuốc trừ sâu",
+          "Không có giá trị sử dụng"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "rubber-course-v1": {
+    "title": "Kiểm tra: Kỹ thuật khai thác mủ Cao su",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Cây cao su được xem là đủ tiêu chuẩn để bắt đầu khai thác mủ khi vanh thân cây (đo ở độ cao 1m) đạt bao nhiêu?",
+        "options": ["20-30 cm", "30-40 cm", "45-50 cm trở lên", "Trên 70 cm"],
+        "answer": 2
+      },
+      {
+        "question": "Lỗi kỹ thuật nào được xem là nghiêm trọng nhất khi cạo mủ cao su?",
+        "options": [
+          "Cạo quá nông",
+          "Cạo quá dày (hao dăm)",
+          "Cạo phạm vào gỗ",
+          "Cạo không đều tay"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chế độ cạo mủ S/2 d/3 có nghĩa là gì?",
+        "options": [
+          "Cạo nửa vòng thân, cạo 2 ngày nghỉ 3 ngày",
+          "Cạo cả vòng thân, cạo 3 ngày nghỉ 2 ngày",
+          "Cạo nửa vòng thân, cạo 1 ngày nghỉ 2 ngày",
+          "Cạo 2 miệng trên 3 cây"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc sử dụng chất kích thích mủ (Ethephon) cần tuân thủ nguyên tắc nào?",
+        "options": [
+          "Sử dụng nồng độ càng cao càng tốt",
+          "Chỉ dùng cho cây non để mau có mủ",
+          "Sử dụng với nồng độ thấp, tần suất thưa và phải kết hợp bón phân đầy đủ",
+          "Bôi hàng ngày để tăng sản lượng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chỉ số nào là quan trọng nhất để định giá chất lượng mủ nước cao su?",
+        "options": [
+          "Màu sắc của mủ",
+          "Độ nhớt của mủ",
+          "Thể tích của mủ",
+          "Hàm lượng cao su khô (DRC)"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Bệnh nào là phổ biến nhất trên miệng cạo cao su, gây ra các sọc đen và thối?",
+        "options": [
+          "Bệnh phấn trắng",
+          "Bệnh gỉ sắt",
+          "Bệnh loét sọc mặt cạo",
+          "Bệnh nấm hồng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao người ta thường cho dung dịch Amoniac (NH3) vào thùng chứa mủ?",
+        "options": [
+          "Để làm mủ thơm hơn",
+          "Để làm mủ đặc lại",
+          "Để chống đông, giữ mủ ở dạng lỏng",
+          "Để tăng hàm lượng DRC"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Độ sâu lý tưởng của vết cạo mủ là như thế nào?",
+        "options": [
+          "Càng sâu càng tốt",
+          "Cạo vào phần gỗ của cây",
+          "Cách tầng tượng tầng (lớp tế bào tái sinh) khoảng 1.0 - 1.5 mm",
+          "Chỉ cạo lớp vỏ ngoài cùng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Góc nghiêng của miệng cạo so với phương ngang nên là bao nhiêu độ?",
+        "options": ["10-15 độ", "20-25 độ", "30-32 độ", "45 độ"],
+        "answer": 2
+      },
+      {
+        "question": "Tầng tượng tầng trên cây cao su có chức năng gì?",
+        "options": [
+          "Vận chuyển nước",
+          "Tái sinh lớp vỏ mới",
+          "Dự trữ mủ",
+          "Bảo vệ lõi gỗ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Hao dăm (độ dày lát cạo) quá lớn sẽ dẫn đến hậu quả gì?",
+        "options": [
+          "Tăng sản lượng mủ",
+          "Làm mủ đặc hơn",
+          "Lãng phí vỏ, rút ngắn chu kỳ khai thác",
+          "Không ảnh hưởng gì"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi nào nên bón phân có hàm lượng Kali (K) cao cho vườn cao su kinh doanh?",
+        "options": [
+          "Đầu mùa mưa",
+          "Giữa và cuối mùa mưa",
+          "Mùa khô",
+          "Không cần bón Kali"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao không nên cạo mủ khi trời mưa hoặc vỏ cây còn ướt?",
+        "options": [
+          "Vì mủ sẽ loãng",
+          "Vì khó cạo hơn",
+          "Vì dễ gây bệnh loét sọc mặt cạo",
+          "Vì mủ sẽ không chảy"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Ngoài mủ nước, sản phẩm nào sau đây cũng được thu gom từ cây cao su?",
+        "options": [
+          "Lá cây",
+          "Vỏ cây",
+          "Mủ đông (mủ chén) và mủ dây",
+          "Rễ cây"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dao cạo mủ cần được duy trì như thế nào?",
+        "options": [
+          "Càng cùn càng tốt",
+          "Chỉ cần sạch sẽ",
+          "Phải luôn sắc bén",
+          "Không cần bảo quản"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Lạm dụng chất kích thích mủ có thể dẫn đến hiện tượng gì?",
+        "options": [
+          "Cây xanh tốt hơn",
+          "Khô miệng cạo, cây suy kiệt",
+          "Tăng tuổi thọ cây",
+          "Mủ có chất lượng tốt hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Máng dẫn mủ (lưỡi gà) được đóng ở vị trí nào?",
+        "options": [
+          "Phía trên miệng cạo",
+          "Bên cạnh miệng cạo",
+          "Ngay phía dưới đường cạo hậu",
+          "Ở gốc cây"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chu kỳ khai thác của một cây cao su thường kéo dài bao lâu?",
+        "options": ["5-10 năm", "10-15 năm", "20-25 năm", "Trên 30 năm"],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh loét sọc mặt cạo thường do tác nhân nào gây ra?",
+        "options": ["Vi khuẩn", "Virus", "Nấm Phytophthora", "Côn trùng"],
+        "answer": 2
+      },
+      {
+        "question": "Khi bón phân cho cao su đầu mùa mưa, cần ưu tiên các chất nào?",
+        "options": [
+          "Kali và Canxi",
+          "Đạm và Lân",
+          "Chỉ cần phân hữu cơ",
+          "Vi lượng"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "mango-course-v1": {
+    "title": "Kiểm tra: Trồng Xoài Cát Hòa Lộc",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Đối tượng sâu bệnh nào gây hại nặng nhất cho hoa xoài, làm hoa bị khô và rụng?",
+        "options": ["Sâu đục thân", "Nhện đỏ", "Rầy bông xoài", "Sâu vẽ bùa"],
+        "answer": 2
+      },
+      {
+        "question": "Kỹ thuật bao trái xoài mang lại lợi ích chính nào?",
+        "options": [
+          "Làm quả nhanh chín hơn",
+          "Ngăn chặn ruồi đục quả và giúp vỏ quả đẹp",
+          "Tăng kích thước quả",
+          "Làm quả chua hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để xử lý xoài ra hoa nghịch vụ, người ta thường dùng chất nào để 'hãm' cây, giúp cây tạo mầm hoa?",
+        "options": [
+          "Phân đạm (Urea)",
+          "Vôi bột",
+          "Paclobutrazol",
+          "Thuốc trừ cỏ"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thời điểm nào là thích hợp nhất để tiến hành bao trái cho xoài?",
+        "options": [
+          "Khi hoa vừa nở",
+          "Khi quả còn rất nhỏ (bằng đầu ngón tay)",
+          "Khi quả lớn bằng quả trứng gà",
+          "Khi quả sắp chín"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh thán thư trên cây xoài thường phát triển mạnh trong điều kiện thời tiết nào?",
+        "options": [
+          "Nắng nóng, khô hạn",
+          "Lạnh và có sương giá",
+          "Ẩm ướt, mưa nhiều",
+          "Gió mạnh"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc tỉa bớt quả trên một chùm xoài có tác dụng gì?",
+        "options": [
+          "Làm cây nhẹ hơn",
+          "Giúp các quả còn lại to, đều và chất lượng hơn",
+          "Để các quả khác nhanh rụng",
+          "Không có tác dụng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao phải chừa lại một đoạn cuống khi thu hái xoài?",
+        "options": [
+          "Để dễ cầm",
+          "Để nhựa không dính vào vỏ quả gây nám đen",
+          "Để làm kỷ niệm",
+          "Không cần thiết"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giai đoạn nào cây xoài cần được cung cấp nhiều Kali (K) nhất?",
+        "options": [
+          "Sau khi trồng",
+          "Khi cây ra đọt non",
+          "Giai đoạn nuôi trái để tăng độ ngọt",
+          "Sau khi thu hoạch"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Gốc ghép nào thường được sử dụng để ghép xoài Cát Hòa Lộc?",
+        "options": [
+          "Gốc mít",
+          "Gốc ổi",
+          "Gốc xoài bưởi hoặc xoài sẻ",
+          "Gốc sầu riêng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Mục đích của việc bấm ngọn cây xoài con khi cây cao khoảng 0.8-1m là gì?",
+        "options": [
+          "Để cây không cao nữa",
+          "Để cây phân cành, tạo cành cấp 1",
+          "Để cây ra hoa sớm",
+          "Để thu hoạch lá"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Xoài Cát Hòa Lộc phát triển tốt nhất trên loại đất nào?",
+        "options": [
+          "Đất phèn nặng",
+          "Đất sét chặt",
+          "Đất phù sa ven sông, thoát nước tốt",
+          "Đất sỏi đá"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sau khi xử lý bằng Paclobutrazol, chất nào được dùng để phá vỡ miên trạng, kích thích mầm hoa bung ra?",
+        "options": ["Phân đạm", "Vôi", "Nước lã", "Thioure hoặc KNO3"],
+        "answer": 3
+      },
+      {
+        "question": "Công việc nào cần làm ngay sau khi tỉa cành cho cây xoài?",
+        "options": [
+          "Tưới thật nhiều nước",
+          "Quét vôi hoặc thuốc gốc đồng vào vết cắt",
+          "Bón phân đạm",
+          "Không làm gì cả"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Để đảm bảo an toàn thực phẩm theo tiêu chuẩn VietGAP, việc nào sau đây là quan trọng?",
+        "options": [
+          "Sử dụng thuốc BVTV không hạn chế",
+          "Ghi chép nhật ký sản xuất",
+          "Không cần bón phân",
+          "Thu hoạch quả thật chín"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Dấu hiệu nào cho thấy xoài Cát Hòa Lộc đã có thể thu hoạch?",
+        "options": [
+          "Vỏ quả có màu xanh đậm",
+          "Vỏ quả chuyển sang xanh vàng, vai quả nở tròn",
+          "Quả có vị chua",
+          "Quả còn rất cứng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao phải xử lý quả xoài bằng nước nóng sau khi thu hoạch?",
+        "options": [
+          "Để quả ngọt hơn",
+          "Để diệt trừ một số mầm bệnh và trứng sâu hại",
+          "Để quả có màu đẹp hơn",
+          "Để quả nhanh chín"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nhiệt độ bảo quản xoài trong kho lạnh để giữ được lâu là bao nhiêu?",
+        "options": ["Dưới 0°C", "0-5°C", "10-12°C", "Trên 15°C"],
+        "answer": 2
+      },
+      {
+        "question": "Tỉa cành sau thu hoạch cho cây xoài có mục đích gì?",
+        "options": [
+          "Làm cây yếu đi",
+          "Kích thích cây ra các cơi đọt mới đồng loạt",
+          "Để cây không ra quả nữa",
+          "Chỉ để vườn thông thoáng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh thán thư thường gây hại trên bộ phận nào của cây xoài?",
+        "options": ["Chỉ rễ", "Chỉ thân", "Lá non, hoa và quả", "Chỉ quả chín"],
+        "answer": 2
+      },
+      {
+        "question": "Mật độ trồng xoài Cát Hòa Lộc phổ biến là bao nhiêu cây/ha?",
+        "options": [
+          "50-100 cây/ha",
+          "150-200 cây/ha",
+          "400-500 cây/ha",
+          "Trên 600 cây/ha"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "duck-farming-v1": {
+    "title": "Kiểm tra: Chăn nuôi Vịt an toàn sinh học",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Mô hình chuồng trại nào được xem là lý tưởng cho chăn nuôi vịt?",
+        "options": [
+          "Chuồng kín hoàn toàn",
+          "Thả rông tự do",
+          "Chuồng sàn trên ao hoặc có sân chơi và ao bơi",
+          "Chỉ cần mái che"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh nào có thể lây từ vịt sang người và yêu cầu phải tiêm phòng vaccine bắt buộc?",
+        "options": [
+          "Bệnh dịch tả vịt",
+          "Bệnh tụ huyết trùng",
+          "Bệnh cúm gia cầm (H5N1)",
+          "Bệnh viêm gan"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao phải cho vịt con uống nước có pha vitamin, điện giải trước khi cho ăn?",
+        "options": [
+          "Để vịt con no",
+          "Để chống stress và tăng sức đề kháng",
+          "Để dễ tiêu hóa thức ăn khô",
+          "Để kiểm tra khả năng uống của vịt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Vịt đẻ cần được bổ sung chất khoáng nào nhiều nhất trong khẩu phần ăn?",
+        "options": ["Sắt", "Kẽm", "Kali", "Canxi"],
+        "answer": 3
+      },
+      {
+        "question": "Khi nuôi vịt, tại sao không nên nuôi chung với các loại gia cầm khác như gà?",
+        "options": [
+          "Vì chúng sẽ đánh nhau",
+          "Vì vịt có thể mang mầm bệnh (như cúm gia cầm) mà không biểu hiện triệu chứng",
+          "Vì gà sẽ ăn hết thức ăn của vịt",
+          "Vì chúng không cùng kích cỡ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giống vịt nào nổi tiếng thế giới về sản lượng trứng cao?",
+        "options": ["Vịt Bầu", "Vịt Siêu thịt", "Vịt Cỏ", "Vịt Khaki Campbell"],
+        "answer": 3
+      },
+      {
+        "question": "Khi chăm sóc vịt, hành động nào là quan trọng nhất cần làm trước khi cho vịt ăn?",
+        "options": [
+          "Vệ sinh máng ăn",
+          "Cung cấp đủ nước uống sạch",
+          "Đo trọng lượng vịt",
+          "Kiểm tra nhiệt độ chuồng"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Nên thu hoạch trứng vịt vào thời điểm nào trong ngày là tốt nhất?",
+        "options": [
+          "Buổi trưa",
+          "Buổi chiều",
+          "Bất kỳ lúc nào",
+          "Buổi sáng sớm"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Giống vịt CV Super M là giống chuyên dụng cho mục đích gì?",
+        "options": ["Chuyên trứng", "Chuyên thịt", "Kiêm dụng", "Vịt cảnh"],
+        "answer": 1
+      },
+      {
+        "question": "Trong giai đoạn úm, nếu thấy vịt con tản ra xa đèn sưởi, điều đó có nghĩa là gì?",
+        "options": [
+          "Nhiệt độ quá lạnh",
+          "Nhiệt độ phù hợp",
+          "Nhiệt độ quá nóng",
+          "Vịt bị đói"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi xử lý trứng vịt bị bẩn, biện pháp nào được khuyến khích?",
+        "options": [
+          "Rửa kỹ bằng xà phòng",
+          "Ngâm trong nước muối",
+          "Dùng khăn khô hoặc giấy nhám lau sạch",
+          "Để nguyên không xử lý"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh dịch tả vịt do tác nhân nào gây ra?",
+        "options": ["Vi khuẩn", "Virus", "Nấm", "Ký sinh trùng"],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao ao/bể bơi lại quan trọng đối với con vịt?",
+        "options": [
+          "Chỉ để uống nước",
+          "Để vịt làm sạch lông, giao phối và điều hòa thân nhiệt",
+          "Để vịt không chạy đi mất",
+          "Để nuôi cá cùng với vịt"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giai đoạn hậu bị của vịt đẻ là giai đoạn nào?",
+        "options": [
+          "Từ lúc mới nở đến 3 tuần tuổi",
+          "Từ lúc bắt đầu đẻ đến khi hết đẻ",
+          "Từ lúc hết giai đoạn sinh trưởng đến khi bắt đầu đẻ",
+          "Không có giai đoạn này"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Vaccine Viêm gan siêu vi trùng type 1 nên được tiêm cho vịt vào lúc nào?",
+        "options": [
+          "Khi vịt được 1 tháng tuổi",
+          "Khi vịt sắp đẻ",
+          "Lúc 1 ngày tuổi",
+          "Không cần tiêm"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi xếp trứng vịt vào khay để bảo quản, nên đặt đầu nào của quả trứng hướng lên trên?",
+        "options": [
+          "Đầu to",
+          "Đầu nhỏ",
+          "Đặt nằm ngang",
+          "Hướng nào cũng được"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Trong khẩu phần ăn của vịt, có thể bổ sung loại thức ăn tự nhiên nào?",
+        "options": [
+          "Cát, sỏi",
+          "Lá cây khô",
+          "Ốc, cá nhỏ, bèo tấm",
+          "Thịt sống"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thời gian nuôi vịt siêu thịt thường kéo dài bao lâu?",
+        "options": ["20-30 ngày", "45-50 ngày", "70-80 ngày", "Trên 90 ngày"],
+        "answer": 1
+      },
+      {
+        "question": "Khi phát hiện vịt chết hàng loạt không rõ nguyên nhân, cần làm gì đầu tiên?",
+        "options": [
+          "Tự ý mổ khám",
+          "Chôn lấp ngay lập tức",
+          "Báo ngay cho cơ quan thú y địa phương",
+          "Bán tháo những con còn lại"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần phải có sân chơi khô ráo cho vịt?",
+        "options": [
+          "Để vịt phơi nắng",
+          "Để vịt nghỉ ngơi, vận động trên cạn",
+          "Để dễ bắt vịt",
+          "Không cần thiết"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "goat-farming-v1": {
+    "title": "Kiểm tra: Kỹ thuật chăn nuôi Dê",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Tại sao chuồng nuôi dê nên được thiết kế dạng chuồng sàn?",
+        "options": [
+          "Để tiết kiệm diện tích",
+          "Để dê luôn khô ráo, sạch sẽ và giảm bệnh tật",
+          "Để dễ dàng quan sát dê",
+          "Để dê không chạy ra ngoài"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Giống dê nào có nguồn gốc từ Nam Phi, nổi tiếng là giống chuyên thịt hàng đầu thế giới?",
+        "options": ["Dê Bách Thảo", "Dê Saanen", "Dê Boer", "Dê cỏ"],
+        "answer": 2
+      },
+      {
+        "question": "Loại thức ăn nào chiếm tỷ trọng lớn nhất trong khẩu phần ăn của dê?",
+        "options": [
+          "Thức ăn tinh (cám, ngô)",
+          "Thức ăn thô xanh (cỏ, lá cây)",
+          "Muối khoáng",
+          "Nước"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Biểu hiện nào là rõ ràng nhất cho thấy một con dê cái đang trong giai đoạn động dục?",
+        "options": [
+          "Ăn nhiều, ngủ nhiều",
+          "Kêu la, ve vẩy đuôi liên tục, chấp nhận cho con khác nhảy",
+          "Trốn vào một góc",
+          "Lông xù, mắt lờ đờ"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Việc cung cấp đá liếm chuyên dụng cho dê có mục đích chính là gì?",
+        "options": [
+          "Để dê mài răng",
+          "Để dê giải trí",
+          "Để bổ sung khoáng chất cần thiết",
+          "Để làm sạch miệng dê"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dê mang thai trong khoảng thời gian bao lâu?",
+        "options": ["3 tháng", "5 tháng", "7 tháng", "9 tháng"],
+        "answer": 1
+      },
+      {
+        "question": "Đối với dê con mới sinh, việc quan trọng nhất cần làm ngay là gì?",
+        "options": [
+          "Cho dê con uống nước đường",
+          "Tắm cho dê con",
+          "Cho dê con bú sữa đầu của mẹ",
+          "Tách dê con ra khỏi mẹ ngay lập tức"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao phân dê được xem là một loại phân hữu cơ rất tốt?",
+        "options": [
+          "Vì nó rất hiếm",
+          "Vì nó không có mùi",
+          "Vì nó ở dạng viên khô, ít mùi và rất giàu dinh dưỡng",
+          "Vì nó chỉ bón được cho cây dê"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sàn chuồng dê nên được làm bằng các thanh gỗ cách nhau bao nhiêu cm là hợp lý?",
+        "options": ["Sát nhau", "1 - 1.5 cm", "5 - 6 cm", "10 cm"],
+        "answer": 1
+      },
+      {
+        "question": "Giống dê Bách Thảo của Việt Nam thuộc nhóm giống nào?",
+        "options": [
+          "Chuyên thịt",
+          "Chuyên sữa",
+          "Kiêm dụng (thịt - sữa)",
+          "Chuyên cho da"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Lá cây nào sau đây cần phải phơi héo trước khi cho dê ăn để giảm độc tố?",
+        "options": ["Lá chuối", "Lá mít", "Lá sắn (khoai mì)", "Lá cỏ voi"],
+        "answer": 2
+      },
+      {
+        "question": "Kỹ thuật ủ chua (Silage) thức ăn cho dê có lợi ích gì?",
+        "options": [
+          "Làm thức ăn mất chất dinh dưỡng",
+          "Dự trữ thức ăn cho mùa khô và tăng khả năng tiêu hóa",
+          "Chỉ để thức ăn có mùi lạ",
+          "Làm thức ăn nhanh hỏng hơn"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Bệnh nào thường xảy ra khi thời tiết thay đổi đột ngột và có thể phòng bằng vaccine?",
+        "options": [
+          "Bệnh tiêu chảy",
+          "Bệnh ghẻ",
+          "Bệnh Tụ huyết trùng",
+          "Bệnh đầy hơi"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khi dê bị bệnh ghẻ, triệu chứng thường thấy là gì?",
+        "options": [
+          "Sốt cao",
+          "Tiêu chảy",
+          "Rụng lông, ngứa ngáy, da đóng vảy",
+          "Bỏ ăn"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Thời điểm phối giống tốt nhất cho dê cái là khi nào trong chu kỳ động dục?",
+        "options": [
+          "Ngay khi bắt đầu có biểu hiện",
+          "Vào ngày thứ hai của chu kỳ",
+          "Sau khi đã hết động dục",
+          "Bất kỳ lúc nào"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao cần có sổ sách theo dõi ngày phối giống và dự kiến đẻ cho từng con dê?",
+        "options": [
+          "Để khoe thành tích",
+          "Theo yêu cầu của pháp luật",
+          "Để có kế hoạch chăm sóc dê mẹ và chuẩn bị đỡ đẻ phù hợp",
+          "Chỉ để cho vui"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Dê thịt thường được xuất bán khi đạt trọng lượng bao nhiêu?",
+        "options": ["10-15 kg", "20-25 kg", "30-40 kg", "Trên 50 kg"],
+        "answer": 2
+      },
+      {
+        "question": "Khi vắt sữa dê, tại sao phải vắt bỏ vài tia sữa đầu tiên?",
+        "options": [
+          "Vì các tia sữa đầu không ngon",
+          "Để loại bỏ sữa có lượng vi khuẩn cao nhất và kiểm tra sữa",
+          "Để kích thích dê ra nhiều sữa hơn",
+          "Theo một nghi thức truyền thống"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Sữa đầu của dê mẹ chứa chất gì quan trọng nhất cho dê con?",
+        "options": [
+          "Nhiều đường",
+          "Nhiều chất béo",
+          "Nhiều nước",
+          "Nhiều kháng thể"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Để vỗ béo dê thịt, cần thay đổi chế độ ăn như thế nào?",
+        "options": [
+          "Tăng cường thức ăn thô xanh, giảm thức ăn tinh",
+          "Tăng cường thức ăn tinh, giảm thức ăn thô xanh",
+          "Chỉ cho ăn một loại cỏ",
+          "Cho dê nhịn đói"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "finance-course-v1": {
+    "title": "Kiểm tra: Quản lý tài chính nông hộ",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Khoản chi nào sau đây được xem là một khoản ĐẦU TƯ, không phải CHI PHÍ?",
+        "options": [
+          "Tiền mua phân bón cho một vụ",
+          "Tiền công thu hoạch lúa",
+          "Tiền mua máy cày",
+          "Tiền mua thuốc trừ sâu"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Điểm hòa vốn là gì?",
+        "options": [
+          "Điểm mà tại đó lợi nhuận cao nhất",
+          "Điểm mà tại đó không có chi phí",
+          "Điểm mà tại đó tổng doanh thu vừa đủ bù đắp tổng chi phí",
+          "Điểm bắt đầu một vụ mùa mới"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Công cụ nào được xem là quan trọng nhất và cơ bản nhất để bắt đầu quản lý tài chính?",
+        "options": [
+          "Phần mềm kế toán đắt tiền",
+          "Máy tính cá nhân",
+          "Sổ tay và bút để ghi chép thu chi hàng ngày",
+          "Trí nhớ tốt"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao việc quản lý dòng tiền lại quan trọng, ngay cả khi trang trại có lãi trên giấy tờ?",
+        "options": [
+          "Vì nó giúp tính thuế dễ hơn",
+          "Vì nếu không có tiền mặt sẵn sàng, trang trại có thể phá sản khi cần chi tiêu gấp",
+          "Vì nó giúp khoe khoang với hàng xóm",
+          "Không quan trọng lắm"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Khi lập phương án vay vốn ngân hàng, yếu tố nào là bằng chứng thuyết phục nhất cho thấy kế hoạch của bạn khả thi?",
+        "options": [
+          "Lời hứa sẽ làm việc chăm chỉ",
+          "Một hệ thống sổ sách ghi chép thu chi rõ ràng",
+          "Kinh nghiệm lâu năm của gia đình",
+          "Một khu vườn thật đẹp"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Mục đích của việc lập quỹ dự phòng rủi ro là gì?",
+        "options": [
+          "Để có tiền đi du lịch",
+          "Để mua sắm cho gia đình",
+          "Là 'phao cứu sinh' giúp vượt qua khó khăn khi gặp thiên tai, dịch bệnh",
+          "Để đầu tư vào một lĩnh vực khác"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Chi phí nào thường chiếm tỷ trọng lớn nhất trong chăn nuôi?",
+        "options": [
+          "Chi phí điện, nước",
+          "Chi phí khấu hao chuồng trại",
+          "Chi phí thuốc thú y",
+          "Chi phí thức ăn"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Nếu gặp khó khăn do dịch bệnh không thể trả nợ ngân hàng đúng hạn, bạn nên làm gì?",
+        "options": [
+          "Im lặng và trốn tránh",
+          "Vay nặng lãi để trả nợ ngân hàng",
+          "Chủ động làm việc với ngân hàng để tìm giải pháp cơ cấu lại khoản nợ",
+          "Bán hết tài sản để trả nợ ngay lập tức"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Khấu hao tài sản cố định (ví dụ: máy cày) được tính vào đâu?",
+        "options": [
+          "Tính hết vào chi phí của một vụ",
+          "Được tính dần vào chi phí sản xuất qua nhiều năm sử dụng",
+          "Không cần tính",
+          "Chỉ tính khi bán máy cày"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Vốn lưu động trong nông nghiệp là gì?",
+        "options": [
+          "Tiền để mua đất",
+          "Tiền để xây nhà",
+          "Tiền cần thiết để chi trả cho các hoạt động hàng ngày của một vụ mùa (giống, phân, công...)",
+          "Tiền tiết kiệm trong ngân hàng"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Lợi nhuận ròng được tính bằng công thức nào?",
+        "options": [
+          "Tổng doanh thu - Chi phí vật tư",
+          "Tổng doanh thu - Chi phí nhân công",
+          "Tổng doanh thu - Tổng tất cả chi phí (bao gồm cả khấu hao)",
+          "Tổng doanh thu"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tài sản đảm bảo khi vay vốn ngân hàng có thể là gì?",
+        "options": [
+          "Lời hứa",
+          "Sức khỏe của người vay",
+          "Sổ đỏ (Giấy chứng nhận quyền sử dụng đất)",
+          "Kinh nghiệm làm nông"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Tối ưu hóa chi phí có nghĩa là gì?",
+        "options": [
+          "Cắt giảm tất cả các chi phí",
+          "Không chi tiêu bất cứ thứ gì",
+          "Sử dụng chi phí một cách thông minh để đạt hiệu quả cao nhất",
+          "Chỉ mua những thứ rẻ tiền nhất"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Ngân hàng nào ở Việt Nam được xem là chủ lực trong việc cho vay nông nghiệp, nông thôn?",
+        "options": [
+          "Ngân hàng TMCP Sài Gòn (SCB)",
+          "Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank)",
+          "Ngân hàng TMCP Kỹ thương Việt Nam (Techcombank)",
+          "Ngân hàng TMCP Ngoại thương Việt Nam (Vietcombank)"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Tại sao nên tách biệt tài chính cá nhân và tài chính của trang trại?",
+        "options": [
+          "Để dễ dàng tính toán chính xác hiệu quả kinh doanh của trang trại",
+          "Vì pháp luật yêu cầu",
+          "Để trông chuyên nghiệp hơn",
+          "Không cần thiết phải tách biệt"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Một kế hoạch sản xuất kinh doanh tốt KHÔNG cần yếu tố nào sau đây?",
+        "options": [
+          "Dự toán chi phí",
+          "Dự kiến sản lượng và doanh thu",
+          "Kế hoạch các hoạt động chính",
+          "Dự báo thời tiết chính xác 100%"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Nếu tổng chi phí cho 1 ha rau là 10 triệu và giá bán dự kiến là 5.000 đồng/kg, sản lượng hòa vốn là bao nhiêu?",
+        "options": [
+          "1.000 kg (1 tấn)",
+          "1.500 kg (1.5 tấn)",
+          "2.000 kg (2 tấn)",
+          "2.500 kg (2.5 tấn)"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Việc sử dụng vốn vay sai mục đích có thể dẫn đến hậu quả gì?",
+        "options": [
+          "Được ngân hàng khen thưởng",
+          "Không thể trả nợ, ảnh hưởng đến uy tín tín dụng",
+          "Lợi nhuận cao hơn",
+          "Không có hậu quả gì"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Khi phân tích sổ sách, nếu thấy chi phí thuốc BVTV quá cao, bạn nên làm gì?",
+        "options": [
+          "Tiếp tục mua nhiều hơn",
+          "Ngừng sử dụng thuốc hoàn toàn",
+          "Tìm hiểu các biện pháp phòng trừ sinh học, IPM để giảm phụ thuộc vào thuốc hóa học",
+          "Đổ lỗi cho thời tiết"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Sự khác biệt giữa chi phí biến đổi và chi phí cố định là gì?",
+        "options": [
+          "Không có sự khác biệt",
+          "Chi phí cố định thay đổi theo sản lượng, chi phí biến đổi thì không",
+          "Chi phí cố định không thay đổi theo sản lượng (tiền thuê đất), chi phí biến đổi thì có (tiền phân bón)",
+          "Chi phí biến đổi luôn cao hơn chi phí cố định"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  
+    "quizId": "orange-course-v1",
+    "title": "Kiểm tra: Canh tác Cam sành theo tiêu chuẩn VietGAP",
+    "timeLimit": 15,
+    "totalQuestions": 20,
+    "questions": [
+      {
+        "question": "Bệnh nào được xem là nguy hiểm nhất đối với cây có múi và được lây truyền qua rầy chổng cánh?",
+        "options": ["Bệnh loét", "Bệnh ghẻ", "Bệnh vàng lá Greening", "Bệnh thối gốc"],
+        "answer": 2
+      },
+      {
+        "question": "Mục đích của việc 'xiết nước' trước khi xử lý cho cây có múi ra hoa là gì?",
+        "options": ["Để tiết kiệm nước", "Để diệt cỏ dại", "Để tạo stress, giúp cây phân hóa mầm hoa", "Để rễ cây ăn sâu hơn"],
+        "answer": 2
+      },
+      {
+        "question": "Tại sao cần phải bao trái cho cam sành?",
+        "options": ["Để quả không bị rám nắng", "Để quả ngọt hơn", "Để ngăn chặn sâu đục trái và giúp vỏ quả đẹp", "Để quả nhanh lớn hơn"],
+        "answer": 2
+      },
+      {
+        "question": "Dấu hiệu nào cho thấy cam sành đã đến thời điểm thu hoạch?",
+        "options": ["Vỏ quả chuyển sang màu vàng hoàn toàn", "Vỏ căng bóng, các túi tinh dầu nở to", "Quả tự rụng xuống đất", "Khi quả còn non và nhỏ"],
+        "answer": 1
+      },
+      {
+        "question": "Trong giai đoạn kiến thiết (1-3 năm đầu), cây cam cần được bón phân có hàm lượng các chất nào cao?",
+        "options": ["Kali (K) và Canxi (Ca)", "Vi lượng", "Đạm (N) và Lân (P)", "Chỉ cần nước"],
+        "answer": 2
+      },
+      {
+        "question": "Sâu vẽ bùa gây hại chủ yếu trên bộ phận nào của cây cam?",
+        "options": ["Rễ cây", "Thân cây già", "Quả chín", "Lá non và đọt non"],
+        "answer": 3
+      },
+      {
+        "question": "Ở vùng đất thấp như Đồng bằng sông Cửu Long, tại sao phải lên liếp (mô) cao khi trồng cam?",
+        "options": ["Để cây dễ lấy ánh sáng", "Để chống ngập úng cho bộ rễ", "Để dễ bón phân", "Để vườn đẹp hơn"],
+        "answer": 1
+      },
+      {
+        "question": "Nhiệt độ bảo quản cam sành tươi lâu trong kho lạnh là khoảng bao nhiêu?",
+        "options": ["0°C", "2-4°C", "8-10°C", "15-20°C"],
+        "answer": 2
+      },
+      {
+        "question": "Bệnh nào gây ra các vết sần sùi màu xám trên vỏ quả và lá cam?",
+        "options": ["Bệnh loét", "Bệnh vàng lá Greening", "Bệnh thán thư", "Bệnh ghẻ"],
+        "answer": 3
+      },
+      {
+        "question": "Việc phun bổ sung vi lượng Bo trong giai đoạn ra hoa có tác dụng chính là gì?",
+        "options": ["Giúp lá xanh hơn", "Tăng sức sống hạt phấn, giúp tăng tỷ lệ đậu quả", "Làm cho vỏ cây dày hơn", "Xua đuổi côn trùng"],
+        "answer": 1
+      },
+      {
+          "question": "Gốc ghép nào thường được sử dụng cho cây cam sành để có bộ rễ khỏe và kháng bệnh?",
+          "options": ["Gốc xoài", "Gốc mít", "Gốc bưởi Bung, cam mật", "Không cần gốc ghép"],
+          "answer": 2
+      },
+      {
+          "question": "Mục đích của việc tỉa cành tạo tán cho cây cam con là gì?",
+          "options": ["Để cây có nhiều cành hơn", "Tạo bộ khung tán khỏe mạnh, cân đối, thông thoáng", "Để cây nhanh có quả", "Để cây thấp lùn"],
+          "answer": 1
+      },
+      {
+          "question": "Trong giai đoạn nuôi quả, bón phân có hàm lượng Kali (K) cao có tác dụng gì?",
+          "options": ["Giúp lá xanh hơn", "Giúp quả to, ngọt và có màu sắc đẹp", "Giúp cây ra nhiều rễ hơn", "Giúp cây cao hơn"],
+          "answer": 1
+      },
+      {
+          "question": "Nhện đỏ gây ra hiện tượng gì trên vỏ quả cam?",
+          "options": ["Các đốm đen", "Quả bị thối", "Vỏ quả sần sùi (da lu, da cám)", "Quả bị nứt"],
+          "answer": 2
+      },
+      {
+          "question": "Khi thu hoạch cam, tại sao nên dùng kéo sắc cắt cuống thay vì dùng tay vặn?",
+          "options": ["Vì dùng tay lâu hơn", "Để tránh làm dập vỏ và tổn thương cây", "Để cuống dài hơn", "Không có sự khác biệt"],
+          "answer": 1
+      },
+      {
+          "question": "Mật độ trồng cam sành phổ biến là khoảng bao nhiêu cây/ha?",
+          "options": ["100-200 cây/ha", "400-500 cây/ha", "800-1000 cây/ha", "Trên 1200 cây/ha"],
+          "answer": 1
+      },
+      {
+          "question": "Độ pH đất lý tưởng cho cây cam sành là bao nhiêu?",
+          "options": ["4.5 - 5.0", "5.5 - 6.5", "7.0 - 7.5", "Trên 8.0"],
+          "answer": 1
+      },
+      {
+          "question": "Bệnh loét do vi khuẩn trên cây cam thường lây lan mạnh qua đâu?",
+          "options": ["Qua đất", "Qua côn trùng chích hút", "Qua mưa và gió", "Qua rễ cây"],
+          "answer": 2
+      },
+      {
+          "question": "Thời điểm nào là thích hợp nhất để tiến hành tỉa cành cho cây cam sau một vụ thu hoạch?",
+          "options": ["Khi cây đang ra hoa", "Khi quả đang lớn", "Ngay sau khi thu hoạch xong", "Vào mùa khô hạn"],
+          "answer": 2
+      },
+      {
+          "question": "Trong các biện pháp phòng bệnh vàng lá greening, biện pháp nào KHÔNG trực tiếp hiệu quả?",
+          "options": ["Sử dụng giống sạch bệnh", "Quản lý rầy chổng cánh", "Nhổ bỏ cây bệnh", "Bón nhiều phân đạm"],
+          "answer": 3
+      }
+    ]
+  
+}

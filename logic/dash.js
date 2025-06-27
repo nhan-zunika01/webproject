@@ -1,7 +1,5 @@
 // Global variable for current user
 let currentUser = null;
-const RICE_QUIZ_ID = "rice-basics-v1"; // ID của bài kiểm tra duy nhất
-const TOTAL_QUIZ_QUESTIONS = 20; // Tổng số câu hỏi trong bài kiểm tra
 
 // === START: MODAL AND ALERT ELEMENTS ===
 const alertModal = document.getElementById("alert-modal");
@@ -84,8 +82,11 @@ function showSection(sectionId, element) {
     titleElement.textContent = titleText;
   }
 
+  // Load content dynamically when switching tabs
   if (sectionId === "forum") {
     loadForumPosts();
+  } else if (sectionId === "quiz") {
+    loadAndRenderQuizzes();
   }
 }
 
@@ -97,7 +98,7 @@ function logout() {
 }
 // === END: GENERAL UI FUNCTIONS (MODALS, TABS) ===
 
-// === CẬP NHẬT: THÊM HÀM TẢI KHÓA HỌC DYNAMIC ===
+// === START: DYNAMIC CONTENT LOADING FUNCTIONS ===
 async function loadAndRenderCourses() {
   const coursesGrid = document.getElementById("courses-grid");
   if (!coursesGrid) return;
@@ -111,9 +112,9 @@ async function loadAndRenderCourses() {
     }
     const coursesData = await response.json();
 
-    coursesGrid.innerHTML = ""; // Xóa thông báo đang tải
+    coursesGrid.innerHTML = ""; // Clear loading message
 
-    const isUserLoggedIn = !!localStorage.getItem("currentUser");
+    const isUserLoggedIn = !!currentUser;
 
     for (const courseId in coursesData) {
       if (Object.hasOwnProperty.call(coursesData, courseId)) {
@@ -122,7 +123,6 @@ async function loadAndRenderCourses() {
         const courseCard = document.createElement("div");
         courseCard.className = "course-card card";
 
-        // KHÔI PHỤC LOGIC CŨ: Render cả nút và thông báo, sau đó ẩn/hiện bằng CSS
         const actionHTML = `
                     <a href="course.html?id=${courseId}" class="btn btn-primary btn-join-course" style="display: ${
           isUserLoggedIn ? "inline-block" : "none"
@@ -149,6 +149,107 @@ async function loadAndRenderCourses() {
     coursesGrid.innerHTML = `<p class="card" style="color: #ffcccc;">${error.message}</p>`;
   }
 }
+
+/**
+ * Loads quiz and course data, fetches user's quiz history,
+ * and renders the list of available quizzes with their high scores.
+ */
+async function loadAndRenderQuizzes() {
+  const quizGrid = document.getElementById("quiz-grid");
+  if (!quizGrid) return;
+
+  quizGrid.innerHTML = '<p class="card">Đang tải danh sách bài kiểm tra...</p>';
+
+  try {
+    const [coursesResponse, quizzesResponse] = await Promise.all([
+      fetch("data/courses.json"),
+      fetch("data/quizzes.json"),
+    ]);
+
+    if (!coursesResponse.ok) throw new Error("Không thể tải dữ liệu khóa học.");
+    if (!quizzesResponse.ok)
+      throw new Error("Không thể tải dữ liệu bài kiểm tra.");
+
+    const coursesData = await coursesResponse.json();
+    const quizzesData = await quizzesResponse.json();
+
+    let quizHistory = [];
+    if (currentUser && currentUser.access_token) {
+      try {
+        const historyResponse = await fetch(`/api/get-quiz-history`, {
+          headers: { Authorization: `Bearer ${currentUser.access_token}` },
+        });
+        if (historyResponse.ok) {
+          quizHistory = await historyResponse.json();
+        } else {
+          console.error("Không thể tải lịch sử làm bài.");
+        }
+      } catch (historyError) {
+        console.error("Lỗi khi tải lịch sử bài kiểm tra:", historyError);
+      }
+    }
+
+    const highScores = {};
+    quizHistory.forEach((result) => {
+      if (
+        !highScores[result.quiz_id] ||
+        result.score > highScores[result.quiz_id]
+      ) {
+        highScores[result.quiz_id] = result.score;
+      }
+    });
+
+    quizGrid.innerHTML = "";
+
+    const quizzesAvailable = Object.values(coursesData).some(
+      (course) => course.quizId
+    );
+
+    if (!quizzesAvailable) {
+      quizGrid.innerHTML = '<p class="card">Hiện chưa có bài kiểm tra nào.</p>';
+      return;
+    }
+
+    for (const courseId in coursesData) {
+      const course = coursesData[courseId];
+      if (course.quizId && quizzesData[course.quizId]) {
+        const quiz = quizzesData[course.quizId];
+        const quizCard = document.createElement("div");
+        quizCard.className = "card";
+
+        let actionHTML = "";
+        // SỬA LỖI: Khai báo totalQuestions ở đây để có thể truy cập ở phạm vi rộng hơn
+        const totalQuestions = quiz.totalQuestions || 0;
+
+        if (currentUser) {
+          const userHighScore = highScores[course.quizId] || 0;
+          actionHTML = `
+                        <p class="highscore">Điểm cao nhất: <span>${userHighScore}/${totalQuestions}</span></p>
+                        <a href="quiz.html?id=${course.quizId}" class="btn btn-primary">Bắt đầu ngay</a>
+                    `;
+        } else {
+          actionHTML = `
+                        <div class="highscore">Vui lòng <a href="login.html" style="color:#a5d6a7; font-weight:bold;">đăng nhập</a> để tham gia.</div>
+                    `;
+        }
+
+        quizCard.innerHTML = `
+                    <h3>${quiz.title}</h3>
+                    <p>Thời gian: ${quiz.timeLimit} phút | Số câu hỏi: ${totalQuestions}</p>
+                    <div class="quiz-actions" style="margin-top: 15px;">
+                        ${actionHTML}
+                    </div>
+                `;
+        quizGrid.appendChild(quizCard);
+      }
+    }
+  } catch (error) {
+    console.error("Lỗi khi tải danh sách bài kiểm tra:", error);
+    quizGrid.innerHTML = `<p class="card" style="color: #ffcccc;">${error.message}</p>`;
+  }
+}
+
+// === END: DYNAMIC CONTENT LOADING FUNCTIONS ===
 
 // === START: FORUM FUNCTIONS ===
 
@@ -462,7 +563,7 @@ async function handleCommentSubmit(event) {
       body: JSON.stringify({ postId, content }),
     });
     await fetchAndRenderComments(postId);
-    await loadForumPosts();
+    await loadForumPosts(); // To update the comment count on the main post
     const commentsSection = document.getElementById(
       `comments-section-${postId}`
     );
@@ -494,13 +595,15 @@ function animateValue(obj, start, end, duration) {
 function updateDashboardStats(highScore) {
   const score = highScore || 0;
   const animationDuration = 1500;
-  const completedCourses = score > 0 ? 1 : 0;
+  const completedCourses = score > 0 ? 1 : 0; // Simplified logic for now
   const completedCoursesEl = document.getElementById("stat-courses-completed");
   if (completedCoursesEl)
     animateValue(completedCoursesEl, 0, completedCourses, animationDuration);
 
+  // Assuming only one quiz for now
+  const totalQuestionsInOneQuiz = 20;
   const averageScorePercent =
-    TOTAL_QUIZ_QUESTIONS > 0 ? (score / TOTAL_QUIZ_QUESTIONS) * 100 : 0;
+    totalQuestionsInOneQuiz > 0 ? (score / totalQuestionsInOneQuiz) * 100 : 0;
   const averageScoreEl = document.getElementById("stat-average-score");
   if (averageScoreEl) {
     let startTimestamp = null;
@@ -525,7 +628,7 @@ function updateDashboardStats(highScore) {
   if (studyHoursEl)
     animateValue(studyHoursEl, 0, totalStudyHours, animationDuration);
 
-  const rating = score > 0 ? (score / TOTAL_QUIZ_QUESTIONS) * 4 + 1 : 0;
+  const rating = score > 0 ? (score / totalQuestionsInOneQuiz) * 4 + 1 : 0;
   const ratingEl = document.getElementById("stat-student-rating");
   if (ratingEl) {
     let startTimestampRating = null;
@@ -548,29 +651,23 @@ function updateDashboardStats(highScore) {
 async function loadDashboardData() {
   if (!currentUser || !currentUser.access_token) return;
 
-  const highscoreEl = document.getElementById("quiz-highscore");
   try {
-    const response = await fetch(`/api/get-quiz-score?quizId=${RICE_QUIZ_ID}`, {
+    const response = await fetch(`/api/get-quiz-history`, {
       headers: {
         Authorization: `Bearer ${currentUser.access_token}`,
       },
     });
-    let scoreData = { high_score: 0 };
-    if (response.ok) {
-      scoreData = await response.json();
-    } else {
-      console.error("Không thể lấy điểm, sử dụng giá trị mặc định là 0.");
+    if (!response.ok) {
+      throw new Error("Could not fetch history");
     }
-
-    const highScore = scoreData.high_score || 0;
-
-    if (highscoreEl) {
-      highscoreEl.textContent = `${highScore}/${TOTAL_QUIZ_QUESTIONS}`;
-    }
-    updateDashboardStats(highScore);
+    const history = await response.json();
+    const highestScore = history.reduce(
+      (max, item) => Math.max(max, item.score),
+      0
+    );
+    updateDashboardStats(highestScore);
   } catch (error) {
     console.error("Lỗi khi tải dữ liệu người dùng:", error);
-    if (highscoreEl) highscoreEl.textContent = "Lỗi";
     updateDashboardStats(0);
   }
 }
@@ -586,11 +683,7 @@ function setupUserUI() {
   document.getElementById("forum-login-prompt").style.display = "none";
   const guestMessage = document.getElementById("guest-welcome-message");
   if (guestMessage) guestMessage.style.display = "none";
-  const startQuizBtn = document.getElementById("start-quiz-btn");
-  if (startQuizBtn) {
-    startQuizBtn.classList.remove("disabled");
-    startQuizBtn.removeAttribute("title");
-  }
+
   loadDashboardData();
   const usernameSpan = document.querySelector(".user-menu .username");
   if (usernameSpan) {
@@ -610,19 +703,12 @@ function setupGuestUI() {
   document.getElementById("profile-tab").style.display = "none";
   document.getElementById("create-post-btn").style.display = "none";
   document.getElementById("forum-login-prompt").style.display = "block";
-  const startQuizBtn = document.getElementById("start-quiz-btn");
-  if (startQuizBtn) {
-    startQuizBtn.classList.add("disabled");
-    startQuizBtn.title = "Vui lòng đăng nhập để làm bài kiểm tra";
-  }
+
   document.getElementById("stat-courses-completed").textContent = "0";
   document.getElementById("stat-average-score").textContent = "0%";
   document.getElementById("stat-study-hours").textContent = "0";
   document.getElementById("stat-student-rating").textContent = "0.0★";
-  const highscoreEl = document.getElementById("quiz-highscore");
-  if (highscoreEl) {
-    highscoreEl.textContent = "0/20";
-  }
+
   document.getElementById("main-content-title").textContent = "Trang chủ";
   if (!document.getElementById("guest-welcome-message")) {
     const dashboardSection = document.getElementById("dashboard");
@@ -913,7 +999,6 @@ function renderWeatherData(current, forecast, locationName) {
 
 // === START: INITIALIZATION AND EVENT LISTENERS ===
 document.addEventListener("DOMContentLoaded", function () {
-  // CẬP NHẬT: Gọi hàm tải khóa học ngay khi DOM sẵn sàng
   loadAndRenderCourses();
 
   const userData = localStorage.getItem("currentUser");

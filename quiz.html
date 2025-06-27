@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiểm tra: Kỹ thuật trồng lúa cơ bản - Sổ tay nông dân</title>
+    <title>Đang tải bài kiểm tra... - Sổ tay nông dân</title>
     <link rel="stylesheet" href="styles/quiz.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
@@ -13,16 +13,16 @@
         <div id="start-screen" class="quiz-screen active">
             <div class="card">
                 <i class="fas fa-feather-alt icon-start"></i>
-                <h1>Kiểm tra: Kỹ thuật trồng lúa cơ bản</h1>
-                <p class="quiz-rules">
-                    <span><i class="fas fa-question-circle"></i> 20 câu hỏi</span>
-                    <span><i class="fas fa-clock"></i> 15 phút</span>
-                </p>
+                <h1 id="quiz-title">Đang tải...</h1>
+                <div class="quiz-rules">
+                    <span><i class="fas fa-question-circle"></i> <span id="quiz-question-count">...</span> câu hỏi</span>
+                    <span><i class="fas fa-clock"></i> <span id="quiz-time-limit">...</span> phút</span>
+                </div>
                 <div class="quiz-info">
                     <span id="attempts-info">Số lần đã thi: 0</span>
-                    <span id="highscore-info">Điểm cao nhất: 0/20</span>
+                    <span id="highscore-info">Điểm cao nhất: 0/0</span>
                 </div>
-                <p>Bài kiểm tra này sẽ đánh giá kiến thức của bạn về các kỹ thuật canh tác lúa. Hãy đảm bảo bạn đã sẵn sàng trước khi bắt đầu.</p>
+                <p id="quiz-description">Bài kiểm tra này sẽ đánh giá kiến thức của bạn. Hãy đảm bảo bạn đã sẵn sàng trước khi bắt đầu.</p>
                 <button id="start-btn" class="btn btn-primary">Tôi đã sẵn sàng!</button>
                  <a href="dash.html#quiz" class="back-link">Quay lại trang Kiểm tra</a>
             </div>
@@ -34,13 +34,13 @@
                 <a href="#" id="exit-quiz-btn" class="exit-btn" title="Thoát bài kiểm tra"><i class="fas fa-times"></i></a>
                 <div class="timer">
                     <i class="fas fa-stopwatch"></i>
-                    <span id="time-left">15:00</span>
+                    <span id="time-left">00:00</span>
                 </div>
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
                 <div class="progress-text">
-                    Câu <span id="current-question-num">1</span>/20
+                    Câu <span id="current-question-num">1</span>/<span id="total-question-num">...</span>
                 </div>
             </header>
             <div id="question-container" class="card">
@@ -60,11 +60,10 @@
                 <h1>Hoàn thành!</h1>
                 <p>Bạn đã hoàn thành bài kiểm tra.</p>
                 <div class="score-container">
-                    Điểm của bạn: <span id="score-text">0 / 20</span>
+                    Điểm của bạn: <span id="score-text">0 / 0</span>
                 </div>
                 <div id="result-message"></div>
                 <div class="result-actions">
-                    <!-- SỬA LỖI: Chuyển thẻ <a> thành <button> -->
                     <button id="retake-btn" class="btn">Làm lại bài thi</button>
                     <button id="review-btn" class="btn btn-primary">Xem lại bài làm</button>
                 </div>
@@ -80,7 +79,7 @@
     <!-- Overlays & Modals -->
     <div id="loading-overlay">
         <div class="spinner"></div>
-        <p>Đang lưu kết quả...</p>
+        <p>Đang tải...</p>
     </div>
     <div id="confirmation-modal" class="modal-overlay">
         <div class="modal-box">
@@ -88,7 +87,7 @@
             <p id="confirm-message"></p>
             <div class="modal-actions">
                 <button id="cancel-submit-btn" class="btn btn-secondary">Hủy</button>
-                <button id="confirm-submit-btn" class="btn btn-primary">Thoát</button>
+                <button id="confirm-submit-btn" class="btn btn-primary">Nộp bài</button>
             </div>
         </div>
     </div>
@@ -103,7 +102,6 @@
         </div>
     </div>
     
-    <!-- SỬA LỖI: Thêm modal thông báo chung -->
     <div id="alert-modal" class="modal-overlay">
         <div class="modal-box">
             <h3 id="alert-title">Thông báo</h3>

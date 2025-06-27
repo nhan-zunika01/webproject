@@ -1,31 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // === CONSTANTS ===
-  const QUIZ_ID = "rice-basics-v1";
-  const QUIZ_STATE_KEY_PREFIX = `quizState_${QUIZ_ID}`;
-
   // === DOM ELEMENTS ===
   const startScreen = document.getElementById("start-screen");
   const quizScreen = document.getElementById("quiz-screen");
   const resultsScreen = document.getElementById("results-screen");
+
+  // Start Screen
+  const quizTitleEl = document.getElementById("quiz-title");
+  const quizQuestionCountEl = document.getElementById("quiz-question-count");
+  const quizTimeLimitEl = document.getElementById("quiz-time-limit");
+  const attemptsInfoEl = document.getElementById("attempts-info");
+  const highscoreInfoEl = document.getElementById("highscore-info");
   const startBtn = document.getElementById("start-btn");
+
+  // Quiz Screen
   const questionContainer = document.getElementById("question-container");
   const timeLeftEl = document.getElementById("time-left");
   const progressBar = document.getElementById("progress-bar");
   const currentQuesNumEl = document.getElementById("current-question-num");
-  const scoreTextEl = document.getElementById("score-text");
-  const resultMessageEl = document.getElementById("result-message");
-  const reviewContainer = document.getElementById("review-container");
-  const loadingOverlay = document.getElementById("loading-overlay");
-  const exitQuizBtn = document.getElementById("exit-quiz-btn");
-  const attemptsInfoEl = document.getElementById("attempts-info");
-  const highscoreInfoEl = document.getElementById("highscore-info");
+  const totalQuestionNumEl = document.getElementById("total-question-num");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   const submitBtn = document.getElementById("submit-btn");
+  const exitQuizBtn = document.getElementById("exit-quiz-btn");
+
+  // Results Screen
+  const scoreTextEl = document.getElementById("score-text");
+  const resultMessageEl = document.getElementById("result-message");
+  const reviewContainer = document.getElementById("review-container");
   const retakeBtn = document.getElementById("retake-btn");
   const reviewBtn = document.getElementById("review-btn");
 
-  // === MODAL ELEMENTS ===
+  // Modals & Overlays
+  const loadingOverlay = document.getElementById("loading-overlay");
   const confirmationModal = document.getElementById("confirmation-modal");
   const confirmTitleEl = document.getElementById("confirm-title");
   const confirmMessageEl = document.getElementById("confirm-message");
@@ -38,207 +44,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertMessage = document.getElementById("alert-message");
   const alertCloseBtn = document.getElementById("alert-close-btn");
 
-  // === QUIZ DATA ===
-  const questions = [
-    {
-      question: "Giai đoạn nào cây lúa cần nhiều nước nhất?",
-      options: ["Làm đòng - trổ bông", "Mạ", "Đẻ nhánh", "Chín sáp"],
-      answer: 0,
-    },
-    {
-      question:
-        "Loại phân bón nào quan trọng nhất cho sự phát triển của cây lúa?",
-      options: [
-        "Phân Lân (P)",
-        "Phân Kali (K)",
-        "Phân Đạm (N)",
-        "Phân vi lượng",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Sâu đục thân gây hại cho cây lúa ở giai đoạn nào?",
-      options: [
-        "Chỉ giai đoạn mạ",
-        "Chỉ giai đoạn trổ bông",
-        "Mọi giai đoạn",
-        "Chỉ giai đoạn chín",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Bệnh đạo ôn trên lúa thường do tác nhân nào gây ra?",
-      options: ["Vi khuẩn", "Virus", "Nấm", "Côn trùng"],
-      answer: 2,
-    },
-    {
-      question: "Mật độ sạ lúa thích hợp là bao nhiêu?",
-      options: [
-        "20-40 kg/ha",
-        "80-120 kg/ha",
-        "200-250 kg/ha",
-        "Trên 300 kg/ha",
-      ],
-      answer: 1,
-    },
-    {
-      question: "Biện pháp '3 giảm 3 tăng' trong canh tác lúa là gì?",
-      options: [
-        "Giảm đạm, sâu bệnh, thất thoát; Tăng năng suất, chất lượng, hiệu quả",
-        "Giảm nước, phân, thuốc; Tăng giống, công, vốn",
-        "Giảm giống, thuốc trừ sâu, phân đạm; Tăng năng suất, chất lượng, lợi nhuận",
-        "Giảm chi phí, thời gian, công sức; Tăng thu nhập, an toàn, bền vững",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Thời điểm thu hoạch lúa tốt nhất là khi nào?",
-      options: [
-        "Khi lúa còn xanh",
-        "Khi 85-90% số hạt trên bông đã chín vàng",
-        "Khi 100% hạt đã chín vàng",
-        "Bất kỳ lúc nào sau khi trổ bông",
-      ],
-      answer: 1,
-    },
-    {
-      question: "Phương pháp tưới 'ngập khô xen kẽ' giúp gì?",
-      options: [
-        "Tăng sâu bệnh",
-        "Lãng phí nước",
-        "Giảm phát thải khí nhà kính và tiết kiệm nước",
-        "Làm đất chai cứng",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Cây lúa thuộc họ thực vật nào?",
-      options: ["Họ Cà", "Họ Đậu", "Họ Hòa thảo (Cỏ)", "Họ Bầu bí"],
-      answer: 2,
-    },
-    {
-      question: "Rầy nâu hại lúa bằng cách nào?",
-      options: [
-        "Ăn lá",
-        "Cắn rễ",
-        "Chích hút nhựa cây và truyền bệnh virus",
-        "Đục vào thân cây",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Làm đất kỹ trước khi gieo sạ có tác dụng gì?",
-      options: [
-        "Tăng cỏ dại",
-        "Tạo điều kiện cho rễ phát triển, diệt mầm bệnh",
-        "Làm đất mất dinh dưỡng",
-        "Không có tác dụng gì",
-      ],
-      answer: 1,
-    },
-    {
-      question: "Phân chuồng hoai mục tốt cho đất vì:",
-      options: [
-        "Cung cấp nhiều đạm tức thì",
-        "Làm chua đất",
-        "Cải tạo đất, tăng độ phì nhiêu, cung cấp vi sinh vật có lợi",
-        "Không có lợi ích",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Bón vôi cho đất trồng lúa nhằm mục đích gì?",
-      options: [
-        "Tăng độ phì nhiêu",
-        "Cung cấp dinh dưỡng",
-        "Khử chua, hạ phèn cho đất",
-        "Diệt côn trùng",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Giống lúa kháng sâu bệnh có nghĩa là gì?",
-      options: [
-        "Không bao giờ bị sâu bệnh",
-        "Có khả năng chống chịu sâu bệnh tốt hơn giống thường",
-        "Chỉ cần bón ít phân hơn",
-        "Năng suất luôn cao hơn",
-      ],
-      answer: 1,
-    },
-    {
-      question: "Giai đoạn 'ngậm sữa' của cây lúa là giai đoạn nào?",
-      options: [
-        "Trước khi trổ bông",
-        "Sau khi thụ phấn, hạt lúa bắt đầu tích lũy tinh bột dạng lỏng",
-        "Khi hạt lúa cứng lại",
-        "Lúc cây đẻ nhánh",
-      ],
-      answer: 1,
-    },
-    {
-      question: "Tại sao cần phải quản lý cỏ dại trên ruộng lúa?",
-      options: [
-        "Để ruộng đẹp hơn",
-        "Cỏ dại không ảnh hưởng gì",
-        "Cỏ dại cạnh tranh dinh dưỡng, ánh sáng, nước với cây lúa",
-        "Cỏ dại giúp giữ ẩm cho đất",
-      ],
-      answer: 2,
-    },
-    {
-      question:
-        "Nhiệt độ thích hợp cho sự sinh trưởng của cây lúa là khoảng bao nhiêu?",
-      options: ["Dưới 15°C", "15-20°C", "25-32°C", "Trên 40°C"],
-      answer: 2,
-    },
-    {
-      question: "Bón phân không cân đối (thừa đạm) sẽ dẫn đến hậu quả gì?",
-      options: [
-        "Cây lúa cứng cáp, ít sâu bệnh",
-        "Lúa chín sớm hơn",
-        "Cây lúa yếu, dễ đổ ngã và dễ bị sâu bệnh tấn công",
-        "Không ảnh hưởng gì",
-      ],
-      answer: 2,
-    },
-    {
-      question: "Thuật ngữ 'lúa chét' có nghĩa là gì?",
-      options: [
-        "Một giống lúa mới",
-        "Lúa mọc từ gốc rạ của vụ trước",
-        "Lúa bị bệnh",
-        "Lúa trồng trên cạn",
-      ],
-      answer: 1,
-    },
-    {
-      question: "Mục đích của việc phơi thóc sau khi thu hoạch là gì?",
-      options: [
-        "Để thóc có màu đẹp hơn",
-        "Giảm độ ẩm của hạt để dễ bảo quản, tránh nấm mốc",
-        "Làm tăng trọng lượng",
-        "Không cần thiết",
-      ],
-      answer: 2,
-    },
-  ];
-
   // === STATE VARIABLES ===
   let currentUser = null;
+  let quizId = null;
+  let questions = [];
+  let timeLimitInMinutes = 0;
   let currentQuestionIndex = 0;
   let userAnswers = [];
   let timer;
-  let timeRemaining = 15 * 60;
+  let timeRemaining = 0;
   let quizInProgress = false;
   let quizStateKey = "";
 
   // === CORE FUNCTIONS ===
+
   const showScreen = (screenId) => {
     document
       .querySelectorAll(".quiz-screen")
       .forEach((screen) => screen.classList.remove("active"));
-    document.getElementById(screenId).classList.add("active");
+    const screenToShow = document.getElementById(screenId);
+    if (screenToShow) {
+      screenToShow.classList.add("active");
+    }
   };
 
   const showInfoModal = (message, title = "Thông báo") => {
@@ -275,6 +102,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const fetchAllQuizzes = async () => {
+    try {
+      const response = await fetch("data/quizzes.json");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to fetch quizzes.json:", error);
+      return null;
+    }
+  };
+
+  const initializeQuizPage = async () => {
+    loadingOverlay.style.display = "flex";
+    const params = new URLSearchParams(window.location.search);
+    quizId = params.get("id");
+
+    if (!quizId) {
+      showInfoModal("Không tìm thấy ID bài kiểm tra trong URL.", "Lỗi");
+      loadingOverlay.style.display = "none";
+      return;
+    }
+
+    const allQuizzes = await fetchAllQuizzes();
+    if (!allQuizzes || !allQuizzes[quizId]) {
+      showInfoModal(
+        `Không tìm thấy dữ liệu cho bài kiểm tra với ID: ${quizId}.`,
+        "Lỗi"
+      );
+      loadingOverlay.style.display = "none";
+      return;
+    }
+
+    const quizData = allQuizzes[quizId];
+    questions = quizData.questions;
+    timeLimitInMinutes = quizData.timeLimit;
+
+    document.title = `${quizData.title} - Sổ tay nông dân`;
+    quizTitleEl.textContent = quizData.title;
+    quizQuestionCountEl.textContent = quizData.totalQuestions;
+    quizTimeLimitEl.textContent = quizData.timeLimit;
+    totalQuestionNumEl.textContent = quizData.totalQuestions;
+    highscoreInfoEl.textContent = `Điểm cao nhất: 0/${quizData.totalQuestions}`;
+
+    const userData = localStorage.getItem("currentUser");
+    if (userData) {
+      currentUser = JSON.parse(userData);
+      quizStateKey = `quizState_${quizId}_${currentUser.id}`;
+      checkAndResume();
+    } else {
+      showScreen("start-screen");
+      loadInitialInfo();
+    }
+    loadingOverlay.style.display = "none";
+  };
+
   const saveQuizState = () => {
     if (!quizInProgress || !currentUser) return;
     const state = { currentQuestionIndex, userAnswers, timeRemaining };
@@ -294,18 +178,21 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     try {
-      const response = await fetch(`/api/get-quiz-history`, {
+      const response = await fetch(`/api/get-quiz-history?quizId=${quizId}`, {
         headers: { Authorization: `Bearer ${currentUser.access_token}` },
       });
       if (!response.ok) {
         throw new Error("Không thể lấy lịch sử làm bài.");
       }
       const history = await response.json();
-      const riceQuizHistory = history.filter((r) => r.quiz_id === QUIZ_ID);
-      const attempts = riceQuizHistory.length;
+      const currentQuizHistory = history.filter((r) => r.quiz_id === quizId);
+      const attempts = currentQuizHistory.length;
       attemptsInfoEl.textContent = `Số lần đã thi: ${attempts}`;
       if (attempts > 0) {
-        const highScore = Math.max(...riceQuizHistory.map((r) => r.score), 0);
+        const highScore = Math.max(
+          ...currentQuizHistory.map((r) => r.score),
+          0
+        );
         highscoreInfoEl.textContent = `Điểm cao nhất: ${highScore}/${questions.length}`;
       } else {
         highscoreInfoEl.textContent = `Điểm cao nhất: 0/${questions.length}`;
@@ -355,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearQuizState();
     currentQuestionIndex = 0;
     userAnswers = Array(questions.length).fill(null);
-    timeRemaining = 15 * 60;
+    timeRemaining = timeLimitInMinutes * 60;
     quizInProgress = true;
     showScreen("quiz-screen");
     startTimer();
@@ -401,6 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const renderQuestion = () => {
+    if (questions.length === 0) return;
     const question = questions[currentQuestionIndex];
     const userAnswer = userAnswers[currentQuestionIndex];
     currentQuesNumEl.textContent = currentQuestionIndex + 1;
@@ -448,28 +336,46 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timer);
     let score = userAnswers.reduce(
       (total, answer, index) =>
-        answer === questions[index].answer ? total + 1 : total,
+        questions[index] && answer === questions[index].answer
+          ? total + 1
+          : total,
       0
     );
     scoreTextEl.textContent = `${score} / ${questions.length}`;
+
+    const percentage = (score / questions.length) * 100;
     resultMessageEl.textContent =
-      score >= 15
-        ? "Xuất sắc! Bạn có kiến thức rất tốt về trồng lúa."
-        : score >= 10
+      percentage >= 80
+        ? "Xuất sắc! Bạn có kiến thức rất tốt."
+        : percentage >= 50
         ? "Khá tốt! Hãy tiếp tục học hỏi để cải thiện nhé."
         : "Cần cố gắng hơn. Hãy xem lại bài làm để củng cố kiến thức nhé!";
+
     renderReview();
     showScreen("results-screen");
 
-    // Lưu kết quả trước khi xóa state
     try {
+      loadingOverlay.querySelector("p").textContent = "Đang lưu kết quả...";
       loadingOverlay.style.display = "flex";
       await saveResultToDB(score);
     } catch (error) {
-      console.error("Failed to save score:", error);
-      showInfoModal(
-        "Không thể lưu kết quả. Vui lòng kiểm tra kết nối và thử lại."
-      );
+      // CẬP NHẬT: Xử lý lỗi hết hạn phiên đăng nhập một cách đặc biệt
+      if (error.message === "SESSION_EXPIRED") {
+        showInfoModal(
+          "Phiên đăng nhập của bạn đã hết hạn. Vui lòng đăng nhập lại để lưu kết quả.",
+          "Phiên đã hết hạn"
+        );
+        // Chuyển hướng đến trang đăng nhập sau 3 giây
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 3000);
+      } else {
+        console.error("Failed to save score:", error);
+        showInfoModal(
+          `Lỗi: ${error.message}. Vui lòng liên hệ quản trị viên.`,
+          "Không thể lưu kết quả"
+        );
+      }
     } finally {
       loadingOverlay.style.display = "none";
       clearQuizState();
@@ -515,26 +421,28 @@ document.addEventListener("DOMContentLoaded", () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${currentUser.access_token}`,
       },
-      body: JSON.stringify({ quizId: QUIZ_ID, score: score }),
+      body: JSON.stringify({ quizId: quizId, score: score }),
     });
+
+    // CẬP NHẬT: Kiểm tra lỗi 401 (Unauthorized) để xác định phiên hết hạn
+    if (response.status === 401) {
+      localStorage.removeItem("currentUser");
+      throw new Error("SESSION_EXPIRED");
+    }
+
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to save score");
+      throw new Error(
+        errorData.message ||
+          "Không thể lưu điểm. Phản hồi không hợp lệ từ máy chủ."
+      );
     }
     return await response.json();
   };
 
   // --- INITIALIZATION & EVENT LISTENERS ---
   const init = () => {
-    const userData = localStorage.getItem("currentUser");
-    if (userData) {
-      currentUser = JSON.parse(userData);
-      quizStateKey = `${QUIZ_STATE_KEY_PREFIX}_${currentUser.id}`;
-      checkAndResume();
-    } else {
-      showScreen("start-screen");
-      loadInitialInfo();
-    }
+    initializeQuizPage();
 
     startBtn.addEventListener("click", startQuiz);
     retakeBtn.addEventListener("click", () => window.location.reload());
@@ -572,7 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
       startQuiz();
     });
 
-    // Listeners for the new Alert Modal
     if (alertCloseBtn) {
       alertCloseBtn.addEventListener("click", () =>
         alertModal.classList.remove("active")
