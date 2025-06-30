@@ -109,10 +109,12 @@ function initializeCoursePage(allCourses) {
       courseSapo.textContent = course.sapo;
 
       if (course.quizId) {
+        // === SỬA LỖI TẠI ĐÂY ===
+        // Đường dẫn `href` đã được sửa để trỏ đến quiz.html với đúng ID.
         quizCtaContainer.innerHTML = `
                   <h3>Kiểm tra kiến thức của bạn!</h3>
                   <p>Sau khi hoàn thành khóa học, hãy làm bài kiểm tra để củng cố kiến thức.</p>
-                  <a href="${course.quizId}" class="btn btn-primary">Làm bài kiểm tra ngay</a>`;
+                  <a href="quiz.html?id=${course.quizId}" class="btn btn-primary">Làm bài kiểm tra ngay</a>`;
       } else {
         quizCtaContainer.innerHTML = `
                   <h3>Kiểm tra kiến thức của bạn!</h3>
