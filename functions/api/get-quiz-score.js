@@ -1,108 +1,92 @@
 // File: functions/api/get-quiz-score.js
-import { createClient } from "@supabase/supabase-js";
+// Fetches the highest quiz score for a user from Cloudflare D1.
 
-export const onRequestGet = async ({ request, env }) => {
+// --- Helper Functions ---
+
+/**
+ * Verifies a JWT and returns the payload.
+ * @param {string} token The JWT.
+ * @param {string} secret The secret key.
+ * @returns {Promise<object|null>} The decoded payload or null.
+ */
+async function verifyJwt(token, secret) {
+    try {
+        const [encodedHeader, encodedPayload, signature] = token.split('.');
+        const signatureInput = `${encodedHeader}.${encodedPayload}`;
+
+        const key = await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(secret),
+            { name: "HMAC", hash: "SHA-256" },
+            false,
+            ["verify"]
+        );
+
+        const signatureBuffer = new Uint8Array(atob(signature.replace(/-/g, '+').replace(/_/g, '/')).split('').map(c => c.charCodeAt(0)));
+        const isValid = await crypto.subtle.verify("HMAC", key, signatureBuffer, new TextEncoder().encode(signatureInput));
+
+        if (!isValid) return null;
+
+        return JSON.parse(atob(encodedPayload.replace(/-/g, '+').replace(/_/g, '/')));
+    } catch (e) {
+        return null;
+    }
+}
+
+export const onRequest = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json",
   };
 
-  // Sử dụng SERVICE_ROLE_KEY để truy cập ở cấp độ quản trị, được kiểm soát bằng xác thực token
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error("Biến môi trường Supabase chưa được thiết lập.");
-    return new Response(
-      JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ.",
-      }),
-      { status: 500, headers }
-    );
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers });
+  }
+  if (request.method !== "GET") {
+    return new Response("Method not allowed", { status: 405, headers });
+  }
+
+  if (!env.DB || !env.JWT_SECRET) {
+      console.error("Server configuration error: D1 or JWT_SECRET is missing.");
+      return new Response(JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }), { status: 500, headers });
   }
 
   try {
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_SERVICE_ROLE_KEY
-    );
-    const url = new URL(request.url);
-    const quizId = url.searchParams.get("quizId");
-
-    // Lấy người dùng từ token trong header Authorization
+    // 1. Authenticate user via JWT
     const authHeader = request.headers.get("Authorization");
-    if (!authHeader) {
-      return new Response(
-        JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }),
-        { status: 401, headers }
-      );
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }), { status: 401, headers });
     }
     const token = authHeader.split(" ")[1];
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser(token);
-
-    if (userError || !user) {
-      return new Response(
-        JSON.stringify({ message: "Mã xác thực không hợp lệ." }),
-        { status: 401, headers }
-      );
+    const decodedPayload = await verifyJwt(token, env.JWT_SECRET);
+    if (!decodedPayload || !decodedPayload.sub) {
+      return new Response(JSON.stringify({ message: "Mã xác thực không hợp lệ." }), { status: 401, headers });
     }
+    const userId = decodedPayload.sub;
 
+    // 2. Get quizId from URL
+    const url = new URL(request.url);
+    const quizId = url.searchParams.get("quizId");
     if (!quizId) {
-      return new Response(JSON.stringify({ message: "Cần có quizId." }), {
-        status: 400,
-        headers,
-      });
+      return new Response(JSON.stringify({ message: "Cần có quizId." }), { status: 400, headers });
     }
 
-    // SỬA LỖI: Truy vấn tất cả kết quả cho người dùng và bài kiểm tra cụ thể để tìm điểm cao nhất.
-    const { data, error } = await supabase
-      .from("quiz_results")
-      .select("score")
-      .eq("user_id", user.id) // Sử dụng ID người dùng đã được xác thực
-      .eq("quiz_id", quizId);
+    // 3. Fetch the highest score using a D1 aggregate query
+    const result = await env.DB.prepare(
+        "SELECT MAX(score) as high_score FROM quiz_results WHERE user_id = ? AND quiz_id = ?"
+      )
+      .bind(userId, quizId)
+      .first();
 
-    if (error) {
-      // Không xem "không có hàng nào" là một lỗi nghiêm trọng.
-      if (error.code === "PGRST116") {
-        return new Response(JSON.stringify({ high_score: 0 }), {
-          status: 200,
-          headers,
-        });
-      }
-      throw error;
-    }
+    // If result.high_score is null (no records found), default to 0.
+    const highScore = result?.high_score || 0;
 
-    // Tính điểm cao nhất từ dữ liệu trả về
-    let highScore = 0;
-    if (data && data.length > 0) {
-      highScore = Math.max(...data.map((result) => result.score));
-    }
+    return new Response(JSON.stringify({ high_score: highScore }), { status: 200, headers });
 
-    return new Response(JSON.stringify({ high_score: highScore }), {
-      status: 200,
-      headers,
-    });
   } catch (e) {
-    console.error("Lỗi máy chủ khi lấy điểm bài kiểm tra:", e);
-    return new Response(
-      JSON.stringify({ message: "Đã xảy ra lỗi khi lấy điểm số." }),
-      { status: 500, headers }
-    );
+    console.error("Server error getting quiz score:", e);
+    return new Response(JSON.stringify({ message: "Đã xảy ra lỗi khi lấy điểm số." }), { status: 500, headers });
   }
-};
-
-export const onRequest = (context) => {
-  if (context.request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    });
-  }
-  if (context.request.method === "GET") {
-    return onRequestGet(context);
-  }
-  return new Response("Method not allowed", { status: 405 });
 };

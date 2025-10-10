@@ -1,99 +1,88 @@
 // File: functions/api/update-profile.js
-import { createClient } from "@supabase/supabase-js";
+// Allows an authenticated user to update their profile information in Cloudflare D1.
 
-export const onRequestPost = async ({ request, env }) => {
+// --- Helper Functions ---
+
+/**
+ * Verifies a JWT and returns the payload.
+ * @param {string} token The JWT.
+ * @param {string} secret The secret key.
+ * @returns {Promise<object|null>} The decoded payload or null.
+ */
+async function verifyJwt(token, secret) {
+    try {
+        const [encodedHeader, encodedPayload, signature] = token.split('.');
+        const signatureInput = `${encodedHeader}.${encodedPayload}`;
+
+        const key = await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(secret),
+            { name: "HMAC", hash: "SHA-256" },
+            false,
+            ["verify"]
+        );
+
+        const signatureBuffer = new Uint8Array(atob(signature.replace(/-/g, '+').replace(/_/g, '/')).split('').map(c => c.charCodeAt(0)));
+        const isValid = await crypto.subtle.verify("HMAC", key, signatureBuffer, new TextEncoder().encode(signatureInput));
+
+        if (!isValid) return null;
+
+        return JSON.parse(atob(encodedPayload.replace(/-/g, '+').replace(/_/g, '/')));
+    } catch (e) {
+        return null;
+    }
+}
+
+export const onRequest = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json",
   };
 
-  // Kiểm tra thông tin kết nối Supabase
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error("Biến môi trường Supabase chưa được thiết lập.");
-    return new Response(
-      JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }),
-      { status: 500, headers }
-    );
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers });
+  }
+  if (request.method !== "POST") {
+    return new Response("Method not allowed", { status: 405, headers });
+  }
+
+  if (!env.DB || !env.JWT_SECRET) {
+      console.error("Server configuration error: D1 or JWT_SECRET is missing.");
+      return new Response(JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }), { status: 500, headers });
   }
 
   try {
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
-    // Lấy người dùng từ token trong header Authorization để bảo mật
+    // 1. Authenticate user via JWT
     const authHeader = request.headers.get("Authorization");
-    if (!authHeader) {
-      return new Response(
-        JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }),
-        { status: 401, headers }
-      );
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }), { status: 401, headers });
     }
     const token = authHeader.split(" ")[1];
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser(token);
-
-    if (userError || !user) {
-      return new Response(
-        JSON.stringify({ message: "Mã xác thực không hợp lệ." }),
-        { status: 401, headers }
-      );
+    const decodedPayload = await verifyJwt(token, env.JWT_SECRET);
+    if (!decodedPayload || !decodedPayload.sub) {
+      return new Response(JSON.stringify({ message: "Mã xác thực không hợp lệ." }), { status: 401, headers });
     }
+    const userId = decodedPayload.sub;
 
-    // Lấy dữ liệu mới từ body của yêu cầu
+    // 2. Get data from request body
     const { name_user, phone_user } = await request.json();
-
-    // Kiểm tra dữ liệu đầu vào
     if (!name_user || !phone_user) {
-      return new Response(
-        JSON.stringify({ message: "Họ tên và số điện thoại là bắt buộc." }),
-        { status: 400, headers }
-      );
+      return new Response(JSON.stringify({ message: "Họ tên và số điện thoại là bắt buộc." }), { status: 400, headers });
     }
 
-    // Sử dụng quyền admin để cập nhật metadata của người dùng
-    const { data: updatedUser, error: updateError } =
-      await supabase.auth.admin.updateUserById(user.id, {
-        user_metadata: {
-          name_user: name_user,
-          phone_user: phone_user,
-        },
-      });
+    // 3. Update the user's profile in D1
+    await env.DB.prepare(
+        "UPDATE users SET name_user = ?, phone_user = ? WHERE id = ?"
+      )
+      .bind(name_user, phone_user, userId)
+      .run();
 
-    if (updateError) {
-      console.error("Lỗi cập nhật từ Supabase:", updateError);
-      throw new Error("Không thể cập nhật thông tin người dùng.");
-    }
+    return new Response(JSON.stringify({ message: "Cập nhật thông tin thành công!" }), { status: 200, headers });
 
-    // Trả về phản hồi thành công
-    return new Response(
-      JSON.stringify({
-        message: "Cập nhật thông tin thành công!",
-      }),
-      { status: 200, headers }
-    );
   } catch (e) {
-    console.error("Lỗi máy chủ khi cập nhật hồ sơ:", e);
-    return new Response(
-      JSON.stringify({ message: e.message || "Đã xảy ra lỗi hệ thống." }),
-      { status: 500, headers }
-    );
+    console.error("Server error updating profile:", e);
+    return new Response(JSON.stringify({ message: "Đã xảy ra lỗi khi cập nhật thông tin." }), { status: 500, headers });
   }
-};
-
-// Xử lý các yêu cầu CORS preflight
-export const onRequest = (context) => {
-  if (context.request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    });
-  }
-  return onRequestPost(context);
 };

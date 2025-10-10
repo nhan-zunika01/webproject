@@ -67,10 +67,8 @@ async function handleRegister(event) {
     const result = await response.json();
 
     if (response.ok) {
-      // THAY ĐỔI QUAN TRỌNG: Truyền email qua URL
-      window.location.href = `registration-pending.html?email=${encodeURIComponent(
-        email_user
-      )}`;
+      // After successful registration, redirect to the login page with a success message
+      window.location.href = `login.html?registered=true`;
     } else {
       // Display a more specific error if possible
       setMessage(`error-reg-${result.field || "name-account"}`, result.message);

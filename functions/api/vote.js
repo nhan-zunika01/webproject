@@ -1,116 +1,111 @@
 // File: functions/api/vote.js
-// Handles all like/dislike actions.
-import { createClient } from "@supabase/supabase-js";
+// Handles all like/dislike actions using atomic D1 batch operations.
 
-export const onRequestPost = async ({ request, env }) => {
+// --- Helper Functions ---
+
+/**
+ * Verifies a JWT and returns the payload.
+ * @param {string} token The JWT.
+ * @param {string} secret The secret key.
+ * @returns {Promise<object|null>} The decoded payload or null.
+ */
+async function verifyJwt(token, secret) {
+    try {
+        const [encodedHeader, encodedPayload, signature] = token.split('.');
+        const signatureInput = `${encodedHeader}.${encodedPayload}`;
+
+        const key = await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(secret),
+            { name: "HMAC", hash: "SHA-256" },
+            false,
+            ["verify"]
+        );
+
+        const signatureBuffer = new Uint8Array(atob(signature.replace(/-/g, '+').replace(/_/g, '/')).split('').map(c => c.charCodeAt(0)));
+        const isValid = await crypto.subtle.verify("HMAC", key, signatureBuffer, new TextEncoder().encode(signatureInput));
+
+        if (!isValid) return null;
+
+        return JSON.parse(atob(encodedPayload.replace(/-/g, '+').replace(/_/g, '/')));
+    } catch (e) {
+        return null;
+    }
+}
+
+export const onRequest = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json",
   };
 
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    return new Response(
-      JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }),
-      { status: 500, headers }
-    );
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers });
+  }
+  if (request.method !== "POST") {
+    return new Response("Method not allowed", { status: 405, headers });
   }
 
-  const supabase = createClient(
-    env.SUPABASE_URL,
-    env.SUPABASE_SERVICE_ROLE_KEY
-  );
-
-  // Authenticate user
-  const authHeader = request.headers.get("Authorization");
-  if (!authHeader) {
-    return new Response(
-      JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }),
-      { status: 401, headers }
-    );
-  }
-  const token = authHeader.split(" ")[1];
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser(token);
-
-  if (userError || !user) {
-    return new Response(
-      JSON.stringify({ message: "Mã xác thực không hợp lệ." }),
-      { status: 401, headers }
-    );
+  if (!env.DB || !env.JWT_SECRET) {
+      console.error("Server configuration error: D1 or JWT_SECRET is missing.");
+      return new Response(JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }), { status: 500, headers });
   }
 
   try {
-    const { postId, voteType } = await request.json(); // voteType can be 'like' or 'dislike'
+    // 1. Authenticate user via JWT
+    const authHeader = request.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }), { status: 401, headers });
+    }
+    const token = authHeader.split(" ")[1];
+    const decodedPayload = await verifyJwt(token, env.JWT_SECRET);
+    if (!decodedPayload || !decodedPayload.sub) {
+      return new Response(JSON.stringify({ message: "Mã xác thực không hợp lệ." }), { status: 401, headers });
+    }
+    const userId = decodedPayload.sub;
+
+    // 2. Get data from request body
+    const { postId, voteType } = await request.json(); // voteType: 'like' or 'dislike'
     const voteValue = voteType === "like" ? 1 : -1;
 
-    // Check for existing vote
-    const { data: existingVote, error: selectError } = await supabase
-      .from("post_votes")
-      .select("*")
-      .eq("user_id", user.id)
-      .eq("post_id", postId)
-      .single();
+    // 3. Determine the vote operation
+    const existingVote = await env.DB.prepare(
+        "SELECT id, vote_type FROM post_votes WHERE user_id = ? AND post_id = ?"
+      ).bind(userId, postId).first();
 
-    if (selectError && selectError.code !== "PGRST116") {
-      // PGRST116 means no rows found, which is fine
-      throw selectError;
-    }
-
+    const batch = [];
     if (existingVote) {
-      // User has voted before
-      if (existingVote.vote_type === voteValue) {
-        // User is un-voting (e.g., clicking like again)
-        const { error: deleteError } = await supabase
-          .from("post_votes")
-          .delete()
-          .eq("id", existingVote.id);
-        if (deleteError) throw deleteError;
-      } else {
-        // User is changing their vote (e.g., from dislike to like)
-        const { error: updateError } = await supabase
-          .from("post_votes")
-          .update({ vote_type: voteValue })
-          .eq("id", existingVote.id);
-        if (updateError) throw updateError;
-      }
+        if (existingVote.vote_type === voteValue) {
+            // Un-voting: delete the existing vote
+            batch.push(env.DB.prepare("DELETE FROM post_votes WHERE id = ?").bind(existingVote.id));
+        } else {
+            // Changing vote: update the existing vote
+            batch.push(env.DB.prepare("UPDATE post_votes SET vote_type = ? WHERE id = ?").bind(voteValue, existingVote.id));
+        }
     } else {
-      // New vote
-      const { error: insertError } = await supabase
-        .from("post_votes")
-        .insert({ user_id: user.id, post_id: postId, vote_type: voteValue });
-      if (insertError) throw insertError;
+        // New vote: insert a new vote record
+        batch.push(env.DB.prepare("INSERT INTO post_votes (user_id, post_id, vote_type) VALUES (?, ?, ?)").bind(userId, postId, voteValue));
     }
 
-    // After changing the vote, call the RPC function to update counts
-    const { error: rpcError } = await supabase.rpc("update_post_vote_counts", {
-      p_post_id: postId,
-    });
-    if (rpcError) throw rpcError;
-
-    return new Response(
-      JSON.stringify({ message: "Vote recorded successfully." }),
-      { status: 200, headers }
+    // 4. Add a statement to the batch to update the post's vote counts atomically
+    batch.push(
+        env.DB.prepare(
+            `UPDATE posts SET
+               like_count = (SELECT COUNT(*) FROM post_votes WHERE post_id = ? AND vote_type = 1),
+               dislike_count = (SELECT COUNT(*) FROM post_votes WHERE post_id = ? AND vote_type = -1)
+             WHERE id = ?`
+        ).bind(postId, postId, postId)
     );
+
+    // 5. Execute the atomic batch operation
+    await env.DB.batch(batch);
+
+    return new Response(JSON.stringify({ message: "Vote recorded successfully." }), { status: 200, headers });
+
   } catch (e) {
     console.error("Error processing vote:", e);
-    return new Response(
-      JSON.stringify({ message: `Không thể ghi nhận vote. Lỗi: ${e.message}` }),
-      { status: 500, headers }
-    );
+    return new Response(JSON.stringify({ message: "Không thể ghi nhận vote." }), { status: 500, headers });
   }
-};
-
-export const onRequest = (context) => {
-  if (context.request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    });
-  }
-  return onRequestPost(context);
 };

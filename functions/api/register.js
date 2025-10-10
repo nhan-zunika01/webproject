@@ -1,5 +1,18 @@
 // File: functions/api/register.js
-import { createClient } from "@supabase/supabase-js";
+// Handles user registration using Cloudflare D1.
+
+/**
+ * Hashes a password using the Web Crypto API (SHA-256).
+ * @param {string} password The password to hash.
+ * @returns {Promise<string>} The hexadecimal representation of the hash.
+ */
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 export const onRequestPost = async ({ request, env }) => {
   const headers = {
@@ -7,11 +20,9 @@ export const onRequestPost = async ({ request, env }) => {
     "Content-Type": "application/json",
   };
 
-  // Check for environment variables
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error(
-      "Supabase environment variables are not set for registration."
-    );
+  // Ensure the D1 database is bound
+  if (!env.DB) {
+    console.error("D1 database binding not found.");
     return new Response(
       JSON.stringify({
         message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
@@ -21,11 +32,6 @@ export const onRequestPost = async ({ request, env }) => {
   }
 
   try {
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
     const {
       email_user,
       password_account,
@@ -34,54 +40,52 @@ export const onRequestPost = async ({ request, env }) => {
       phone_user,
     } = await request.json();
 
-    const { data, error } = await supabase.auth.signUp({
-      email: email_user,
-      password: password_account,
-      options: {
-        data: {
-          name_account: name_account,
-          name_user: name_user,
-          phone_user: phone_user,
-        },
-      },
-    });
-
-    if (error) {
-      // Check for specific, common errors to provide better feedback
-      if (error.message.includes("User already registered")) {
-        return new Response(
-          JSON.stringify({ message: "Email này đã được sử dụng." }),
-          {
-            status: 409, // Conflict
-            headers,
-          }
-        );
-      }
-      if (error.message.includes("Password should be at least 6 characters")) {
-        return new Response(
-          JSON.stringify({ message: "Mật khẩu phải có ít nhất 6 ký tự." }),
-          {
-            status: 400,
-            headers,
-          }
-        );
-      }
-      return new Response(JSON.stringify({ message: error.message }), {
-        status: 400,
-        headers,
-      });
+    // Basic input validation
+    if (!email_user || !password_account || !name_account || !name_user) {
+        return new Response(JSON.stringify({ message: "Vui lòng điền đầy đủ các trường bắt buộc." }), { status: 400, headers });
+    }
+    if (password_account.length < 6) {
+        return new Response(JSON.stringify({ message: "Mật khẩu phải có ít nhất 6 ký tự." }), { status: 400, headers });
     }
 
-    // Return success message
+
+    const password_hash = await hashPassword(password_account);
+    const user_id = crypto.randomUUID();
+
+    // Insert the new user into the D1 database
+    await env.DB.prepare(
+      `INSERT INTO users (id, email, password_hash, name_account, name_user, phone_user)
+       VALUES (?, ?, ?, ?, ?, ?)`
+    )
+    .bind(user_id, email_user, password_hash, name_account, name_user, phone_user)
+    .run();
+
+    // Create a user object to return, excluding the password hash.
+    const userPayload = {
+        id: user_id,
+        email: email_user,
+        name_account: name_account,
+        name_user: name_user,
+        phone_user: phone_user
+    };
+
     return new Response(
       JSON.stringify({
-        message: "Đăng ký thành công! Vui lòng kiểm tra email để xác thực.",
-        user: data.user,
+        message: "Đăng ký thành công!",
+        user: userPayload
       }),
       { status: 201, headers }
     );
+
   } catch (e) {
     console.error("Registration server error:", e);
+    // Check for unique constraint violation (email already exists)
+    if (e.message && e.message.includes("UNIQUE constraint failed: users.email")) {
+      return new Response(
+        JSON.stringify({ message: "Email này đã được sử dụng." }),
+        { status: 409, headers } // 409 Conflict
+      );
+    }
     return new Response(
       JSON.stringify({
         message: "Đã xảy ra lỗi hệ thống khi đăng ký. Vui lòng thử lại.",
@@ -92,7 +96,6 @@ export const onRequestPost = async ({ request, env }) => {
 };
 
 export const onRequest = async (context) => {
-  // Handle CORS preflight request
   if (context.request.method === "OPTIONS") {
     return new Response(null, {
       headers: {

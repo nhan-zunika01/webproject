@@ -1,5 +1,5 @@
 // File: functions/api/resend-confirmation.js
-import { createClient } from "@supabase/supabase-js";
+// Placeholder for email confirmation resend functionality after migrating from Supabase.
 
 export const onRequestPost = async ({ request, env }) => {
   const headers = {
@@ -7,58 +7,30 @@ export const onRequestPost = async ({ request, env }) => {
     "Content-Type": "application/json",
   };
 
-  // Check for environment variables
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error(
-      "Supabase environment variables are not set for resend confirmation."
-    );
-    return new Response(
-      JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
-      }),
-      { status: 500, headers }
-    );
-  }
+  // NOTE: Cloudflare D1 does not have a built-in email sending service like Supabase.
+  // A full implementation of resending a confirmation email requires integrating a
+  // third-party email provider (e.g., SendGrid, Mailgun), which is a significant
+  // feature addition beyond the scope of the database migration.
 
-  try {
-    const { email } = await request.json();
+  // For now, we return a helpful message to the user.
+  return new Response(
+    JSON.stringify({
+      message:
+        "Chức năng gửi lại email xác nhận không có sẵn. Vui lòng liên hệ quản trị viên để được hỗ trợ.",
+    }),
+    { status: 501, headers } // 501 Not Implemented
+  );
+};
 
-    if (!email) {
-      return new Response(JSON.stringify({ message: "Email là bắt buộc." }), {
-        status: 400,
-        headers,
-      });
-    }
-
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
-    const { data, error } = await supabase.auth.admin.resend({
-      type: "signup",
-      email: email,
+export const onRequest = async (context) => {
+  if (context.request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
     });
-
-    if (error) {
-      console.error("Lỗi khi gửi lại mail từ Supabase:", error);
-      return new Response(
-        JSON.stringify({
-          message: "Không thể gửi lại mail. Vui lòng thử lại sau.",
-        }),
-        { status: 500, headers }
-      );
-    }
-
-    return new Response(
-      JSON.stringify({ message: "Đã gửi lại email xác nhận thành công." }),
-      { status: 200, headers }
-    );
-  } catch (e) {
-    console.error("Resend confirmation server error:", e);
-    return new Response(
-      JSON.stringify({ message: "Đã có lỗi xảy ra phía máy chủ." }),
-      { status: 500, headers }
-    );
   }
+  return onRequestPost(context);
 };

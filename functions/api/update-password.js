@@ -1,5 +1,61 @@
 // File: functions/api/update-password.js
-import { createClient } from "@supabase/supabase-js";
+// Allows an authenticated user to change their password.
+
+// --- Helper Functions ---
+
+/**
+ * Hashes a password using SHA-256.
+ * @param {string} password The password to hash.
+ * @returns {Promise<string>} The hexadecimal representation of the hash.
+ */
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+/**
+ * A basic JWT verifier and decoder.
+ * NOTE: In a real-world app, a more robust library would be used.
+ * This does not validate all claims (like exp), but is sufficient for this context.
+ * @param {string} token The JWT to verify.
+ * @param {string} secret The secret key.
+ * @returns {Promise<object|null>} The decoded payload or null if invalid.
+ */
+async function verifyJwt(token, secret) {
+    try {
+        const [encodedHeader, encodedPayload, signature] = token.split('.');
+        const signatureInput = `${encodedHeader}.${encodedPayload}`;
+
+        const key = await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(secret),
+            { name: "HMAC", hash: "SHA-256" },
+            false,
+            ["verify"]
+        );
+
+        // Decode the signature from Base64url to a buffer
+        const signatureBuffer = new Uint8Array(atob(signature.replace(/-/g, '+').replace(/_/g, '/')).split('').map(c => c.charCodeAt(0)));
+
+        const isValid = await crypto.subtle.verify("HMAC", key, signatureBuffer, new TextEncoder().encode(signatureInput));
+
+        if (!isValid) {
+            return null;
+        }
+
+        // Decode payload
+        const payload = JSON.parse(atob(encodedPayload.replace(/-/g, '+').replace(/_/g, '/')));
+        return payload;
+
+    } catch (e) {
+        console.error("JWT verification error:", e);
+        return null;
+    }
+}
+
 
 export const onRequestPost = async ({ request, env }) => {
   const headers = {
@@ -7,66 +63,69 @@ export const onRequestPost = async ({ request, env }) => {
     "Content-Type": "application/json",
   };
 
-  // Check for environment variables
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error(
-      "Supabase environment variables are not set for password update."
-    );
-    return new Response(
-      JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
-      }),
-      { status: 500, headers }
-    );
+  if (!env.DB || !env.JWT_SECRET) {
+    console.error("Server configuration error: D1 or JWT_SECRET is missing.");
+    return new Response(JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }), { status: 500, headers });
   }
+
+  // --- 1. Authenticate the user with JWT ---
+  const authHeader = request.headers.get("Authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return new Response(JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }), { status: 401, headers });
+  }
+  const token = authHeader.split(" ")[1];
+  const decodedPayload = await verifyJwt(token, env.JWT_SECRET);
+
+  if (!decodedPayload || !decodedPayload.sub) {
+    return new Response(JSON.stringify({ message: "Mã xác thực không hợp lệ." }), { status: 401, headers });
+  }
+  const userId = decodedPayload.sub;
 
   try {
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_SERVICE_ROLE_KEY
-    );
-    const { access_token, password } = await request.json();
+    const { current_password, new_password } = await request.json();
 
-    if (!access_token || !password) {
-      return new Response(
-        JSON.stringify({ message: "Access token and password are required." }),
-        { status: 400, headers }
-      );
+    if (!current_password || !new_password) {
+      return new Response(JSON.stringify({ message: "Mật khẩu hiện tại và mật khẩu mới là bắt buộc." }), { status: 400, headers });
+    }
+     if (new_password.length < 6) {
+        return new Response(JSON.stringify({ message: "Mật khẩu mới phải có ít nhất 6 ký tự." }), { status: 400, headers });
     }
 
-    const {
-      data: { user },
-      error: sessionError,
-    } = await supabase.auth.getUser(access_token);
+    // --- 2. Verify the user's current password ---
+    const user = await env.DB.prepare("SELECT password_hash FROM users WHERE id = ?").bind(userId).first();
 
-    if (sessionError || !user) {
-      return new Response(
-        JSON.stringify({
-          message: "Mã khôi phục không hợp lệ hoặc đã hết hạn.",
-        }),
-        { status: 401, headers }
-      );
+    if (!user) {
+        return new Response(JSON.stringify({ message: "Không tìm thấy người dùng." }), { status: 404, headers });
     }
 
-    const { error: updateError } = await supabase.auth.admin.updateUserById(
-      user.id,
-      { password: password }
-    );
-
-    if (updateError) {
-      throw updateError;
+    const currentPasswordHash = await hashPassword(current_password);
+    if (currentPasswordHash !== user.password_hash) {
+      return new Response(JSON.stringify({ message: "Mật khẩu hiện tại không chính xác." }), { status: 403, headers });
     }
 
-    return new Response(
-      JSON.stringify({ message: "Password updated successfully." }),
-      { status: 200, headers }
-    );
+    // --- 3. Update to the new password ---
+    const newPasswordHash = await hashPassword(new_password);
+    await env.DB.prepare("UPDATE users SET password_hash = ? WHERE id = ?")
+      .bind(newPasswordHash, userId)
+      .run();
+
+    return new Response(JSON.stringify({ message: "Cập nhật mật khẩu thành công!" }), { status: 200, headers });
+
   } catch (e) {
     console.error("Update password server error:", e);
-    const errorMessage = e.message || "An internal server error occurred.";
-    return new Response(JSON.stringify({ message: errorMessage }), {
-      status: 500,
-      headers,
+    return new Response(JSON.stringify({ message: "Đã xảy ra lỗi hệ thống." }), { status: 500, headers });
+  }
+};
+
+export const onRequest = (context) => {
+  if (context.request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
     });
   }
+  return onRequestPost(context);
 };

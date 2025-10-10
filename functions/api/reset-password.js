@@ -1,69 +1,26 @@
 // File: functions/api/reset-password.js
-import { createClient } from "@supabase/supabase-js";
+// Placeholder for password reset functionality after migrating from Supabase.
 
-export const onRequestPost = async (context) => {
-  const { request, env } = context;
-
+export const onRequestPost = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   };
 
-  // Check for environment variables
-  if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
-    // Reset password uses anon key
-    console.error(
-      "Supabase environment variables are not set for password reset."
-    );
-    return new Response(
-      JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
-      }),
-      { status: 500, headers }
-    );
-  }
+  // NOTE: Cloudflare D1 does not have a built-in email sending service like Supabase.
+  // A full implementation of password reset requires integrating a third-party
+  // email provider (e.g., SendGrid, Mailgun) to send a reset link with a secure,
+  // single-use token. This is a significant feature addition beyond the scope of
+  // the database migration.
 
-  try {
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_ANON_KEY // It's safer to use anon key for this operation
-    );
-    const { email } = await request.json();
-
-    if (!email) {
-      return new Response(JSON.stringify({ message: "Email is required" }), {
-        status: 400,
-        headers,
-      });
-    }
-
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://webproject-bxj.pages.dev/update-password.html",
-    });
-
-    // Supabase intentionally does not return an error if the email doesn't exist
-    // to prevent email enumeration attacks. We always return a success message.
-    if (error) {
-      console.error("Supabase password reset error:", error.message);
-    }
-
-    return new Response(
-      JSON.stringify({
-        message:
-          "If an account with this email exists, a password reset link has been sent.",
-      }),
-      { status: 200, headers }
-    );
-  } catch (e) {
-    console.error("Password reset server error:", e);
-    return new Response(
-      JSON.stringify({ message: "An internal server error occurred." }),
-      {
-        status: 500,
-        headers,
-      }
-    );
-  }
+  // For now, we return a helpful message to the user.
+  return new Response(
+    JSON.stringify({
+      message:
+        "Chức năng tự động đặt lại mật khẩu không có sẵn. Vui lòng liên hệ quản trị viên để được hỗ trợ.",
+    }),
+    { status: 501, headers } // 501 Not Implemented
+  );
 };
 
 export const onRequest = async (context) => {

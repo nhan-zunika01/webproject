@@ -1,7 +1,39 @@
 // File: functions/api/course-progress.js
-import { createClient } from "@supabase/supabase-js";
+// Handles getting and saving course progress using Cloudflare D1.
 
-// This single file handles both getting and saving course progress.
+// --- Helper Functions ---
+
+/**
+ * Verifies a JWT and returns the payload.
+ * @param {string} token The JWT.
+ * @param {string} secret The secret key.
+ * @returns {Promise<object|null>} The decoded payload or null.
+ */
+async function verifyJwt(token, secret) {
+    try {
+        const [encodedHeader, encodedPayload, signature] = token.split('.');
+        const signatureInput = `${encodedHeader}.${encodedPayload}`;
+
+        const key = await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(secret),
+            { name: "HMAC", hash: "SHA-256" },
+            false,
+            ["verify"]
+        );
+
+        const signatureBuffer = new Uint8Array(atob(signature.replace(/-/g, '+').replace(/_/g, '/')).split('').map(c => c.charCodeAt(0)));
+        const isValid = await crypto.subtle.verify("HMAC", key, signatureBuffer, new TextEncoder().encode(signatureInput));
+
+        if (!isValid) return null;
+
+        return JSON.parse(atob(encodedPayload.replace(/-/g, '+').replace(/_/g, '/')));
+    } catch (e) {
+        console.error("JWT verification error:", e);
+        return null;
+    }
+}
+
 export const onRequest = async ({ request, env }) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -14,89 +46,77 @@ export const onRequest = async ({ request, env }) => {
     return new Response(null, { headers });
   }
 
-  const supabase = createClient(
-    env.SUPABASE_URL,
-    env.SUPABASE_SERVICE_ROLE_KEY
-  );
+  if (!env.DB || !env.JWT_SECRET) {
+      console.error("Server configuration error: D1 binding or JWT_SECRET is missing.");
+      return new Response(JSON.stringify({ message: "Lỗi cấu hình phía máy chủ." }), { status: 500, headers });
+  }
 
-  // Extract user token from Authorization header
+  // --- Authenticate user via JWT for both GET and POST ---
   const authHeader = request.headers.get("Authorization");
-  if (!authHeader) {
-    return new Response(
-      JSON.stringify({ message: "Missing authorization header." }),
-      { status: 401, headers }
-    );
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return new Response(JSON.stringify({ message: "Yêu cầu thiếu thông tin xác thực." }), { status: 401, headers });
   }
   const token = authHeader.split(" ")[1];
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser(token);
+  const decodedPayload = await verifyJwt(token, env.JWT_SECRET);
 
-  if (userError || !user) {
-    return new Response(JSON.stringify({ message: "Invalid token." }), {
-      status: 401,
-      headers,
-    });
+  if (!decodedPayload || !decodedPayload.sub) {
+    return new Response(JSON.stringify({ message: "Mã xác thực không hợp lệ." }), { status: 401, headers });
   }
+  const userId = decodedPayload.sub;
 
+  // --- GET: Fetch course progress ---
   if (request.method === "GET") {
-    const url = new URL(request.url);
-    const courseId = url.searchParams.get("courseId");
-    if (!courseId) {
-      return new Response(
-        JSON.stringify({ message: "courseId is required." }),
-        { status: 400, headers }
-      );
+    try {
+        const url = new URL(request.url);
+        const courseId = url.searchParams.get("courseId");
+        if (!courseId) {
+            return new Response(JSON.stringify({ message: "courseId is required." }), { status: 400, headers });
+        }
+
+        const progress = await env.DB.prepare(
+            "SELECT completed_lessons FROM course_progress WHERE user_id = ? AND course_id = ?"
+        ).bind(userId, courseId).first();
+
+        // If progress is found, parse the JSON string before sending
+        if (progress) {
+            const completed_lessons = JSON.parse(progress.completed_lessons || "[]");
+            return new Response(JSON.stringify({ completed_lessons }), { status: 200, headers });
+        } else {
+            // If no record exists, return an empty array
+            return new Response(JSON.stringify({ completed_lessons: [] }), { status: 200, headers });
+        }
+    } catch (e) {
+        console.error("Error fetching course progress:", e);
+        return new Response(JSON.stringify({ message: "Không thể tải tiến độ khóa học." }), { status: 500, headers });
     }
-
-    const { data, error } = await supabase
-      .from("course_progress")
-      .select("completed_lessons")
-      .eq("user_id", user.id)
-      .eq("course_id", courseId)
-      .single();
-
-    if (error && error.code !== "PGRST116") {
-      // PGRST116 means no rows found, which is fine
-      throw error;
-    }
-
-    return new Response(JSON.stringify(data || { completed_lessons: [] }), {
-      status: 200,
-      headers,
-    });
   }
 
+  // --- POST: Save (upsert) course progress ---
   if (request.method === "POST") {
-    const { courseId, completed_lessons } = await request.json();
-    if (!courseId || !completed_lessons) {
-      return new Response(
-        JSON.stringify({
-          message: "courseId and completed_lessons are required.",
-        }),
-        { status: 400, headers }
-      );
+    try {
+        const { courseId, completed_lessons } = await request.json();
+        if (!courseId || !Array.isArray(completed_lessons)) {
+            return new Response(JSON.stringify({ message: "courseId and a completed_lessons array are required." }), { status: 400, headers });
+        }
+
+        const lessonsJson = JSON.stringify(completed_lessons);
+        const updatedAt = new Date().toISOString();
+
+        // Use INSERT ON CONFLICT (UPSERT) to create or update the record
+        await env.DB.prepare(
+            `INSERT INTO course_progress (user_id, course_id, completed_lessons, updated_at)
+             VALUES (?, ?, ?, ?)
+             ON CONFLICT(user_id, course_id) DO UPDATE SET
+               completed_lessons = excluded.completed_lessons,
+               updated_at = excluded.updated_at`
+        ).bind(userId, courseId, lessonsJson, updatedAt).run();
+
+        return new Response(JSON.stringify({ message: "Progress saved." }), { status: 200, headers });
+
+    } catch (e) {
+        console.error("Error saving course progress:", e);
+        return new Response(JSON.stringify({ message: "Không thể lưu tiến độ khóa học." }), { status: 500, headers });
     }
-
-    const { data, error } = await supabase.from("course_progress").upsert(
-      {
-        user_id: user.id,
-        course_id: courseId,
-        completed_lessons: completed_lessons,
-        updated_at: new Date(),
-      },
-      { onConflict: "user_id, course_id" }
-    );
-
-    if (error) {
-      throw error;
-    }
-
-    return new Response(JSON.stringify({ message: "Progress saved." }), {
-      status: 200,
-      headers,
-    });
   }
 
   return new Response("Method not allowed", { status: 405, headers });
