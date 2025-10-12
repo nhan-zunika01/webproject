@@ -90,11 +90,9 @@ export const onRequestPost = async ({ request, env }) => {
       return new Response(JSON.stringify({ message: "Email hoặc mật khẩu không chính xác." }), { status: 401, headers });
     }
 
-    // NOTE: Email confirmation flow is not implemented in this migration.
-    // We will assume for now that if a user exists, they are confirmed.
-    // if (!user.email_confirmed_at) {
-    //   return new Response(JSON.stringify({ message: "Tài khoản của bạn chưa được xác thực." }), { status: 403, headers });
-    // }
+    if (!user.email_confirmed_at) {
+      return new Response(JSON.stringify({ message: "Tài khoản của bạn chưa được xác thực." }), { status: 403, headers });
+    }
 
     // Create JWT payload
     const payload = {

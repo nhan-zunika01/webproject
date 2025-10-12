@@ -67,8 +67,8 @@ async function handleRegister(event) {
     const result = await response.json();
 
     if (response.ok) {
-      // After successful registration, redirect to the login page with a success message
-      window.location.href = `login.html?registered=true`;
+      // After successful registration, redirect to the registration pending page
+      window.location.href = `registration-pending.html`;
     } else {
       // Display a more specific error if possible
       setMessage(`error-reg-${result.field || "name-account"}`, result.message);
