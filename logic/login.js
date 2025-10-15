@@ -36,13 +36,13 @@ async function handleLogin(event) {
   event.preventDefault();
   clearAllMessages();
 
-  const email_user = document.getElementById("login-email").value.trim();
+  const identifier = document.getElementById("login-identifier").value.trim();
   const password_account = document.getElementById("login-password").value;
 
-  if (!email_user || !password_account) {
+  if (!identifier || !password_account) {
     setMessage(
       "error-login-general",
-      "Vui lòng nhập đầy đủ email và mật khẩu."
+      "Vui lòng nhập đầy đủ email/tên tài khoản và mật khẩu."
     );
     return;
   }
@@ -51,7 +51,7 @@ async function handleLogin(event) {
     const response = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email_user, password_account }),
+      body: JSON.stringify({ identifier, password_account }),
     });
 
     const result = await response.json();
