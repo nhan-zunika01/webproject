@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     questions = quizData.questions;
     timeLimitInMinutes = quizData.timeLimit;
 
-    document.title = `${quizData.title} - Sổ tay nông dân`;
+    document.title = `${quizData.title} -  AgriNova`;
     quizTitleEl.textContent = quizData.title;
     quizQuestionCountEl.textContent = quizData.totalQuestions;
     quizTimeLimitEl.textContent = quizData.timeLimit;

@@ -8,7 +8,7 @@
     },
     "image": "https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop",
     "imageAlt": "Cánh đồng lúa xanh mướt",
-    "sapo": "Khóa học này cung cấp kiến thức toàn diện từ cơ bản đến nâng cao về kỹ thuật canh tác lúa, giúp bà con nông dân tối ưu hóa năng suất, giảm chi phí và canh tác bền vững theo các tiêu chuẩn hiện đại.",
+    "sapo": "Khóa học này cung cấp kiến thức toàn diện từ cơ bản đến nâng cao về kỹ thuật canh tác lúa, giúp bà conAgriNova tối ưu hóa năng suất, giảm chi phí và canh tác bền vững theo các tiêu chuẩn hiện đại.",
     "quizId": "rice-course-v1",
     "chapters": [
       {
@@ -1333,7 +1333,7 @@
           {
             "id": "drone-c1l1",
             "title": "Lợi ích của Drone trong nông nghiệp",
-            "content": "<h3>Cuộc cách mạng từ trên không:</h3><p>Drone nông nghiệp không chỉ là một thiết bị bay, mà là một công cụ mạnh mẽ giúp tối ưu hóa sản xuất.</p><ul><li><strong>Tiết kiệm thời gian và nhân công:</strong> Một drone có thể phun thuốc cho 1 hecta chỉ trong 10-15 phút, công việc mà trước đây cần nhiều giờ và nhiều nhân công.</li><li><strong>Tiết kiệm chi phí:</strong> Drone giúp tiết kiệm tới 30% lượng thuốc BVTV và 90% lượng nước nhờ vào công nghệ phun ly tâm, tạo ra các hạt sương siêu nhỏ bám đều trên cây.</li><li><strong>Bảo vệ sức khỏe nông dân:</strong> Người nông dân không còn phải tiếp xúc trực tiếp với hóa chất độc hại.</li><li><strong>Tăng năng suất:</strong> Phun thuốc đồng đều và kịp thời, kết hợp với việc phát hiện sớm sâu bệnh giúp bảo vệ mùa màng và tăng năng suất cây trồng.</li><li><strong>Hoạt động linh hoạt:</strong> Drone có thể hoạt động trên mọi địa hình, từ đồng bằng đến đồi núi, và vào cả ban đêm.</li></ul>"
+            "content": "<h3>Cuộc cách mạng từ trên không:</h3><p>Drone nông nghiệp không chỉ là một thiết bị bay, mà là một công cụ mạnh mẽ giúp tối ưu hóa sản xuất.</p><ul><li><strong>Tiết kiệm thời gian và nhân công:</strong> Một drone có thể phun thuốc cho 1 hecta chỉ trong 10-15 phút, công việc mà trước đây cần nhiều giờ và nhiều nhân công.</li><li><strong>Tiết kiệm chi phí:</strong> Drone giúp tiết kiệm tới 30% lượng thuốc BVTV và 90% lượng nước nhờ vào công nghệ phun ly tâm, tạo ra các hạt sương siêu nhỏ bám đều trên cây.</li><li><strong>Bảo vệ sức khỏeAgriNova:</strong> NgườiAgriNova không còn phải tiếp xúc trực tiếp với hóa chất độc hại.</li><li><strong>Tăng năng suất:</strong> Phun thuốc đồng đều và kịp thời, kết hợp với việc phát hiện sớm sâu bệnh giúp bảo vệ mùa màng và tăng năng suất cây trồng.</li><li><strong>Hoạt động linh hoạt:</strong> Drone có thể hoạt động trên mọi địa hình, từ đồng bằng đến đồi núi, và vào cả ban đêm.</li></ul>"
           },
           {
             "id": "drone-c1l2",
@@ -1383,7 +1383,7 @@
           {
             "id": "drone-c3l3",
             "title": "Tạo bản đồ sức khỏe cây trồng",
-            "content": "<h3>Từ ảnh đến bản đồ thông minh:</h3><p>Sau khi drone quan trắc bay xong, các phần mềm chuyên dụng sẽ thực hiện các công việc sau:</p><ol><li><strong>Ghép ảnh (Stitching):</strong> Ghép hàng trăm, hàng nghìn bức ảnh nhỏ lại thành một bản đồ lớn, duy nhất của toàn bộ khu vực.</li><li><strong>Tính toán NDVI:</strong> Tính toán chỉ số NDVI cho từng pixel trên bản đồ.</li><li><strong>Tô màu bản đồ:</strong> Gán màu sắc cho các giá trị NDVI. Thường thì màu xanh lá đậm biểu thị cây rất khỏe (NDVI cao), màu vàng biểu thị cây có vấn đề, và màu đỏ biểu thị khu vực cây rất yếu hoặc đất trống (NDVI thấp).</li></ol><p>Kết quả là một 'bản đồ sức khỏe' trực quan, giúp người nông dân nhanh chóng xác định chính xác các khu vực có vấn đề trong trang trại để đi kiểm tra và xử lý kịp thời, thay vì phải đi bộ kiểm tra toàn bộ một cách mò mẫm.</p>"
+            "content": "<h3>Từ ảnh đến bản đồ thông minh:</h3><p>Sau khi drone quan trắc bay xong, các phần mềm chuyên dụng sẽ thực hiện các công việc sau:</p><ol><li><strong>Ghép ảnh (Stitching):</strong> Ghép hàng trăm, hàng nghìn bức ảnh nhỏ lại thành một bản đồ lớn, duy nhất của toàn bộ khu vực.</li><li><strong>Tính toán NDVI:</strong> Tính toán chỉ số NDVI cho từng pixel trên bản đồ.</li><li><strong>Tô màu bản đồ:</strong> Gán màu sắc cho các giá trị NDVI. Thường thì màu xanh lá đậm biểu thị cây rất khỏe (NDVI cao), màu vàng biểu thị cây có vấn đề, và màu đỏ biểu thị khu vực cây rất yếu hoặc đất trống (NDVI thấp).</li></ol><p>Kết quả là một 'bản đồ sức khỏe' trực quan, giúp ngườiAgriNova nhanh chóng xác định chính xác các khu vực có vấn đề trong trang trại để đi kiểm tra và xử lý kịp thời, thay vì phải đi bộ kiểm tra toàn bộ một cách mò mẫm.</p>"
           }
         ]
       },
@@ -1398,7 +1398,7 @@
           {
             "id": "drone-c4l2",
             "title": "Mô hình kinh doanh dịch vụ Drone",
-            "content": "<h3>Các mô hình phổ biến:</h3><ul><li><strong>Dịch vụ phun thuốc thuê:</strong> Đây là mô hình phổ biến nhất. Các đội bay sẽ cung cấp dịch vụ phun thuốc, bón phân, gieo sạ cho nông dân và tính phí trên mỗi hecta.</li><li><strong>Dịch vụ khảo sát và phân tích:</strong> Sử dụng drone quan trắc để tạo bản đồ sức khỏe cây trồng, sau đó bán báo cáo phân tích và tư vấn giải pháp cho các trang trại lớn hoặc công ty nông nghiệp.</li><li><strong>Kết hợp cả hai:</strong> Cung cấp một gói dịch vụ toàn diện từ khảo sát, phát hiện vấn đề đến phun thuốc xử lý.</li></ul>"
+            "content": "<h3>Các mô hình phổ biến:</h3><ul><li><strong>Dịch vụ phun thuốc thuê:</strong> Đây là mô hình phổ biến nhất. Các đội bay sẽ cung cấp dịch vụ phun thuốc, bón phân, gieo sạ choAgriNova và tính phí trên mỗi hecta.</li><li><strong>Dịch vụ khảo sát và phân tích:</strong> Sử dụng drone quan trắc để tạo bản đồ sức khỏe cây trồng, sau đó bán báo cáo phân tích và tư vấn giải pháp cho các trang trại lớn hoặc công ty nông nghiệp.</li><li><strong>Kết hợp cả hai:</strong> Cung cấp một gói dịch vụ toàn diện từ khảo sát, phát hiện vấn đề đến phun thuốc xử lý.</li></ul>"
           },
           {
             "id": "drone-c4l3",
@@ -1417,7 +1417,7 @@
       "duration": "9 giờ"
     },
     "image": "https://images.unsplash.com/photo-1544795594-279376662489?q=80&w=2070&auto=format&fit=crop",
-    "imageAlt": "Một nông dân đang kiểm tra dữ liệu trên máy tính bảng trong trang trại",
+    "imageAlt": "MộtAgriNova đang kiểm tra dữ liệu trên máy tính bảng trong trang trại",
     "sapo": "Học cách ứng dụng các cảm biến IoT để theo dõi độ ẩm đất, nhiệt độ, ánh sáng và tự động hóa hệ thống tưới tiêu, bón phân.",
     "quizId": "iot-course-v1",
     "chapters": [
@@ -1427,7 +1427,7 @@
           {
             "id": "iot-c1l1",
             "title": "IoT là gì và vai trò trong nông nghiệp?",
-            "content": "<h3>IoT là gì?</h3><p>IoT (Internet of Things - Mạng lưới vạn vật kết nối) là một mạng lưới các thiết bị vật lý (gọi là 'vật'), được gắn cảm biến, phần mềm và các công nghệ khác cho phép chúng kết nối và trao đổi dữ liệu với nhau qua Internet.</p><h3>Vai trò trong Nông nghiệp (Agriculture 4.0):</h3><p>Trong nông nghiệp, IoT biến trang trại truyền thống thành một 'trang trại thông minh'. Nó cho phép chúng ta:</p><ul><li><strong>Thu thập dữ liệu thời gian thực:</strong> Thay vì phỏng đoán, chúng ta có thể biết chính xác nhiệt độ, độ ẩm đất, cường độ ánh sáng, độ pH... tại bất kỳ thời điểm nào.</li><li><strong>Giám sát từ xa:</strong> Người nông dân có thể theo dõi toàn bộ trang trại của mình qua điện thoại thông minh hoặc máy tính mà không cần phải có mặt trực tiếp.</li><li><strong>Tự động hóa:</strong> Dựa trên dữ liệu thu thập được, hệ thống có thể tự động ra quyết định, ví dụ: tự động bật máy bơm khi đất khô, tự động kéo lưới che khi trời quá nắng.</li><li><strong>Nông nghiệp chính xác:</strong> Cung cấp đúng thứ cây cần, vào đúng thời điểm và đúng vị trí. Ví dụ: chỉ tưới nước cho khu vực đất khô, thay vì tưới cả cánh đồng. Điều này giúp tiết kiệm tài nguyên (nước, phân bón) và tăng năng suất.</li></ul>"
+            "content": "<h3>IoT là gì?</h3><p>IoT (Internet of Things - Mạng lưới vạn vật kết nối) là một mạng lưới các thiết bị vật lý (gọi là 'vật'), được gắn cảm biến, phần mềm và các công nghệ khác cho phép chúng kết nối và trao đổi dữ liệu với nhau qua Internet.</p><h3>Vai trò trong Nông nghiệp (Agriculture 4.0):</h3><p>Trong nông nghiệp, IoT biến trang trại truyền thống thành một 'trang trại thông minh'. Nó cho phép chúng ta:</p><ul><li><strong>Thu thập dữ liệu thời gian thực:</strong> Thay vì phỏng đoán, chúng ta có thể biết chính xác nhiệt độ, độ ẩm đất, cường độ ánh sáng, độ pH... tại bất kỳ thời điểm nào.</li><li><strong>Giám sát từ xa:</strong> NgườiAgriNova có thể theo dõi toàn bộ trang trại của mình qua điện thoại thông minh hoặc máy tính mà không cần phải có mặt trực tiếp.</li><li><strong>Tự động hóa:</strong> Dựa trên dữ liệu thu thập được, hệ thống có thể tự động ra quyết định, ví dụ: tự động bật máy bơm khi đất khô, tự động kéo lưới che khi trời quá nắng.</li><li><strong>Nông nghiệp chính xác:</strong> Cung cấp đúng thứ cây cần, vào đúng thời điểm và đúng vị trí. Ví dụ: chỉ tưới nước cho khu vực đất khô, thay vì tưới cả cánh đồng. Điều này giúp tiết kiệm tài nguyên (nước, phân bón) và tăng năng suất.</li></ul>"
           },
           {
             "id": "iot-c1l2",
@@ -1477,7 +1477,7 @@
           {
             "id": "iot-c3l3",
             "title": "Cảnh báo sớm qua điện thoại",
-            "content": "<h3>Giám sát trang trại 24/7:</h3><p>Một trong những lợi ích lớn của IoT là khả năng cảnh báo ngay lập tức khi có sự cố, giúp người nông dân phản ứng kịp thời dù đang ở bất cứ đâu.</p><h3>Các loại cảnh báo có thể thiết lập:</h3><ul><li><strong>Cảnh báo môi trường:</strong> 'Nhiệt độ trong nhà kính quá cao', 'Độ ẩm đất quá thấp', 'Mất điện'.</li><li><strong>Cảnh báo an ninh:</strong> Kết hợp với cảm biến chuyển động hoặc cảm biến cửa, hệ thống có thể gửi cảnh báo 'Phát hiện có sự xâm nhập trái phép'.</li><li><strong>Cảnh báo vận hành:</strong> 'Máy bơm đã chạy được 30 phút', 'Bồn chứa dinh dưỡng sắp cạn'.</li></ul><p>Các cảnh báo này được gửi qua tin nhắn đẩy (push notification) trên ứng dụng điện thoại, email hoặc thậm chí là cuộc gọi tự động.</p>"
+            "content": "<h3>Giám sát trang trại 24/7:</h3><p>Một trong những lợi ích lớn của IoT là khả năng cảnh báo ngay lập tức khi có sự cố, giúp ngườiAgriNova phản ứng kịp thời dù đang ở bất cứ đâu.</p><h3>Các loại cảnh báo có thể thiết lập:</h3><ul><li><strong>Cảnh báo môi trường:</strong> 'Nhiệt độ trong nhà kính quá cao', 'Độ ẩm đất quá thấp', 'Mất điện'.</li><li><strong>Cảnh báo an ninh:</strong> Kết hợp với cảm biến chuyển động hoặc cảm biến cửa, hệ thống có thể gửi cảnh báo 'Phát hiện có sự xâm nhập trái phép'.</li><li><strong>Cảnh báo vận hành:</strong> 'Máy bơm đã chạy được 30 phút', 'Bồn chứa dinh dưỡng sắp cạn'.</li></ul><p>Các cảnh báo này được gửi qua tin nhắn đẩy (push notification) trên ứng dụng điện thoại, email hoặc thậm chí là cuộc gọi tự động.</p>"
           }
         ]
       },
@@ -1991,7 +1991,7 @@
           {
             "id": "finance-c1l1",
             "title": "Tại sao cần quản lý tài chính?",
-            "content": "<h3>Từ làm nông đến kinh doanh nông nghiệp:</h3><p>Nhiều bà con nông dân thường chỉ tính toán đơn giản 'thu được bao nhiêu, trừ đi những gì đã bỏ ra'. Tuy nhiên, để làm giàu từ nông nghiệp, chúng ta cần xem trang trại của mình như một doanh nghiệp. Quản lý tài chính giúp trả lời các câu hỏi cốt lõi:</p><ul><li><strong>Lãi/Lỗ thực sự là bao nhiêu?</strong> Giúp biết được hoạt động sản xuất có hiệu quả hay không.</li><li><strong>Tiền đang đi đâu?</strong> Nhận diện được những khoản chi phí nào đang quá cao, khoản nào có thể cắt giảm.</li><li><strong>Có nên đầu tư không?</strong> Cung cấp cơ sở để quyết định có nên mua thêm máy móc, mở rộng trang trại hay không.</li><li><strong>Làm sao để vay vốn?</strong> Một hệ thống sổ sách rõ ràng là bằng chứng thuyết phục nhất đối với các ngân hàng và tổ chức tín dụng.</li></ul><p>Quản lý tài chính không phức tạp, nó chỉ đơn giản là thói quen ghi chép và kiểm soát 'túi tiền' của gia đình và trang trại một cách có hệ thống.</p>"
+            "content": "<h3>Từ làm nông đến kinh doanh nông nghiệp:</h3><p>Nhiều bà conAgriNova thường chỉ tính toán đơn giản 'thu được bao nhiêu, trừ đi những gì đã bỏ ra'. Tuy nhiên, để làm giàu từ nông nghiệp, chúng ta cần xem trang trại của mình như một doanh nghiệp. Quản lý tài chính giúp trả lời các câu hỏi cốt lõi:</p><ul><li><strong>Lãi/Lỗ thực sự là bao nhiêu?</strong> Giúp biết được hoạt động sản xuất có hiệu quả hay không.</li><li><strong>Tiền đang đi đâu?</strong> Nhận diện được những khoản chi phí nào đang quá cao, khoản nào có thể cắt giảm.</li><li><strong>Có nên đầu tư không?</strong> Cung cấp cơ sở để quyết định có nên mua thêm máy móc, mở rộng trang trại hay không.</li><li><strong>Làm sao để vay vốn?</strong> Một hệ thống sổ sách rõ ràng là bằng chứng thuyết phục nhất đối với các ngân hàng và tổ chức tín dụng.</li></ul><p>Quản lý tài chính không phức tạp, nó chỉ đơn giản là thói quen ghi chép và kiểm soát 'túi tiền' của gia đình và trang trại một cách có hệ thống.</p>"
           },
           {
             "id": "finance-c1l2",
@@ -2001,7 +2001,7 @@
           {
             "id": "finance-c1l3",
             "title": "Các công cụ ghi chép đơn giản",
-            "content": "<h3>Bắt đầu từ những gì đơn giản nhất:</h3><p>Bạn không cần phải là một kế toán chuyên nghiệp. Hãy bắt đầu bằng những công cụ quen thuộc:</p><ul><li><strong>Sổ tay ghi chép:</strong> Một cuốn sổ tay chia làm hai cột THU và CHI là đủ để bắt đầu. Hãy tập thói quen ghi lại TẤT CẢ các khoản thu chi hàng ngày, dù là nhỏ nhất.</li><li><strong>Bảng tính Excel hoặc Google Sheets:</strong> Nếu bạn quen dùng máy tính hoặc điện thoại thông minh, các công cụ này rất mạnh mẽ. Bạn có thể tạo các bảng tính để tự động cộng trừ, phân loại chi phí và vẽ biểu đồ.</li><li><strong>Ứng dụng quản lý tài chính:</strong> Có nhiều ứng dụng miễn phí trên điện thoại giúp bạn ghi chép thu chi một cách trực quan và tiện lợi.</li></ul><p>Điều quan trọng nhất không phải là công cụ, mà là sự <strong>kỷ luật</strong> và <strong>nhất quán</strong> trong việc ghi chép hàng ngày.</p>"
+            "content": "<h3>Bắt đầu từ những gì đơn giản nhất:</h3><p>Bạn không cần phải là một kế toán chuyên nghiệp. Hãy bắt đầu bằng những công cụ quen thuộc:</p><ul><li><strong>  ghi chép:</strong> Một cuốn   chia làm hai cột THU và CHI là đủ để bắt đầu. Hãy tập thói quen ghi lại TẤT CẢ các khoản thu chi hàng ngày, dù là nhỏ nhất.</li><li><strong>Bảng tính Excel hoặc Google Sheets:</strong> Nếu bạn quen dùng máy tính hoặc điện thoại thông minh, các công cụ này rất mạnh mẽ. Bạn có thể tạo các bảng tính để tự động cộng trừ, phân loại chi phí và vẽ biểu đồ.</li><li><strong>Ứng dụng quản lý tài chính:</strong> Có nhiều ứng dụng miễn phí trên điện thoại giúp bạn ghi chép thu chi một cách trực quan và tiện lợi.</li></ul><p>Điều quan trọng nhất không phải là công cụ, mà là sự <strong>kỷ luật</strong> và <strong>nhất quán</strong> trong việc ghi chép hàng ngày.</p>"
           }
         ]
       },
@@ -2051,7 +2051,7 @@
           {
             "id": "finance-c4l1",
             "title": "Các nguồn vốn vay ưu đãi",
-            "content": "<h3>Các kênh vay vốn chính thống:</h3><p>Khi cần vốn để mở rộng sản xuất, đầu tư, hãy tìm đến các nguồn vốn chính thống với lãi suất hợp lý, tránh xa 'tín dụng đen'.</p><ul><li><strong>Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank):</strong> Là ngân hàng chủ lực, có nhiều chính sách và gói vay ưu đãi dành riêng cho nông nghiệp, nông dân.</li><li><strong>Ngân hàng Chính sách xã hội:</strong> Cung cấp các khoản vay cho hộ nghèo, hộ cận nghèo và các đối tượng chính sách khác để phát triển sản xuất.</li><li><strong>Quỹ Hỗ trợ Nông dân:</strong> Được thành lập bởi Hội Nông dân, cung cấp các khoản vay với lãi suất thấp để hỗ trợ các mô hình sản xuất hiệu quả.</li></ul>"
+            "content": "<h3>Các kênh vay vốn chính thống:</h3><p>Khi cần vốn để mở rộng sản xuất, đầu tư, hãy tìm đến các nguồn vốn chính thống với lãi suất hợp lý, tránh xa 'tín dụng đen'.</p><ul><li><strong>Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank):</strong> Là ngân hàng chủ lực, có nhiều chính sách và gói vay ưu đãi dành riêng cho nông nghiệp,AgriNova.</li><li><strong>Ngân hàng Chính sách xã hội:</strong> Cung cấp các khoản vay cho hộ nghèo, hộ cận nghèo và các đối tượng chính sách khác để phát triển sản xuất.</li><li><strong>Quỹ Hỗ trợAgriNova:</strong> Được thành lập bởi HộiAgriNova, cung cấp các khoản vay với lãi suất thấp để hỗ trợ các mô hình sản xuất hiệu quả.</li></ul>"
           },
           {
             "id": "finance-c4l2",
