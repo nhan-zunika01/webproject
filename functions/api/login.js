@@ -66,22 +66,22 @@ export const onRequestPost = async ({ request, env }) => {
   }
 
   try {
-    const { email_user, password_account } = await request.json();
+    const { identifier, password_account } = await request.json();
 
-    if (!email_user || !password_account) {
-      return new Response(JSON.stringify({ message: "Vui lòng cung cấp email và mật khẩu." }), { status: 400, headers });
+    if (!identifier || !password_account) {
+      return new Response(JSON.stringify({ message: "Vui lòng cung cấp tên người dùng/email và mật khẩu." }), { status: 400, headers });
     }
 
     // Fetch user from D1 database
     const user = await env.DB.prepare(
         `SELECT id, email, password_hash, name_account, name_user, phone_user, email_confirmed_at
-         FROM users WHERE email = ?`
+         FROM users WHERE email = ? OR name_account = ?`
       )
-      .bind(email_user)
+      .bind(identifier, identifier)
       .first();
 
     if (!user) {
-      return new Response(JSON.stringify({ message: "Email hoặc mật khẩu không chính xác." }), { status: 401, headers });
+      return new Response(JSON.stringify({ message: "Tên người dùng/email hoặc mật khẩu không chính xác." }), { status: 401, headers });
     }
 
     // Verify the password
