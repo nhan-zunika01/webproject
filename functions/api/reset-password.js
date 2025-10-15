@@ -509,13 +509,13 @@ export const onRequestPost = async ({ request, env }) => {
   }
 
   try {
-    const { email_user } = await request.json();
+    const { email } = await request.json();
 
-    if (!email_user) {
+    if (!email) {
       return new Response(JSON.stringify({ message: "Vui lòng cung cấp email của bạn." }), { status: 400, headers });
     }
 
-    const user = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email_user).first();
+    const user = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
 
     if (user) {
       const resetToken = crypto.randomUUID();
@@ -530,7 +530,7 @@ export const onRequestPost = async ({ request, env }) => {
       .bind(tokenHash, tokenExpiry.toISOString(), user.id)
       .run();
 
-      await sendPasswordResetEmail(email_user, resetToken, env);
+      await sendPasswordResetEmail(email, resetToken, env);
     }
 
     return new Response(

@@ -538,14 +538,24 @@ export const onRequestPost = async ({ request, env }) => {
     .bind(user_id, email_user, password_hash, name_account, name_user, phone_user, tokenHash, tokenExpiry.toISOString())
     .run();
 
-    await sendVerificationEmail(email_user, verificationToken, env);
-
-    return new Response(
-      JSON.stringify({
-        message: "Đăng ký thành công! Vui lòng kiểm tra email của bạn để xác thực tài khoản.",
-      }),
-      { status: 201, headers }
-    );
+    try {
+      await sendVerificationEmail(email_user, verificationToken, env);
+      return new Response(
+        JSON.stringify({
+          message: "Đăng ký thành công! Vui lòng kiểm tra email của bạn để xác thực tài khoản.",
+        }),
+        { status: 201, headers }
+      );
+    } catch (emailError) {
+      console.error("Failed to send verification email, but user was created:", emailError);
+      return new Response(
+        JSON.stringify({
+          message: "Tài khoản của bạn đã được tạo, nhưng không thể gửi email xác thực. Vui lòng thử yêu cầu một email mới.",
+          userCreated: true,
+        }),
+        { status: 207, headers } // 207 Multi-Status
+      );
+    }
 
   } catch (e) {
     console.error("Registration server error:", e);
