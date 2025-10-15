@@ -480,7 +480,7 @@ async function sendVerificationEmail(email, token, env) {
       "Authorization": `Bearer ${env.RESEND_API_KEY}`,
     },
     body: JSON.stringify({
-      from: "onboarding@resend.dev",
+      from: "noreply@sotaynongdan.pages.dev",
       to: email,
       subject: "Xác nhận email đăng ký",
       html: emailHtml,

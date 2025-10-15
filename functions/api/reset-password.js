@@ -477,7 +477,7 @@ async function sendPasswordResetEmail(email, token, env) {
       "Authorization": `Bearer ${env.RESEND_API_KEY}`,
     },
     body: JSON.stringify({
-      from: "onboarding@resend.dev",
+      from: "noreply@sotaynongdan.pages.dev",
       to: email,
       subject: "Đặt lại mật khẩu của bạn",
       html: emailHtml,
