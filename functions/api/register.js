@@ -15,6 +15,9 @@ async function hashPassword(password) {
 }
 
 async function sendVerificationEmail(email, token, env) {
+  if (!env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not configured.");
+  }
   const verificationLink = `https://sotaynongdan.pages.dev/verify-email?token=${token}`;
 
   const emailHtml = `
