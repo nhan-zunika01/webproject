@@ -22,45 +22,29 @@ export const onRequest = async ({ request, env }) => {
   // --- GET: Fetch all posts ---
   if (request.method === "GET") {
     try {
-      // First, get all posts, now including comment_count
-      const { data: posts, error: postsError } = await supabase
-        .from("posts")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (postsError) throw postsError;
-
-      // Check if a user is logged in to fetch their votes
       const authHeader = request.headers.get("Authorization");
-      let userVotes = [];
+      let userId = null;
+
       if (authHeader) {
         const token = authHeader.split(" ")[1];
-        const {
-          data: { user },
-        } = await supabase.auth.getUser(token);
-
-        if (user) {
-          const { data: votes, error: votesError } = await supabase
-            .from("post_votes")
-            .select("post_id, vote_type")
-            .eq("user_id", user.id);
-          if (votesError) throw votesError;
-          userVotes = votes;
+        try {
+          const { data: { user } } = await supabase.auth.getUser(token);
+          if (user) {
+            userId = user.id;
+          }
+        } catch (e) {
+          console.warn("Invalid token, fetching posts without user context.");
         }
       }
 
-      const userVotesMap = userVotes.reduce((acc, vote) => {
-        acc[vote.post_id] = vote.vote_type;
-        return acc;
-      }, {});
+      const { data: posts, error } = await supabase.rpc(
+        "get_posts_with_user_votes",
+        { p_user_id: userId }
+      );
 
-      // Combine post data with the current user's vote status
-      const postsWithVotes = posts.map((post) => ({
-        ...post,
-        user_vote: userVotesMap[post.id] || 0, // 0 means no vote, 1 like, -1 dislike
-      }));
+      if (error) throw error;
 
-      return new Response(JSON.stringify(postsWithVotes), {
+      return new Response(JSON.stringify(posts), {
         status: 200,
         headers,
       });

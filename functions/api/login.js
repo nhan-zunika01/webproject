@@ -27,13 +27,36 @@ export const onRequestPost = async (context) => {
 
   try {
     const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
-    const { email_user, password_account } = await request.json();
+    const { identifier, password_account } = await request.json();
 
-    if (!email_user || !password_account) {
+    if (!identifier || !password_account) {
       return new Response(
-        JSON.stringify({ message: "Vui lòng cung cấp email và mật khẩu." }),
+        JSON.stringify({
+          message: "Vui lòng cung cấp email/tên tài khoản và mật khẩu.",
+        }),
         { status: 400, headers }
       );
+    }
+
+    let email_user = identifier;
+    const isEmail = identifier.includes("@");
+
+    if (!isEmail) {
+      const { data: user, error: findError } = await supabase
+        .from("users")
+        .select("email_user")
+        .eq("name_account", identifier)
+        .single();
+
+      if (findError || !user) {
+        return new Response(
+          JSON.stringify({
+            message: "Tên tài khoản hoặc mật khẩu không chính xác.",
+          }),
+          { status: 401, headers }
+        );
+      }
+      email_user = user.email_user;
     }
 
     const { data, error } = await supabase.auth.signInWithPassword({
