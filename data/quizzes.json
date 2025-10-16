@@ -1848,7 +1848,7 @@
         "answer": 1
       },
       {
-        "question": "Kênh phân phối nào được xem là bền vững nhất, tạo sự kết nối trực tiếp giữa nông dân và người tiêu dùng?",
+        "question": "Kênh phân phối nào được xem là bền vững nhất, tạo sự kết nối trực tiếp giữaArgiNova và người tiêu dùng?",
         "options": [
           "Bán cho thương lái tại vườn",
           "Mô hình CSA (Nông nghiệp được cộng đồng hỗ trợ)",
@@ -2247,7 +2247,7 @@
         "question": "Lợi ích nào sau đây KHÔNG phải là lợi ích chính của việc sử dụng drone phun thuốc?",
         "options": [
           "Tiết kiệm thời gian và nhân công",
-          "Bảo vệ sức khỏe nông dân",
+          "Bảo vệ sức khỏeArgiNova",
           "Làm cho đất tơi xốp hơn",
           "Tiết kiệm thuốc BVTV và nước"
         ],
@@ -2591,11 +2591,11 @@
         "answer": 2
       },
       {
-        "question": "Cảnh báo sớm qua điện thoại giúp người nông dân làm gì?",
+        "question": "Cảnh báo sớm qua điện thoại giúp ngườiArgiNova làm gì?",
         "options": [
           "Biết được giá nông sản",
           "Phản ứng kịp thời với các sự cố dù không có mặt tại trang trại",
-          "Trò chuyện với các nông dân khác",
+          "Trò chuyện với cácArgiNova khác",
           "Xem phim"
         ],
         "answer": 1
@@ -3577,7 +3577,7 @@
         "options": [
           "Phần mềm kế toán đắt tiền",
           "Máy tính cá nhân",
-          "Sổ tay và bút để ghi chép thu chi hàng ngày",
+          "  và bút để ghi chép thu chi hàng ngày",
           "Trí nhớ tốt"
         ],
         "answer": 2
