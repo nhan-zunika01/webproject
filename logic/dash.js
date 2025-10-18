@@ -716,7 +716,7 @@ function setupGuestUI() {
     guestMessage.className = "card";
     guestMessage.id = "guest-welcome-message";
     guestMessage.innerHTML =
-      '<h3>Chào mừng bạn đến với ArgiNova!</h3><p>Vui lòng <a href="login.html">đăng nhập</a> hoặc <a href="register.html">đăng ký</a> để truy cập tất cả các tính năng.</p>';
+      '<h3>Chào mừng bạn đến với AgriNova!</h3><p>Vui lòng <a href="login.html">đăng nhập</a> hoặc <a href="register.html">đăng ký</a> để truy cập tất cả các tính năng.</p>';
     if (dashboardSection.firstChild) {
       dashboardSection.insertBefore(guestMessage, dashboardSection.firstChild);
     } else {

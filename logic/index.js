@@ -55,3 +55,22 @@ document.addEventListener("DOMContentLoaded", () => {
     navRegisterBtn.addEventListener("click", handleRegisterRedirect);
   }
 });
+const oldDomain = "https://sotaynongdan.pages.dev/";
+const newDomain = "https://agrinova.pages.dev/";
+
+if (window.location.hostname === oldDomain) {
+    // Hiện modal thông báo chuyển hướng
+    document.getElementById("alert-modal-title").textContent = "Chuyển hướng trang web";
+    document.getElementById("modal-message").textContent = "Trang web đã chuyển sang địa chỉ mới. Bạn sẽ được chuyển hướng trong giây lát: " + newDomain;
+    document.getElementById("alert-modal").style.display = "flex";
+
+    // Đóng modal khi nhấn nút
+    document.getElementById("modal-close-btn").onclick = function() {
+        window.location.href = newDomain;
+    };
+
+    // Tự động chuyển hướng sau 5 giây
+    setTimeout(function() {
+        window.location.href = newDomain;
+    }, 5000);
+}
