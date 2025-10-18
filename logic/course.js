@@ -99,7 +99,7 @@ function initializeCoursePage(allCourses) {
     }
 
     function populateCourseOverview() {
-      pageTitle.textContent = `${course.title} - Sổ tay nông dân`;
+      pageTitle.textContent = `${course.title} - ArgiNova`;
       mainTitle.textContent = course.title;
       metaExpert.innerHTML = `<i class="fas fa-user-tie"></i> Chuyên gia: ${course.meta.expert}`;
       metaField.innerHTML = `<i class="fas fa-layer-group"></i> Lĩnh vực: ${course.meta.field}`;
