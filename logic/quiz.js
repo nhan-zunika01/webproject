@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   const submitBtn = document.getElementById("submit-btn");
-  const exitQuizBtn = document.getElementById("exit-quiz-btn");
+  // const exitQuizBtn = document.getElementById("exit-quiz-btn"); // Đã xóa
+  const finishNowBtn = document.getElementById("finish-now-btn"); // Thêm nút mới
 
   // Results Screen
   const scoreTextEl = document.getElementById("score-text");
@@ -452,23 +453,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     prevBtn.addEventListener("click", () => navigateQuestion("prev"));
     nextBtn.addEventListener("click", () => navigateQuestion("next"));
+    
+    // Nút nộp bài (submit chính, chỉ hiện ở câu cuối)
     submitBtn.addEventListener("click", () => endQuiz(false));
 
-    exitQuizBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      if (quizInProgress) {
-        const confirmed = await showConfirmModal(
-          "Tiến trình hiện tại sẽ được lưu lại. Bạn có chắc chắn muốn thoát không?",
-          "Xác nhận rời đi"
-        );
-        if (confirmed) {
-          saveQuizState();
-          window.location.href = "dash.html#quiz";
-        }
-      } else {
-        window.location.href = "dash.html#quiz";
-      }
-    });
+    // Sự kiện cho nút Kết thúc mới (luôn hiện, nộp bài ngay)
+    if (finishNowBtn) {
+        finishNowBtn.addEventListener("click", () => endQuiz(false));
+    }
+
+    /* ĐÃ XÓA: Sự kiện exitQuizBtn cũ */
 
     resumeYesBtn.addEventListener("click", () => {
       resumeModal.classList.remove("active");

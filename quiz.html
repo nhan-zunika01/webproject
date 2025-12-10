@@ -31,7 +31,7 @@
         <!-- Screen 2: Quiz Screen -->
         <div id="quiz-screen" class="quiz-screen">
             <header class="quiz-header">
-                <a href="#" id="exit-quiz-btn" class="exit-btn" title="Thoát bài kiểm tra"><i class="fas fa-times"></i></a>
+                <!-- ĐÃ XÓA NÚT X (THOÁT) Ở ĐÂY -->
                 <div class="timer">
                     <i class="fas fa-stopwatch"></i>
                     <span id="time-left">00:00</span>
@@ -46,10 +46,19 @@
             <div id="question-container" class="card">
                 <!-- Questions will be injected here by JS -->
             </div>
+            
             <div id="navigation-footer" class="quiz-footer">
+                <!-- Nút Bên Trái -->
                 <button id="prev-btn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Câu trước</button>
-                <button id="next-btn" class="btn btn-primary">Câu tiếp theo <i class="fas fa-arrow-right"></i></button>
-                <button id="submit-btn" class="btn">Nộp bài</button>
+                
+                <!-- Nhóm Nút Bên Phải -->
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button id="next-btn" class="btn btn-primary">Câu tiếp theo <i class="fas fa-arrow-right"></i></button>
+                    <!-- Nút Submit mặc định (chỉ hiện ở câu cuối) -->
+                    <button id="submit-btn" class="btn">Nộp bài</button>
+                    <!-- Nút Kết thúc mới (luôn hiện để nộp bài sớm) -->
+                    <button id="finish-now-btn" class="btn btn-danger" style="background-color: #c0392b; border-color: #e74c3c;">Kết thúc</button>
+                </div>
             </div>
         </div>
 
