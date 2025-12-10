@@ -30,8 +30,33 @@
                         <div class="error-message message" id="error-reg-name-account"></div>
                     </div>
                     <div class="form-group">
-                        <input type="password" id="reg-password" placeholder="Mật khẩu (tối thiểu 8 ký tự)" required>
+                        <input type="password" id="reg-password" placeholder="Mật khẩu" required>
+                        
+                        <!-- START: Thanh đánh giá độ mạnh mật khẩu (Giao diện mới) -->
+                        <div class="password-strength-container" id="password-strength-container">
+                            <!-- Thanh chạy liên tục (1 thanh duy nhất) -->
+                            <div class="strength-meter-bg">
+                                <div id="strength-bar-fill" class="strength-bar-fill"></div>
+                            </div>
+                            
+                            <div id="strength-text" class="strength-text"></div>
+                            
+                            <!-- Danh sách tiêu chí (Căn trái) -->
+                            <div id="password-criteria" class="password-criteria">
+                                <div id="crit-length" class="criterion"><i class="fas fa-exclamation-circle"></i> Tối thiểu 8 ký tự</div>
+                                <div id="crit-uppercase" class="criterion"><i class="fas fa-exclamation-circle"></i> Ít nhất 1 chữ hoa</div>
+                                <div id="crit-number" class="criterion"><i class="fas fa-exclamation-circle"></i> Ít nhất 1 số</div>
+                                <div id="crit-special" class="criterion"><i class="fas fa-exclamation-circle"></i> Ít nhất 1 ký tự đặc biệt</div>
+                            </div>
+                        </div>
+                        <!-- END: Thanh đánh giá độ mạnh mật khẩu -->
+
                         <div class="error-message message" id="error-reg-password"></div>
+                    </div>
+                    <!-- Thêm ô nhập lại mật khẩu -->
+                    <div class="form-group">
+                        <input type="password" id="reg-confirm-password" placeholder="Xác nhận mật khẩu" required>
+                        <div class="error-message message" id="error-reg-confirm-password"></div>
                     </div>
                     <div class="form-group">
                         <input type="text" id="reg-name-user" placeholder="Họ và tên" required>

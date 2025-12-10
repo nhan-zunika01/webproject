@@ -37,37 +37,42 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute("href")).scrollIntoView({
-        behavior: "smooth",
-      });
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
     });
   });
 
-  // --- Logic xử lý chuyển hướng đăng ký ---
-  function handleRegisterRedirect(event) {
-    event.preventDefault();
-    localStorage.setItem("showRegisterForm", "true");
-    window.location.href = "login.html";
-  }
-
-  const navRegisterBtn = document.querySelector("a.btn-register");
-  if (navRegisterBtn) {
-    navRegisterBtn.addEventListener("click", handleRegisterRedirect);
-  }
+  // --- ĐÃ XÓA: Logic xử lý chuyển hướng đăng ký cũ ---
+  // Đoạn mã cũ chặn nút đăng ký và chuyển hướng sang login.html đã được gỡ bỏ 
+  // để nút hoạt động bình thường (chuyển sang register.html).
 });
+
 const oldDomain = "https://sotaynongdan.pages.dev/";
 const newDomain = "https://agrinova.pages.dev/";
 
 if (window.location.hostname === oldDomain) {
-    // Hiện modal thông báo chuyển hướng
-    document.getElementById("alert-modal-title").textContent = "Chuyển hướng trang web";
-    document.getElementById("modal-message").textContent = "Trang web đã chuyển sang địa chỉ mới. Bạn sẽ được chuyển hướng trong giây lát: " + newDomain;
-    document.getElementById("alert-modal").style.display = "flex";
+    // Hiện modal thông báo chuyển hướng nếu có phần tử modal
+    const alertModal = document.getElementById("alert-modal");
+    const alertTitle = document.getElementById("alert-modal-title");
+    const alertMessage = document.getElementById("modal-message");
+    const closeBtn = document.getElementById("modal-close-btn");
 
-    // Đóng modal khi nhấn nút
-    document.getElementById("modal-close-btn").onclick = function() {
-        window.location.href = newDomain;
-    };
+    if (alertModal && alertTitle && alertMessage && closeBtn) {
+        alertTitle.textContent = "Chuyển hướng trang web";
+        alertMessage.textContent = "Trang web đã chuyển sang địa chỉ mới. Bạn sẽ được chuyển hướng trong giây lát: " + newDomain;
+        alertModal.style.display = "flex";
+
+        // Đóng modal khi nhấn nút
+        closeBtn.onclick = function() {
+            window.location.href = newDomain;
+        };
+    }
 
     // Tự động chuyển hướng sau 5 giây
     setTimeout(function() {
