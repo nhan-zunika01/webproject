@@ -9,12 +9,9 @@ export const onRequestPost = async ({ request, env }) => {
 
   // Check for environment variables
   if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.error(
-      "Supabase environment variables are not set for password update."
-    );
     return new Response(
       JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
+        message: "Lỗi cấu hình phía máy chủ.",
       }),
       { status: 500, headers }
     );
@@ -29,11 +26,12 @@ export const onRequestPost = async ({ request, env }) => {
 
     if (!access_token || !password) {
       return new Response(
-        JSON.stringify({ message: "Access token and password are required." }),
+        JSON.stringify({ message: "Thiếu thông tin xác thực hoặc mật khẩu mới." }),
         { status: 400, headers }
       );
     }
 
+    // 1. Xác thực người dùng bằng Access Token gửi lên
     const {
       data: { user },
       error: sessionError,
@@ -42,12 +40,14 @@ export const onRequestPost = async ({ request, env }) => {
     if (sessionError || !user) {
       return new Response(
         JSON.stringify({
-          message: "Mã khôi phục không hợp lệ hoặc đã hết hạn.",
+          message: "Phiên làm việc hết hạn hoặc liên kết không hợp lệ. Vui lòng yêu cầu lại.",
         }),
         { status: 401, headers }
       );
     }
 
+    // 2. Cập nhật mật khẩu bằng quyền Admin (Service Role)
+    // Cách này đảm bảo bypass mọi ràng buộc bảo mật phía client nếu có
     const { error: updateError } = await supabase.auth.admin.updateUserById(
       user.id,
       { password: password }
@@ -58,15 +58,28 @@ export const onRequestPost = async ({ request, env }) => {
     }
 
     return new Response(
-      JSON.stringify({ message: "Password updated successfully." }),
+      JSON.stringify({ message: "Cập nhật mật khẩu thành công." }),
       { status: 200, headers }
     );
   } catch (e) {
     console.error("Update password server error:", e);
-    const errorMessage = e.message || "An internal server error occurred.";
+    const errorMessage = e.message || "Lỗi hệ thống.";
     return new Response(JSON.stringify({ message: errorMessage }), {
       status: 500,
       headers,
     });
   }
+};
+
+export const onRequest = (context) => {
+    if (context.request.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
+    }
+    return onRequestPost(context);
 };

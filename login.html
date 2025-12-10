@@ -7,7 +7,7 @@
     <!-- Liên kết đến file CSS mới -->
     <link rel="stylesheet" href="styles/login.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-    <!-- THÊM: Script của Cloudflare Turnstile -->
+    <!-- Script Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -15,7 +15,6 @@
         <div class="container">
             <a href="index.html" class="logo"><i class="fas fa-seedling"></i> AgriNova</a>
             <nav class="main-nav">
-                <!-- Nút này sẽ dẫn đến trang đăng ký mới -->
                 <a href="index.html" class="nav-btn">Trở về trang chủ</a>
             </nav>
         </div>
@@ -35,16 +34,18 @@
                         <input type="password" id="login-password" placeholder="Mật khẩu" required>
                         <div class="error-message message" id="error-login-password"></div>
                     </div>
+                    
+                    <!-- Link chuyển sang trang Reset Password riêng biệt -->
                     <div class="form-group forgot-password-link">
-                        <button type="button" class="auth-toggle-link" onclick="showForm('forgot-password-form-container')">Quên mật khẩu?</button>
+                        <a href="reset-password.html" class="auth-toggle-link">Quên mật khẩu?</a>
                     </div>
                     
                     <div class="error-message message" id="error-login-general"></div>
 
-                    <!-- THÊM: Widget Cloudflare Turnstile -->
-                    <!-- Thay YOUR_SITE_KEY_FROM_CLOUDFLARE bằng Site Key bạn lấy từ Cloudflare -->
+                    <!-- Turnstile Widget -->
+                    <!-- Thay YOUR_SITE_KEY bằng Site Key thực tế -->
                     <div class="form-group" style="display: flex; justify-content: center;">
-                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACF14HVPAPqsNu2l"></div>
+                        <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY_FROM_CLOUDFLARE"></div>
                     </div>
 
                     <button type="submit" class="btn-submit" id="login-btn">Đăng nhập</button>
@@ -53,27 +54,9 @@
                     </div>
                 </form>
             </div>
-
-            <!-- Forgot Password Form -->
-            <div id="forgot-password-form-container" class="form-container">
-                <form id="forgot-password-form" novalidate>
-                    <h2 class="form-title">Khôi phục mật khẩu</h2>
-                    <p class="form-instructions">Nhập email của bạn. Chúng tôi sẽ gửi một liên kết để bạn có thể đặt lại mật khẩu.</p>
-                    <div class="form-group">
-                        <input type="email" id="forgot-email" placeholder="Địa chỉ email của bạn" required>
-                    </div>
-                    <div class="message success-message" id="success-forgot-password"></div>
-                    <div class="message error-message" id="error-forgot-password"></div>
-                    <button type="submit" class="btn-submit">Gửi liên kết</button>
-                    <div class="auth-toggle">
-                        Nhớ mật khẩu rồi? <button type="button" class="auth-toggle-link" onclick="showForm('login-form-container')">Đăng nhập</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </main>
-<p><a href="reset-password.html">Quên mật khẩu?</a></p>
-    <!-- Liên kết đến file JavaScript mới -->
+
     <script src="logic/login.js"></script>
 </body>
 </html>

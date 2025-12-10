@@ -8,26 +8,13 @@ function clearAllMessages() {
     .forEach((msg) => (msg.textContent = ""));
 }
 
-function setMessage(fieldId, message, isError = true) {
+function setMessage(fieldId, message) {
   const element = document.getElementById(fieldId);
   if (element) {
     element.textContent = message;
-    element.className = isError
-      ? "message error-message"
-      : "message success-message";
+    // Hiển thị message box nếu có nội dung
+    element.style.display = message ? 'block' : 'none';
   }
-}
-
-// Function to switch between login and forgot-password forms
-function showForm(formIdToShow) {
-  document.querySelectorAll(".form-container").forEach((container) => {
-    container.classList.remove("active");
-  });
-  const formToShow = document.getElementById(formIdToShow);
-  if (formToShow) {
-    formToShow.classList.add("active");
-  }
-  clearAllMessages();
 }
 
 // === EVENT HANDLERS ===
@@ -38,10 +25,11 @@ async function handleLogin(event) {
 
   const email_user = document.getElementById("login-email").value.trim();
   const password_account = document.getElementById("login-password").value;
+  const submitBtn = document.getElementById("login-btn");
 
-  // === THÊM: Lấy token Turnstile từ form ===
-  const turnstileInput = document.querySelector('[name="cf-turnstile-response"]');
-  const turnstileToken = turnstileInput ? turnstileInput.value : null;
+  // Lấy token từ widget Login
+  const formData = new FormData(document.getElementById("login-form"));
+  const turnstileToken = formData.get("cf-turnstile-response");
 
   if (!email_user || !password_account) {
     setMessage(
@@ -51,11 +39,13 @@ async function handleLogin(event) {
     return;
   }
 
-  // === THÊM: Kiểm tra đã check Turnstile chưa ===
   if (!turnstileToken) {
     setMessage("error-login-general", "Vui lòng hoàn thành xác thực bảo mật (CAPTCHA).");
     return;
   }
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Đang xử lý...";
 
   try {
     const response = await fetch("/api/login", {
@@ -64,79 +54,41 @@ async function handleLogin(event) {
       body: JSON.stringify({ 
           email_user, 
           password_account,
-          turnstileToken // === THÊM: Gửi token lên server ===
+          turnstileToken 
       }),
     });
 
     const result = await response.json();
 
     if (response.ok) {
-      // Status 200-299
+      // Lưu thông tin user và chuyển hướng
       localStorage.setItem("currentUser", JSON.stringify(result.user));
       window.location.href = "dash.html";
     } else {
-      // Nếu đăng nhập thất bại, reset Turnstile để người dùng thử lại
+      // Nếu lỗi, reset captcha để thử lại
       if (typeof turnstile !== 'undefined') turnstile.reset();
-
-      // Handle error codes from the backend
       setMessage("error-login-general", result.message || "Đã có lỗi xảy ra.");
     }
   } catch (error) {
     console.error("Login error:", error);
     setMessage("error-login-general", "Không thể kết nối đến máy chủ.");
-  }
-}
-
-async function handleForgotPassword(event) {
-  event.preventDefault();
-  clearAllMessages();
-
-  const email = document.getElementById("forgot-email").value.trim();
-
-  if (!email) {
-    setMessage("error-forgot-password", "Vui lòng nhập địa chỉ email của bạn.");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      setMessage(
-        "success-forgot-password",
-        "Nếu email tồn tại, một liên kết khôi phục đã được gửi. Vui lòng kiểm tra hộp thư.",
-        false
-      );
-    } else {
-      setMessage(
-        "error-forgot-password",
-        result.message || "Đã có lỗi xảy ra."
-      );
-    }
-  } catch (error) {
-    console.error("Password reset error:", error);
-    setMessage("error-forgot-password", "Không thể kết nối đến máy chủ.");
+  } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Đăng nhập";
   }
 }
 
 // === INITIALIZATION ===
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Nếu đã đăng nhập thì chuyển luôn vào dash
   if (localStorage.getItem("currentUser")) {
     window.location.href = "dash.html";
     return;
   }
 
-  document
-    .getElementById("login-form")
-    ?.addEventListener("submit", handleLogin);
-  document
-    .getElementById("forgot-password-form")
-    ?.addEventListener("submit", handleForgotPassword);
+  const loginForm = document.getElementById("login-form");
+  if (loginForm) {
+      loginForm.addEventListener("submit", handleLogin);
+  }
 });

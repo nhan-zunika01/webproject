@@ -9,59 +9,83 @@ export const onRequestPost = async (context) => {
     "Content-Type": "application/json",
   };
 
-  // Check for environment variables
   if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
-    // Reset password uses anon key
-    console.error(
-      "Supabase environment variables are not set for password reset."
-    );
     return new Response(
       JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
+        message: "Lỗi cấu hình phía máy chủ (Supabase).",
+      }),
+      { status: 500, headers }
+    );
+  }
+
+  if (!env.TURNSTILE_SECRET_KEY) {
+    return new Response(
+      JSON.stringify({
+        message: "Lỗi cấu hình phía máy chủ (Turnstile).",
       }),
       { status: 500, headers }
     );
   }
 
   try {
-    const supabase = createClient(
-      env.SUPABASE_URL,
-      env.SUPABASE_ANON_KEY // It's safer to use anon key for this operation
-    );
-    const { email } = await request.json();
+    const { email, turnstileToken } = await request.json();
 
-    if (!email) {
-      return new Response(JSON.stringify({ message: "Email is required" }), {
+    if (!email || !turnstileToken) {
+      return new Response(JSON.stringify({ message: "Email và CAPTCHA là bắt buộc." }), {
         status: 400,
         headers,
       });
     }
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://webproject-bxj.pages.dev/update-password.html",
+    // 1. Xác thực Turnstile Token
+    const formData = new FormData();
+    formData.append('secret', env.TURNSTILE_SECRET_KEY);
+    formData.append('response', turnstileToken);
+    formData.append('remoteip', request.headers.get('CF-Connecting-IP'));
+
+    const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        body: formData,
     });
 
-    // Supabase intentionally does not return an error if the email doesn't exist
-    // to prevent email enumeration attacks. We always return a success message.
+    const turnstileOutcome = await turnstileResult.json();
+
+    if (!turnstileOutcome.success) {
+        return new Response(JSON.stringify({ 
+            message: "Xác thực bảo mật thất bại. Vui lòng thử lại." 
+        }), { status: 403, headers });
+    }
+
+    // 2. Gửi mail reset qua Supabase
+    const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
+    
+    // Tự động xác định URL chuyển hướng dựa trên request hiện tại
+    // Điều này giúp code chạy đúng trên cả localhost và production domain
+    const url = new URL(request.url);
+    const origin = url.origin; // Ví dụ: https://agrinova.pages.dev hoặc http://127.0.0.1:8788
+    const redirectTo = `${origin}/update-password.html`;
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectTo,
+    });
+
     if (error) {
       console.error("Supabase password reset error:", error.message);
+      // Để bảo mật, không nên báo chi tiết lỗi cho người dùng nếu email không tồn tại
+      // Nhưng trong giai đoạn dev, có thể log ra console server
     }
 
     return new Response(
       JSON.stringify({
-        message:
-          "If an account with this email exists, a password reset link has been sent.",
+        message: "Yêu cầu đã được tiếp nhận.",
       }),
       { status: 200, headers }
     );
   } catch (e) {
     console.error("Password reset server error:", e);
     return new Response(
-      JSON.stringify({ message: "An internal server error occurred." }),
-      {
-        status: 500,
-        headers,
-      }
+      JSON.stringify({ message: "Đã xảy ra lỗi hệ thống." }),
+      { status: 500, headers }
     );
   }
 };
