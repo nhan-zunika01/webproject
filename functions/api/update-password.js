@@ -11,7 +11,16 @@ export const onRequestPost = async ({ request, env }) => {
   if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
     return new Response(
       JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ.",
+        message: "Lỗi cấu hình phía máy chủ (Supabase).",
+      }),
+      { status: 500, headers }
+    );
+  }
+
+  if (!env.TURNSTILE_SECRET_KEY) {
+    return new Response(
+      JSON.stringify({
+        message: "Lỗi cấu hình phía máy chủ (Turnstile).",
       }),
       { status: 500, headers }
     );
@@ -22,7 +31,9 @@ export const onRequestPost = async ({ request, env }) => {
       env.SUPABASE_URL,
       env.SUPABASE_SERVICE_ROLE_KEY
     );
-    const { access_token, password } = await request.json();
+    
+    // Nhận thêm turnstileToken
+    const { access_token, password, turnstileToken } = await request.json();
 
     if (!access_token || !password) {
       return new Response(
@@ -31,7 +42,33 @@ export const onRequestPost = async ({ request, env }) => {
       );
     }
 
-    // 1. Xác thực người dùng bằng Access Token gửi lên
+    if (!turnstileToken) {
+      return new Response(
+        JSON.stringify({ message: "Thiếu mã xác thực CAPTCHA." }),
+        { status: 400, headers }
+      );
+    }
+
+    // 1. Xác thực Turnstile Token
+    const formData = new FormData();
+    formData.append('secret', env.TURNSTILE_SECRET_KEY);
+    formData.append('response', turnstileToken);
+    formData.append('remoteip', request.headers.get('CF-Connecting-IP'));
+
+    const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        body: formData,
+    });
+
+    const turnstileOutcome = await turnstileResult.json();
+
+    if (!turnstileOutcome.success) {
+        return new Response(JSON.stringify({ 
+            message: "Xác thực bảo mật thất bại. Vui lòng thử lại." 
+        }), { status: 403, headers });
+    }
+
+    // 2. Xác thực người dùng bằng Access Token gửi lên
     const {
       data: { user },
       error: sessionError,
@@ -40,14 +77,13 @@ export const onRequestPost = async ({ request, env }) => {
     if (sessionError || !user) {
       return new Response(
         JSON.stringify({
-          message: "Phiên làm việc hết hạn hoặc liên kết không hợp lệ. Vui lòng yêu cầu lại.",
+          message: "Phiên làm việc hết hạn hoặc liên kết không hợp lệ. Vui lòng yêu cầu lại liên kết đổi mật khẩu.",
         }),
         { status: 401, headers }
       );
     }
 
-    // 2. Cập nhật mật khẩu bằng quyền Admin (Service Role)
-    // Cách này đảm bảo bypass mọi ràng buộc bảo mật phía client nếu có
+    // 3. Cập nhật mật khẩu bằng quyền Admin (Service Role)
     const { error: updateError } = await supabase.auth.admin.updateUserById(
       user.id,
       { password: password }
