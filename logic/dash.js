@@ -150,10 +150,6 @@ async function loadAndRenderCourses() {
   }
 }
 
-/**
- * Loads quiz and course data, fetches user's quiz history,
- * and renders the list of available quizzes with their high scores.
- */
 async function loadAndRenderQuizzes() {
   const quizGrid = document.getElementById("quiz-grid");
   if (!quizGrid) return;
@@ -218,7 +214,6 @@ async function loadAndRenderQuizzes() {
         quizCard.className = "card";
 
         let actionHTML = "";
-        // SỬA LỖI: Khai báo totalQuestions ở đây để có thể truy cập ở phạm vi rộng hơn
         const totalQuestions = quiz.totalQuestions || 0;
 
         if (currentUser) {
@@ -248,11 +243,9 @@ async function loadAndRenderQuizzes() {
     quizGrid.innerHTML = `<p class="card" style="color: #ffcccc;">${error.message}</p>`;
   }
 }
-
 // === END: DYNAMIC CONTENT LOADING FUNCTIONS ===
 
 // === START: FORUM FUNCTIONS ===
-
 function timeAgo(date) {
   const seconds = Math.floor((new Date() - new Date(date)) / 1000);
   let interval = seconds / 31536000;
@@ -997,6 +990,196 @@ function renderWeatherData(current, forecast, locationName) {
 }
 // === END: WEATHER FUNCTIONS ===
 
+// === START: FARMING ASSISTANT LOGIC (MỚI) ===
+
+// 1. Cơ sở tri thức (Knowledge Base) cho từng loại cây
+const CROP_RULES = {
+    rice: {
+        name: "Cây Lúa",
+        rules: (temp, rain, wind) => {
+            let advice = [];
+            if (rain > 10) {
+                advice.push({ type: 'warning', text: "Mưa lớn: Ngưng bón phân đạm để tránh rửa trôi." });
+                advice.push({ type: 'danger', text: "Ngưng phun thuốc BVTV (hiệu quả thấp)." });
+            } else if (rain > 0 && rain <= 10) {
+                advice.push({ type: 'info', text: "Mưa nhỏ: Có thể bón phân đón đòng nếu đất đủ ẩm." });
+            }
+            
+            if (temp > 35) {
+                advice.push({ type: 'warning', text: "Nắng nóng: Duy trì mực nước ruộng cao để điều hòa nhiệt độ." });
+            } else if (temp < 20) {
+                advice.push({ type: 'warning', text: "Trời lạnh: Giữ nước ấm chân, ngưng bón đạm, tăng cường Lân và Kali." });
+            }
+
+            if (wind > 15) {
+                advice.push({ type: 'danger', text: "Gió mạnh: Không phun thuốc sâu (thuốc bị bay), đề phòng lúa đổ ngã." });
+            }
+
+            if (advice.length === 0) advice.push({ type: 'success', text: "Thời tiết thuận lợi: Chăm sóc, thăm đồng bình thường." });
+            return advice;
+        }
+    },
+    durian: {
+        name: "Sầu Riêng",
+        rules: (temp, rain, wind) => {
+            let advice = [];
+            if (rain > 20) {
+                advice.push({ type: 'danger', text: "Mưa to: Kiểm tra rãnh thoát nước ngay, ngừa bệnh thối rễ/xì mủ." });
+                advice.push({ type: 'warning', text: "Không bón phân gốc, dễ gây nấm bệnh tấn công rễ." });
+            } else if (rain === 0 && temp > 33) {
+                advice.push({ type: 'info', text: "Nắng nóng: Tưới giữ ẩm đều đặn, nên tưới vào sáng sớm hoặc chiều mát." });
+                advice.push({ type: 'info', text: "Có thể phun sương làm mát lá nếu nhiệt độ quá cao." });
+            }
+
+            if (wind > 10) {
+                advice.push({ type: 'warning', text: "Gió: Cẩn thận gãy cành, nên chằng chống cây mang trái lớn." });
+            }
+            
+            if (advice.length === 0) advice.push({ type: 'success', text: "Thời tiết tốt: Thích hợp để tỉa cành, bón phân lá hoặc làm cỏ." });
+            return advice;
+        }
+    },
+    coffee: {
+        name: "Cà Phê",
+        rules: (temp, rain, wind) => {
+            let advice = [];
+            if (rain > 5 && rain < 20) {
+                advice.push({ type: 'success', text: "Đất ẩm: Thời điểm vàng để bón phân NPK mùa mưa." });
+                advice.push({ type: 'info', text: "Trồng dặm cây con nếu có kế hoạch." });
+            } else if (rain > 50) {
+                advice.push({ type: 'warning', text: "Mưa dầm: Ngưng bón phân, chú ý phòng bệnh rỉ sắt và nấm hồng." });
+            } else if (rain === 0) {
+                advice.push({ type: 'info', text: "Khô ráo: Thăm vườn, cắt cành, làm cỏ, đánh chồi vượt." });
+                if (temp > 34) advice.push({ type: 'warning', text: "Cảnh báo rệp sáp phát triển mạnh khi nắng nóng khô hạn." });
+            }
+
+            if (advice.length === 0) advice.push({ type: 'success', text: "Điều kiện bình thường: Canh tác theo lịch trình." });
+            return advice;
+        }
+    }
+};
+
+// 2. Hàm xử lý chính
+async function generateFarmingPlan() {
+    const cropType = document.getElementById('crop-select').value;
+    const resultContainer = document.getElementById('plan-results-container');
+    
+    // Lấy dữ liệu thời tiết hiện tại (từ biến toàn cục hoặc fetch lại nếu cần)
+    const locationText = document.querySelector('.weather-location')?.textContent;
+
+    if (!locationText || locationText === "Vị trí của bạn" || locationText === "") {
+        showAlert("Vui lòng chọn địa điểm cụ thể ở trên trước khi lập kế hoạch.");
+        return;
+    }
+
+    resultContainer.innerHTML = '<p class="card" style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Đang phân tích dữ liệu...</p>';
+
+    try {
+        // Gọi API lấy dự báo (Sử dụng lại logic get-weather đã có)
+        const response = await fetch(`/api/get-weather?location=${encodeURIComponent(locationText)}`);
+        if (!response.ok) throw new Error("Không thể lấy dữ liệu thời tiết.");
+        
+        const data = await response.json();
+        const forecastList = data.forecast.list; // Danh sách dự báo 3h/lần trong 5 ngày
+
+        // Gộp dữ liệu theo ngày (Lấy mốc 12:00 trưa mỗi ngày làm đại diện)
+        const dailyForecasts = processForecastData(forecastList);
+
+        renderPlan(dailyForecasts, cropType, resultContainer);
+
+    } catch (error) {
+        console.error("Lỗi lập kế hoạch:", error);
+        resultContainer.innerHTML = `<p class="card" style="color: #ffcccc;">Lỗi: ${error.message}</p>`;
+    }
+}
+
+// Hàm phụ trợ: Gộp dữ liệu dự báo 3 giờ thành dự báo ngày
+function processForecastData(list) {
+    const dailyData = [];
+    const processedDates = new Set();
+
+    list.forEach(item => {
+        const dateObj = new Date(item.dt * 1000);
+        const dateKey = dateObj.toLocaleDateString('vi-VN');
+        const hour = dateObj.getHours();
+
+        // Lấy dữ liệu vào khoảng trưa (11h - 13h) làm đại diện cho ban ngày, hoặc lấy mục đầu tiên của ngày mới
+        if (!processedDates.has(dateKey) && (hour >= 11 || dailyData.length === 0)) {
+            // Tính tổng lượng mưa trong 3h (nếu có)
+            const rain = item.rain ? (item.rain['3h'] || 0) : 0;
+            
+            dailyData.push({
+                date: dateKey,
+                weekday: getVietnameseDay(dateObj.getDay()),
+                temp: Math.round(item.main.temp),
+                humidity: item.main.humidity,
+                wind: Math.round(item.wind.speed * 3.6), // Đổi m/s sang km/h
+                rain: rain,
+                desc: item.weather[0].description,
+                icon: item.weather[0].icon
+            });
+            processedDates.add(dateKey);
+        }
+    });
+    return dailyData.slice(0, 5); // Lấy 5 ngày
+}
+
+function getVietnameseDay(dayIndex) {
+    const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+    return days[dayIndex];
+}
+
+// Hàm hiển thị giao diện kế hoạch
+function renderPlan(forecasts, cropType, container) {
+    const cropInfo = CROP_RULES[cropType];
+    let html = `<h4 style="margin-bottom:20px; border-left: 4px solid #4CAF50; padding-left:10px;">
+        Kế hoạch chăm sóc: <span style="color:#a5d6a7">${cropInfo.name}</span>
+    </h4>
+    <div class="plan-grid" style="display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">`;
+
+    forecasts.forEach(day => {
+        // Lấy lời khuyên dựa trên rules
+        const adviceList = cropInfo.rules(day.temp, day.rain, day.wind);
+        
+        let adviceHTML = `<ul style="padding-left: 20px; margin-top: 10px;">`;
+        adviceList.forEach(item => {
+            // Style màu sắc dựa trên mức độ cảnh báo
+            let color = '#ccc';
+            let icon = 'fa-check';
+            if(item.type === 'warning') { color = '#f39c12'; icon = 'fa-exclamation-triangle'; }
+            if(item.type === 'danger') { color = '#e74c3c'; icon = 'fa-ban'; }
+            if(item.type === 'success') { color = '#2ecc71'; icon = 'fa-check-circle'; }
+            if(item.type === 'info') { color = '#3498db'; icon = 'fa-info-circle'; }
+
+            adviceHTML += `<li style="color: ${color}; margin-bottom: 5px;">
+                <i class="fas ${icon}"></i> ${item.text}
+            </li>`;
+        });
+        adviceHTML += `</ul>`;
+
+        html += `
+        <div class="card plan-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px; margin-bottom:10px;">
+                <span style="font-weight:bold; color:#fff;">${day.weekday} (${day.date})</span>
+                <img src="https://openweathermap.org/img/wn/${day.icon}.png" alt="icon" style="width:40px;">
+            </div>
+            <div style="font-size: 0.9em; color: #aaa; display:flex; justify-content:space-between; margin-bottom:10px;">
+                <span><i class="fas fa-thermometer-half"></i> ${day.temp}°C</span>
+                <span><i class="fas fa-tint"></i> ${day.rain.toFixed(1)} mm</span>
+                <span><i class="fas fa-wind"></i> ${day.wind} km/h</span>
+            </div>
+            <div class="advice-content">
+                ${adviceHTML}
+            </div>
+        </div>`;
+    });
+
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+// === END: FARMING ASSISTANT LOGIC ===
+
 // === START: INITIALIZATION AND EVENT LISTENERS ===
 document.addEventListener("DOMContentLoaded", function () {
   loadAndRenderCourses();
@@ -1080,6 +1263,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   } else {
     showSection("dashboard", document.querySelector(".nav-tab.active"));
+  }
+
+  // === MỚI: Event listener cho nút Tạo kế hoạch ===
+  const btnGeneratePlan = document.getElementById("btn-generate-plan");
+  if (btnGeneratePlan) {
+      btnGeneratePlan.addEventListener("click", generateFarmingPlan);
   }
 });
 // === END: INITIALIZATION AND EVENT LISTENERS ===

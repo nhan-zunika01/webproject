@@ -29,8 +29,9 @@
                 <li><a href="#" class="nav-tab" onclick="showSection('forum', this)">
                     <i class="fas fa-comments"></i> <span>Diễn đàn</span>
                 </a></li>
+                <!-- Mục Thời tiết giờ bao gồm cả Trợ lý Nông vụ -->
                 <li><a href="#" class="nav-tab" onclick="showSection('weather', this)">
-                    <i class="fas fa-cloud-sun"></i> <span>Thời tiết</span>
+                    <i class="fas fa-cloud-sun"></i> <span>Thời tiết & Nông vụ</span>
                 </a></li>
                 <li><a href="#" class="nav-tab" onclick="showSection('quiz', this)">
                     <i class="fas fa-clipboard-check"></i> <span>Kiểm tra</span>
@@ -114,7 +115,7 @@
                 </div>
             </section>
 
-            <!-- Weather Section -->
+            <!-- Weather Section (Đã tích hợp Trợ lý Nông vụ) -->
             <section id="weather" class="content-section">
                 <div class="location-changer card">
                     <div class="select-group">
@@ -135,14 +136,40 @@
                         <span class="note-icon">ⓘ</span> Dữ liệu địa danh hành chính được cập nhật đến 01/07/2025.
                     </p>
                 </div>
+                
+                <!-- Widget thời tiết -->
                 <div class="weather-widget card">
                     <p>Chọn một vị trí để xem dự báo thời tiết.</p>
+                </div>
+
+                <!-- TÍCH HỢP TRỢ LÝ NÔNG VỤ -->
+                <div class="card" style="margin-top: 25px;">
+                    <h3><i class="fas fa-robot" style="color: #4CAF50;"></i> Trợ lý Nông vụ AI</h3>
+                    <p>Phân tích dữ liệu thời tiết trên để đưa ra kế hoạch chăm sóc.</p>
+                    
+                    <div style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
+                        <div class="form-group" style="margin-bottom: 0; flex-grow: 1; min-width: 200px;">
+                            <label for="crop-select" style="font-weight: bold; color: #a5d6a7;">Chọn loại cây trồng:</label>
+                            <select id="crop-select" class="location-select" style="width: 100%; margin-top: 5px;">
+                                <option value="rice">Cây Lúa</option>
+                                <option value="durian">Cây Sầu Riêng</option>
+                                <option value="coffee">Cây Cà Phê</option>
+                            </select>
+                        </div>
+                        <button id="btn-generate-plan" class="btn btn-primary" style="margin-bottom: 2px;">
+                            <i class="fas fa-magic"></i> Phân tích ngay
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nơi hiển thị kết quả phân tích -->
+                <div id="plan-results-container" class="plan-results" style="margin-top: 25px;">
+                    <!-- Các thẻ khuyến nghị sẽ được JS chèn vào đây -->
                 </div>
             </section>
             
             <!-- Quiz Section -->
             <section id="quiz" class="content-section">
-                <!-- CẬP NHẬT: Thay đổi cấu trúc để JS có thể chèn danh sách bài kiểm tra -->
                 <div id="quiz-grid" class="content-grid two-column">
                     <!-- Các bài kiểm tra sẽ được JS tải và chèn vào đây -->
                 </div>
