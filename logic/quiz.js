@@ -21,8 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   const submitBtn = document.getElementById("submit-btn");
-  // const exitQuizBtn = document.getElementById("exit-quiz-btn"); // Đã xóa
-  const finishNowBtn = document.getElementById("finish-now-btn"); // Thêm nút mới
+  const finishNowBtn = document.getElementById("finish-now-btn");
 
   // Results Screen
   const scoreTextEl = document.getElementById("score-text");
@@ -360,13 +359,11 @@ document.addEventListener("DOMContentLoaded", () => {
       loadingOverlay.style.display = "flex";
       await saveResultToDB(score);
     } catch (error) {
-      // CẬP NHẬT: Xử lý lỗi hết hạn phiên đăng nhập một cách đặc biệt
       if (error.message === "SESSION_EXPIRED") {
         showInfoModal(
           "Phiên đăng nhập của bạn đã hết hạn. Vui lòng đăng nhập lại để lưu kết quả.",
           "Phiên đã hết hạn"
         );
-        // Chuyển hướng đến trang đăng nhập sau 3 giây
         setTimeout(() => {
           window.location.href = "login.html";
         }, 3000);
@@ -425,7 +422,6 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify({ quizId: quizId, score: score }),
     });
 
-    // CẬP NHẬT: Kiểm tra lỗi 401 (Unauthorized) để xác định phiên hết hạn
     if (response.status === 401) {
       localStorage.removeItem("currentUser");
       throw new Error("SESSION_EXPIRED");
@@ -453,16 +449,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     prevBtn.addEventListener("click", () => navigateQuestion("prev"));
     nextBtn.addEventListener("click", () => navigateQuestion("next"));
-    
-    // Nút nộp bài (submit chính, chỉ hiện ở câu cuối)
     submitBtn.addEventListener("click", () => endQuiz(false));
 
-    // Sự kiện cho nút Kết thúc mới (luôn hiện, nộp bài ngay)
     if (finishNowBtn) {
-        finishNowBtn.addEventListener("click", () => endQuiz(false));
+      finishNowBtn.addEventListener("click", () => endQuiz(false));
     }
-
-    /* ĐÃ XÓA: Sự kiện exitQuizBtn cũ */
 
     resumeYesBtn.addEventListener("click", () => {
       resumeModal.classList.remove("active");
@@ -486,6 +477,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
+
+    // === THÊM: Xử lý sự kiện bàn phím ===
+    document.addEventListener("keydown", (e) => {
+      if (!quizInProgress) return;
+
+      // Phím 1, 2, 3, 4 để chọn đáp án
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        const index = parseInt(e.key) - 1;
+        const options = document.querySelectorAll(".option");
+        if (options[index]) {
+          options[index].click(); // Kích hoạt sự kiện click đã có
+        }
+      }
+      
+      // Phím Enter để qua câu tiếp theo hoặc nộp bài
+      if (e.key === "Enter") {
+        e.preventDefault(); // Ngăn hành vi mặc định (như nhấn nút đang focus)
+        if (currentQuestionIndex < questions.length - 1) {
+          navigateQuestion("next");
+        } else {
+          // Nếu đang ở câu cuối cùng, Enter sẽ nộp bài
+          endQuiz(false);
+        }
+      }
+    });
 
     window.addEventListener("beforeunload", () => {
       if (quizInProgress) {

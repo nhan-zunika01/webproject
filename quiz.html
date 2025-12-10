@@ -31,7 +31,6 @@
         <!-- Screen 2: Quiz Screen -->
         <div id="quiz-screen" class="quiz-screen">
             <header class="quiz-header">
-                <!-- ĐÃ XÓA NÚT X (THOÁT) Ở ĐÂY -->
                 <div class="timer">
                     <i class="fas fa-stopwatch"></i>
                     <span id="time-left">00:00</span>
@@ -53,11 +52,11 @@
                 
                 <!-- Nhóm Nút Bên Phải -->
                 <div style="display: flex; gap: 10px; align-items: center;">
+                    <!-- ĐÃ CHỈNH SỬA: Nút Kết thúc được chuyển sang bên trái nút Next -->
+                    <button id="finish-now-btn" class="btn btn-danger" style="background-color: #c0392b; border-color: #e74c3c;">Kết thúc</button>
                     <button id="next-btn" class="btn btn-primary">Câu tiếp theo <i class="fas fa-arrow-right"></i></button>
                     <!-- Nút Submit mặc định (chỉ hiện ở câu cuối) -->
                     <button id="submit-btn" class="btn">Nộp bài</button>
-                    <!-- Nút Kết thúc mới (luôn hiện để nộp bài sớm) -->
-                    <button id="finish-now-btn" class="btn btn-danger" style="background-color: #c0392b; border-color: #e74c3c;">Kết thúc</button>
                 </div>
             </div>
         </div>
