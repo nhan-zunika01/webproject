@@ -39,6 +39,10 @@ async function handleLogin(event) {
   const email_user = document.getElementById("login-email").value.trim();
   const password_account = document.getElementById("login-password").value;
 
+  // === THÊM: Lấy token Turnstile từ form ===
+  const turnstileInput = document.querySelector('[name="cf-turnstile-response"]');
+  const turnstileToken = turnstileInput ? turnstileInput.value : null;
+
   if (!email_user || !password_account) {
     setMessage(
       "error-login-general",
@@ -47,11 +51,21 @@ async function handleLogin(event) {
     return;
   }
 
+  // === THÊM: Kiểm tra đã check Turnstile chưa ===
+  if (!turnstileToken) {
+    setMessage("error-login-general", "Vui lòng hoàn thành xác thực bảo mật (CAPTCHA).");
+    return;
+  }
+
   try {
     const response = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email_user, password_account }),
+      body: JSON.stringify({ 
+          email_user, 
+          password_account,
+          turnstileToken // === THÊM: Gửi token lên server ===
+      }),
     });
 
     const result = await response.json();
@@ -61,8 +75,10 @@ async function handleLogin(event) {
       localStorage.setItem("currentUser", JSON.stringify(result.user));
       window.location.href = "dash.html";
     } else {
+      // Nếu đăng nhập thất bại, reset Turnstile để người dùng thử lại
+      if (typeof turnstile !== 'undefined') turnstile.reset();
+
       // Handle error codes from the backend
-      // The backend now provides more specific messages and statuses
       setMessage("error-login-general", result.message || "Đã có lỗi xảy ra.");
     }
   } catch (error) {

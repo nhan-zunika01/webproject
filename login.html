@@ -7,6 +7,8 @@
     <!-- Liên kết đến file CSS mới -->
     <link rel="stylesheet" href="styles/login.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <!-- THÊM: Script của Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -36,7 +38,15 @@
                     <div class="form-group forgot-password-link">
                         <button type="button" class="auth-toggle-link" onclick="showForm('forgot-password-form-container')">Quên mật khẩu?</button>
                     </div>
+                    
                     <div class="error-message message" id="error-login-general"></div>
+
+                    <!-- THÊM: Widget Cloudflare Turnstile -->
+                    <!-- Thay YOUR_SITE_KEY_FROM_CLOUDFLARE bằng Site Key bạn lấy từ Cloudflare -->
+                    <div class="form-group" style="display: flex; justify-content: center;">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACF14HVPAPqsNu2l"></div>
+                    </div>
+
                     <button type="submit" class="btn-submit" id="login-btn">Đăng nhập</button>
                     <div class="auth-toggle">
                         Chưa có tài khoản? <a href="register.html" class="auth-toggle-link">Đăng ký ngay</a>
