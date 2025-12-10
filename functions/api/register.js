@@ -14,8 +14,17 @@ export const onRequestPost = async ({ request, env }) => {
     );
     return new Response(
       JSON.stringify({
-        message: "Lỗi cấu hình phía máy chủ. Vui lòng liên hệ quản trị viên.",
+        message: "Lỗi cấu hình phía máy chủ (Supabase). Vui lòng liên hệ quản trị viên.",
       }),
+      { status: 500, headers }
+    );
+  }
+
+  // === THÊM: Kiểm tra Secret Key của Turnstile ===
+  if (!env.TURNSTILE_SECRET_KEY) {
+    console.error("Turnstile Secret Key chưa được thiết lập.");
+    return new Response(
+      JSON.stringify({ message: "Lỗi cấu hình phía máy chủ (Turnstile)." }),
       { status: 500, headers }
     );
   }
@@ -32,7 +41,28 @@ export const onRequestPost = async ({ request, env }) => {
       name_account,
       name_user,
       phone_user,
+      turnstileToken // === THÊM: Nhận token từ client ===
     } = await request.json();
+
+    // === THÊM: Xác thực Token với Cloudflare ===
+    const formData = new FormData();
+    formData.append('secret', env.TURNSTILE_SECRET_KEY);
+    formData.append('response', turnstileToken);
+    formData.append('remoteip', request.headers.get('CF-Connecting-IP'));
+
+    const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        body: formData,
+    });
+
+    const turnstileOutcome = await turnstileResult.json();
+
+    if (!turnstileOutcome.success) {
+        return new Response(JSON.stringify({ 
+            message: "Xác thực bảo mật thất bại. Vui lòng thử lại." 
+        }), { status: 403, headers });
+    }
+    // === KẾT THÚC: Xác thực Turnstile ===
 
     const { data, error } = await supabase.auth.signUp({
       email: email_user,

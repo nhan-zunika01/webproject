@@ -7,6 +7,8 @@
     <!-- Liên kết đến file CSS mới -->
     <link rel="stylesheet" href="styles/register.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <!-- THÊM: Script của Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -70,6 +72,13 @@
                         <input type="tel" id="reg-phone" placeholder="Số điện thoại" required>
                         <div class="error-message message" id="error-reg-phone"></div>
                     </div>
+
+                    <!-- THÊM: Widget Cloudflare Turnstile -->
+                    <!-- Thay YOUR_SITE_KEY_FROM_CLOUDFLARE bằng Site Key bạn lấy từ Cloudflare -->
+                    <div class="form-group" style="display: flex; justify-content: center;">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACF14HVPAPqsNu2l"></div>
+                    </div>
+
                     <button type="submit" class="btn-submit" id="register-btn">Đăng ký</button>
                     <div class="auth-toggle">
                         Đã có tài khoản? <a href="login.html" class="auth-toggle-link">Đăng nhập</a>

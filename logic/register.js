@@ -168,6 +168,10 @@ async function handleRegister(event) {
   const email_user = document.getElementById("reg-email").value.trim();
   const phone_user = document.getElementById("reg-phone").value.trim();
 
+  // === THÊM: Lấy token Turnstile từ form ===
+  const turnstileInput = document.querySelector('[name="cf-turnstile-response"]');
+  const turnstileToken = turnstileInput ? turnstileInput.value : null;
+
   let isValid = true;
   if (!name_account) {
     setMessage("error-reg-name-account", "Vui lòng nhập tên tài khoản.");
@@ -198,6 +202,12 @@ async function handleRegister(event) {
     isValid = false;
   }
 
+  // === THÊM: Kiểm tra đã check Turnstile chưa ===
+  if (!turnstileToken) {
+    setMessage("error-reg-name-account", "Vui lòng hoàn thành xác thực bảo mật (CAPTCHA).");
+    isValid = false;
+  }
+
   if (!isValid) return;
 
   try {
@@ -210,6 +220,7 @@ async function handleRegister(event) {
         name_account,
         name_user,
         phone_user,
+        turnstileToken, // === THÊM: Gửi token lên server ===
       }),
     });
 
@@ -220,6 +231,9 @@ async function handleRegister(event) {
         email_user
       )}`;
     } else {
+      // Nếu lỗi, có thể do token hết hạn, reset widget nếu cần (tự động thường có sẵn)
+      if (typeof turnstile !== 'undefined') turnstile.reset();
+      
       setMessage(`error-reg-${result.field || "name-account"}`, result.message);
     }
   } catch (error) {
