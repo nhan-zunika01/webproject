@@ -339,6 +339,19 @@ function renderForumPosts(posts) {
     tempDiv.textContent = post.content || "";
     const safeContentHTML = tempDiv.innerHTML.replace(/\n/g, "<br />");
 
+    // --- UPDATED: Xử lý hiển thị Tag ---
+    let tagHTML = "";
+    if (post.tag) {
+        let tagClass = "tag-default";
+        if (post.tag === "Khẩn cấp") tagClass = "tag-urgent";
+        else if (post.tag === "Hỗ trợ") tagClass = "tag-support";
+        else if (post.tag === "Hỏi đáp") tagClass = "tag-qa";
+        else if (post.tag === "Chia sẻ") tagClass = "tag-share";
+        
+        tagHTML = `<span class="post-tag ${tagClass}">${post.tag}</span>`;
+    }
+    // --- KẾT THÚC CẬP NHẬT ---
+
     postElement.innerHTML = `
             <div class="post-header">
                 <div class="avatar ${randomColorClass}">${
@@ -348,6 +361,8 @@ function renderForumPosts(posts) {
                     <h4></h4>
                     <small>${timeAgo(post.created_at)}</small>
                 </div>
+                <!-- Chèn Tag vào đây -->
+                <div style="margin-left: auto;">${tagHTML}</div>
             </div>
             <div class="post-body-content">
                 <h3></h3>
@@ -428,6 +443,9 @@ async function handleCreatePost(event) {
 
   const title = document.getElementById("post-title").value.trim();
   const content = document.getElementById("post-content").value.trim();
+  // UPDATED: Lấy giá trị tag
+  const tag = document.getElementById("post-tag").value;
+  
   const submitBtn = document.getElementById("submit-post-btn");
 
   if (!title || !content) {
@@ -445,7 +463,8 @@ async function handleCreatePost(event) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${currentUser.access_token}`,
       },
-      body: JSON.stringify({ title, content }),
+      // UPDATED: Gửi tag lên server
+      body: JSON.stringify({ title, content, tag }),
     });
 
     showAlert("Đăng bài thành công!");

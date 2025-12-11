@@ -1127,3 +1127,59 @@ body::after {
     }
     
 }
+
+/* --- Styles cho Tag bài viết --- */
+.post-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.tag-default {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tag-qa { /* Hỏi đáp - Màu xanh dương */
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.tag-share { /* Chia sẻ - Màu xanh lá */
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    border: 1px solid #2ecc71;
+}
+
+.tag-support { /* Hỗ trợ - Màu cam */
+    background-color: rgba(243, 156, 18, 0.2);
+    color: #f39c12;
+    border: 1px solid #f39c12;
+}
+
+.tag-urgent { /* Khẩn cấp - Màu đỏ */
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    animation: pulseTag 2s infinite;
+}
+
+@keyframes pulseTag {
+    0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+    70% { box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+/* Chỉnh lại Select box trên mobile cho dễ nhìn */
+select#post-tag option {
+    background-color: #333;
+    color: white;
+}

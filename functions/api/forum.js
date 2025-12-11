@@ -99,7 +99,8 @@ export const onRequest = async ({ request, env }) => {
     }
 
     try {
-      const { title, content } = await request.json();
+      // UPDATED: Destructure 'tag' from the request body
+      const { title, content, tag } = await request.json();
 
       if (!title || !content) {
         return new Response(
@@ -111,12 +112,14 @@ export const onRequest = async ({ request, env }) => {
       const userName = user.user_metadata?.name_user || "Người dùng ẩn danh";
       const avatarChar = (userName.charAt(0) || "A").toUpperCase();
 
+      // UPDATED: Include 'tag' in the insert operation
       const { data, error: insertError } = await supabase
         .from("posts")
         .insert({
           user_id: user.id,
           title,
           content,
+          tag: tag || null, // Store the tag or null if empty
           user_name: userName,
           user_avatar_char: avatarChar,
         })

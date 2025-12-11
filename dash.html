@@ -274,6 +274,20 @@
                     <label for="post-title">Tiêu đề</label>
                     <input type="text" id="post-title" name="title" required placeholder="Câu hỏi hoặc chủ đề của bạn là gì?">
                 </div>
+                
+                <!-- THÊM MỚI: Ô chọn Tag -->
+                <div class="form-group">
+                    <label for="post-tag">Loại bài viết (Tag)</label>
+                    <select id="post-tag" name="tag" class="form-control" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+                        <option value="" style="color: black;">-- Không gắn thẻ --</option>
+                        <option value="Hỏi đáp" style="color: black;">❓ Hỏi đáp</option>
+                        <option value="Chia sẻ" style="color: black;">💡 Chia sẻ kinh nghiệm</option>
+                        <option value="Hỗ trợ" style="color: black;">🛠️ Hỗ trợ kỹ thuật</option>
+                        <option value="Khẩn cấp" style="color: black;">🚨 Khẩn cấp / Cứu trợ</option>
+                    </select>
+                </div>
+                <!-- KẾT THÚC THÊM MỚI -->
+
                 <div class="form-group">
                     <label for="post-content">Nội dung</label>
                     <textarea id="post-content" name="content" required placeholder="Mô tả chi tiết vấn đề hoặc kinh nghiệm bạn muốn chia sẻ..."></textarea>
