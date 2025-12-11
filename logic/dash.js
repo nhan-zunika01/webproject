@@ -1,5 +1,7 @@
 // Global variable for current user
 let currentUser = null;
+// MỚI: Biến toàn cục để lưu tọa độ thời tiết hiện tại
+let currentWeatherCoords = null; 
 
 // === START: MODAL AND ALERT ELEMENTS ===
 const alertModal = document.getElementById("alert-modal");
@@ -839,6 +841,9 @@ function changeWeatherLocation() {
 }
 
 async function getWeatherByManualSelection(locationQuery) {
+  // Reset tọa độ khi chọn thủ công để đảm bảo logic AI hoạt động đúng
+  currentWeatherCoords = null; 
+  
   if (!weatherWidget) return;
   weatherWidget.innerHTML = "<p>Đang tìm kiếm và tải dữ liệu thời tiết...</p>";
 
@@ -868,6 +873,10 @@ async function getWeatherByBrowser() {
       async (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+        
+        // MỚI: Lưu lại tọa độ để sử dụng cho Trợ lý Nông vụ AI
+        currentWeatherCoords = { lat, lon };
+
         weatherWidget.innerHTML =
           "<p>Đã có tọa độ, đang tải dữ liệu thời tiết...</p>";
         try {
@@ -1059,7 +1068,7 @@ const CROP_RULES = {
     }
 };
 
-// 2. Hàm xử lý chính
+// 2. Hàm xử lý chính (ĐÃ SỬA LỖI)
 async function generateFarmingPlan() {
     const cropType = document.getElementById('crop-select').value;
     const resultContainer = document.getElementById('plan-results-container');
@@ -1067,16 +1076,27 @@ async function generateFarmingPlan() {
     // Lấy dữ liệu thời tiết hiện tại (từ biến toàn cục hoặc fetch lại nếu cần)
     const locationText = document.querySelector('.weather-location')?.textContent;
 
-    if (!locationText || locationText === "Vị trí của bạn" || locationText === "") {
-        showAlert("Vui lòng chọn địa điểm cụ thể ở trên trước khi lập kế hoạch.");
+    // LOGIC KIỂM TRA MỚI:
+    // Cho phép chạy nếu có tọa độ (khi dùng Tự động) HOẶC có tên địa điểm hợp lệ (khi dùng Chọn địa điểm)
+    // Loại bỏ việc chặn cứng "Vị trí của bạn" nếu đã có tọa độ GPS.
+    if (!currentWeatherCoords && (!locationText || locationText === "Vị trí của bạn" || locationText === "")) {
+        showAlert("Vui lòng chọn địa điểm cụ thể hoặc nhấn 'Tự động' để lấy tọa độ trước khi lập kế hoạch.");
         return;
     }
 
     resultContainer.innerHTML = '<p class="card" style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Đang phân tích dữ liệu...</p>';
 
     try {
-        // Gọi API lấy dự báo (Sử dụng lại logic get-weather đã có)
-        const response = await fetch(`/api/get-weather?location=${encodeURIComponent(locationText)}`);
+        // Gọi API lấy dự báo
+        // Ưu tiên dùng tọa độ nếu có (chính xác hơn), nếu không thì dùng tên địa điểm
+        let apiUrl = "";
+        if (currentWeatherCoords) {
+             apiUrl = `/api/get-weather?lat=${currentWeatherCoords.lat}&lon=${currentWeatherCoords.lon}`;
+        } else {
+             apiUrl = `/api/get-weather?location=${encodeURIComponent(locationText)}`;
+        }
+
+        const response = await fetch(apiUrl);
         if (!response.ok) throw new Error("Không thể lấy dữ liệu thời tiết.");
         
         const data = await response.json();
