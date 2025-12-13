@@ -339,10 +339,11 @@ function renderForumPosts(posts) {
     tempDiv.textContent = post.content || "";
     const safeContentHTML = tempDiv.innerHTML.replace(/\n/g, "<br />");
 
-    // --- UPDATED: Xử lý hiển thị Tag ---
+    // --- HIỂN THỊ TAG ---
     let tagHTML = "";
-    if (post.tag) {
+    if (post.tag && post.tag !== "null") {
         let tagClass = "tag-default";
+        // Map màu sắc tag
         if (post.tag === "Khẩn cấp") tagClass = "tag-urgent";
         else if (post.tag === "Hỗ trợ") tagClass = "tag-support";
         else if (post.tag === "Hỏi đáp") tagClass = "tag-qa";
@@ -350,7 +351,7 @@ function renderForumPosts(posts) {
         
         tagHTML = `<span class="post-tag ${tagClass}">${post.tag}</span>`;
     }
-    // --- KẾT THÚC CẬP NHẬT ---
+    // --------------------
 
     postElement.innerHTML = `
             <div class="post-header">
@@ -361,7 +362,6 @@ function renderForumPosts(posts) {
                     <h4></h4>
                     <small>${timeAgo(post.created_at)}</small>
                 </div>
-                <!-- Chèn Tag vào đây -->
                 <div style="margin-left: auto;">${tagHTML}</div>
             </div>
             <div class="post-body-content">
@@ -441,11 +441,18 @@ async function handleCreatePost(event) {
     return;
   }
 
-  const title = document.getElementById("post-title").value.trim();
-  const content = document.getElementById("post-content").value.trim();
-  // UPDATED: Lấy giá trị tag
-  const tag = document.getElementById("post-tag").value;
+  const titleInput = document.getElementById("post-title");
+  const contentInput = document.getElementById("post-content");
+  const tagInput = document.getElementById("post-tag");
+
+  const title = titleInput ? titleInput.value.trim() : "";
+  const content = contentInput ? contentInput.value.trim() : "";
+  // Lấy giá trị Tag an toàn
+  const tag = tagInput ? tagInput.value : "";
   
+  // LOG ĐỂ KIỂM TRA DỮ LIỆU
+  console.log("DỮ LIỆU SẮP GỬI:", { title, content, tag });
+
   const submitBtn = document.getElementById("submit-post-btn");
 
   if (!title || !content) {
@@ -457,15 +464,20 @@ async function handleCreatePost(event) {
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng...';
 
   try {
-    await fetch("/api/forum", {
+    const response = await fetch("/api/forum", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${currentUser.access_token}`,
       },
-      // UPDATED: Gửi tag lên server
       body: JSON.stringify({ title, content, tag }),
     });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.message || "Đăng bài thất bại.");
+    }
 
     showAlert("Đăng bài thành công!");
     createPostModal.classList.remove("active");
@@ -473,10 +485,16 @@ async function handleCreatePost(event) {
     await loadForumPosts();
   } catch (error) {
     console.error("Lỗi khi tạo bài viết:", error);
-    showAlert(error.message);
+    if (error.message.includes("tag")) {
+        showAlert("Lỗi Database: Chưa có cột 'tag' trong bảng 'posts'. Vui lòng chạy lệnh SQL để thêm cột.");
+    } else {
+        showAlert(`Lỗi: ${error.message}`);
+    }
   } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = "Đăng bài";
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Đăng bài";
+    }
   }
 }
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng điều khiển - AgriNova</title>
     <!-- CSS và Font Awesome -->
-    <link rel="stylesheet" href="styles/dash.css">
+    <link rel="stylesheet" href="styles/dash.css?v=3">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
@@ -275,18 +275,20 @@
                     <input type="text" id="post-title" name="title" required placeholder="Câu hỏi hoặc chủ đề của bạn là gì?">
                 </div>
                 
-                <!-- THÊM MỚI: Ô chọn Tag -->
+                <!-- Giao diện Tag đã chỉnh sửa cho đẹp và dễ nhìn hơn -->
                 <div class="form-group">
                     <label for="post-tag">Loại bài viết (Tag)</label>
-                    <select id="post-tag" name="tag" class="form-control" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
-                        <option value="" style="color: black;">-- Không gắn thẻ --</option>
-                        <option value="Hỏi đáp" style="color: black;">❓ Hỏi đáp</option>
-                        <option value="Chia sẻ" style="color: black;">💡 Chia sẻ kinh nghiệm</option>
-                        <option value="Hỗ trợ" style="color: black;">🛠️ Hỗ trợ kỹ thuật</option>
-                        <option value="Khẩn cấp" style="color: black;">🚨 Khẩn cấp / Cứu trợ</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select id="post-tag" name="tag">
+                            <option value="">-- Chọn loại bài viết --</option>
+                            <option value="Hỏi đáp">❓ Hỏi đáp</option>
+                            <option value="Chia sẻ">💡 Chia sẻ kinh nghiệm</option>
+                            <option value="Hỗ trợ">🛠️ Hỗ trợ kỹ thuật</option>
+                            <option value="Khẩn cấp">🚨 Khẩn cấp / Cứu trợ</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-icon"></i>
+                    </div>
                 </div>
-                <!-- KẾT THÚC THÊM MỚI -->
 
                 <div class="form-group">
                     <label for="post-content">Nội dung</label>
@@ -303,7 +305,7 @@
     <!-- ===== END: NEW MODALS ===== -->
 
 
-    <!-- JavaScript -->
-    <script src="logic/dash.js"></script>
+    <!-- JavaScript: Thêm ?v=3 để ép tải lại file mới nhất -->
+    <script src="logic/dash.js?v=3"></script>
 </body>
 </html>
