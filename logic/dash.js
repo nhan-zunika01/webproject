@@ -1,3 +1,5 @@
+// File: logic/dash.js
+
 // Global variable for current user
 let currentUser = null;
 let currentWeatherCoords = null;
@@ -87,10 +89,11 @@ function showSection(sectionId, element) {
 
   // Load content dynamically
   if (sectionId === "forum") {
-    // FIX: Luôn tải lại bài viết khi vào tab forum để đảm bảo dữ liệu mới nhất
+    // FIX: Không cần gọi tải lại ở đây nếu muốn giữ trạng thái mượt mà
+    // Dữ liệu sẽ được tự động cập nhật ngầm hoặc qua nút Làm mới
+    // Tuy nhiên, để đảm bảo luôn tươi mới khi chuyển tab, ta vẫn có thể gọi
+    // Nhưng vì đã pre-load ở init, user sẽ không thấy loading spinner.
     loadForumPosts();
-    // MỚI: Khởi tạo thanh công cụ Sort/Filter/Refresh với giao diện mới
-    setupForumControls();
   } else if (sectionId === "quiz") {
     loadAndRenderQuizzes();
   }
@@ -312,24 +315,28 @@ function setupForumControls() {
     refreshBtn.className = "btn-refresh";
     refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Làm mới</span>';
     
-    refreshBtn.onclick = () => {
+    refreshBtn.onclick = async () => {
         const icon = refreshBtn.querySelector("i");
         const text = refreshBtn.querySelector("span");
         
-        // Hiệu ứng xoay icon và đổi text
-        icon.classList.add("fa-spin");
-        text.textContent = "Đang tải...";
+        // Khóa giao diện nút
+        if(icon) icon.classList.add("fa-spin");
+        if(text) text.textContent = "Đang tải...";
         refreshBtn.style.opacity = "0.7";
         refreshBtn.style.pointerEvents = "none";
         
-        loadForumPosts().then(() => {
+        try {
+            await loadForumPosts();
+        } catch (error) {
+            console.error("Lỗi làm mới diễn đàn:", error);
+        } finally {
             setTimeout(() => {
-                 icon.classList.remove("fa-spin");
-                 text.textContent = "Làm mới";
+                 if(icon) icon.classList.remove("fa-spin");
+                 if(text) text.textContent = "Làm mới";
                  refreshBtn.style.opacity = "1";
                  refreshBtn.style.pointerEvents = "auto";
-            }, 500); // Giữ hiệu ứng ít nhất 0.5s cho mượt
-        });
+            }, 500); 
+        }
     };
 
     toolbar.appendChild(refreshBtn);
@@ -438,7 +445,7 @@ async function loadForumPosts() {
   }
 
   try {
-    const response = await fetch("/api/forum", { headers });
+    const response = await fetch(`/api/forum?t=${Date.now()}`, { headers });
     if (!response.ok) throw new Error("Không thể kết nối đến máy chủ diễn đàn.");
     const posts = await response.json();
 
@@ -454,17 +461,22 @@ async function loadForumPosts() {
 
 function renderForumPosts(posts) {
   const container = document.getElementById("forum-posts-container");
-  container.innerHTML = "";
   
   if (posts.length === 0) {
       container.innerHTML = '<p class="card" id="no-posts-msg">Không tìm thấy bài viết nào phù hợp.</p>';
       return;
   }
 
+  // TỐI ƯU HÓA: Sử dụng DocumentFragment để tránh reflow nhiều lần (giảm nháy)
+  const fragment = document.createDocumentFragment();
   posts.forEach((post) => {
     const postElement = createPostElement(post);
-    container.appendChild(postElement);
+    fragment.appendChild(postElement);
   });
+
+  container.innerHTML = ""; // Xóa nội dung cũ
+  container.appendChild(fragment); // Thêm nội dung mới một lần duy nhất
+  
   setupExpandableContent();
 }
 
@@ -1159,6 +1171,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const userData = localStorage.getItem("currentUser");
   if (userData) { currentUser = JSON.parse(userData); setupUserUI(); } 
   else { setupGuestUI(); }
+
+  // THAY ĐỔI QUAN TRỌNG: Tải trước dữ liệu forum ngay khi vào trang để tránh giật lag sau này
+  loadForumPosts();
+  setupForumControls();
 
   // Modal events
   if (modalCloseBtn) modalCloseBtn.onclick = closeAlertModal;

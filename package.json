@@ -6,10 +6,14 @@
     "start": "wrangler pages dev . --compatibility-date=2023-10-30 --port=8788"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.0.0",
+    "@supabase/supabase-js": "^2.87.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
     "supabase": "^2.26.9"
   },
   "devDependencies": {
-    "wrangler": "^3.0.0"
+    "wrangler": "^4.54.0"
   }
 }

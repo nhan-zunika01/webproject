@@ -3,3 +3,5 @@ wrangler.toml
 /node_modules
 .wrangler/
 .gitignore
+server.js
+.env
