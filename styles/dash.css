@@ -1226,3 +1226,155 @@ body::after {
     pointer-events: none; /* Để click xuyên qua icon vào select */
     font-size: 0.9rem;
 }
+/* === NEW FORUM TOOLBAR STYLES === */
+#forum-toolbar {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Nhóm các bộ lọc bên trái */
+.toolbar-filters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+/* Wrapper cho ô select để chèn icon */
+.custom-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Icon bên trái trong ô select */
+.custom-select-wrapper .select-icon {
+    position: absolute;
+    left: 12px;
+    color: #4CAF50;
+    pointer-events: none;
+    z-index: 1;
+    font-size: 0.9rem;
+}
+
+/* Icon mũi tên bên phải */
+.custom-select-wrapper::after {
+    content: '\f078'; /* FontAwesome chevron-down */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    color: #aaa;
+    pointer-events: none;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng xoay mũi tên khi focus (tùy trình duyệt hỗ trợ) */
+.custom-select-wrapper:focus-within::after {
+    transform: rotate(180deg);
+    color: #4CAF50;
+}
+
+/* Style cho thẻ select */
+.forum-select {
+    appearance: none; /* Ẩn giao diện mặc định */
+    -webkit-appearance: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 35px 10px 35px; /* Chừa chỗ cho icon trái và phải */
+    color: #f0f0f0;
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    min-width: 160px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.forum-select:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.forum-select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.forum-select option {
+    background-color: #3a3f44;
+    color: white;
+    padding: 10px;
+}
+
+/* Nút làm mới (Refresh) */
+.btn-refresh {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: auto; /* Đẩy nút sang phải cùng */
+}
+
+.btn-refresh:hover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-refresh:active {
+    transform: translateY(0);
+}
+
+.btn-refresh i {
+    transition: transform 0.5s ease;
+}
+
+.btn-refresh:hover i {
+    transform: rotate(180deg);
+}
+
+/* Responsive cho mobile */
+@media (max-width: 600px) {
+    #forum-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .toolbar-filters {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .forum-select {
+        width: 100%;
+    }
+
+    .btn-refresh {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+    }
+}

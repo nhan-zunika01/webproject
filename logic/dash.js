@@ -89,7 +89,7 @@ function showSection(sectionId, element) {
   if (sectionId === "forum") {
     // FIX: Luôn tải lại bài viết khi vào tab forum để đảm bảo dữ liệu mới nhất
     loadForumPosts();
-    // MỚI: Khởi tạo thanh công cụ Sort/Filter/Refresh
+    // MỚI: Khởi tạo thanh công cụ Sort/Filter/Refresh với giao diện mới
     setupForumControls();
   } else if (sectionId === "quiz") {
     loadAndRenderQuizzes();
@@ -256,138 +256,82 @@ function setupExpandableContent() {
   });
 }
 
-// MỚI: Hàm tạo UI Toolbar cho diễn đàn (Sort, Filter, Refresh) - ĐƯỢC THIẾT KẾ LẠI ĐẸP HƠN
+// MỚI: Hàm tạo UI Toolbar cho diễn đàn (Sort, Filter, Refresh) - ĐƯỢC THIẾT KẾ LẠI
 function setupForumControls() {
     const container = document.getElementById("forum-posts-container");
     // Kiểm tra xem toolbar đã tồn tại chưa để tránh tạo trùng
     if (!container || document.getElementById("forum-toolbar")) return;
 
+    // Tạo container chính
     const toolbar = document.createElement("div");
     toolbar.id = "forum-toolbar";
-    // Thiết kế mới: Nền tối mờ, bo tròn, có đổ bóng nhẹ
-    toolbar.style.cssText = `
-        display: flex; 
-        gap: 20px; 
-        margin-bottom: 25px; 
-        flex-wrap: wrap; 
-        align-items: center; 
-        background: rgba(20, 20, 20, 0.6); 
-        backdrop-filter: blur(10px); 
-        padding: 15px 25px; 
-        border-radius: 15px; 
-        border: 1px solid rgba(255, 255, 255, 0.1); 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    `;
 
-    // Style chung cho các ô select
-    const selectStyle = `
-        padding: 8px 15px; 
-        border-radius: 20px; 
-        border: 1px solid rgba(255, 255, 255, 0.2); 
-        background: rgba(0, 0, 0, 0.5); 
-        color: #f0f0f0; 
-        font-size: 0.95rem;
-        cursor: pointer;
-        outline: none;
-        font-family: inherit;
-        transition: all 0.3s ease;
-    `;
+    // --- Nhóm các bộ lọc (Bên trái) ---
+    const filterGroup = document.createElement("div");
+    filterGroup.className = "toolbar-filters";
 
-    // Style cho nhãn (label)
-    const labelStyle = `
-        font-size: 0.95em; 
-        margin-right: 10px; 
-        color: #ccc; 
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    `;
-
-    // 1. Sort Select
+    // 1. Sort Select (Sắp xếp)
     const sortWrapper = document.createElement("div");
-    sortWrapper.style.display = "flex";
-    sortWrapper.style.alignItems = "center";
+    sortWrapper.className = "custom-select-wrapper";
     sortWrapper.innerHTML = `
-        <label style="${labelStyle}"><i class="fas fa-sort-amount-down" style="color: #4CAF50;"></i> Sắp xếp:</label>
-        <select id="forum-sort-select" style="${selectStyle}">
-            <option value="newest">⏱️ Mới nhất</option>
-            <option value="oldest">🕰️ Cũ nhất</option>
+        <i class="fas fa-sort-amount-down select-icon"></i>
+        <select id="forum-sort-select" class="forum-select">
+            <option value="newest">⏱️ Mới nhất trước</option>
+            <option value="oldest">🕰️ Cũ nhất trước</option>
             <option value="popular">🔥 Phổ biến nhất</option>
         </select>
     `;
+    // Gán sự kiện
     const sortSelect = sortWrapper.querySelector("select");
     sortSelect.onchange = applyForumFilters;
-    sortSelect.onfocus = () => sortSelect.style.borderColor = "#4CAF50";
-    sortSelect.onblur = () => sortSelect.style.borderColor = "rgba(255, 255, 255, 0.2)";
+    filterGroup.appendChild(sortWrapper);
 
-    // 2. Filter Tag Select
+    // 2. Filter Tag Select (Lọc chủ đề)
     const filterWrapper = document.createElement("div");
-    filterWrapper.style.display = "flex";
-    filterWrapper.style.alignItems = "center";
+    filterWrapper.className = "custom-select-wrapper";
     filterWrapper.innerHTML = `
-        <label style="${labelStyle}"><i class="fas fa-filter" style="color: #4CAF50;"></i> Chủ đề:</label>
-        <select id="forum-filter-select" style="${selectStyle}">
-            <option value="all">🌐 Tất cả</option>
+        <i class="fas fa-filter select-icon"></i>
+        <select id="forum-filter-select" class="forum-select">
+            <option value="all">🌐 Tất cả chủ đề</option>
             <option value="Khẩn cấp">🚨 Khẩn cấp</option>
-            <option value="Hỗ trợ">🛠️ Hỗ trợ</option>
-            <option value="Hỏi đáp">❓ Hỏi đáp</option>
-            <option value="Chia sẻ">💡 Chia sẻ</option>
+            <option value="Hỗ trợ">🛠️ Hỗ trợ kỹ thuật</option>
+            <option value="Hỏi đáp">❓ Hỏi đáp & Tư vấn</option>
+            <option value="Chia sẻ">💡 Chia sẻ kinh nghiệm</option>
         </select>
     `;
+    // Gán sự kiện
     const filterSelect = filterWrapper.querySelector("select");
     filterSelect.onchange = applyForumFilters;
-    filterSelect.onfocus = () => filterSelect.style.borderColor = "#4CAF50";
-    filterSelect.onblur = () => filterSelect.style.borderColor = "rgba(255, 255, 255, 0.2)";
+    filterGroup.appendChild(filterWrapper);
 
-    // 3. Refresh Button
+    // Thêm nhóm lọc vào toolbar
+    toolbar.appendChild(filterGroup);
+
+    // --- Nút Refresh (Bên phải) ---
     const refreshBtn = document.createElement("button");
-    refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Tải lại';
-    refreshBtn.className = "btn";
-    // Style riêng cho nút refresh để nó nổi bật nhưng tinh tế
-    refreshBtn.style.cssText = `
-        padding: 8px 20px; 
-        display: flex; 
-        align-items: center; 
-        gap: 8px; 
-        margin-left: auto; /* Đẩy nút sang phải cùng */
-        background: rgba(255, 255, 255, 0.1); 
-        border: 1px solid rgba(255, 255, 255, 0.2); 
-        color: #fff;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    `;
+    refreshBtn.className = "btn-refresh";
+    refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Làm mới</span>';
     
-    // Hiệu ứng hover cho nút
-    refreshBtn.onmouseover = () => {
-        refreshBtn.style.background = "rgba(76, 175, 80, 0.2)";
-        refreshBtn.style.borderColor = "#4CAF50";
-    };
-    refreshBtn.onmouseout = () => {
-        refreshBtn.style.background = "rgba(255, 255, 255, 0.1)";
-        refreshBtn.style.borderColor = "rgba(255, 255, 255, 0.2)";
-    };
-
     refreshBtn.onclick = () => {
-        refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang tải...';
-        // Disable nút để tránh spam click
+        const icon = refreshBtn.querySelector("i");
+        const text = refreshBtn.querySelector("span");
+        
+        // Hiệu ứng xoay icon và đổi text
+        icon.classList.add("fa-spin");
+        text.textContent = "Đang tải...";
         refreshBtn.style.opacity = "0.7";
         refreshBtn.style.pointerEvents = "none";
         
         loadForumPosts().then(() => {
             setTimeout(() => {
-                 refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Tải lại';
+                 icon.classList.remove("fa-spin");
+                 text.textContent = "Làm mới";
                  refreshBtn.style.opacity = "1";
                  refreshBtn.style.pointerEvents = "auto";
-            }, 500);
+            }, 500); // Giữ hiệu ứng ít nhất 0.5s cho mượt
         });
     };
 
-    toolbar.appendChild(sortWrapper);
-    toolbar.appendChild(filterWrapper);
     toolbar.appendChild(refreshBtn);
 
     // Chèn toolbar vào trước container bài viết
