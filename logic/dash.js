@@ -339,11 +339,10 @@ function renderForumPosts(posts) {
     tempDiv.textContent = post.content || "";
     const safeContentHTML = tempDiv.innerHTML.replace(/\n/g, "<br />");
 
-    // --- HIỂN THỊ TAG ---
+    // Xử lý hiển thị Tag
     let tagHTML = "";
-    if (post.tag && post.tag !== "null") {
+    if (post.tag) {
         let tagClass = "tag-default";
-        // Map màu sắc tag
         if (post.tag === "Khẩn cấp") tagClass = "tag-urgent";
         else if (post.tag === "Hỗ trợ") tagClass = "tag-support";
         else if (post.tag === "Hỏi đáp") tagClass = "tag-qa";
@@ -351,13 +350,11 @@ function renderForumPosts(posts) {
         
         tagHTML = `<span class="post-tag ${tagClass}">${post.tag}</span>`;
     }
-    // --------------------
 
+    // FIX: Sử dụng window.toggleComments trong onclick
     postElement.innerHTML = `
             <div class="post-header">
-                <div class="avatar ${randomColorClass}">${
-      post.user_avatar_char
-    }</div>
+                <div class="avatar ${randomColorClass}">${post.user_avatar_char}</div>
                 <div class="post-info">
                     <h4></h4>
                     <small>${timeAgo(post.created_at)}</small>
@@ -370,26 +367,16 @@ function renderForumPosts(posts) {
             </div>
             <div class="post-actions">
                 <button class="btn vote-btn like-btn ${likeBtnClass}" data-vote="like">
-                    <i class="fas fa-thumbs-up"></i> <span class="like-count">${
-                      post.likes
-                    }</span>
+                    <i class="fas fa-thumbs-up"></i> <span class="like-count">${post.likes || 0}</span>
                 </button>
                 <button class="btn vote-btn dislike-btn ${dislikeBtnClass}" data-vote="dislike">
-                    <i class="fas fa-thumbs-down"></i> <span class="dislike-count">${
-                      post.dislikes
-                    }</span>
+                    <i class="fas fa-thumbs-down"></i> <span class="dislike-count">${post.dislikes || 0}</span>
                 </button>
-                <button class="btn btn-secondary btn-discuss" onclick="toggleComments(this, '${
-                  post.id
-                }')">
-                    <i class="fas fa-comment"></i> Thảo luận (<span class="comment-count">${
-                      post.comment_count
-                    }</span>)
+                <button class="btn btn-secondary btn-discuss" onclick="window.toggleComments(this, '${post.id}')">
+                    <i class="fas fa-comment"></i> Thảo luận (<span class="comment-count">${post.comment_count || 0}</span>)
                 </button>
             </div>
-            <div class="comments-section" id="comments-section-${
-              post.id
-            }"></div>
+            <div class="comments-section" id="comments-section-${post.id}" style="display:none;"></div>
         `;
     postElement.querySelector(".post-info h4").textContent = post.user_name;
     postElement.querySelector(".post-body-content h3").textContent = post.title;
@@ -441,18 +428,10 @@ async function handleCreatePost(event) {
     return;
   }
 
-  const titleInput = document.getElementById("post-title");
-  const contentInput = document.getElementById("post-content");
-  const tagInput = document.getElementById("post-tag");
-
-  const title = titleInput ? titleInput.value.trim() : "";
-  const content = contentInput ? contentInput.value.trim() : "";
-  // Lấy giá trị Tag an toàn
-  const tag = tagInput ? tagInput.value : "";
+  const title = document.getElementById("post-title").value.trim();
+  const content = document.getElementById("post-content").value.trim();
+  const tag = document.getElementById("post-tag").value;
   
-  // LOG ĐỂ KIỂM TRA DỮ LIỆU
-  console.log("DỮ LIỆU SẮP GỬI:", { title, content, tag });
-
   const submitBtn = document.getElementById("submit-post-btn");
 
   if (!title || !content) {
@@ -464,7 +443,7 @@ async function handleCreatePost(event) {
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng...';
 
   try {
-    const response = await fetch("/api/forum", {
+    await fetch("/api/forum", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -473,31 +452,20 @@ async function handleCreatePost(event) {
       body: JSON.stringify({ title, content, tag }),
     });
 
-    const result = await response.json();
-
-    if (!response.ok) {
-        throw new Error(result.message || "Đăng bài thất bại.");
-    }
-
     showAlert("Đăng bài thành công!");
     createPostModal.classList.remove("active");
     createPostForm.reset();
     await loadForumPosts();
   } catch (error) {
     console.error("Lỗi khi tạo bài viết:", error);
-    if (error.message.includes("tag")) {
-        showAlert("Lỗi Database: Chưa có cột 'tag' trong bảng 'posts'. Vui lòng chạy lệnh SQL để thêm cột.");
-    } else {
-        showAlert(`Lỗi: ${error.message}`);
-    }
+    showAlert(error.message);
   } finally {
-    if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "Đăng bài";
-    }
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "Đăng bài";
   }
 }
 
+// FIX: Hàm này được gán vào window ở cuối file
 async function toggleComments(button, postId) {
   const commentsSection = document.getElementById(`comments-section-${postId}`);
   if (!commentsSection) return;
@@ -506,7 +474,7 @@ async function toggleComments(button, postId) {
   commentsSection.style.display = isVisible ? "none" : "block";
 
   if (!isVisible) {
-    commentsSection.innerHTML = `<p>Đang tải bình luận...</p>`;
+    commentsSection.innerHTML = `<div style="text-align:center; padding:10px;"><i class="fas fa-spinner fa-spin"></i> Đang tải bình luận...</div>`;
     await fetchAndRenderComments(postId);
   }
 }
@@ -533,15 +501,11 @@ function renderComments(postId, comments) {
       }`;
       commentsHTML += `
                 <div class="comment-item">
-                    <div class="avatar ${randomColorClass}">${
-        comment.user_avatar_char
-      }</div>
+                    <div class="avatar ${randomColorClass}">${comment.user_avatar_char}</div>
                     <div class="comment-body">
                         <div class="comment-header">
                             <span class="user-name">${comment.user_name}</span>
-                            <span class="timestamp">${timeAgo(
-                              comment.created_at
-                            )}</span>
+                            <span class="timestamp">${timeAgo(comment.created_at)}</span>
                         </div>
                         <p class="comment-content">${comment.content}</p>
                     </div>
@@ -549,7 +513,7 @@ function renderComments(postId, comments) {
             `;
     });
   } else {
-    commentsHTML += "<p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>";
+    commentsHTML += `<p style="text-align:center; color:#ccc; font-style:italic;">Chưa có bình luận nào. Hãy là người đầu tiên!</p>`;
   }
   commentsHTML += "</div>";
 
@@ -562,12 +526,13 @@ function renderComments(postId, comments) {
             </form>
         `;
   } else {
-    commentFormHTML = `<p>Vui lòng <a href="login.html">đăng nhập</a> để bình luận.</p>`;
+    commentFormHTML = `<div class="login-prompt-card"><p>Vui lòng <a href="login.html" style="color:#4CAF50;">đăng nhập</a> để bình luận.</p></div>`;
   }
   commentsSection.innerHTML = commentFormHTML + commentsHTML;
+  
   if (currentUser) {
     const form = commentsSection.querySelector(".comment-form");
-    form.addEventListener("submit", handleCommentSubmit);
+    if(form) form.addEventListener("submit", handleCommentSubmit);
   }
 }
 
@@ -594,12 +559,21 @@ async function handleCommentSubmit(event) {
       },
       body: JSON.stringify({ postId, content }),
     });
+    // Tải lại bình luận để hiện bình luận mới
     await fetchAndRenderComments(postId);
-    await loadForumPosts(); // To update the comment count on the main post
-    const commentsSection = document.getElementById(
-      `comments-section-${postId}`
-    );
-    if (commentsSection) commentsSection.style.display = "block";
+    // Tải lại danh sách bài viết để cập nhật số lượng comment bên ngoài
+    await loadForumPosts(); 
+    
+    // Đảm bảo section vẫn mở sau khi load lại forum
+    setTimeout(() => {
+        const commentsSection = document.getElementById(`comments-section-${postId}`);
+        if (commentsSection) {
+            commentsSection.style.display = "block";
+            // Cần load lại comment lần nữa vì loadForumPosts đã render lại toàn bộ HTML
+            fetchAndRenderComments(postId); 
+        }
+    }, 500);
+
   } catch (error) {
     console.error("Lỗi khi gửi bình luận:", error);
     showAlert("Không thể gửi bình luận của bạn. Vui lòng thử lại.");
@@ -1329,3 +1303,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 // === END: INITIALIZATION AND EVENT LISTENERS ===
+
+// === EXPOSE FUNCTIONS TO WINDOW FOR HTML ACCESS ===
+window.showSection = showSection;
+window.logout = logout;
+window.changeWeatherLocation = changeWeatherLocation;
+window.editProfile = editProfile;
+window.toggleComments = toggleComments; // Đã thêm hàm này để nút bình luận hoạt động
