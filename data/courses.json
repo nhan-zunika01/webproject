@@ -6,7 +6,7 @@
       "field": "Cây công nghiệp",
       "duration": "10 giờ"
     },
-    "image": "https://images.unsplash.com/photo-1599399325946-53243f789547?q=80&w=2070&auto=format&fit=crop",
+    "image": "images/caphe.jpg",
     "imageAlt": "Vườn cà phê với những quả chín đỏ",
     "sapo": "Học cách trồng và chăm sóc cà phê Robusta để đạt năng suất cao, chất lượng tốt và thân thiện với môi trường, đáp ứng các tiêu chuẩn xuất khẩu.",
     "quizId": "coffee-course-v1",
@@ -100,7 +100,7 @@
       "field": "Cây công nghiệp",
       "duration": "9 giờ"
     },
-    "image": "https://images.unsplash.com/photo-1629033819974-272d3637651a?q=80&w=1964&auto=format&fit=crop",
+    "image": "images/hotieu.jpg",
     "imageAlt": "Dây hồ tiêu đen trên trụ",
     "sapo": "Cung cấp quy trình kỹ thuật trồng và chăm sóc hồ tiêu tiên tiến, tập trung vào việc phòng trừ bệnh hại và tạo ra sản phẩm an toàn, chất lượng cao.",
     "quizId": "pepper-course-v1",
@@ -194,7 +194,7 @@
       "field": "Cây ăn quả",
       "duration": "12 giờ"
     },
-    "image": "https://images.unsplash.com/photo-1608783459362-34d1d91b5a2f?q=80&w=1964&auto=format&fit=crop",
+    "image": "images/khoahocsaurieng.webp",
     "imageAlt": "Quả sầu riêng trên cây",
     "sapo": "Làm chủ kỹ thuật trồng và chăm sóc sầu riêng, từ khâu chọn giống, xử lý ra hoa đến phòng trừ bệnh xì mủ, thán thư để tối đa hóa lợi nhuận.",
     "quizId": "durian-course-v1",
@@ -288,7 +288,7 @@
       "field": "Trồng trọt công nghệ cao",
       "duration": "7 giờ"
     },
-    "image": "https://images.unsplash.com/photo-1605578334826-42756ad28a42?q=80&w=2070&auto=format&fit=crop",
+    "image": "images/thuy-canh-trang-trai.webp",
     "imageAlt": "Hệ thống rau thủy canh trong trang trại",
     "sapo": "Khám phá và ứng dụng kỹ thuật trồng rau bằng phương pháp thủy canh, từ quy mô gia đình đến trang trại thương mại.",
     "quizId": "hydroponics-v1",
@@ -476,7 +476,7 @@
       "field": "Nông nghiệp công nghệ cao",
       "duration": "9 giờ"
     },
-    "image": "https://images.unsplash.com/photo-1544795594-279376662489?q=80&w=2070&auto=format&fit=crop",
+    "image": "images/iot.jpg",
     "imageAlt": "Một nông dân đang kiểm tra dữ liệu trên máy tính bảng trong trang trại",
     "sapo": "Học cách ứng dụng các cảm biến IoT để theo dõi độ ẩm đất, nhiệt độ, ánh sáng và tự động hóa hệ thống tưới tiêu, bón phân.",
     "quizId": "iot-course-v1",
