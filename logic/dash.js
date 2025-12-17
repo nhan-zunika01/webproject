@@ -1013,7 +1013,7 @@ async function getWeatherByBrowser() {
         finally { autoLocationBtn.disabled = false; }
       },
       (err) => {
-        weatherWidget.innerHTML = `<p style="color: #ffcccc;">Không thể lấy vị trí.</p>`;
+        weatherWidget.innerHTML = `<p style="color: #ffcccc;">Không thể lấy vị trí. Vui lòng thử lại.</p>`;
         autoLocationBtn.disabled = false;
       }
     );
